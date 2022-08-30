@@ -10,11 +10,12 @@ const colores = {
 const Div = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 50px;
+  grid-gap: 10px;
   justify-items: center;
   align-items: center;
-  height: 70vh;
-  @media (max-width: 1050px) {
+  height: 98vh;
+  border: 1px solid #000;
+  @media (max-width: 1600px) {
     grid-template-columns: none;
     grid-template-rows: 1fr 1fr;
   }
@@ -23,6 +24,7 @@ const Div = styled.div`
 const Formulario = styled.form`
   display: grid;
   grid-template-columns: 1fr;
+  width: 80%;
 `;
 
 const Label = styled.label`
@@ -146,6 +148,7 @@ const ContenedorBotonCentrado = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 15px;
 `;
 
 const Boton = styled.button`

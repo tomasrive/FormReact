@@ -119,49 +119,46 @@ const App = () => {
           </ContenedorBotonCentrado>
         </Formulario>
         <div>
-          <table class="table-responsive-full">
+          <table>
             <thead>
               <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Hero Title</th>
-                <th>Name</th>
-                <th>Last</th>
-                <th>Hero</th>
+                <th>Fecha de la rotura</th>
+                <th>Hora de la rotura</th>
+                <th>Molde</th>
+                <th>Lider a cargo:</th>
+                <th>Descripcion de la rotura:</th>
+                <th>Quien recibe esta reparacion:</th>
+                <th>Fecha de finalizacion</th>
+                <th>Hora de finalizacion</th>
+                <th>Quien lo reparo:</th>
+                <th>Estado:</th>
+                <th>Completar:</th>
+                <th>Verificar:</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td data-label="First Name">Bruce</td>
-                <td data-label="Last Name">Wayne</td>
-                <td data-label="Hero Title">Batman</td>
-                <td data-label="Name">Bruce</td>
-                <td data-label="Last">Wayne</td>
-                <td data-label="Hero">Batman</td>
+                <td>{date}</td>
+                <td>{hour}</td>
+                <td>Batman</td>
+                <td>Bruce</td>
+                <td>Wayne</td>
+                <td>Batman</td>
+                <td>{date}</td>
+                <td>{hour}</td>
+                <td>Wayne</td>
+                <td>Reparado</td>
               </tr>
               <tr>
-                <td data-label="First Name">Peter</td>
-                <td data-label="Last Name">Parker</td>
-                <td data-label="Hero Title">Spiderman</td>
-                <td data-label="Name">Bruce</td>
-                <td data-label="Last">Wayne</td>
-                <td data-label="Hero">Batman</td>
-              </tr>
-              <tr>
-                <td data-label="First Name">Bruce</td>
-                <td data-label="Last Name">Banner</td>
-                <td data-label="Hero Title">The Hulk</td>
-                <td data-label="Name">Bruce</td>
-                <td data-label="Last">Wayne</td>
-                <td data-label="Hero">Batman</td>
-              </tr>
-              <tr>
-                <td data-label="First Name">Clark</td>
-                <td data-label="Last Name">Kent</td>
-                <td data-label="Hero Title">Superman</td>
-                <td data-label="Name">Bruce</td>
-                <td data-label="Last">Wayne</td>
-                <td data-label="Hero">Batman</td>
+                <td>Peter</td>
+                <td>Parker</td>
+                <td>Spiderman</td>
+                <td>Bruce</td>
+                <td>Wayne</td>
+                <td>Batman</td>
+                <td>Wayne</td>
+                <td>Batman</td>
+                <td>Wayne</td>
               </tr>
             </tbody>
           </table>
