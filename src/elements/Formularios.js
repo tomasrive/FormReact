@@ -14,17 +14,22 @@ const Div = styled.div`
   justify-items: center;
   align-items: center;
   height: 98vh;
-  border: 1px solid #000;
   @media (max-width: 1600px) {
     grid-template-columns: none;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 0.5fr 1fr;
   }
+`;
+const DivTable = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
 `;
 
 const Formulario = styled.form`
   display: grid;
   grid-template-columns: 1fr;
-  width: 80%;
+  width: 70%;
 `;
 
 const Label = styled.label`
@@ -194,6 +199,7 @@ const MensajeError = styled.div`
 
 export {
   Div,
+  DivTable,
   Formulario,
   Label,
   GroupInput,
