@@ -21,7 +21,6 @@ const CompInput = ({
   inputError,
   inputExp,
   inputFunction,
-  inputValue,
 }) => {
   const onChange = (e) => {
     InputSetState({

@@ -1,20 +1,28 @@
-import styled, { css } from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styled, { css } from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const colores = {
-  borde: "#0075FF",
-  error: "#bb2929",
-  exito: "#1ed12d",
+  borde: '#0075FF',
+  error: '#bb2929',
+  exito: '#1ed12d',
 };
+
+const Div = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 50px;
+  justify-items: center;
+  align-items: center;
+  height: 70vh;
+  @media (max-width: 1050px) {
+    grid-template-columns: none;
+    grid-template-rows: 1fr 1fr;
+  }
+`;
 
 const Formulario = styled.form`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-
-  @media (max-width: 800px) {
-    grid-template-columns: 1fr;
-  }
+  grid-template-columns: 1fr;
 `;
 
 const Label = styled.label`
@@ -25,7 +33,7 @@ const Label = styled.label`
   cursor: pointer;
   color: #000;
   ${(props) =>
-    props.validate === "false" &&
+    props.validate === 'false' &&
     css`
       color: ${colores.error};
     `}
@@ -34,6 +42,26 @@ const Label = styled.label`
 const GroupInput = styled.div`
   position: relative;
   z-index: 90;
+`;
+const GroupInputDate = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  z-index: 90;
+  gap: 40px;
+  text-align: center;
+`;
+const InputDate = styled.input`
+  background-color: #fff;
+  border: 0;
+  border-radius: 320px;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+  font-size: 20px;
+  outline: 0;
+  padding: 10px;
+  transition: all 0.2s ease-in-out;
+  width: 70%;
+  text-align: center;
 `;
 
 const Input = styled.input`
@@ -46,6 +74,7 @@ const Input = styled.input`
   padding: 16px;
   transition: all 0.2s ease-in-out;
   width: 100%;
+  border: 2px solid #fff;
 
   &:focus {
     border: 2px solid ${colores.borde};
@@ -53,17 +82,18 @@ const Input = styled.input`
   }
 
   ${(props) =>
-    props.validate === "true" &&
+    props.validate === 'true' &&
     css`
       border: 2px solid none;
     `}
 
   ${(props) =>
-    props.validate === "false" &&
+    props.validate === 'false' &&
     css`
       border: 2px solid ${colores.error} !important;
     `}
 `;
+
 const LeyendaError = styled.p`
   font-size: 12px;
   margin-bottom: 0;
@@ -71,13 +101,13 @@ const LeyendaError = styled.p`
   display: none;
 
   ${(props) =>
-    props.validate === "true" &&
+    props.validate === 'true' &&
     css`
       display: none;
     `}
 
   ${(props) =>
-    props.validate === "false" &&
+    props.validate === 'false' &&
     css`
       display: block;
     `}
@@ -92,14 +122,14 @@ const IconoValidacion = styled(FontAwesomeIcon)`
   opacity: 0;
 
   ${(props) =>
-    props.validate === "false" &&
+    props.validate === 'false' &&
     css`
       opacity: 1;
       color: ${colores.error};
     `}
 
   ${(props) =>
-    props.validate === "true" &&
+    props.validate === 'true' &&
     css`
       opacity: 1;
       color: ${colores.exito};
@@ -107,13 +137,8 @@ const IconoValidacion = styled(FontAwesomeIcon)`
 `;
 
 const ContenedorTerminos = styled.div`
-  grid-column: span 2;
   input {
     margin-right: 10px;
-  }
-
-  @media (max-width: 800px) {
-    grid-column: span 1;
   }
 `;
 
@@ -121,11 +146,6 @@ const ContenedorBotonCentrado = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  grid-column: span 2;
-
-  @media (max-width: 800px) {
-    grid-column: span 1;
-  }
 `;
 
 const Boton = styled.button`
@@ -157,10 +177,10 @@ const MensajeExito = styled.p`
 
 const MensajeError = styled.div`
   border-radius: 320px;
-  line-height: 50px;
+  line-height: 40px;
   background: #f66060;
   padding: 0px 15px;
-  grid-column: span 2;
+  margin-top: 10px;
   p {
     margin: 0;
   }
@@ -170,10 +190,13 @@ const MensajeError = styled.div`
 `;
 
 export {
+  Div,
   Formulario,
   Label,
   GroupInput,
+  GroupInputDate,
   Input,
+  InputDate,
   LeyendaError,
   IconoValidacion,
   ContenedorTerminos,
