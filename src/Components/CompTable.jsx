@@ -5,16 +5,28 @@ import { Option, Table, TR } from '../elements/Formularios';
 import { Link } from 'react-router-dom';
 
 export const CompTable = () => {
+  // const URL = 'http://192.168.11.139:4001/api/armado/users';
+
   const options = [
     { value: 'noReparado', text: 'No reparado' },
     { value: 'reparado', text: 'Reparado' },
   ];
-
   const [selected, setSelected] = useState(options[0].value);
 
   const handleChange = (event) => {
     setSelected(event.target.value);
   };
+
+  // fetch(URL)
+  //   .then((response) => response.json())
+  //   .then((data) => datos(data));
+
+  // const datos = (data) => {
+  //   data.map((dato) => {
+  //     console.log(dato);
+  //     <CompTable />;
+  //   });
+  // };
 
   return (
     <Table>
@@ -38,7 +50,7 @@ export const CompTable = () => {
           <TR validate={selected}>
             <td>date</td>
             <td>hour</td>
-            <td>Batman</td>
+            <td>datos</td>
             <td>Bruce</td>
             <td>Wayne</td>
             <td>Batman</td>

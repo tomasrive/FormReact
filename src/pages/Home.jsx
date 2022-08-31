@@ -10,18 +10,39 @@ export const Home = () => {
   return (
     <>
       <DivTable>
-        <Link className="noStyle" to="/FormCreate">
+        <Link className='noStyle' to='/FormCreate'>
           <ContenedorBotonInicio>
-            <BotonInicio type="submit">Crear orden de reparacion</BotonInicio>
+            <BotonInicio type='submit'>
+              Orden de reparacion: Matriceria
+              {/* moldes */}
+            </BotonInicio>
           </ContenedorBotonInicio>
         </Link>
-        <Link className="noStyle" to="/FormEdit">
+        <Link className='noStyle' to='/FormCreate'>
           <ContenedorBotonInicio>
-            <BotonInicio type="submit">Editar orden de reparacion</BotonInicio>
+            <BotonInicio type='submit'>
+              Orden de reparacion: Mantenimiento inyectoras
+              {/* maquinas  */}
+            </BotonInicio>
+          </ContenedorBotonInicio>
+        </Link>
+        <Link className='noStyle' to='/FormCreate'>
+          <ContenedorBotonInicio>
+            <BotonInicio type='submit'>
+              Orden de reparacion: Mantenimiento Edilicio
+              {/* infraestructura */}
+            </BotonInicio>
+          </ContenedorBotonInicio>
+        </Link>
+        <Link className='noStyle' to='/FormCreate'>
+          <ContenedorBotonInicio>
+            <BotonInicio type='submit'>
+              Orden de reparacion: Mantenimiento Armado
+              {/* pROBLE A */}
+            </BotonInicio>
           </ContenedorBotonInicio>
         </Link>
       </DivTable>
-
       <CompTable />
     </>
   );

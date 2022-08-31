@@ -22,7 +22,7 @@ const Div = styled.div`
 `;
 const DivTable = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-items: center;
   align-items: center;
   height: 50vh;
