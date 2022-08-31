@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import {
-  Div,
   Formulario,
   Label,
   ContenedorBotonCentrado,
@@ -10,29 +9,36 @@ import {
   MensajeExito,
   GroupInputDate,
   InputDate,
-  DivTable,
-} from "../elements/Formularios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
-import CompInput from "../Components/CompInput";
-import dayjs from "dayjs";
+  BotonInicio,
+} from '../elements/Formularios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import CompInput from '../Components/CompInput';
+import dayjs from 'dayjs';
 
 const FormCreate = () => {
   const [seconds, setSeconds] = useState(0);
-  const [user, setUser] = useState({ campo: "", valido: null });
-  const [name, setName] = useState({ campo: "", valido: null });
-  const [message, setMessage] = useState({ campo: "", valido: null });
+  const [user, setUser] = useState({ campo: '', valido: null });
+  const [name, setName] = useState({ campo: '', valido: null });
+  const [message, setMessage] = useState({ campo: '', valido: null });
   const [formValidate, setFormValidate] = useState(null);
 
+  const navigate = useNavigate();
+
+  function timeout(delay) {
+    return new Promise((res) => setTimeout(res, delay));
+  }
+
   const expresiones = {
-    user: /^[a-zA-Z0-9_-]{4,16}$/,
-    molde: /^[a-zA-ZÀ-ÿ\s]{3,40}$/,
+    molde: /^[a-zA-Z0-9À-ÿ\s]{3,40}$/,
+    lider: /^[a-zA-ZÀ-ÿ\s]{4,16}$/,
     mensaje: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
   };
 
-  dayjs.locale("es");
-  const date = dayjs().format("DD/MM/YYYY");
-  const hour = dayjs().format("HH:mm");
+  dayjs.locale('es');
+  const date = dayjs().format('DD/MM/YYYY');
+  const hour = dayjs().format('HH:mm');
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -41,17 +47,25 @@ const FormCreate = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    // async
+    // await axios.post(URI, { title: title, content: content, author: author });
+    console.log(user.campo);
+    console.log(name.campo);
+    console.log(message.campo);
+
     if (
-      user.valido === "true" &&
-      name.valido === "true" &&
-      message.valido === "true"
+      user.valido === 'true' &&
+      name.valido === 'true' &&
+      message.valido === 'true'
     ) {
       setFormValidate(true);
-      setUser({ campo: "", valido: "" });
-      setName({ campo: "", valido: null });
-      setMessage({ campo: "", valido: null });
+      setUser({ campo: '', valido: '' });
+      setName({ campo: '', valido: null });
+      setMessage({ campo: '', valido: null });
+      await timeout(2000);
+      navigate('/');
     } else {
       setFormValidate(false);
     }
@@ -59,8 +73,6 @@ const FormCreate = () => {
 
   return (
     <>
-      <Link to="/">Form Create</Link>
-
       <Formulario action="" onSubmit={onSubmit}>
         <GroupInputDate>
           <div>
@@ -92,7 +104,7 @@ const FormCreate = () => {
           inputPlaceholder="Julian Lopez"
           inputName="name"
           inputError="El nombre tiene que ser de 3 a 40 dígitos y solo puede contener letras y espacios."
-          inputExp={expresiones.user}
+          inputExp={expresiones.lider}
         />
 
         <CompInput
@@ -108,18 +120,26 @@ const FormCreate = () => {
 
         {formValidate === false && (
           <MensajeError>
-            <p>
+            <span>
               <FontAwesomeIcon icon={faExclamationTriangle} />
               <b>Error:</b> Por favor rellene el formulario correctamente.
-            </p>
+            </span>
           </MensajeError>
+        )}
+        {formValidate === true && (
+          <MensajeExito>
+            <span>
+              <FontAwesomeIcon icon={faCheck} />
+              <b>Exito:</b> Formulario enviado exitosamente!
+            </span>
+          </MensajeExito>
         )}
 
         <ContenedorBotonCentrado>
+          <Link to="/">
+            <BotonInicio type="submit">Cancelar</BotonInicio>
+          </Link>
           <Boton type="submit">Enviar</Boton>
-          {formValidate === true && (
-            <MensajeExito>Formulario enviado exitosamente!</MensajeExito>
-          )}
         </ContenedorBotonCentrado>
       </Formulario>
     </>

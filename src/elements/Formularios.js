@@ -5,6 +5,7 @@ const colores = {
   borde: '#0075FF',
   error: '#bb2929',
   exito: '#1ed12d',
+  proceso: '#ffff00',
 };
 
 const Div = styled.div`
@@ -24,12 +25,23 @@ const DivTable = styled.div`
   grid-template-columns: 1fr 1fr;
   justify-items: center;
   align-items: center;
+  height: 50vh;
+`;
+
+const Table = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: center;
+  margin-top: 20px;
 `;
 
 const Formulario = styled.form`
   display: grid;
   grid-template-columns: 1fr;
-  width: 70%;
+  margin: auto;
+  width: 80%;
+  margin-top: 50px;
 `;
 
 const Label = styled.label`
@@ -149,11 +161,45 @@ const ContenedorTerminos = styled.div`
   }
 `;
 
-const ContenedorBotonCentrado = styled.div`
+const ContenedorBotonInicio = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 15px;
+  width: 100%;
+`;
+
+const BotonInicio = styled.button`
+  background-color: #fff;
+  border: 0;
+  border-radius: 320px;
+  box-shadow: -5px -5px 20px #cccbcb, 5px 5px 20px #babecc;
+  color: #000;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 10px 0;
+  outline: 0;
+  padding: 16px;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px #000;
+  }
+
+  &:active {
+    box-shadow: inset 1px 1px 2px #000, inset -1px -1px 2px #393f4b;
+  }
+`;
+
+const ContenedorBotonCentrado = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-top: 15px;
+  gap: 100px;
+  width: 50%;
 `;
 
 const Boton = styled.button`
@@ -179,8 +225,17 @@ const Boton = styled.button`
   }
 `;
 const MensajeExito = styled.p`
-  font-size: 14px;
-  color: ${colores.exito};
+  border-radius: 320px;
+  line-height: 40px;
+  background: ${colores.exito};
+  padding: 0px 15px;
+  margin-top: 10px;
+  span {
+    margin: 0;
+  }
+  b {
+    margin-left: 10px;
+  }
 `;
 
 const MensajeError = styled.div`
@@ -189,7 +244,7 @@ const MensajeError = styled.div`
   background: #f66060;
   padding: 0px 15px;
   margin-top: 10px;
-  p {
+  span {
     margin: 0;
   }
   b {
@@ -197,9 +252,50 @@ const MensajeError = styled.div`
   }
 `;
 
+const TR = styled.tr`
+  ${(props) =>
+    props.validate === 'reparado' &&
+    css`
+      background-color: ${colores.exito} !important;
+    `}
+
+  ${(props) =>
+    props.validate === 'enProceso' &&
+    css`
+      background-color: ${colores.proceso} !important;
+    `}
+
+  ${(props) =>
+    props.validate === 'noReparado' &&
+    css`
+      background-color: ${colores.error} !important;
+    `}
+`;
+
+const Option = styled.option`
+  ${(props) =>
+    props.validate === 'reparado' &&
+    css`
+      background-color: ${colores.exito};
+    `}
+
+  ${(props) =>
+    props.validate === 'enProceso' &&
+    css`
+      background-color: ${colores.proceso};
+    `}
+
+  ${(props) =>
+    props.validate === 'noReparado' &&
+    css`
+      background-color: ${colores.error};
+    `}
+`;
+
 export {
   Div,
   DivTable,
+  Table,
   Formulario,
   Label,
   GroupInput,
@@ -209,8 +305,12 @@ export {
   LeyendaError,
   IconoValidacion,
   ContenedorTerminos,
+  ContenedorBotonInicio,
   ContenedorBotonCentrado,
   Boton,
+  BotonInicio,
   MensajeError,
   MensajeExito,
+  Option,
+  TR,
 };

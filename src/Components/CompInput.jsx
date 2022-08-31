@@ -4,12 +4,12 @@ import {
   LeyendaError,
   IconoValidacion,
   Label,
-} from "../elements/Formularios";
+} from '../elements/Formularios';
 
 import {
   faCheckCircle,
   faTimesCircle,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 
 const CompInput = ({
   InputState,
@@ -20,7 +20,6 @@ const CompInput = ({
   inputName,
   inputError,
   inputExp,
-  inputFunction,
 }) => {
   const onChange = (e) => {
     InputSetState({
@@ -32,13 +31,10 @@ const CompInput = ({
   const validate = () => {
     if (inputExp) {
       if (inputExp.test(InputState.campo)) {
-        InputSetState({ ...InputState, valido: "true" });
+        InputSetState({ ...InputState, valido: 'true' });
       } else {
-        InputSetState({ ...InputState, valido: "false" });
+        InputSetState({ ...InputState, valido: 'false' });
       }
-    }
-    if (inputFunction) {
-      inputFunction();
     }
   };
 
@@ -62,7 +58,7 @@ const CompInput = ({
         />
 
         <IconoValidacion
-          icon={InputState.valido === "true" ? faCheckCircle : faTimesCircle}
+          icon={InputState.valido === 'true' ? faCheckCircle : faTimesCircle}
           validate={InputState.valido}
         />
       </GroupInput>
