@@ -1,14 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { useState } from 'react';
 import { Option, Table, TR } from '../elements/Formularios';
+import { Link } from 'react-router-dom';
 
 export const CompTable = () => {
   const options = [
-    { value: '', text: '--Elige un estado--' },
-    { value: 'reparado', text: 'Reparado' },
-    { value: 'enProceso', text: 'En proceso' },
     { value: 'noReparado', text: 'No reparado' },
+    { value: 'reparado', text: 'Reparado' },
   ];
 
   const [selected, setSelected] = useState(options[0].value);
@@ -31,8 +30,8 @@ export const CompTable = () => {
             <th>Fecha de finalizacion</th>
             <th>Hora de finalizacion</th>
             <th>Quien lo reparo:</th>
+            <th>Editar:</th>
             <th>Estado:</th>
-            <th>Enviar:</th>
           </tr>
         </thead>
         <tbody>
@@ -47,6 +46,11 @@ export const CompTable = () => {
             <td>hour</td>
             <td>Wayne</td>
             <td>
+              <Link to='/FormEdit'>
+                <FontAwesomeIcon className='edit' icon={faPenToSquare} />
+              </Link>
+            </td>
+            <td>
               <select value={selected} onChange={handleChange}>
                 {options.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -55,23 +59,57 @@ export const CompTable = () => {
                 ))}
               </select>
             </td>
-            <td>
-              <a className='pointer'>
-                <FontAwesomeIcon className="enviar" icon={faCheckCircle} />
-              </a>
-            </td>
           </TR>
-          <tr>
-            <td>Peter</td>
-            <td>Parker</td>
-            <td>Spiderman</td>
+          <TR validate={selected}>
+            <td>date</td>
+            <td>hour</td>
+            <td>Batman</td>
             <td>Bruce</td>
             <td>Wayne</td>
             <td>Batman</td>
+            <td>date</td>
+            <td>hour</td>
+            <td>Wayne</td>
+            <td>
+              <Link to='/FormEdit'>
+                <FontAwesomeIcon className='edit' icon={faPenToSquare} />
+              </Link>
+            </td>
+            <td>
+              <select value={selected} onChange={handleChange}>
+                {options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.text}
+                  </option>
+                ))}
+              </select>
+            </td>
+          </TR>
+          <TR validate={selected}>
+            <td>date</td>
+            <td>hour</td>
+            <td>Batman</td>
+            <td>Bruce</td>
             <td>Wayne</td>
             <td>Batman</td>
+            <td>date</td>
+            <td>hour</td>
             <td>Wayne</td>
-          </tr>
+            <td>
+              <Link to='/FormEdit'>
+                <FontAwesomeIcon className='edit' icon={faPenToSquare} />
+              </Link>
+            </td>
+            <td>
+              <select value={selected} onChange={handleChange}>
+                {options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.text}
+                  </option>
+                ))}
+              </select>
+            </td>
+          </TR>
         </tbody>
       </table>
     </Table>

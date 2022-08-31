@@ -43,9 +43,9 @@ table td {
 .pointer {
   cursor: pointer;
 }
-.enviar {
+.edit {
   display: flex;
-  color: #1ed12d;
   margin: auto;
   font-size: 25px;
+  color: #000 ;
 }
