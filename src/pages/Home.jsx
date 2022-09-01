@@ -37,7 +37,7 @@ export const Home = () => {
           <ContenedorBotonInicio>
             <BotonInicio type="submit">
               Orden de reparacion: Mantenimiento Armado
-              {/* pROBLE A */}
+              {/* Problema */}
             </BotonInicio>
           </ContenedorBotonInicio>
         </Link>
