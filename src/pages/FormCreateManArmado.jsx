@@ -16,8 +16,8 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import CompInput from '../Components/CompInput';
 import dayjs from 'dayjs';
-
-const FormCreate = () => {
+import { CompTableArmado } from '../Components/CompTableArmado';
+const FormCreateArmado = () => {
   const [seconds, setSeconds] = useState(0);
   const [user, setUser] = useState({ campo: '', valido: null });
   const [name, setName] = useState({ campo: '', valido: null });
@@ -77,48 +77,48 @@ const FormCreate = () => {
 
   return (
     <>
-      <Formulario action='' onSubmit={onSubmit}>
+      <Formulario action="" onSubmit={onSubmit}>
         <GroupInputDate>
           <div>
             <Label>Fecha de la rotura</Label>
-            <InputDate type='text' value={date} disabled />
+            <InputDate type="text" value={date} disabled />
           </div>
 
           <div>
             <Label>Hora de la rotura</Label>
-            <InputDate type='text' value={hour} disabled />
+            <InputDate type="text" value={hour} disabled />
           </div>
         </GroupInputDate>
 
         <CompInput
           InputState={user}
           InputSetState={setUser}
-          inputType='text'
-          inputLabel='Molde'
-          inputPlaceholder='MAM060'
-          inputName='molde'
-          inputError='El nombre de molde tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo.'
+          inputType="text"
+          inputLabel="Molde"
+          inputPlaceholder="MAM060"
+          inputName="molde"
+          inputError="El nombre de molde tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo."
           inputExp={expresiones.molde}
         />
         <CompInput
           InputState={name}
           InputSetState={setName}
-          inputType='text'
-          inputLabel='Lider a cargo del molde'
-          inputPlaceholder='Julian Lopez'
-          inputName='name'
-          inputError='El nombre tiene que ser de 3 a 40 dígitos y solo puede contener letras y espacios.'
+          inputType="text"
+          inputLabel="Lider a cargo del molde"
+          inputPlaceholder="Julian Lopez"
+          inputName="name"
+          inputError="El nombre tiene que ser de 3 a 40 dígitos y solo puede contener letras y espacios."
           inputExp={expresiones.lider}
         />
 
         <CompInput
           InputState={message}
           InputSetState={setMessage}
-          inputType='text'
-          inputLabel='F0-07-02-32 Orden de reparacion Sector Matriceria: Descripcion de la rotura'
-          inputPlaceholder='Se quedo perno'
-          inputName='message'
-          inputError='La descripcion tiene que ser de 3 a 200 dígitos y solo puede contener letras y espacios.'
+          inputType="text"
+          inputLabel="F0-07-02-32 Orden de reparacion Sector Matriceria: Descripcion de la rotura"
+          inputPlaceholder="Se quedo perno"
+          inputName="message"
+          inputError="La descripcion tiene que ser de 3 a 200 dígitos y solo puede contener letras y espacios."
           inputExp={expresiones.mensaje}
         />
 
@@ -140,14 +140,16 @@ const FormCreate = () => {
         )}
 
         <ContenedorBotonCentrado>
-          <Link to='/'>
-            <BotonInicio type='submit'>Cancelar</BotonInicio>
+          <Link to="/">
+            <BotonInicio type="submit">Cancelar</BotonInicio>
           </Link>
-          <Boton type='submit'>Enviar</Boton>
+          <Boton type="submit">Enviar</Boton>
         </ContenedorBotonCentrado>
       </Formulario>
+
+      <CompTableArmado />
     </>
   );
 };
 
-export default FormCreate;
+export default FormCreateArmado;

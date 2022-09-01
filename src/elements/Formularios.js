@@ -22,9 +22,10 @@ const Div = styled.div`
 `;
 const DivTable = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  justify-items: center;
+  grid-template-columns: repeat(4, 230px);
+  gap: 50px;
   align-items: center;
+  justify-content: center;
   height: 50vh;
 `;
 
@@ -170,6 +171,7 @@ const ContenedorBotonInicio = styled.div`
 `;
 
 const BotonInicio = styled.button`
+  width: 95%;
   background-color: #fff;
   border: 0;
   border-radius: 320px;
@@ -177,7 +179,6 @@ const BotonInicio = styled.button`
   color: #000;
   cursor: pointer;
   font-size: 16px;
-  margin: 10px 0;
   outline: 0;
   padding: 16px;
   transition: all 0.2s ease-in-out;

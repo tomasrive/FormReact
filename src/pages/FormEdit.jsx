@@ -66,37 +66,37 @@ export const FormEdit = () => {
   };
 
   return (
-    <Formulario action='' onSubmit={onSubmit}>
+    <Formulario action="" onSubmit={onSubmit}>
       <GroupInputDate>
         <div>
           <Label>Fecha de reparacion</Label>
-          <InputDate type='text' value={date} disabled />
+          <InputDate type="text" value={date} disabled />
         </div>
 
         <div>
           <Label>Hora de reparacion</Label>
-          <InputDate type='text' value={hour} disabled />
+          <InputDate type="text" value={hour} disabled />
         </div>
       </GroupInputDate>
 
       <CompInput
         InputState={recibe}
         InputSetState={setRecibe}
-        inputType='text'
-        inputLabel='Quien recibe esta reparacion'
-        inputPlaceholder='Julian Perez'
-        inputName='recibe'
-        inputError='El nombre de molde tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo.'
+        inputType="text"
+        inputLabel="Quien recibe esta reparacion"
+        inputPlaceholder="Julian Perez"
+        inputName="recibe"
+        inputError="El nombre de molde tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo."
         inputExp={expresiones.recibe}
       />
       <CompInput
         InputState={repara}
         InputSetState={setRepara}
-        inputType='text'
-        inputLabel='Quien lo reparo'
-        inputPlaceholder='Julian Lopez'
-        inputName='repara'
-        inputError='El nombre tiene que ser de 3 a 40 dígitos y solo puede contener letras y espacios.'
+        inputType="text"
+        inputLabel="Quien lo reparo"
+        inputPlaceholder="Julian Lopez"
+        inputName="repara"
+        inputError="El nombre tiene que ser de 3 a 40 dígitos y solo puede contener letras y espacios."
         inputExp={expresiones.repara}
       />
 
@@ -118,10 +118,10 @@ export const FormEdit = () => {
       )}
 
       <ContenedorBotonCentrado>
-        <Link to='/'>
-          <BotonInicio type='submit'>Cancelar</BotonInicio>
+        <Link to="/">
+          <BotonInicio type="submit">Cancelar</BotonInicio>
         </Link>
-        <Boton type='submit'>Enviar</Boton>
+        <Boton type="submit">Enviar</Boton>
       </ContenedorBotonCentrado>
     </Formulario>
   );
