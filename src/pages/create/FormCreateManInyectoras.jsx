@@ -10,20 +10,23 @@ import {
   GroupInputDate,
   InputDate,
   BotonInicio,
-} from '../elements/Formularios';
+} from '../../elements/Formularios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-import CompInput from '../Components/CompInput';
+import CompInput from '../../Components/CompInput';
 import dayjs from 'dayjs';
-import { CompTableMatriceria } from '../Components/CompTableMatriceria';
+import axios from 'axios';
 
-const FormCreateMatriceria = () => {
-  const [seconds, setSeconds] = useState(0);
-  const [molde, setMolde] = useState({ campo: '', valido: null });
-  const [name, setName] = useState({ campo: '', valido: null });
+const URI = 'http://localhost:3000/api/ordenInyectoras';
+
+const FormCreateInyectoras = () => {
+  const [, setSeconds] = useState(0);
+  const [maquinas, setMaquinas] = useState({ campo: '', valido: null });
   const [message, setMessage] = useState({ campo: '', valido: null });
   const [formValidate, setFormValidate] = useState(null);
+
+  const data = sessionStorage.getItem('lider');
 
   const navigate = useNavigate();
 
@@ -32,8 +35,7 @@ const FormCreateMatriceria = () => {
   }
 
   const expresiones = {
-    molde: /^[a-zA-Z0-9À-ÿ\s]{3,40}$/,
-    lider: /^[a-zA-ZÀ-ÿ\s]{4,16}$/,
+    maquinas: /^[a-zA-Z0-9À-ÿ\s]{3,40}$/,
     mensaje: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
   };
 
@@ -51,24 +53,37 @@ const FormCreateMatriceria = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('_________Formulario Crear Matriceria_______________');
+    console.log('_________Formulario Crear Inyectoras_______________');
 
     const dataJson = JSON.stringify({
-      Molde: molde.campo,
-      Lider: name.campo,
+      Maquinas: maquinas.campo,
       Mensaje: message.campo,
     });
 
     console.log(dataJson);
 
-    if (
-      molde.valido === 'true' &&
-      name.valido === 'true' &&
-      message.valido === 'true'
-    ) {
+    console.log(date);
+    console.log(hour);
+    console.log(maquinas.campo);
+    console.log(message.campo);
+
+    if (maquinas.valido === 'true' && message.valido === 'true') {
       setFormValidate(true);
-      setMolde({ campo: '', valido: '' });
-      setName({ campo: '', valido: null });
+
+      await axios.post(URI, {
+        fecha: date,
+        hora: hour,
+        molde: maquinas.campo,
+        lider: data,
+        descripcion: message.campo,
+        recibe: '',
+        repara: '',
+        fechaFinal: '',
+        horaFinal: '',
+        estado: 'no-reparado',
+      });
+
+      setMaquinas({ campo: '', valido: '' });
       setMessage({ campo: '', valido: null });
 
       await timeout(2000);
@@ -80,48 +95,46 @@ const FormCreateMatriceria = () => {
 
   return (
     <>
-      <Formulario action='' onSubmit={onSubmit}>
+      <Formulario action="" onSubmit={onSubmit}>
         <GroupInputDate>
           <div>
             <Label>Fecha</Label>
-            <InputDate type='text' value={date} disabled />
+            <InputDate type="text" value={date} disabled />
           </div>
 
           <div>
             <Label>Hora</Label>
-            <InputDate type='text' value={hour} disabled />
+            <InputDate type="text" value={hour} disabled />
           </div>
         </GroupInputDate>
 
         <CompInput
-          InputState={molde}
-          InputSetState={setMolde}
-          inputType='text'
-          inputLabel='Molde'
-          inputPlaceholder='MAM060'
-          inputName='molde'
-          inputError='El nombre de molde tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo.'
-          inputExp={expresiones.molde}
+          InputState={maquinas}
+          InputSetState={setMaquinas}
+          inputType="text"
+          inputLabel="Maquinas"
+          inputPlaceholder="Nombre de maquina"
+          inputName="molde"
+          inputError="El nombre de la maquina tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo."
+          inputExp={expresiones.maquinas}
         />
         <CompInput
-          InputState={name}
-          InputSetState={setName}
-          inputType='text'
-          inputLabel='Lider a cargo del molde'
-          inputPlaceholder='Julian Lopez'
-          inputName='name'
-          inputError='El nombre tiene que ser de 3 a 40 dígitos y solo puede contener letras y espacios.'
-          inputExp={expresiones.lider}
+          InputState={data}
+          inputType="text"
+          inputLabel="Lider a cargo del molde"
+          inputName="name"
+          inputError="El nombre tiene que ser de 3 a 40 dígitos y solo puede contener letras y espacios."
+          inputDis="disable"
         />
 
         <CompInput
           InputState={message}
           InputSetState={setMessage}
-          inputType='text'
-          inputLabel='F0-07-02-32 - Sector Matriceria - Descripcion de rotura/problema:'
-          inputPlaceholder='Se quedo perno'
-          inputName='message'
-          inputError='La descripcion tiene que ser de 3 a 200 dígitos y solo puede contener letras y espacios.'
+          inputType="text"
+          inputLabel="F0-07-02-32 - Sector Mantenimiento de Inyectoras - Descripcion de rotura/problema:"
+          inputPlaceholder="Descripcion de rotura/problema"
+          inputName="message"
+          inputError="La descripcion tiene que ser de 3 a 200 dígitos y solo puede contener letras y espacios."
           inputExp={expresiones.mensaje}
         />
 
@@ -143,16 +156,14 @@ const FormCreateMatriceria = () => {
         )}
 
         <ContenedorBotonCentrado>
-          <Link to='/'>
-            <BotonInicio type='submit'>Cancelar</BotonInicio>
+          <Link to="/">
+            <BotonInicio type="submit">Cancelar</BotonInicio>
           </Link>
-          <Boton type='submit'>Enviar</Boton>
+          <Boton type="submit">Enviar</Boton>
         </ContenedorBotonCentrado>
       </Formulario>
-
-      <CompTableMatriceria />
     </>
   );
 };
 
-export default FormCreateMatriceria;
+export default FormCreateInyectoras;

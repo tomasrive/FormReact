@@ -10,17 +10,16 @@ import {
   GroupInputDate,
   InputDate,
   BotonInicio,
-} from '../elements/Formularios';
+} from '../../elements/Formularios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-import CompInput from '../Components/CompInput';
+import CompInput from '../../Components/CompInput';
 import dayjs from 'dayjs';
-import { CompTableInyectoras } from '../Components/CompTableInyectoras';
 
-const FormCreateInyectoras = () => {
+const FormCreateEdilicio = () => {
   const [seconds, setSeconds] = useState(0);
-  const [maquinas, setMaquinas] = useState({ campo: '', valido: null });
+  const [infra, setInfra] = useState({ campo: '', valido: null });
   const [name, setName] = useState({ campo: '', valido: null });
   const [message, setMessage] = useState({ campo: '', valido: null });
   const [formValidate, setFormValidate] = useState(null);
@@ -32,9 +31,9 @@ const FormCreateInyectoras = () => {
   }
 
   const expresiones = {
-    maquinas: /^[a-zA-Z0-9À-ÿ\s]{3,40}$/,
+    infraestructura: /^[a-zA-Z0-9À-ÿ\s]{3,40}$/,
     lider: /^[a-zA-ZÀ-ÿ\s]{4,16}$/,
-    mensaje: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
+    problema: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
   };
 
   dayjs.locale('es');
@@ -51,29 +50,30 @@ const FormCreateInyectoras = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('_________Formulario Crear Inyectoras_______________');
+    console.log('_________Formulario Crear Edilicio_______________');
 
     const dataJson = JSON.stringify({
-      Maquinas: maquinas.campo,
+      Infraestructura: infra.campo,
       Lider: name.campo,
       Mensaje: message.campo,
     });
 
     console.log(dataJson);
 
+
     console.log(date);
     console.log(hour);
-    console.log(maquinas.campo);
+    console.log(infra.campo);
     console.log(name.campo);
     console.log(message.campo);
 
     if (
-      maquinas.valido === 'true' &&
+      infra.valido === 'true' &&
       name.valido === 'true' &&
       message.valido === 'true'
     ) {
       setFormValidate(true);
-      setMaquinas({ campo: '', valido: '' });
+      setInfra({ campo: '', valido: '' });
       setName({ campo: '', valido: null });
       setMessage({ campo: '', valido: null });
 
@@ -86,49 +86,49 @@ const FormCreateInyectoras = () => {
 
   return (
     <>
-      <Formulario action='' onSubmit={onSubmit}>
+      <Formulario action="" onSubmit={onSubmit}>
         <GroupInputDate>
           <div>
             <Label>Fecha</Label>
-            <InputDate type='text' value={date} disabled />
+            <InputDate type="text" value={date} disabled />
           </div>
 
           <div>
             <Label>Hora</Label>
-            <InputDate type='text' value={hour} disabled />
+            <InputDate type="text" value={hour} disabled />
           </div>
         </GroupInputDate>
 
         <CompInput
-          InputState={maquinas}
-          InputSetState={setMaquinas}
-          inputType='text'
-          inputLabel='Maquinas'
-          inputPlaceholder='MAM060'
-          inputName='molde'
-          inputError='El nombre de la maquina tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo.'
-          inputExp={expresiones.maquinas}
+          InputState={infra}
+          InputSetState={setInfra}
+          inputType="text"
+          inputLabel="Infraestructura"
+          inputPlaceholder="MAM060"
+          inputName="infraestructura"
+          inputError="El nombre de la infraestructura tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo."
+          inputExp={expresiones.infraestructura}
         />
         <CompInput
           InputState={name}
           InputSetState={setName}
-          inputType='text'
-          inputLabel='Lider a cargo de la maquina'
-          inputPlaceholder='Julian Lopez'
-          inputName='name'
-          inputError='El nombre tiene que ser de 3 a 40 dígitos y solo puede contener letras y espacios.'
+          inputType="text"
+          inputLabel="Lider a cargo"
+          inputPlaceholder="Julian Lopez"
+          inputName="name"
+          inputError="El nombre tiene que ser de 3 a 40 dígitos y solo puede contener letras y espacios."
           inputExp={expresiones.lider}
         />
 
         <CompInput
           InputState={message}
           InputSetState={setMessage}
-          inputType='text'
-          inputLabel='F0-07-02-32 - Sector Mantenimiento de Inyectoras - Descripcion de rotura/problema:'
-          inputPlaceholder='Se quedo perno'
-          inputName='message'
-          inputError='La descripcion tiene que ser de 3 a 200 dígitos y solo puede contener letras y espacios.'
-          inputExp={expresiones.mensaje}
+          inputType="text"
+          inputLabel="F0-07-02-32 - Sector Mantenimiento de Edilicio - Descripcion de rotura/problema:"
+          inputPlaceholder="Se quedo perno"
+          inputName="message"
+          inputError="La descripcion tiene que ser de 3 a 200 dígitos y solo puede contener letras y espacios."
+          inputExp={expresiones.problema}
         />
 
         {formValidate === false && (
@@ -149,16 +149,15 @@ const FormCreateInyectoras = () => {
         )}
 
         <ContenedorBotonCentrado>
-          <Link to='/'>
-            <BotonInicio type='submit'>Cancelar</BotonInicio>
+          <Link to="/">
+            <BotonInicio type="submit">Cancelar</BotonInicio>
           </Link>
-          <Boton type='submit'>Enviar</Boton>
+          <Boton type="submit">Enviar</Boton>
         </ContenedorBotonCentrado>
       </Formulario>
 
-      <CompTableInyectoras />
     </>
   );
 };
 
-export default FormCreateInyectoras;
+export default FormCreateEdilicio;

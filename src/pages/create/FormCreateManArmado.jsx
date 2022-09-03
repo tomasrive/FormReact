@@ -10,13 +10,12 @@ import {
   GroupInputDate,
   InputDate,
   BotonInicio,
-} from '../elements/Formularios';
+} from '../../elements/Formularios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-import CompInput from '../Components/CompInput';
+import CompInput from '../../Components/CompInput';
 import dayjs from 'dayjs';
-import { CompTableArmado } from '../Components/CompTableArmado';
 
 const URI = 'http://192.168.11.139:4001/api/armado/users';
 
@@ -154,7 +153,6 @@ const FormCreateArmado = () => {
         </ContenedorBotonCentrado>
       </Formulario>
 
-      <CompTableArmado />
     </>
   );
 };

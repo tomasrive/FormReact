@@ -12,31 +12,6 @@ main {
   margin: auto;
 }
 
-table {
-  border-collapse: collapse;
-  margin: 20px;
-}
-table thead tr {
-  border-bottom: 3px solid #0085a6;
-  color: #000;
-}
-
-table tbody tr:hover {
-  background-color: rgba(0, 0, 0, 0.2);
-  color: #000;
-}
-
-table th {
-  border: 1px solid #bfbfbf;
-  padding: 5px;
-  font-size: 15px;
-}
-table td {
-  border: 1px solid #bfbfbf;
-  padding: 10px 15px;
-  position: relative;
-  vertical-align: middle;
-}
 .noStyle {
   text-decoration: none;
 }
@@ -47,5 +22,89 @@ table td {
   display: flex;
   margin: auto;
   font-size: 25px;
-  color: #000 ;
+  color: #000;
+  margin-top: 5px;
+}
+
+.dataTable {
+  display: block;
+  margin: auto;
+  background-color: #000;
+}
+
+.dataTable thead,
+.dataTable tbody,
+.dataTable thead tr,
+.dataTable th {
+  display: block;
+
+}
+
+.dataTable thead {
+  float: left;
+  
+}
+
+.dataTable tbody {
+  width: auto;
+  position: relative;
+  overflow-x: auto;
+  
+}
+
+.dataTable td,
+.dataTable th {
+  height: 45px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-size: 14px;
+  padding: 5px;
+}
+
+.dataTable th {
+  text-align: left;
+  background: #fff;
+  padding: 5px;
+}
+
+.dataTable tbody tr {
+  display: table-cell;
+}
+
+.dataTable tbody td {
+  display: block;
+}
+
+@media screen and (min-width: 50em) {
+  .dataTable {
+    display: table;
+  }
+
+  .dataTable thead {
+    display: table-header-group;
+    float: none;
+    
+  }
+
+  .dataTable tbody {
+    display: table-row-group;
+  }
+
+  .dataTable thead tr,
+  .dataTable tbody tr {
+    display: table-row;
+  }
+
+  .dataTable th,
+  .dataTable tbody td {
+    display: table-cell;
+  }
+
+  .dataTable td,
+  .dataTable th {
+    width: auto;
+    font-size: 16px;
+    text-align: center;
+  }
 }

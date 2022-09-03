@@ -11,6 +11,8 @@ import {
   faTimesCircle,
 } from '@fortawesome/free-solid-svg-icons';
 
+const data = sessionStorage.getItem('lider');
+
 const CompInput = ({
   InputState,
   InputSetState,
@@ -20,6 +22,7 @@ const CompInput = ({
   inputName,
   inputError,
   inputExp,
+  inputDis,
 }) => {
   const onChange = (e) => {
     InputSetState({
@@ -49,12 +52,19 @@ const CompInput = ({
           type={inputType}
           placeholder={inputPlaceholder}
           id={inputName}
-          value={InputState.campo}
+          value={
+            inputDis === 'disable'
+              ? data
+              : InputState.campo && inputName === 'mayus'
+              ? InputState.campo.toUpperCase()
+              : InputState.campo
+          }
           onChange={onChange}
           onKeyUp={validate}
           onBlur={validate}
           name={inputName}
           validate={InputState.valido}
+          disabled={inputDis}
         />
 
         <IconoValidacion

@@ -1,10 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { useState } from 'react';
-import { Option, Table, TR } from '../elements/Formularios';
+import { Option, Table, TR } from '../../elements/Formularios';
 import { Link } from 'react-router-dom';
 
-export const CompTableEdilicio = () => {
+export const CompTableArmado = () => {
   // const URL = 'http://192.168.11.139:4001/api/armado/users';
 
   const options = [
@@ -24,7 +24,7 @@ export const CompTableEdilicio = () => {
   // const datos = (data) => {
   //   data.map((dato) => {
   //     console.log(dato);
-  //     <CompTable />;
+  //     <CompTableArmado />;
   //   });
   // };
 
@@ -48,18 +48,18 @@ export const CompTableEdilicio = () => {
         </thead>
         <tbody>
           <TR validate={selected}>
-          <td>date</td>
+            <td>date</td>
             <td>hour</td>
             <td>datos</td>
             <td>Bruce</td>
             <td>Wayne</td>
             <td>Batman</td>
-            <td>Wayne</td>
             <td>date</td>
             <td>hour</td>
+            <td>Wayne</td>
             <td>
-              <Link to='/FormEdit'>
-                <FontAwesomeIcon className='edit' icon={faPenToSquare} />
+              <Link to="/FormEdit">
+                <FontAwesomeIcon className="edit" icon={faPenToSquare} />
               </Link>
             </td>
             <td>
@@ -83,8 +83,8 @@ export const CompTableEdilicio = () => {
             <td>hour</td>
             <td>Wayne</td>
             <td>
-              <Link to='/FormEdit'>
-                <FontAwesomeIcon className='edit' icon={faPenToSquare} />
+              <Link to="/FormEdit">
+                <FontAwesomeIcon className="edit" icon={faPenToSquare} />
               </Link>
             </td>
             <td>
@@ -108,8 +108,8 @@ export const CompTableEdilicio = () => {
             <td>hour</td>
             <td>Wayne</td>
             <td>
-              <Link to='/FormEdit'>
-                <FontAwesomeIcon className='edit' icon={faPenToSquare} />
+              <Link to="/FormEdit">
+                <FontAwesomeIcon className="edit" icon={faPenToSquare} />
               </Link>
             </td>
             <td>

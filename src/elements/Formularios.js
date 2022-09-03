@@ -27,6 +27,15 @@ const DivTable = styled.div`
   align-items: center;
   justify-content: center;
   height: 50vh;
+  @media (max-width: 1600px) {
+    grid-template-columns: 230px 230px 230px 230px;
+  }
+  @media (max-width: 1100px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 820px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Table = styled.div`
@@ -34,7 +43,8 @@ const Table = styled.div`
   grid-template-columns: 1fr;
   justify-items: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 30px;
+  font-size: 16px;
 `;
 
 const Formulario = styled.form`
@@ -43,6 +53,9 @@ const Formulario = styled.form`
   margin: auto;
   width: 80%;
   margin-top: 50px;
+  @media (max-width: 1300px) {
+    width: 100%;
+  }
 `;
 
 const Label = styled.label`
@@ -65,10 +78,8 @@ const GroupInput = styled.div`
 `;
 const GroupInputDate = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  position: relative;
-  z-index: 90;
-  gap: 40px;
+  justify-content: center;
+  grid-template-columns: 200px 200px;
   text-align: center;
 `;
 const InputDate = styled.input`
@@ -155,6 +166,16 @@ const IconoValidacion = styled(FontAwesomeIcon)`
       color: ${colores.exito};
     `}
 `;
+const IconoTabla = styled(FontAwesomeIcon)`
+  display: flex;
+  align-content: center;
+  font-size: 30px;
+  margin: auto;
+  margin-top: 5px;
+`;
+const TD = styled.td`
+  display: flex;
+`;
 
 const ContenedorTerminos = styled.div`
   input {
@@ -171,7 +192,7 @@ const ContenedorBotonInicio = styled.div`
 `;
 
 const BotonInicio = styled.button`
-  width: 95%;
+  width: 100%;
   background-color: #fff;
   border: 0;
   border-radius: 320px;
@@ -224,6 +245,10 @@ const Boton = styled.button`
   &:active {
     box-shadow: inset 1px 1px 2px #000, inset -1px -1px 2px #393f4b;
   }
+
+  @media (max-width: 550px) {
+    width: 100%;
+  }
 `;
 const MensajeExito = styled.p`
   border-radius: 320px;
@@ -257,39 +282,16 @@ const TR = styled.tr`
   ${(props) =>
     props.validate === 'reparado' &&
     css`
+      text-align: center;
       background-color: ${colores.exito} !important;
+      pointer-events: none;
     `}
 
   ${(props) =>
-    props.validate === 'enProceso' &&
+    props.validate === 'no-reparado' &&
     css`
-      background-color: ${colores.proceso} !important;
-    `}
-
-  ${(props) =>
-    props.validate === 'noReparado' &&
-    css`
+      text-align: center;
       background-color: ${colores.error} !important;
-    `}
-`;
-
-const Option = styled.option`
-  ${(props) =>
-    props.validate === 'reparado' &&
-    css`
-      background-color: ${colores.exito};
-    `}
-
-  ${(props) =>
-    props.validate === 'enProceso' &&
-    css`
-      background-color: ${colores.proceso};
-    `}
-
-  ${(props) =>
-    props.validate === 'noReparado' &&
-    css`
-      background-color: ${colores.error};
     `}
 `;
 
@@ -305,6 +307,8 @@ export {
   InputDate,
   LeyendaError,
   IconoValidacion,
+  IconoTabla,
+  TD,
   ContenedorTerminos,
   ContenedorBotonInicio,
   ContenedorBotonCentrado,
@@ -312,6 +316,5 @@ export {
   BotonInicio,
   MensajeError,
   MensajeExito,
-  Option,
   TR,
 };

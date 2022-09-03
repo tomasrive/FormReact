@@ -6,13 +6,22 @@ import {
 } from '../elements/Formularios.js';
 
 export const Home = () => {
+  // Usuario de Session Storage de ejemplo
+
+  if (typeof Storage != 'undefined') {
+    let lider = 'Fabian Gomez';
+    sessionStorage.setItem('lider', lider);
+  } else {
+    alert('aaaaa');
+  }
+
   return (
     <>
       <DivTable>
         <Link className="noStyle" to="/FormCreateMatriceria">
           <ContenedorBotonInicio>
             <BotonInicio type="submit">
-              Orden de reparacion: <br /> Matriceria
+              Orden de reparacion: Matriceria
               {/* moldes */}
             </BotonInicio>
           </ContenedorBotonInicio>
@@ -37,6 +46,39 @@ export const Home = () => {
           <ContenedorBotonInicio>
             <BotonInicio type="submit">
               Orden de reparacion: Mantenimiento Armado
+              {/* Problema */}
+            </BotonInicio>
+          </ContenedorBotonInicio>
+        </Link>
+
+        <Link className="noStyle" to="/CompTableMatriceria">
+          <ContenedorBotonInicio>
+            <BotonInicio type="submit">
+              Tabla de matriceria
+              {/* Problema */}
+            </BotonInicio>
+          </ContenedorBotonInicio>
+        </Link>
+        <Link className="noStyle" to="/CompTableInyectoras">
+          <ContenedorBotonInicio>
+            <BotonInicio type="submit">
+              Tabla de Mantenimiento Inyectoras
+              {/* Problema */}
+            </BotonInicio>
+          </ContenedorBotonInicio>
+        </Link>
+        <Link className="noStyle" to="/CompTableEdilicio">
+          <ContenedorBotonInicio>
+            <BotonInicio type="submit">
+              Tabla de Mantenimiento Edilicio
+              {/* Problema */}
+            </BotonInicio>
+          </ContenedorBotonInicio>
+        </Link>
+        <Link className="noStyle" to="/CompTableArmado">
+          <ContenedorBotonInicio>
+            <BotonInicio type="submit">
+              Tabla de Mantenimiento Armado
               {/* Problema */}
             </BotonInicio>
           </ContenedorBotonInicio>

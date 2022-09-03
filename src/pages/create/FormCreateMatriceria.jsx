@@ -10,20 +10,23 @@ import {
   GroupInputDate,
   InputDate,
   BotonInicio,
-} from '../elements/Formularios';
+} from '../../elements/Formularios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-import CompInput from '../Components/CompInput';
+import CompInput from '../../Components/CompInput';
 import dayjs from 'dayjs';
-import { CompTableEdilicio } from '../Components/CompTableEdilicio';
+import axios from 'axios';
 
-const FormCreateEdilicio = () => {
-  const [seconds, setSeconds] = useState(0);
-  const [infra, setInfra] = useState({ campo: '', valido: null });
-  const [name, setName] = useState({ campo: '', valido: null });
+const URI = 'http://localhost:3000/api/ordenMatriceria';
+
+const FormCreateMatriceria = () => {
+  const [, setSeconds] = useState(0);
+  const [molde, setMolde] = useState({ campo: '', valido: null });
   const [message, setMessage] = useState({ campo: '', valido: null });
   const [formValidate, setFormValidate] = useState(null);
+
+  const data = sessionStorage.getItem('lider');
 
   const navigate = useNavigate();
 
@@ -32,9 +35,8 @@ const FormCreateEdilicio = () => {
   }
 
   const expresiones = {
-    infraestructura: /^[a-zA-Z0-9À-ÿ\s]{3,40}$/,
-    lider: /^[a-zA-ZÀ-ÿ\s]{4,16}$/,
-    problema: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
+    molde: /^[a-zA-Z0-9À-ÿ\s]{3,40}$/,
+    mensaje: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
   };
 
   dayjs.locale('es');
@@ -51,31 +53,33 @@ const FormCreateEdilicio = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('_________Formulario Crear Edilicio_______________');
+    console.log('_________Formulario Crear Matriceria_______________');
 
     const dataJson = JSON.stringify({
-      Infraestructura: infra.campo,
-      Lider: name.campo,
+      Molde: molde.campo,
+      Lider: data,
       Mensaje: message.campo,
     });
 
     console.log(dataJson);
 
-
-    console.log(date);
-    console.log(hour);
-    console.log(infra.campo);
-    console.log(name.campo);
-    console.log(message.campo);
-
-    if (
-      infra.valido === 'true' &&
-      name.valido === 'true' &&
-      message.valido === 'true'
-    ) {
+    if (molde.valido === 'true' && message.valido === 'true') {
       setFormValidate(true);
-      setInfra({ campo: '', valido: '' });
-      setName({ campo: '', valido: null });
+
+      await axios.post(URI, {
+        fecha: date,
+        hora: hour,
+        molde: molde.campo,
+        lider: data,
+        descripcion: message.campo,
+        recibe: '',
+        repara: '',
+        fechaFinal: '',
+        horaFinal: '',
+        estado: 'no-reparado',
+      });
+
+      setMolde({ campo: '', valido: '' });
       setMessage({ campo: '', valido: null });
 
       await timeout(2000);
@@ -101,35 +105,34 @@ const FormCreateEdilicio = () => {
         </GroupInputDate>
 
         <CompInput
-          InputState={infra}
-          InputSetState={setInfra}
+          InputState={molde}
+          InputSetState={setMolde}
           inputType="text"
-          inputLabel="Infraestructura"
-          inputPlaceholder="MAM060"
-          inputName="infraestructura"
-          inputError="El nombre de la infraestructura tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo."
-          inputExp={expresiones.infraestructura}
+          inputLabel="Molde"
+          inputPlaceholder="Nombre de molde"
+          inputName="mayus"
+          inputError="El nombre de molde tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo."
+          inputExp={expresiones.molde}
         />
+
         <CompInput
-          InputState={name}
-          InputSetState={setName}
+          InputState={data}
           inputType="text"
-          inputLabel="Lider a cargo"
-          inputPlaceholder="Julian Lopez"
+          inputLabel="Lider a cargo del molde"
           inputName="name"
           inputError="El nombre tiene que ser de 3 a 40 dígitos y solo puede contener letras y espacios."
-          inputExp={expresiones.lider}
+          inputDis="disable"
         />
 
         <CompInput
           InputState={message}
           InputSetState={setMessage}
           inputType="text"
-          inputLabel="F0-07-02-32 - Sector Mantenimiento de Edilicio - Descripcion de rotura/problema:"
-          inputPlaceholder="Se quedo perno"
+          inputLabel="F0-07-02-32 - Sector Matriceria - Descripcion de rotura/problema:"
+          inputPlaceholder="Descripcion de rotura/problema"
           inputName="message"
           inputError="La descripcion tiene que ser de 3 a 200 dígitos y solo puede contener letras y espacios."
-          inputExp={expresiones.problema}
+          inputExp={expresiones.mensaje}
         />
 
         {formValidate === false && (
@@ -156,10 +159,8 @@ const FormCreateEdilicio = () => {
           <Boton type="submit">Enviar</Boton>
         </ContenedorBotonCentrado>
       </Formulario>
-
-      <CompTableEdilicio />
     </>
   );
 };
 
-export default FormCreateEdilicio;
+export default FormCreateMatriceria;
