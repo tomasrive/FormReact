@@ -5,7 +5,10 @@ import FormCreateInyectoras from './pages/create/FormCreateManInyectoras';
 import FormCreateEdilicio from './pages/create/FormCreateManEdilicio';
 import FormCreateArmado from './pages/create/FormCreateManArmado';
 
-import { FormEdit } from './pages/edit/FormEdit.jsx';
+import { FormEditMatriceria } from './pages/edit/FormEditMatriceria.jsx';
+import { FormEditInyectoras } from './pages/edit/FormEditInyectoras.jsx';
+import { FormEditEdilicio } from './pages/edit/FormEditEdilicio.jsx';
+import { FormEditArmado } from './pages/edit/FormEditArmado.jsx';
 
 import { CompTableMatriceria } from './Components/tables/CompTableMatriceria.jsx';
 import { CompTableInyectoras } from './Components/tables/CompTableInyectoras.jsx';
@@ -33,7 +36,10 @@ export default function App() {
         <Route path="/CompTableEdilicio" element={<CompTableEdilicio />} />
         <Route path="/CompTableArmado" element={<CompTableArmado />} />
 
-        <Route path="/FormEdit/:id" element={<FormEdit />} />
+        <Route path="/FormEditMatriceria/:id" element={<FormEditMatriceria />} />
+        <Route path="/FormEditInyectoras/:id" element={<FormEditInyectoras />} />
+        <Route path="/FormEditEdilicio/:id" element={<FormEditEdilicio />} />
+        <Route path="/FormEditArmado/:id" element={<FormEditArmado />} />
       </Routes>
     </BrowserRouter>
   );

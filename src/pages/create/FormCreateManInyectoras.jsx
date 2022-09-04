@@ -36,7 +36,7 @@ const FormCreateInyectoras = () => {
 
   const expresiones = {
     maquinas: /^[a-zA-Z0-9À-ÿ\s]{3,40}$/,
-    mensaje: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
+    mensaje: /^[a-zA-Z0-9À-ÿ\s]{3,200}$/,
   };
 
   dayjs.locale('es');
@@ -73,7 +73,7 @@ const FormCreateInyectoras = () => {
       await axios.post(URI, {
         fecha: date,
         hora: hour,
-        molde: maquinas.campo,
+        maquinas: maquinas.campo,
         lider: data,
         descripcion: message.campo,
         recibe: '',
@@ -121,9 +121,8 @@ const FormCreateInyectoras = () => {
         <CompInput
           InputState={data}
           inputType="text"
-          inputLabel="Lider a cargo del molde"
+          inputLabel="Lider a cargo"
           inputName="name"
-          inputError="El nombre tiene que ser de 3 a 40 dígitos y solo puede contener letras y espacios."
           inputDis="disable"
         />
 

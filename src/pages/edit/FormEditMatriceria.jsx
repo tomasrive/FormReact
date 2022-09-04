@@ -18,9 +18,9 @@ import dayjs from 'dayjs';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const URI = 'http://localhost:3000/api/';
+const URI = 'http://localhost:3000/api/ordenMatriceria/';
 
-export const FormEdit = () => {
+export const FormEditMatriceria = () => {
   const [, setSeconds] = useState(0);
   const [recibe, setRecibe] = useState({ campo: '', valido: null });
   const [repara, setRepara] = useState({ campo: '', valido: null });

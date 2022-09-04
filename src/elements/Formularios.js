@@ -22,7 +22,7 @@ const Div = styled.div`
 `;
 const DivTable = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 230px);
+  grid-template-columns: repeat(4, 250px);
   gap: 50px;
   align-items: center;
   justify-content: center;
@@ -189,6 +189,7 @@ const ContenedorBotonInicio = styled.div`
   align-items: center;
   margin-top: 15px;
   width: 100%;
+
 `;
 
 const BotonInicio = styled.button`

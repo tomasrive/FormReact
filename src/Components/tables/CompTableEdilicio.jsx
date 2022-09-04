@@ -1,129 +1,110 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
-import { useState } from 'react';
-import { Option, Table, TR } from '../../elements/Formularios';
+import {
+  faCheckCircle,
+  faPenToSquare,
+  faTimesCircle,
+} from '@fortawesome/free-regular-svg-icons';
+import { useEffect, useState } from 'react';
+import {
+  BotonInicio,
+  ContenedorBotonCentrado,
+  IconoTabla,
+  Table,
+  TD,
+  TR,
+} from '../../elements/Formularios';
 import { Link } from 'react-router-dom';
 
+import axios from 'axios';
+
+const URI = 'http://localhost:3000/api/ordenEdilicio';
+
 export const CompTableEdilicio = () => {
-  // const URL = 'http://192.168.11.139:4001/api/armado/users';
+  const [data, setData] = useState([]);
 
-  const options = [
-    { value: 'noReparado', text: 'No reparado' },
-    { value: 'reparado', text: 'Reparado' },
-  ];
-  const [selected, setSelected] = useState(options[0].value);
+  useEffect(() => {
+    getBlogs();
+  }, []);
 
-  const handleChange = (event) => {
-    setSelected(event.target.value);
+  const getBlogs = async () => {
+    const res = await axios.get(URI);
+    setData(res.data);
+    console.log(res.data);
   };
 
-  // fetch(URL)
-  //   .then((response) => response.json())
-  //   .then((data) => datos(data));
+  data.sort((a, b) => {
+    const nombreA = a.fecha + a.hora;
+    const apellidoB = b.fecha + b.hora;
 
-  // const datos = (data) => {
-  //   data.map((dato) => {
-  //     console.log(dato);
-  //     <CompTable />;
-  //   });
-  // };
+    if (nombreA > apellidoB) {
+      return -1;
+    }
+
+    if (nombreA < apellidoB) {
+      return 1;
+    }
+
+    return 0;
+  });
+
+  console.log(data);
 
   return (
-    <Table>
-      <table>
-        <thead>
-          <tr>
-            <th>Fecha de la rotura</th>
-            <th>Hora de la rotura</th>
-            <th>Molde</th>
-            <th>Lider a cargo:</th>
-            <th>Descripcion de la rotura:</th>
-            <th>Quien recibe esta reparacion:</th>
-            <th>Fecha de finalizacion</th>
-            <th>Hora de finalizacion</th>
-            <th>Quien lo reparo:</th>
-            <th>Editar:</th>
-            <th>Estado:</th>
-          </tr>
-        </thead>
-        <tbody>
-          <TR validate={selected}>
-          <td>date</td>
-            <td>hour</td>
-            <td>datos</td>
-            <td>Bruce</td>
-            <td>Wayne</td>
-            <td>Batman</td>
-            <td>Wayne</td>
-            <td>date</td>
-            <td>hour</td>
-            <td>
-              <Link to='/FormEdit'>
-                <FontAwesomeIcon className='edit' icon={faPenToSquare} />
-              </Link>
-            </td>
-            <td>
-              <select value={selected} onChange={handleChange}>
-                {options.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.text}
-                  </option>
-                ))}
-              </select>
-            </td>
-          </TR>
-          <TR validate={selected}>
-            <td>date</td>
-            <td>hour</td>
-            <td>Batman</td>
-            <td>Bruce</td>
-            <td>Wayne</td>
-            <td>Batman</td>
-            <td>date</td>
-            <td>hour</td>
-            <td>Wayne</td>
-            <td>
-              <Link to='/FormEdit'>
-                <FontAwesomeIcon className='edit' icon={faPenToSquare} />
-              </Link>
-            </td>
-            <td>
-              <select value={selected} onChange={handleChange}>
-                {options.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.text}
-                  </option>
-                ))}
-              </select>
-            </td>
-          </TR>
-          <TR validate={selected}>
-            <td>date</td>
-            <td>hour</td>
-            <td>Batman</td>
-            <td>Bruce</td>
-            <td>Wayne</td>
-            <td>Batman</td>
-            <td>date</td>
-            <td>hour</td>
-            <td>Wayne</td>
-            <td>
-              <Link to='/FormEdit'>
-                <FontAwesomeIcon className='edit' icon={faPenToSquare} />
-              </Link>
-            </td>
-            <td>
-              <select value={selected} onChange={handleChange}>
-                {options.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.text}
-                  </option>
-                ))}
-              </select>
-            </td>
-          </TR>
-        </tbody>
-      </table>
-    </Table>
+    <>
+      <ContenedorBotonCentrado>
+        <Link to="/">
+          <BotonInicio type="submit">Atras</BotonInicio>
+        </Link>
+      </ContenedorBotonCentrado>
+
+      <Table>
+        <table className="dataTable">
+          <thead>
+            <tr>
+              <th>Fecha de la rotura</th>
+              <th>Hora de la rotura</th>
+              <th>Infraestructura:</th>
+              <th>Lider a cargo:</th>
+              <th>Descripcion del problema:</th>
+              <th>Quien recibe esta reparacion:</th>
+              <th>Quien lo reparo:</th>
+              <th>Fecha de finalizacion</th>
+              <th>Hora de finalizacion</th>
+              <th>Editar:</th>
+              <th>Estado:</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((dataTable) => (
+              <TR key={dataTable._id} validate={dataTable.estado}>
+                <td>{dataTable.fecha}</td>
+                <td>{dataTable.hora}</td>
+                <td>{dataTable.infraestructura}</td>
+                <td>{dataTable.lider}</td>
+                <td>{dataTable.descripcion}</td>
+                <td>{dataTable.recibe}</td>
+                <td>{dataTable.repara}</td>
+                <td>{dataTable.fechaFinal}</td>
+                <td>{dataTable.horaFinal}</td>
+                <TD>
+                  <Link to={`/FormEditEdilicio/${dataTable._id}`}>
+                    <FontAwesomeIcon className="edit" icon={faPenToSquare} />
+                  </Link>
+                </TD>
+                <TD>
+                  <IconoTabla
+                    icon={
+                      dataTable.estado === 'reparado'
+                        ? faCheckCircle
+                        : faTimesCircle
+                    }
+                  />
+                </TD>
+              </TR>
+            ))}
+          </tbody>
+        </table>
+      </Table>
+    </>
   );
 };

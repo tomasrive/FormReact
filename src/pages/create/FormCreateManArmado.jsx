@@ -16,14 +16,17 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import CompInput from '../../Components/CompInput';
 import dayjs from 'dayjs';
+import axios from 'axios';
 
-const URI = 'http://192.168.11.139:4001/api/armado/users';
+const URI = 'http://localhost:3000/api/ordenArmado';
 
 const FormCreateArmado = () => {
-  const [seconds, setSeconds] = useState(0);
+  const [, setSeconds] = useState(0);
   const [name, setName] = useState({ campo: '', valido: null });
   const [message, setMessage] = useState({ campo: '', valido: null });
   const [formValidate, setFormValidate] = useState(null);
+
+  const data = sessionStorage.getItem('lider');
 
   const navigate = useNavigate();
 
@@ -32,8 +35,7 @@ const FormCreateArmado = () => {
   }
 
   const expresiones = {
-    lider: /^[a-zA-ZÀ-ÿ\s]{4,16}$/,
-    problema: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
+    problema: /^[a-zA-Z0-9À-ÿ\s]{3,200}$/,
   };
 
   dayjs.locale('es');
@@ -47,20 +49,14 @@ const FormCreateArmado = () => {
     return () => clearInterval(interval);
   }, []);
 
-  fetch(URI)
-    .then((response) => response.json())
-    .then((data) => datos(data));
-
-
-
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('_________Formulario Crear Armado_______________');
+    console.log('_________Formulario Crear Edilicio_______________');
 
     const dataJson = JSON.stringify({
+      Infraestructura: message.campo,
       Lider: name.campo,
-      Mensaje: message.campo,
     });
 
     console.log(dataJson);
@@ -70,8 +66,20 @@ const FormCreateArmado = () => {
     console.log(name.campo);
     console.log(message.campo);
 
-    if (name.valido === 'true' && message.valido === 'true') {
+    if (message.valido === 'true') {
       setFormValidate(true);
+
+      await axios.post(URI, {
+        fecha: date,
+        hora: hour,
+        lider: data,
+        descripcion: message.campo,
+        recibe: '',
+        repara: '',
+        fechaFinal: '',
+        horaFinal: '',
+        estado: 'no-reparado',
+      });
       setName({ campo: '', valido: null });
       setMessage({ campo: '', valido: null });
 
@@ -82,49 +90,37 @@ const FormCreateArmado = () => {
     }
   };
 
-
-  const datos = (data) => {
-    data.map((dato) => {
-      console.log(dato);
-
-
-      
-    });
-  };
   return (
     <>
-      <Formulario action='' onSubmit={onSubmit}>
+      <Formulario action="" onSubmit={onSubmit}>
         <GroupInputDate>
           <div>
             <Label>Fecha</Label>
-            <InputDate type='text' value={date} disabled />
+            <InputDate type="text" value={date} disabled />
           </div>
 
           <div>
             <Label>Hora</Label>
-            <InputDate type='text' value={hour} disabled />
+            <InputDate type="text" value={hour} disabled />
           </div>
         </GroupInputDate>
 
         <CompInput
-          InputState={name}
-          InputSetState={setName}
-          inputType='text'
-          inputLabel='Lider a cargo'
-          inputPlaceholder='Julian Lopez'
-          inputName='name'
-          inputError='El nombre tiene que ser de 3 a 40 dígitos y solo puede contener letras y espacios.'
-          inputExp={expresiones.lider}
+          InputState={data}
+          inputType="text"
+          inputLabel="Lider a cargo"
+          inputName="name"
+          inputDis="disable"
         />
 
         <CompInput
           InputState={message}
           InputSetState={setMessage}
-          inputType='text'
-          inputLabel='F0-07-02-32 - Sector Mantenimiento de Armado - Descripcion de rotura/problema:'
-          inputPlaceholder='Se quedo perno'
-          inputName='message'
-          inputError='La descripcion tiene que ser de 3 a 200 dígitos y solo puede contener letras y espacios.'
+          inputType="text"
+          inputLabel="F0-07-02-32 - Sector Mantenimiento de Armado - Descripcion de rotura/problema:"
+          inputPlaceholder="Descripcion de rotura/problema"
+          inputName="message"
+          inputError="La descripcion tiene que ser de 3 a 200 dígitos y solo puede contener letras y espacios."
           inputExp={expresiones.problema}
         />
 
@@ -146,13 +142,12 @@ const FormCreateArmado = () => {
         )}
 
         <ContenedorBotonCentrado>
-          <Link to='/'>
-            <BotonInicio type='submit'>Cancelar</BotonInicio>
+          <Link to="/">
+            <BotonInicio type="submit">Cancelar</BotonInicio>
           </Link>
-          <Boton type='submit'>Enviar</Boton>
+          <Boton type="submit">Enviar</Boton>
         </ContenedorBotonCentrado>
       </Formulario>
-
     </>
   );
 };

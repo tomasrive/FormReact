@@ -29,7 +29,7 @@ export const Home = () => {
         <Link className="noStyle" to="/FormCreateInyectoras">
           <ContenedorBotonInicio>
             <BotonInicio type="submit">
-              Orden de reparacion: Mantenimiento inyectoras
+              Orden de reparacion: Mantenimiento de Inyectoras
               {/* maquinas  */}
             </BotonInicio>
           </ContenedorBotonInicio>
@@ -45,7 +45,7 @@ export const Home = () => {
         <Link className="noStyle" to="/FormCreateArmado">
           <ContenedorBotonInicio>
             <BotonInicio type="submit">
-              Orden de reparacion: Mantenimiento Armado
+              Orden de reparacion: Mantenimiento de Armado
               {/* Problema */}
             </BotonInicio>
           </ContenedorBotonInicio>
