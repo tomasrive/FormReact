@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const colores = {
   borde: '#0075FF',
   error: '#bb2929',
-  exito: '#1ed12d',
+  exito: '#1ebb2b',
   proceso: '#ffff00',
 };
 
@@ -220,7 +220,7 @@ const ContenedorBotonCentrado = styled.div`
   align-items: center;
   justify-content: center;
   margin: auto;
-  margin-top: 15px;
+  margin-top: 30px;
   gap: 100px;
   width: 50%;
 `;

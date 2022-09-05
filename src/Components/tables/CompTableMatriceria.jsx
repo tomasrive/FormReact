@@ -9,8 +9,6 @@ import {
   BotonInicio,
   ContenedorBotonCentrado,
   IconoTabla,
-  Table,
-  TD,
   TR,
 } from '../../elements/Formularios';
 import { Link } from 'react-router-dom';
@@ -56,8 +54,8 @@ export const CompTableMatriceria = () => {
           <BotonInicio type="submit">Atras</BotonInicio>
         </Link>
       </ContenedorBotonCentrado>
-      <Table>
-        <table className="dataTable">
+      <div>
+        <table className="table-fill">
           <thead>
             <tr>
               <th>Fecha de la rotura</th>
@@ -65,10 +63,10 @@ export const CompTableMatriceria = () => {
               <th>Molde</th>
               <th>Lider a cargo:</th>
               <th>Descripcion de la rotura:</th>
-              <th>Quien recibe esta reparacion:</th>
-              <th>Quien lo reparo:</th>
-              <th>Fecha de finalizacion</th>
-              <th>Hora de finalizacion</th>
+              <th>Quien recibe:</th>
+              <th>Quien repara:</th>
+              <th>Fecha final</th>
+              <th>Hora final</th>
               <th>Editar:</th>
               <th>Estado:</th>
             </tr>
@@ -85,12 +83,12 @@ export const CompTableMatriceria = () => {
                 <td>{dataTable.repara}</td>
                 <td>{dataTable.fechaFinal}</td>
                 <td>{dataTable.horaFinal}</td>
-                <TD>
+                <td>
                   <Link to={`/FormEditMatriceria/${dataTable._id}`}>
                     <FontAwesomeIcon className="edit" icon={faPenToSquare} />
                   </Link>
-                </TD>
-                <TD>
+                </td>
+                <td>
                   <IconoTabla
                     icon={
                       dataTable.estado === 'reparado'
@@ -98,12 +96,12 @@ export const CompTableMatriceria = () => {
                         : faTimesCircle
                     }
                   />
-                </TD>
+                </td>
               </TR>
             ))}
           </tbody>
         </table>
-      </Table>
+      </div>
     </>
   );
 };

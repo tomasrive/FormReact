@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
+:root {
+  --gl-ms: 'screen and (max-width: 23.5em)';
+  --gl-xs: 'screen and (max-width: 35.5em)';
+  --gl-sm: 'screen and (max-width: 48em)';
+  --gl-md: 'screen and (max-width: 64em)';
+  --gl-lg: 'screen and (max-width: 80em)';
+}
+
 * {
   box-sizing: border-box;
 }
@@ -26,85 +34,84 @@ main {
   margin-top: 5px;
 }
 
-.dataTable {
-  display: block;
+.table-fill {
+  border-radius: 3px;
+  border-collapse: collapse;
+  max-height: 250px;
   margin: auto;
-  background-color: #000;
-}
-
-.dataTable thead,
-.dataTable tbody,
-.dataTable thead tr,
-.dataTable th {
-  display: block;
-
-}
-
-.dataTable thead {
-  float: left;
-  
-}
-
-.dataTable tbody {
-  width: auto;
-  position: relative;
-  overflow-x: auto;
-  
-}
-
-.dataTable td,
-.dataTable th {
-  height: 45px;
-  box-sizing: border-box;
-  overflow-x: hidden;
-  overflow-y: auto;
-  font-size: 14px;
+  margin-top: 30px;
+  max-width: 1700px;
   padding: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+  color: #fff;
+  width: 100%;
 }
 
-.dataTable th {
-  text-align: left;
-  background: #fff;
-  padding: 5px;
+th {
+  border: none;
+  background: #555a5e;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px;
+  text-align: center;
+  border: 2px solid #c1c3d1;
 }
 
-.dataTable tbody tr {
-  display: table-cell;
+td:nth-child(-n + 4),
+th:nth-child(-n + 4) {
+  text-align: center;
+  width: 120px;
 }
 
-.dataTable tbody td {
+td:nth-child(5),
+th:nth-child(5) {
+  width: 500px;
+}
+
+td:nth-child(n + 6),
+th:nth-child(n + 6) {
+  width: 120px;
+}
+td:nth-child(n + 10),
+th:nth-child(n + 10) {
+  width: 70px;
+}
+
+tr {
+  font-weight: normal;
+  max-width: 1685px;
+}
+
+tr:hover td {
+  background: #bb4a4a;
+}
+
+tr:last-child {
+  border-bottom: none;
+}
+
+td {
+  padding: 8px;
+  font-weight: 500;
+  font-size: 16px;
+  border: 2px solid #c1c3d1;
+}
+
+tbody {
   display: block;
+  height: 750px;
+  overflow: auto;
 }
 
-@media screen and (min-width: 50em) {
-  .dataTable {
-    display: table;
-  }
-
-  .dataTable thead {
-    display: table-header-group;
-    float: none;
-    
-  }
-
-  .dataTable tbody {
-    display: table-row-group;
-  }
-
-  .dataTable thead tr,
-  .dataTable tbody tr {
-    display: table-row;
-  }
-
-  .dataTable th,
-  .dataTable tbody td {
-    display: table-cell;
-  }
-
-  .dataTable td,
-  .dataTable th {
-    width: auto;
-    font-size: 16px;
-    text-align: center;
-  }
+thead,
+tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 }
+thead {
+  width: calc(100% - 1em);
+}
+
+

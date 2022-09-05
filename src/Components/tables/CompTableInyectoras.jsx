@@ -5,7 +5,12 @@ import {
   faTimesCircle,
 } from '@fortawesome/free-regular-svg-icons';
 import { useEffect, useState } from 'react';
-import { BotonInicio, ContenedorBotonCentrado, IconoTabla, Table, TD, TR } from '../../elements/Formularios';
+import {
+  BotonInicio,
+  ContenedorBotonCentrado,
+  IconoTabla,
+  TR,
+} from '../../elements/Formularios';
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
@@ -49,8 +54,8 @@ export const CompTableInyectoras = () => {
           <BotonInicio type="submit">Atras</BotonInicio>
         </Link>
       </ContenedorBotonCentrado>
-      <Table>
-        <table className="dataTable">
+      <div>
+        <table className="table-fill">
           <thead>
             <tr>
               <th>Fecha de la rotura</th>
@@ -60,8 +65,8 @@ export const CompTableInyectoras = () => {
               <th>Descripcion de la rotura:</th>
               <th>Quien recibe esta reparacion:</th>
               <th>Quien lo reparo:</th>
-              <th>Fecha de finalizacion</th>
-              <th>Hora de finalizacion</th>
+              <th>Fecha final</th>
+              <th>Hora final</th>
               <th>Editar:</th>
               <th>Estado:</th>
             </tr>
@@ -78,12 +83,12 @@ export const CompTableInyectoras = () => {
                 <td>{dataTable.repara}</td>
                 <td>{dataTable.fechaFinal}</td>
                 <td>{dataTable.horaFinal}</td>
-                <TD>
+                <td>
                   <Link to={`/FormEditInyectoras/${dataTable._id}`}>
                     <FontAwesomeIcon className="edit" icon={faPenToSquare} />
                   </Link>
-                </TD>
-                <TD>
+                </td>
+                <td>
                   <IconoTabla
                     icon={
                       dataTable.estado === 'reparado'
@@ -91,12 +96,12 @@ export const CompTableInyectoras = () => {
                         : faTimesCircle
                     }
                   />
-                </TD>
+                </td>
               </TR>
             ))}
           </tbody>
         </table>
-      </Table>
+      </div>
     </>
   );
 };

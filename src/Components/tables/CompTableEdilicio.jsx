@@ -9,8 +9,6 @@ import {
   BotonInicio,
   ContenedorBotonCentrado,
   IconoTabla,
-  Table,
-  TD,
   TR,
 } from '../../elements/Formularios';
 import { Link } from 'react-router-dom';
@@ -57,8 +55,8 @@ export const CompTableEdilicio = () => {
         </Link>
       </ContenedorBotonCentrado>
 
-      <Table>
-        <table className="dataTable">
+      <div>
+        <table className="table-fill">
           <thead>
             <tr>
               <th>Fecha de la rotura</th>
@@ -86,12 +84,12 @@ export const CompTableEdilicio = () => {
                 <td>{dataTable.repara}</td>
                 <td>{dataTable.fechaFinal}</td>
                 <td>{dataTable.horaFinal}</td>
-                <TD>
+                <td>
                   <Link to={`/FormEditEdilicio/${dataTable._id}`}>
                     <FontAwesomeIcon className="edit" icon={faPenToSquare} />
                   </Link>
-                </TD>
-                <TD>
+                </td>
+                <td>
                   <IconoTabla
                     icon={
                       dataTable.estado === 'reparado'
@@ -99,12 +97,12 @@ export const CompTableEdilicio = () => {
                         : faTimesCircle
                     }
                   />
-                </TD>
+                </td>
               </TR>
             ))}
           </tbody>
         </table>
-      </Table>
+      </div>
     </>
   );
 };
