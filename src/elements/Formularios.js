@@ -6,6 +6,7 @@ const colores = {
   error: '#bb2929',
   exito: '#1ebb2b',
   proceso: '#ffff00',
+  verificado: '#191a6e',
 };
 
 const Div = styled.div`
@@ -189,7 +190,6 @@ const ContenedorBotonInicio = styled.div`
   align-items: center;
   margin-top: 15px;
   width: 100%;
-
 `;
 
 const BotonInicio = styled.button`
@@ -281,18 +281,29 @@ const MensajeError = styled.div`
 
 const TR = styled.tr`
   ${(props) =>
+    props.validate === 'creado' &&
+    css`
+      text-align: center;
+      background-color: ${colores.error} !important;
+    `}
+  ${(props) =>
+    props.validate === 'visualizado' &&
+    css`
+      text-align: center;
+      background-color: ${colores.proceso} !important;
+    `}
+  ${(props) =>
     props.validate === 'reparado' &&
     css`
       text-align: center;
       background-color: ${colores.exito} !important;
-      pointer-events: none;
     `}
 
   ${(props) =>
-    props.validate === 'no-reparado' &&
+    props.validate === 'verificado' &&
     css`
       text-align: center;
-      background-color: ${colores.error} !important;
+      background-color: ${colores.verificado} !important;
     `}
 `;
 

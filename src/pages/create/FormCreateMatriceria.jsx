@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   Formulario,
   Label,
@@ -15,13 +15,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import CompInput from '../../Components/CompInput';
-import dayjs from 'dayjs';
 import axios from 'axios';
+import { useDate } from '../../Components/useDate';
 
 const URI = 'http://localhost:3000/api/ordenMatriceria';
 
 const FormCreateMatriceria = () => {
-  const [, setSeconds] = useState(0);
   const [molde, setMolde] = useState({ campo: '', valido: null });
   const [message, setMessage] = useState({ campo: '', valido: null });
   const [formValidate, setFormValidate] = useState(null);
@@ -29,6 +28,8 @@ const FormCreateMatriceria = () => {
   const data = sessionStorage.getItem('lider');
 
   const navigate = useNavigate();
+
+  const { date, hour } = useDate()
 
   function timeout(delay) {
     return new Promise((res) => setTimeout(res, delay));
@@ -39,16 +40,7 @@ const FormCreateMatriceria = () => {
     mensaje: /^[a-zA-Z0-9À-ÿ\s]{3,200}$/,
   };
 
-  dayjs.locale('es');
-  const date = dayjs().format('DD/MM/YYYY');
-  const hour = dayjs().format('HH:mm');
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds((seconds) => seconds + 1);
-    }, 100000);
-    return () => clearInterval(interval);
-  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -67,16 +59,27 @@ const FormCreateMatriceria = () => {
       setFormValidate(true);
 
       await axios.post(URI, {
-        fecha: date,
-        hora: hour,
+        fechaCreado: date,
+        horaCreado: hour,
         molde: molde.campo,
         lider: data,
         descripcion: message.campo,
+
+        fechaVisualizado: '',
+        horaVisualizado: '',
+
+        fechaReparado: '',
+        horaReparado: '',
+
         recibe: '',
         repara: '',
-        fechaFinal: '',
-        horaFinal: '',
-        estado: 'no-reparado',
+        observacionesReparar: '',
+
+        fechaVerificado: '',
+        horaVerificado: '',
+        observacionesVerificar: '',
+
+        estado: 'creado',
       });
 
       setMolde({ campo: '', valido: '' });
@@ -94,12 +97,12 @@ const FormCreateMatriceria = () => {
       <Formulario action="" onSubmit={onSubmit}>
         <GroupInputDate>
           <div>
-            <Label>Fecha</Label>
+            <Label>Fecha de creacion</Label>
             <InputDate type="text" value={date} disabled />
           </div>
 
           <div>
-            <Label>Hora</Label>
+            <Label>Hora de creacion</Label>
             <InputDate type="text" value={hour} disabled />
           </div>
         </GroupInputDate>

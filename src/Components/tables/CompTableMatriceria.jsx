@@ -14,11 +14,14 @@ import {
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
+import { faPlus, faScrewdriverWrench } from '@fortawesome/free-solid-svg-icons';
+import { useDate } from '../useDate';
 
 const URI = 'http://localhost:3000/api/ordenMatriceria';
 
 export const CompTableMatriceria = () => {
   const [data, setData] = useState([]);
+  const { date, hour, setDate } = useDate()
 
   useEffect(() => {
     getBlogs();
@@ -29,6 +32,9 @@ export const CompTableMatriceria = () => {
     setData(res.data);
     console.log(res.data);
   };
+
+
+
 
   data.sort((a, b) => {
     const nombreA = a.fecha + a.hora;
@@ -45,7 +51,8 @@ export const CompTableMatriceria = () => {
     return 0;
   });
 
-  console.log(data);
+
+
 
   return (
     <>
@@ -58,45 +65,55 @@ export const CompTableMatriceria = () => {
         <table className="table-fill">
           <thead>
             <tr>
-              <th>Fecha de la rotura</th>
-              <th>Hora de la rotura</th>
+              <th>Fecha creado</th>
+              <th>Hora creado</th>
               <th>Molde</th>
               <th>Lider a cargo:</th>
-              <th>Descripcion de la rotura:</th>
-              <th>Quien recibe:</th>
-              <th>Quien repara:</th>
-              <th>Fecha final</th>
-              <th>Hora final</th>
-              <th>Editar:</th>
+
+              <th>Fecha visualizado</th>
+              <th>Hora visualizado</th>
+
+              <th>Fecha reparado</th>
+              <th>Hora reparado</th>
+
+              <th>Fecha verificado</th>
+              <th>Hora verificado</th>
+
+              <th>Opciones</th>
+
               <th>Estado:</th>
             </tr>
           </thead>
           <tbody>
+
             {data.map((dataTable) => (
               <TR key={dataTable._id} validate={dataTable.estado}>
-                <td>{dataTable.fecha}</td>
-                <td>{dataTable.hora}</td>
+                <td>{dataTable.fechaCreado}</td>
+                <td>{dataTable.horaCreado}</td>
                 <td>{dataTable.molde}</td>
                 <td>{dataTable.lider}</td>
-                <td>{dataTable.descripcion}</td>
-                <td>{dataTable.recibe}</td>
-                <td>{dataTable.repara}</td>
-                <td>{dataTable.fechaFinal}</td>
-                <td>{dataTable.horaFinal}</td>
+                <td>{dataTable.fechaVisualizado}</td>
+                <td>{dataTable.horaVisualizado}</td>
+                <td>{dataTable.fechaReparado}</td>
+                <td>{dataTable.horaReparado}</td>
+                <td>{dataTable.fechaVerificado}</td>
+                <td>{dataTable.horaVerificado}</td>
                 <td>
-                  <Link to={`/FormEditMatriceria/${dataTable._id}`}>
-                    <FontAwesomeIcon className="edit" icon={faPenToSquare} />
+                  <button onClick={setDate} >
+                    <FontAwesomeIcon icon={faPenToSquare} />
+
+                  </button>
+                  <Link to={`/FormEdit/${dataTable._id}`}>
+                    <FontAwesomeIcon icon={faScrewdriverWrench} />
+                  </Link>
+                  <Link to={`/FormVerificado/${dataTable._id}`}>
+                    <FontAwesomeIcon icon={faCheckCircle} />
+                  </Link>
+                  <Link to={'/'}>
+                    <FontAwesomeIcon icon={faPlus} />
                   </Link>
                 </td>
-                <td>
-                  <IconoTabla
-                    icon={
-                      dataTable.estado === 'reparado'
-                        ? faCheckCircle
-                        : faTimesCircle
-                    }
-                  />
-                </td>
+                <td>{dataTable.estado}</td>
               </TR>
             ))}
           </tbody>

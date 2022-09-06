@@ -22,6 +22,7 @@ const URI = 'http://localhost:3000/api/ordenMatriceria/';
 
 export const FormEditMatriceria = () => {
   const [, setSeconds] = useState(0);
+  const [obser, setObser] = useState({ campo: '', valido: null });
   const [recibe, setRecibe] = useState({ campo: '', valido: null });
   const [repara, setRepara] = useState({ campo: '', valido: null });
   const [formValidate, setFormValidate] = useState(null);
@@ -34,6 +35,7 @@ export const FormEditMatriceria = () => {
   }
 
   const expresiones = {
+    observ: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
     recibe: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
     repara: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
   };
@@ -59,7 +61,7 @@ export const FormEditMatriceria = () => {
     console.log(recibe.campo);
     console.log(repara.campo);
 
-    if (recibe.valido === 'true' && repara.valido === 'true') {
+    if (obser.valido === 'true' && recibe.valido === 'true' && repara.valido === 'true') {
       setFormValidate(true);
 
       await axios.put(URI + id, {
@@ -69,7 +71,7 @@ export const FormEditMatriceria = () => {
         horaFinal: hour,
         estado: 'reparado',
       });
-
+      setObser({ campo: '', valido: null });
       setRecibe({ campo: '', valido: null });
       setRepara({ campo: '', valido: null });
       await timeout(2000);
@@ -94,10 +96,21 @@ export const FormEditMatriceria = () => {
       </GroupInputDate>
 
       <CompInput
+        InputState={obser}
+        InputSetState={setObser}
+        inputType="text"
+        inputLabel="Observacion"
+        inputPlaceholder="Observacion a tener en cuenta"
+        inputName="recibe"
+        inputError="La observacion a tener en cuenta tiene que ser de 3 a 200 dígitos y solo puede contener numeros, letras y guion bajo."
+        inputExp={expresiones.observ}
+      />
+
+      <CompInput
         InputState={recibe}
         InputSetState={setRecibe}
         inputType="text"
-        inputLabel="Quien recibe esta reparacion"
+        inputLabel="Quien recibe"
         inputPlaceholder="Julian Perez"
         inputName="recibe"
         inputError="El nombre de molde tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo."
@@ -107,8 +120,8 @@ export const FormEditMatriceria = () => {
         InputState={repara}
         InputSetState={setRepara}
         inputType="text"
-        inputLabel="Quien lo reparo"
-        inputPlaceholder="Julian Lopez"
+        inputLabel="Quien repara"
+        inputPlaceholder="Diego Garcia"
         inputName="repara"
         inputError="El nombre tiene que ser de 3 a 40 dígitos y solo puede contener letras y espacios."
         inputExp={expresiones.repara}

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   Formulario,
   Label,
@@ -15,13 +15,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import CompInput from '../../Components/CompInput';
-import dayjs from 'dayjs';
 import axios from 'axios';
+import { useDate } from '../../Components/useDate';
 
 const URI = 'http://localhost:3000/api/ordenInyectoras';
 
 const FormCreateInyectoras = () => {
-  const [, setSeconds] = useState(0);
   const [maquinas, setMaquinas] = useState({ campo: '', valido: null });
   const [message, setMessage] = useState({ campo: '', valido: null });
   const [formValidate, setFormValidate] = useState(null);
@@ -39,16 +38,7 @@ const FormCreateInyectoras = () => {
     mensaje: /^[a-zA-Z0-9À-ÿ\s]{3,200}$/,
   };
 
-  dayjs.locale('es');
-  const date = dayjs().format('DD/MM/YYYY');
-  const hour = dayjs().format('HH:mm');
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds((seconds) => seconds + 1);
-    }, 100000);
-    return () => clearInterval(interval);
-  }, []);
+  const { date, hour } = useDate()
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -71,16 +61,22 @@ const FormCreateInyectoras = () => {
       setFormValidate(true);
 
       await axios.post(URI, {
-        fecha: date,
-        hora: hour,
+        fechaCreado: date,
+        horaCreado: hour,
         maquinas: maquinas.campo,
         lider: data,
         descripcion: message.campo,
+        fechaVisualizado: '',
+        horaVisualizado: '',
+        fechaReparado: '',
+        horaReparado: '',
         recibe: '',
         repara: '',
-        fechaFinal: '',
-        horaFinal: '',
-        estado: 'no-reparado',
+        observacionesReparar: '',
+        fechaVerificado: '',
+        horaVerificado: '',
+        observacionesVerificar: '',
+        estado: 'creado',
       });
 
       setMaquinas({ campo: '', valido: '' });

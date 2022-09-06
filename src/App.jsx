@@ -14,6 +14,8 @@ import { CompTableMatriceria } from './Components/tables/CompTableMatriceria.jsx
 import { CompTableInyectoras } from './Components/tables/CompTableInyectoras.jsx';
 import { CompTableEdilicio } from './Components/tables/CompTableEdilicio.jsx';
 import { CompTableArmado } from './Components/tables/CompTableArmado.jsx';
+import { FormEdit } from './pages/edit/FormEdit.jsx';
+import { FormVerificado } from './pages/edit/FormVerificado.jsx';
 
 export default function App() {
   return (
@@ -40,6 +42,9 @@ export default function App() {
         <Route path="/FormEditInyectoras/:id" element={<FormEditInyectoras />} />
         <Route path="/FormEditEdilicio/:id" element={<FormEditEdilicio />} />
         <Route path="/FormEditArmado/:id" element={<FormEditArmado />} />
+        <Route path="/FormEdit/:id" element={<FormEdit />} />
+
+        <Route path="/FormVerificado/:id" element={<FormVerificado />} />
       </Routes>
     </BrowserRouter>
   );

@@ -26,10 +26,13 @@ main {
 .pointer {
   cursor: pointer;
 }
+.editT {
+  display: flex;
+}
 .edit {
   display: flex;
-  margin: auto;
-  font-size: 25px;
+  margin: 20px;
+  font-size: 45px;
   color: #000;
   margin-top: 5px;
 }
@@ -44,8 +47,23 @@ main {
   padding: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   animation: float 5s infinite;
-  color: #fff;
+  color: #000;
   width: 100%;
+}
+tbody {
+  display: block;
+  height: 750px;
+  overflow: auto;
+}
+
+thead,
+tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+thead {
+  width: calc(100% - 1em);
 }
 
 th {
@@ -56,26 +74,6 @@ th {
   padding: 8px;
   text-align: center;
   border: 2px solid #c1c3d1;
-}
-
-td:nth-child(-n + 4),
-th:nth-child(-n + 4) {
-  text-align: center;
-  width: 120px;
-}
-
-td:nth-child(5),
-th:nth-child(5) {
-  width: 500px;
-}
-
-td:nth-child(n + 6),
-th:nth-child(n + 6) {
-  width: 120px;
-}
-td:nth-child(n + 10),
-th:nth-child(n + 10) {
-  width: 70px;
 }
 
 tr {
@@ -98,20 +96,11 @@ td {
   border: 2px solid #c1c3d1;
 }
 
-tbody {
-  display: block;
-  height: 750px;
-  overflow: auto;
+td:nth-child(-n + 10),
+th:nth-child(-n + 10) {
+  width: 120px;
 }
-
-thead,
-tbody tr {
-  display: table;
-  width: 100%;
-  table-layout: fixed;
+td:last-child,
+th:last-child {
+  width: 100px;
 }
-thead {
-  width: calc(100% - 1em);
-}
-
-
