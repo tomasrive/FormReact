@@ -6,7 +6,7 @@ const colores = {
   error: '#bb2929',
   exito: '#1ebb2b',
   proceso: '#ffff00',
-  verificado: '#191a6e',
+  verificado: '#3d40c7',
 };
 
 const Div = styled.div`
@@ -175,7 +175,11 @@ const IconoTabla = styled(FontAwesomeIcon)`
   margin-top: 5px;
 `;
 const TD = styled.td`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  font-size: 40px;
+  margin-left: 20px;
+  color: #000;
 `;
 
 const ContenedorTerminos = styled.div`
@@ -306,6 +310,163 @@ const TR = styled.tr`
       background-color: ${colores.verificado} !important;
     `}
 `;
+const DivOpciones = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  font-size: 40px;
+  a {
+    color: #000 !important;
+  }
+
+  ${(props) =>
+    props.validate === 'creado' &&
+    css`
+      a:nth-child(2),
+      a:nth-child(3) {
+        color: grey !important;
+        pointer-events: none;
+      }
+    `}
+  ${(props) =>
+    props.validate === 'visualizado' &&
+    css`
+      a:nth-child(1),
+      a:nth-child(3) {
+        color: grey !important;
+        pointer-events: none;
+      }
+    `}
+  ${(props) =>
+    props.validate === 'reparado' &&
+    css`
+      a:nth-child(1),
+      a:nth-child(2) {
+        color: grey !important;
+        pointer-events: none;
+      }
+    `}
+
+  ${(props) =>
+    props.validate === 'verificado' &&
+    css`
+      a:nth-child(-n + 3) {
+        color: grey !important;
+        pointer-events: none;
+      }
+    `}
+`;
+const Overlay = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ContenedorModal = styled.div`
+  width: 1000px;
+  min-height: 100px;
+  background: #fff;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 20px;
+`;
+
+const EncabezadoModal = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e8e8e8;
+  h1 {
+    margin: auto;
+  }
+  h3 {
+    font-weight: 500px;
+    font-size: 16px;
+    color: #1766dc;
+  }
+`;
+const BotonCerrar = styled.button`
+  position: absolute;
+  background: #000;
+  right: 20px;
+  top: 20px;
+  width: 50px;
+  height: 50px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease all;
+  border-radius: 5px;
+
+  &:hover {
+    background: #f2f2f2;
+  }
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+const OrdenReparacion = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+  font-size: 15px;
+  h4,
+  h5 {
+    margin: 7px;
+  }
+
+  h5 {
+    border-radius: 5px;
+    min-height: 40px;
+    padding: 10px;
+    background: #f2f2f2;
+  }
+
+  ${(props) =>
+    props.validate === 'creado' &&
+    css`
+      & > h5:last-child {
+        text-align: center;
+        background-color: ${colores.error};
+      }
+    `}
+  ${(props) =>
+    props.validate === 'visualizado' &&
+    css`
+      & > h5:last-child {
+        text-align: center;
+        background-color: ${colores.proceso};
+      }
+    `}
+  ${(props) =>
+    props.validate === 'reparado' &&
+    css`
+      & > h5:last-child {
+        text-align: center;
+        background-color: ${colores.exito};
+      }
+    `}
+
+  ${(props) =>
+    props.validate === 'verificado' &&
+    css`
+      & > h5:last-child {
+        text-align: center;
+        background-color: ${colores.verificado};
+      }
+    `}
+`;
 
 export {
   Div,
@@ -329,4 +490,10 @@ export {
   MensajeError,
   MensajeExito,
   TR,
+  DivOpciones,
+  Overlay,
+  ContenedorModal,
+  EncabezadoModal,
+  BotonCerrar,
+  OrdenReparacion,
 };

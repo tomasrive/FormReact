@@ -1,24 +1,45 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCheckCircle,
-  faPenToSquare,
-  faTimesCircle,
 } from '@fortawesome/free-regular-svg-icons';
 import { useEffect, useState } from 'react';
 import {
   BotonInicio,
   ContenedorBotonCentrado,
-  IconoTabla,
+  DivOpciones,
   TR,
 } from '../../elements/Formularios';
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
+import { faPlus, faScrewdriverWrench, faEye } from '@fortawesome/free-solid-svg-icons';
+import { ModalForm } from '../ModalForm';
 
 const URI = 'http://localhost:3000/api/ordenInyectoras';
 
 export const CompTableInyectoras = () => {
   const [data, setData] = useState([]);
+  const [stateModal, setStateModal] = useState(false)
+  const [dataModal, setDataModal] = useState({
+    tabla: '/ordenInyectoras/',
+    fechaCreado: '',
+    horaCreado: '',
+    maquinas: '',
+    lider: '',
+    descripcion: '',
+    fechaVisualizado: '',
+    horaVisualizado: '',
+    recibe: '',
+    fechaReparado: '',
+    horaReparado: '',
+    repara: '',
+    observacionesReparar: '',
+    fechaVerificado: '',
+    horaVerificado: '',
+    observacionesVerificar: '',
+    estado: '',
+
+  })
 
   useEffect(() => {
     getBlogs();
@@ -31,8 +52,8 @@ export const CompTableInyectoras = () => {
   };
 
   data.sort((a, b) => {
-    const nombreA = a.fecha + a.hora;
-    const apellidoB = b.fecha + b.hora;
+    const nombreA = a.fechaCreado + a.horaCreado;
+    const apellidoB = b.fechaCreado + b.horaCreado;
 
     if (nombreA > apellidoB) {
       return -1;
@@ -45,10 +66,19 @@ export const CompTableInyectoras = () => {
     return 0;
   });
 
-  console.log(data);
+  const modal = (dataTable) => {
+    setStateModal(!stateModal);
+    setDataModal(dataTable)
+  }
 
   return (
     <>
+      <ModalForm
+        state={stateModal}
+        setState={setStateModal}
+        dataTable={dataModal}
+      />
+
       <ContenedorBotonCentrado>
         <Link to="/">
           <BotonInicio type="submit">Atras</BotonInicio>
@@ -58,45 +88,56 @@ export const CompTableInyectoras = () => {
         <table className="table-fill">
           <thead>
             <tr>
-              <th>Fecha de la rotura</th>
-              <th>Hora de la rotura</th>
-              <th>Maquina:</th>
+              <th>Fecha creado</th>
+              <th>Hora creado</th>
+              <th>Maquina</th>
               <th>Lider a cargo:</th>
-              <th>Descripcion de la rotura:</th>
-              <th>Quien recibe esta reparacion:</th>
-              <th>Quien lo reparo:</th>
-              <th>Fecha final</th>
-              <th>Hora final</th>
-              <th>Editar:</th>
+
+              <th>Fecha visualizado</th>
+              <th>Hora visualizado</th>
+
+              <th>Fecha reparado</th>
+              <th>Hora reparado</th>
+
+              <th>Fecha verificado</th>
+              <th>Hora verificado</th>
+
+              <th>Opciones</th>
+
               <th>Estado:</th>
             </tr>
           </thead>
           <tbody>
+
             {data.map((dataTable) => (
               <TR key={dataTable._id} validate={dataTable.estado}>
-                <td>{dataTable.fecha}</td>
-                <td>{dataTable.hora}</td>
+                <td>{dataTable.fechaCreado}</td>
+                <td>{dataTable.horaCreado}</td>
                 <td>{dataTable.maquinas}</td>
                 <td>{dataTable.lider}</td>
-                <td>{dataTable.descripcion}</td>
-                <td>{dataTable.recibe}</td>
-                <td>{dataTable.repara}</td>
-                <td>{dataTable.fechaFinal}</td>
-                <td>{dataTable.horaFinal}</td>
+                <td>{dataTable.fechaVisualizado}</td>
+                <td>{dataTable.horaVisualizado}</td>
+                <td>{dataTable.fechaReparado}</td>
+                <td>{dataTable.horaReparado}</td>
+                <td>{dataTable.fechaVerificado}</td>
+                <td>{dataTable.horaVerificado}</td>
                 <td>
-                  <Link to={`/FormEditInyectoras/${dataTable._id}`}>
-                    <FontAwesomeIcon className="edit" icon={faPenToSquare} />
-                  </Link>
+                  <DivOpciones validate={dataTable.estado}>
+                    <Link to={`/FormVisualizar${dataTable.tabla}${dataTable._id}`} >
+                      <FontAwesomeIcon icon={faEye} />
+                    </Link>
+                    <Link to={`/FormEdit${dataTable.tabla}${dataTable._id}`}>
+                      <FontAwesomeIcon icon={faScrewdriverWrench} />
+                    </Link>
+                    <Link to={`/FormVerificado${dataTable.tabla}${dataTable._id}`}>
+                      <FontAwesomeIcon icon={faCheckCircle} />
+                    </Link>
+                    <button onClick={() => modal(dataTable)} className='btnTable'>
+                      <FontAwesomeIcon icon={faPlus} />
+                    </button>
+                  </DivOpciones>
                 </td>
-                <td>
-                  <IconoTabla
-                    icon={
-                      dataTable.estado === 'reparado'
-                        ? faCheckCircle
-                        : faTimesCircle
-                    }
-                  />
-                </td>
+                <td>{dataTable.estado.toUpperCase()}</td>
               </TR>
             ))}
           </tbody>

@@ -1,27 +1,44 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCheckCircle,
-  faPenToSquare,
-  faTimesCircle,
 } from '@fortawesome/free-regular-svg-icons';
 import { useEffect, useState } from 'react';
 import {
   BotonInicio,
   ContenedorBotonCentrado,
-  IconoTabla,
+  DivOpciones,
   TR,
 } from '../../elements/Formularios';
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
-import { faPlus, faScrewdriverWrench } from '@fortawesome/free-solid-svg-icons';
-import { useDate } from '../useDate';
-
+import { faPlus, faScrewdriverWrench, faEye } from '@fortawesome/free-solid-svg-icons';
+import { ModalForm } from '../ModalForm';
 const URI = 'http://localhost:3000/api/ordenMatriceria';
 
 export const CompTableMatriceria = () => {
   const [data, setData] = useState([]);
-  const { date, hour, setDate } = useDate()
+  const [stateModal, setStateModal] = useState(false)
+  const [dataModal, setDataModal] = useState({
+    tabla: '/ordenMatriceria/',
+    fechaCreado: '',
+    horaCreado: '',
+    molde: '',
+    lider: '',
+    descripcion: '',
+    fechaVisualizado: '',
+    horaVisualizado: '',
+    recibe: '',
+    fechaReparado: '',
+    horaReparado: '',
+    repara: '',
+    observacionesReparar: '',
+    fechaVerificado: '',
+    horaVerificado: '',
+    observacionesVerificar: '',
+    estado: '',
+
+  })
 
   useEffect(() => {
     getBlogs();
@@ -30,15 +47,11 @@ export const CompTableMatriceria = () => {
   const getBlogs = async () => {
     const res = await axios.get(URI);
     setData(res.data);
-    console.log(res.data);
   };
 
-
-
-
   data.sort((a, b) => {
-    const nombreA = a.fecha + a.hora;
-    const apellidoB = b.fecha + b.hora;
+    const nombreA = a.fechaCreado + a.horaCreado;
+    const apellidoB = b.fechaCreado + b.horaCreado;
 
     if (nombreA > apellidoB) {
       return -1;
@@ -51,11 +64,21 @@ export const CompTableMatriceria = () => {
     return 0;
   });
 
+  const modal = (dataTable) => {
+    setStateModal(!stateModal);
+    setDataModal(dataTable)
 
+  }
 
-
+  console.log(data);
   return (
     <>
+      <ModalForm
+        state={stateModal}
+        setState={setStateModal}
+        dataTable={dataModal}
+      />
+
       <ContenedorBotonCentrado>
         <Link to="/">
           <BotonInicio type="submit">Atras</BotonInicio>
@@ -99,26 +122,29 @@ export const CompTableMatriceria = () => {
                 <td>{dataTable.fechaVerificado}</td>
                 <td>{dataTable.horaVerificado}</td>
                 <td>
-                  <button onClick={setDate} >
-                    <FontAwesomeIcon icon={faPenToSquare} />
-
-                  </button>
-                  <Link to={`/FormEdit/${dataTable._id}`}>
-                    <FontAwesomeIcon icon={faScrewdriverWrench} />
-                  </Link>
-                  <Link to={`/FormVerificado/${dataTable._id}`}>
-                    <FontAwesomeIcon icon={faCheckCircle} />
-                  </Link>
-                  <Link to={'/'}>
-                    <FontAwesomeIcon icon={faPlus} />
-                  </Link>
+                  <DivOpciones validate={dataTable.estado}>
+                    <Link to={`/FormVisualizar${dataTable.tabla}${dataTable._id}`} >
+                      <FontAwesomeIcon icon={faEye} />
+                    </Link>
+                    <Link to={`/FormEdit/${dataTable._id}`}>
+                      <FontAwesomeIcon icon={faScrewdriverWrench} />
+                    </Link>
+                    <Link to={`/FormVerificado${dataTable.tabla}${dataTable._id}`}>
+                      <FontAwesomeIcon icon={faCheckCircle} />
+                    </Link>
+                    <button onClick={() => modal(dataTable)} className='btnTable'>
+                      <FontAwesomeIcon icon={faPlus} />
+                    </button>
+                  </DivOpciones>
                 </td>
-                <td>{dataTable.estado}</td>
+                <td>{dataTable.estado.toUpperCase()}</td>
               </TR>
             ))}
+
           </tbody>
         </table>
       </div>
+
     </>
   );
 };

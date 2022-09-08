@@ -20,11 +20,11 @@ import { useDate } from '../../Components/useDate';
 
 const URI = 'http://localhost:3000/api/';
 
-export const FormEdit = () => {
+
+export const FormVisualizar = () => {
+
     const [obser, setObser] = useState({ campo: '', valido: null });
-    const [repara, setRepara] = useState({ campo: '', valido: null });
     const [formValidate, setFormValidate] = useState(null);
-    const { date, hour } = useDate()
     const { tabla, id } = useParams();
 
     const navigate = useNavigate();
@@ -35,10 +35,9 @@ export const FormEdit = () => {
 
     const expresiones = {
         observ: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
-        repara: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
     };
 
-
+    const { date, hour } = useDate()
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -47,21 +46,18 @@ export const FormEdit = () => {
 
         console.log(date);
         console.log(hour);
-        console.log(repara.campo);
+        console.log(obser.campo);
 
-        if (obser.valido === 'true' && repara.valido === 'true') {
+        if (obser.valido === 'true') {
             setFormValidate(true);
 
             await axios.put(URI + tabla + '/' + id, {
-                repara: repara.campo,
-                observacionesReparar: obser.campo,
-                fechaReparado: date,
-                horaReparado: hour,
-                estado: 'reparado',
+                fechaVisualizado: date,
+                horaVisualizado: hour,
+                recibe: obser.campo,
+                estado: 'visualizado',
             });
             setObser({ campo: '', valido: null });
-            setRepara({ campo: '', valido: null });
-
             await timeout(2000);
             navigate('/');
         } else {
@@ -72,7 +68,7 @@ export const FormEdit = () => {
     return (
         <>
             <Formulario action="" onSubmit={onSubmit}>
-                <h1>Formulario Editar</h1>
+                <h1>Formulario Visualizar</h1>
                 <GroupInputDate>
                     <div>
                         <Label>Fecha</Label>
@@ -89,23 +85,13 @@ export const FormEdit = () => {
                     InputState={obser}
                     InputSetState={setObser}
                     inputType="text"
-                    inputLabel="Observacion"
-                    inputPlaceholder="Observacion a tener en cuenta"
+                    inputLabel="Persona que lo visualiza"
+                    inputPlaceholder="Nombre"
                     inputName="recibe"
                     inputError="La observacion a tener en cuenta tiene que ser de 3 a 200 dígitos y solo puede contener numeros, letras y guion bajo."
                     inputExp={expresiones.observ}
                 />
 
-                <CompInput
-                    InputState={repara}
-                    InputSetState={setRepara}
-                    inputType="text"
-                    inputLabel="Quien repara"
-                    inputPlaceholder="Diego Garcia"
-                    inputName="repara"
-                    inputError="El nombre tiene que ser de 3 a 40 dígitos y solo puede contener letras y espacios."
-                    inputExp={expresiones.repara}
-                />
 
                 {formValidate === false && (
                     <MensajeError>
@@ -126,12 +112,13 @@ export const FormEdit = () => {
 
                 <ContenedorBotonCentrado>
                     <Link to="/">
-                        <BotonInicio type="submit">Cancelar</BotonInicio>
+                        <BotonInicio type="submit">Denegar</BotonInicio>
                     </Link>
-                    <Boton type="submit">Enviar</Boton>
+                    <Boton type="submit">Verificar</Boton>
                 </ContenedorBotonCentrado>
             </Formulario>
         </>
 
     );
-};
+
+}

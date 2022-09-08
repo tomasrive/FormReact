@@ -61,24 +61,28 @@ const FormCreateInyectoras = () => {
       setFormValidate(true);
 
       await axios.post(URI, {
+        tabla: '/ordenInyectoras/',
         fechaCreado: date,
         horaCreado: hour,
         maquinas: maquinas.campo,
         lider: data,
         descripcion: message.campo,
+
         fechaVisualizado: '',
         horaVisualizado: '',
+        recibe: '',
+
         fechaReparado: '',
         horaReparado: '',
-        recibe: '',
         repara: '',
         observacionesReparar: '',
+
         fechaVerificado: '',
         horaVerificado: '',
         observacionesVerificar: '',
+
         estado: 'creado',
       });
-
       setMaquinas({ campo: '', valido: '' });
       setMessage({ campo: '', valido: null });
 

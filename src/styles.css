@@ -52,7 +52,7 @@ main {
 }
 tbody {
   display: block;
-  height: 750px;
+  height: 700px;
   overflow: auto;
 }
 
@@ -81,10 +81,6 @@ tr {
   max-width: 1685px;
 }
 
-tr:hover td {
-  background: #bb4a4a;
-}
-
 tr:last-child {
   border-bottom: none;
 }
@@ -92,7 +88,7 @@ tr:last-child {
 td {
   padding: 8px;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 18px;
   border: 2px solid #c1c3d1;
 }
 
@@ -102,5 +98,18 @@ th:nth-child(-n + 10) {
 }
 td:last-child,
 th:last-child {
-  width: 100px;
+  width: 130px;
 }
+
+.btnTable {
+  background: none;
+  border: none;
+  font-size: 40px;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.4s;
+}
+.btnTable:hover {
+  color: #fff;
+}
+

@@ -59,6 +59,7 @@ const FormCreateMatriceria = () => {
       setFormValidate(true);
 
       await axios.post(URI, {
+        tabla: '/ordenMatriceria/',
         fechaCreado: date,
         horaCreado: hour,
         molde: molde.campo,
@@ -67,11 +68,10 @@ const FormCreateMatriceria = () => {
 
         fechaVisualizado: '',
         horaVisualizado: '',
+        recibe: '',
 
         fechaReparado: '',
         horaReparado: '',
-
-        recibe: '',
         repara: '',
         observacionesReparar: '',
 
@@ -97,12 +97,12 @@ const FormCreateMatriceria = () => {
       <Formulario action="" onSubmit={onSubmit}>
         <GroupInputDate>
           <div>
-            <Label>Fecha de creacion</Label>
+            <Label>Fecha</Label>
             <InputDate type="text" value={date} disabled />
           </div>
 
           <div>
-            <Label>Hora de creacion</Label>
+            <Label>Hora</Label>
             <InputDate type="text" value={hour} disabled />
           </div>
         </GroupInputDate>

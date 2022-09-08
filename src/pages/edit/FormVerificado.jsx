@@ -18,12 +18,12 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDate } from '../../Components/useDate';
 
-const URI = 'http://localhost:3000/api/ordenMatriceria/';
+const URI = 'http://localhost:3000/api/';
 
 export const FormVerificado = () => {
     const [obser, setObser] = useState({ campo: '', valido: null });
     const [formValidate, setFormValidate] = useState(null);
-    const { id } = useParams();
+    const { tabla, id } = useParams();
 
     const navigate = useNavigate();
 
@@ -44,11 +44,12 @@ export const FormVerificado = () => {
 
         console.log(date);
         console.log(hour);
+        console.log(obser.campo);
 
         if (obser.valido === 'true') {
             setFormValidate(true);
 
-            await axios.put(URI + id, {
+            await axios.put(URI + tabla + '/' + id, {
                 fechaVerificado: date,
                 horaVerificado: hour,
                 observacionesVerificar: obser.campo,
@@ -63,54 +64,58 @@ export const FormVerificado = () => {
     };
 
     return (
-        <Formulario action="" onSubmit={onSubmit}>
-            <GroupInputDate>
-                <div>
-                    <Label>Fecha de verificacion</Label>
-                    <InputDate type="text" value={date} disabled />
-                </div>
+        <>
+            <Formulario action="" onSubmit={onSubmit}>
+                <h1>Formulario Verificar</h1>
+                <GroupInputDate>
+                    <div>
+                        <Label>Fecha</Label>
+                        <InputDate type="text" value={date} disabled />
+                    </div>
 
-                <div>
-                    <Label>Hora de verificacion</Label>
-                    <InputDate type="text" value={hour} disabled />
-                </div>
-            </GroupInputDate>
+                    <div>
+                        <Label>Hora</Label>
+                        <InputDate type="text" value={hour} disabled />
+                    </div>
+                </GroupInputDate>
 
-            <CompInput
-                InputState={obser}
-                InputSetState={setObser}
-                inputType="text"
-                inputLabel="Observacion"
-                inputPlaceholder="Observacion a tener en cuenta"
-                inputName="recibe"
-                inputError="La observacion a tener en cuenta tiene que ser de 3 a 200 dígitos y solo puede contener numeros, letras y guion bajo."
-                inputExp={expresiones.observ}
-            />
+                <CompInput
+                    InputState={obser}
+                    InputSetState={setObser}
+                    inputType="text"
+                    inputLabel="Observacion"
+                    inputPlaceholder="Observacion a tener en cuenta"
+                    inputName="recibe"
+                    inputError="La observacion a tener en cuenta tiene que ser de 3 a 200 dígitos y solo puede contener numeros, letras y guion bajo."
+                    inputExp={expresiones.observ}
+                />
 
 
-            {formValidate === false && (
-                <MensajeError>
-                    <span>
-                        <FontAwesomeIcon icon={faExclamationTriangle} />
-                        <b>Error:</b> Por favor rellene el formulario correctamente.
-                    </span>
-                </MensajeError>
-            )}
-            {formValidate === true && (
-                <MensajeExito>
-                    <span>
-                        <FontAwesomeIcon icon={faCheck} />
-                        <b>Exito:</b> Formulario enviado exitosamente!
-                    </span>
-                </MensajeExito>
-            )}
+                {formValidate === false && (
+                    <MensajeError>
+                        <span>
+                            <FontAwesomeIcon icon={faExclamationTriangle} />
+                            <b>Error:</b> Por favor rellene el formulario correctamente.
+                        </span>
+                    </MensajeError>
+                )}
+                {formValidate === true && (
+                    <MensajeExito>
+                        <span>
+                            <FontAwesomeIcon icon={faCheck} />
+                            <b>Exito:</b> Formulario enviado exitosamente!
+                        </span>
+                    </MensajeExito>
+                )}
 
-            <ContenedorBotonCentrado>
-                <Link to="/">
-                    <BotonInicio type="submit">Denegar</BotonInicio>
-                </Link>
-                <Boton type="submit">Verificar</Boton>
-            </ContenedorBotonCentrado>
-        </Formulario>
+                <ContenedorBotonCentrado>
+                    <Link to="/">
+                        <BotonInicio type="submit">Denegar</BotonInicio>
+                    </Link>
+                    <Boton type="submit">Verificar</Boton>
+                </ContenedorBotonCentrado>
+            </Formulario>
+        </>
+
     );
 };
