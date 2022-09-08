@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import {
   BotonInicio,
   ContenedorBotonCentrado,
+  ContenedorBotonInicio,
   DivOpciones,
   TR,
 } from '../../elements/Formularios';
@@ -143,6 +144,14 @@ export const CompTableInyectoras = () => {
           </tbody>
         </table>
       </div>
+      <Link className="noStyle" to="/FormCreateMatriceria">
+        <ContenedorBotonInicio>
+          <BotonInicio type="submit">
+            Crear orden de reparacion: Inyeccion
+            {/* moldes */}
+          </BotonInicio>
+        </ContenedorBotonInicio>
+      </Link>
     </>
   );
 };

@@ -192,8 +192,9 @@ const ContenedorBotonInicio = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 30%;
+  margin: auto;
   margin-top: 15px;
-  width: 100%;
 `;
 
 const BotonInicio = styled.button`
@@ -224,7 +225,7 @@ const ContenedorBotonCentrado = styled.div`
   align-items: center;
   justify-content: center;
   margin: auto;
-  margin-top: 30px;
+  margin-top: 20px;
   gap: 100px;
   width: 50%;
 `;
@@ -321,8 +322,7 @@ const DivOpciones = styled.div`
   ${(props) =>
     props.validate === 'creado' &&
     css`
-      a:nth-child(2),
-      a:nth-child(3) {
+      a:nth-child(2) {
         color: grey !important;
         pointer-events: none;
       }
@@ -330,8 +330,7 @@ const DivOpciones = styled.div`
   ${(props) =>
     props.validate === 'visualizado' &&
     css`
-      a:nth-child(1),
-      a:nth-child(3) {
+      a:nth-child(1){
         color: grey !important;
         pointer-events: none;
       }
@@ -347,6 +346,7 @@ const DivOpciones = styled.div`
     `}
 
   ${(props) =>
+    props.validate === 'userLogin' &&
     props.validate === 'verificado' &&
     css`
       a:nth-child(-n + 3) {

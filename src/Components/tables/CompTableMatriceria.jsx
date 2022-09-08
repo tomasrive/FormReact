@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faCheckCircle,
+  faCheckCircle, faWindowRestore,
 } from '@fortawesome/free-regular-svg-icons';
 import { useEffect, useState } from 'react';
 import {
   BotonInicio,
   ContenedorBotonCentrado,
+  ContenedorBotonInicio,
   DivOpciones,
   TR,
 } from '../../elements/Formularios';
@@ -69,6 +70,8 @@ export const CompTableMatriceria = () => {
     setDataModal(dataTable)
 
   }
+  useEffect(() => {
+  }, [])
 
   console.log(data);
   return (
@@ -126,7 +129,7 @@ export const CompTableMatriceria = () => {
                     <Link to={`/FormVisualizar${dataTable.tabla}${dataTable._id}`} >
                       <FontAwesomeIcon icon={faEye} />
                     </Link>
-                    <Link to={`/FormEdit/${dataTable._id}`}>
+                    <Link to={`/FormEdit${dataTable.tabla}${dataTable._id}`}>
                       <FontAwesomeIcon icon={faScrewdriverWrench} />
                     </Link>
                     <Link to={`/FormVerificado${dataTable.tabla}${dataTable._id}`}>
@@ -144,7 +147,14 @@ export const CompTableMatriceria = () => {
           </tbody>
         </table>
       </div>
-
+      <Link className="noStyle" to="/FormCreateMatriceria">
+        <ContenedorBotonInicio>
+          <BotonInicio type="submit">
+            Crear orden de reparacion: Matriceria
+            {/* moldes */}
+          </BotonInicio>
+        </ContenedorBotonInicio>
+      </Link>
     </>
   );
 };
