@@ -2,8 +2,6 @@ import { BotonCerrar, ContenedorModal, EncabezadoModal, OrdenReparacion, Overlay
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 export const ModalForm = ({ dataTable, state, setState }) => {
-    console.log(dataTable);
-
     return (
         <>
             {state &&

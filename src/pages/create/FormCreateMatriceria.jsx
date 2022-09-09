@@ -25,11 +25,11 @@ const FormCreateMatriceria = () => {
   const [message, setMessage] = useState({ campo: '', valido: null });
   const [formValidate, setFormValidate] = useState(null);
 
-  const data = sessionStorage.getItem('lider');
-
   const navigate = useNavigate();
 
   const { date, hour } = useDate()
+
+  const liderSesion = sessionStorage.getItem('lider');
 
   function timeout(delay) {
     return new Promise((res) => setTimeout(res, delay));
@@ -49,7 +49,7 @@ const FormCreateMatriceria = () => {
 
     const dataJson = JSON.stringify({
       Molde: molde.campo,
-      Lider: data,
+      Lider: liderSesion,
       Mensaje: message.campo,
     });
 
@@ -63,7 +63,7 @@ const FormCreateMatriceria = () => {
         fechaCreado: date,
         horaCreado: hour,
         molde: molde.campo,
-        lider: data,
+        lider: liderSesion,
         descripcion: message.campo,
 
         fechaVisualizado: '',
@@ -119,7 +119,7 @@ const FormCreateMatriceria = () => {
         />
 
         <CompInput
-          InputState={data}
+          InputState={liderSesion}
           inputType="text"
           inputLabel="Lider a cargo"
           inputName="name"

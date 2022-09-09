@@ -56,8 +56,8 @@ const CompInput = ({
             inputDis === 'disable'
               ? data
               : InputState.campo && inputName === 'mayus'
-              ? InputState.campo.toUpperCase()
-              : InputState.campo
+                ? InputState.campo.toUpperCase()
+                : InputState.campo
           }
           onChange={onChange}
           onKeyUp={validate}

@@ -8,12 +8,12 @@ import {
 export const Home = () => {
   // Usuario de Session Storage de ejemplo
 
-  if (typeof Storage != 'undefined') {
-    let lider = 'Fabian Gomez';
-    sessionStorage.setItem('lider', lider);
-  } else {
-    alert('aaaaa');
-  }
+  // if (typeof Storage != 'undefined') {
+  //   let lider = 'Fabian Gomez';
+  //   sessionStorage.setItem('lider', lider);
+  // } else {
+  //   alert('aaaaa');
+  // }
 
   return (
     <>

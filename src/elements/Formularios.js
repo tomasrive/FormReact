@@ -192,13 +192,34 @@ const ContenedorBotonInicio = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 30%;
+  width: 100%;
   margin: auto;
   margin-top: 15px;
 `;
 
 const BotonInicio = styled.button`
   width: 100%;
+  background-color: #fff;
+  border: 0;
+  border-radius: 320px;
+  box-shadow: -5px -5px 20px #cccbcb, 5px 5px 20px #babecc;
+  color: #000;
+  cursor: pointer;
+  font-size: 16px;
+  outline: 0;
+  padding: 16px;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px #000;
+  }
+
+  &:active {
+    box-shadow: inset 1px 1px 2px #000, inset -1px -1px 2px #393f4b;
+  }
+`;
+const BotonInicioTabla = styled.button`
+  width:300px;
   background-color: #fff;
   border: 0;
   border-radius: 320px;
@@ -225,7 +246,7 @@ const ContenedorBotonCentrado = styled.div`
   align-items: center;
   justify-content: center;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 15px;
   gap: 100px;
   width: 50%;
 `;
@@ -313,7 +334,8 @@ const TR = styled.tr`
 `;
 const DivOpciones = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 80px);
+  justify-content: space-between;
   font-size: 40px;
   a {
     color: #000 !important;
@@ -322,7 +344,8 @@ const DivOpciones = styled.div`
   ${(props) =>
     props.validate === 'creado' &&
     css`
-      a:nth-child(2) {
+      a:nth-child(2),
+      a:nth-child(3) {
         color: grey !important;
         pointer-events: none;
       }
@@ -330,7 +353,8 @@ const DivOpciones = styled.div`
   ${(props) =>
     props.validate === 'visualizado' &&
     css`
-      a:nth-child(1){
+      a:nth-child(1),
+      a:nth-child(3) {
         color: grey !important;
         pointer-events: none;
       }
@@ -339,14 +363,13 @@ const DivOpciones = styled.div`
     props.validate === 'reparado' &&
     css`
       a:nth-child(1),
-      a:nth-child(2) {
+      a:nth-child(2){
         color: grey !important;
         pointer-events: none;
       }
     `}
 
   ${(props) =>
-    props.validate === 'userLogin' &&
     props.validate === 'verificado' &&
     css`
       a:nth-child(-n + 3) {
@@ -369,7 +392,7 @@ const Overlay = styled.div`
 `;
 
 const ContenedorModal = styled.div`
-  width: 1000px;
+  width: 80%;
   min-height: 100px;
   background: #fff;
   position: relative;
@@ -487,6 +510,7 @@ export {
   ContenedorBotonCentrado,
   Boton,
   BotonInicio,
+  BotonInicioTabla,
   MensajeError,
   MensajeExito,
   TR,

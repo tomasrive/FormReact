@@ -20,6 +20,11 @@ main {
   margin: auto;
 }
 
+.noStyleDiv {
+  margin: auto;
+  width: 310px;
+}
+
 .noStyle {
   text-decoration: none;
 }
@@ -42,17 +47,18 @@ main {
   border-collapse: collapse;
   max-height: 250px;
   margin: auto;
-  margin-top: 30px;
+  margin-top: 20px;
   max-width: 1700px;
   padding: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   animation: float 5s infinite;
   color: #000;
-  width: 100%;
+  width: 100vw;
 }
+
 tbody {
   display: block;
-  height: 700px;
+  height: 740px;
   overflow: auto;
 }
 
@@ -78,7 +84,6 @@ th {
 
 tr {
   font-weight: normal;
-  max-width: 1685px;
 }
 
 tr:last-child {
@@ -113,3 +118,51 @@ th:last-child {
   color: #fff;
 }
 
+.linkMedia {
+  transition: all 0.4s;
+}
+
+.linkMedia:hover {
+  color: #fff;
+}
+
+.linkMediaDisable {
+  margin: auto;
+}
+.linkMediaDisable:hover {
+  color: red;
+}
+
+@media (min-width: 480px) and (max-width: 1550px) {
+  .table-fill {
+    width: 100%;
+  }
+
+  .table-fill .linkMedia {
+    width: 40px;
+  }
+  td:nth-child(-n + 10),
+  th:nth-child(-n + 10) {
+    width: 95px;
+    font-size: 15px;
+  }
+  td:last-child,
+  th:last-child {
+    width: 90px;
+    font-size: 13px;
+  }
+
+  th {
+    font-size: 15px;
+    padding: 4px;
+  }
+
+  tbody {
+    height: 600px;
+  }
+
+  td {
+    padding: 4px;
+    font-size: 16px;
+  }
+}
