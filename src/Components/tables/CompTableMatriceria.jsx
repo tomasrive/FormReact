@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faCheckCircle, faTimesCircle, faWindowRestore,
+  faCheckCircle,
+  faTimesCircle,
 } from '@fortawesome/free-regular-svg-icons';
 import { useEffect, useState } from 'react';
 import {
@@ -14,13 +15,17 @@ import {
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
-import { faPlus, faScrewdriverWrench, faEye } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPlus,
+  faScrewdriverWrench,
+  faEye,
+} from '@fortawesome/free-solid-svg-icons';
 import { ModalForm } from '../ModalForm';
 const URI = 'http://localhost:3000/api/ordenMatriceria';
 
 export const CompTableMatriceria = () => {
   const [data, setData] = useState([]);
-  const [stateModal, setStateModal] = useState(false)
+  const [stateModal, setStateModal] = useState(false);
   const [dataModal, setDataModal] = useState({
     tabla: '/ordenMatriceria/',
     fechaCreado: '',
@@ -39,24 +44,27 @@ export const CompTableMatriceria = () => {
     horaVerificado: '',
     observacionesVerificar: '',
     estado: '',
-
-  })
+  });
 
   const liderSesion = sessionStorage.getItem('lider');
 
   const modal = (dataTable) => {
     setStateModal(!stateModal);
-    setDataModal(dataTable)
+    setDataModal(dataTable);
+  };
 
-  }
+  // setInterval(() => window.location.reload(), 2000);
+
 
   useEffect(() => {
     getBlogs();
   }, []);
 
   const getBlogs = async () => {
+    console.log('drecarga');
     const res = await axios.get(URI);
     setData(res.data);
+    
   };
 
   data.sort((a, b) => {
@@ -83,12 +91,12 @@ export const CompTableMatriceria = () => {
       />
 
       <ContenedorBotonCentrado>
-        <Link to="/">
-          <BotonInicio type="submit">Atras</BotonInicio>
+        <Link to='/'>
+          <BotonInicio type='submit'>Atras</BotonInicio>
         </Link>
       </ContenedorBotonCentrado>
       <div>
-        <table className="table-fill">
+        <table className='table-fill'>
           <thead>
             <tr>
               <th>Fecha creado</th>
@@ -111,7 +119,6 @@ export const CompTableMatriceria = () => {
             </tr>
           </thead>
           <tbody>
-
             {data.map((dataTable) => (
               <TR key={dataTable._id} validate={dataTable.estado}>
                 <td>{dataTable.fechaCreado}</td>
@@ -126,29 +133,38 @@ export const CompTableMatriceria = () => {
                 <td>{dataTable.horaVerificado}</td>
                 <td>
                   <DivOpciones validate={dataTable.estado}>
-                    <Link to={`/FormVisualizar${dataTable.tabla}${dataTable._id}`} >
+                    <Link
+                      to={`/FormVisualizar${dataTable.tabla}${dataTable._id}`}
+                    >
                       <FontAwesomeIcon className='linkMedia' icon={faEye} />
                     </Link>
-                    <Link to={`/FormEdit${dataTable.tabla}${dataTable._id}`}>
-                      <FontAwesomeIcon className='linkMedia' icon={faScrewdriverWrench} />
+                    <Link to={`/FormReparar${dataTable.tabla}${dataTable._id}`}>
+                      <FontAwesomeIcon
+                        className='linkMedia'
+                        icon={faScrewdriverWrench}
+                      />
                     </Link>
 
-                    {liderSesion !== null ?
+                    {liderSesion !== null ? (
+                      <Link
+                        to={`/FormVerificado${dataTable.tabla}${dataTable._id}`}
+                      >
+                        <FontAwesomeIcon
+                          className='linkMedia'
+                          icon={faCheckCircle}
+                        />
+                      </Link>
+                    ) : (
+                      <FontAwesomeIcon
+                        className='linkMediaDisable'
+                        icon={faTimesCircle}
+                      />
+                    )}
 
-                      (
-                        <Link to={`/FormVerificado${dataTable.tabla}${dataTable._id}`}>
-                          <FontAwesomeIcon className='linkMedia' icon={faCheckCircle} />
-                        </Link>)
-
-                      :
-
-                      (
-                        <FontAwesomeIcon className='linkMediaDisable' icon={faTimesCircle} />
-                      )
-
-                    }
-
-                    <button onClick={() => modal(dataTable)} className='btnTable'>
+                    <button
+                      onClick={() => modal(dataTable)}
+                      className='btnTable'
+                    >
                       <FontAwesomeIcon className='linkMedia' icon={faPlus} />
                     </button>
                   </DivOpciones>
@@ -156,22 +172,19 @@ export const CompTableMatriceria = () => {
                 <td>{dataTable.estado.toUpperCase()}</td>
               </TR>
             ))}
-
           </tbody>
         </table>
       </div>
       <div className='noStyleDiv'>
-        {liderSesion !== null &&
-
-          <Link className="noStyle" to="/FormCreateMatriceria">
+        {liderSesion !== null && (
+          <Link className='noStyle' to='/FormCreateMatriceria'>
             <ContenedorBotonInicio>
-              <BotonInicioTabla type="submit">
+              <BotonInicioTabla type='submit'>
                 Crear orden de reparacion: Matriceria
               </BotonInicioTabla>
             </ContenedorBotonInicio>
           </Link>
-
-        }
+        )}
       </div>
     </>
   );

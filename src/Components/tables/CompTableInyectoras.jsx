@@ -127,7 +127,7 @@ export const CompTableInyectoras = () => {
                     <Link to={`/FormVisualizar${dataTable.tabla}${dataTable._id}`} >
                       <FontAwesomeIcon icon={faEye} />
                     </Link>
-                    <Link to={`/FormEdit${dataTable.tabla}${dataTable._id}`}>
+                    <Link to={`/FormReparar${dataTable.tabla}${dataTable._id}`}>
                       <FontAwesomeIcon icon={faScrewdriverWrench} />
                     </Link>
                     <Link to={`/FormVerificado${dataTable.tabla}${dataTable._id}`}>

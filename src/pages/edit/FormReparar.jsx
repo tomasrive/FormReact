@@ -1,4 +1,3 @@
-import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import {
   Formulario,
@@ -12,67 +11,54 @@ import {
   BotonInicio,
 } from '../../elements/Formularios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import CompInput from '../../Components/CompInput';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDate } from '../../Components/useDate';
 
-const URI = 'http://localhost:3000/api/ordenMatriceria';
+const URI = 'http://localhost:3000/api/';
 
-const FormCreateMatriceria = () => {
-  const [molde, setMolde] = useState({ campo: '', valido: null });
-  const [message, setMessage] = useState({ campo: '', valido: null });
-
+export const FormReparar = () => {
+  const [obser, setObser] = useState({ campo: '', valido: null });
+  const [repara, setRepara] = useState({ campo: '', valido: null });
   const [formValidate, setFormValidate] = useState(null);
+  const { date, hour } = useDate();
+  const { tabla, id } = useParams();
 
   const navigate = useNavigate();
-
-  const { date, hour } = useDate();
-
-  const liderSesion = sessionStorage.getItem('lider');
 
   function timeout(delay) {
     return new Promise((res) => setTimeout(res, delay));
   }
 
   const expresiones = {
-    molde: /^[a-zA-Z0-9À-ÿ\s]{3,40}$/,
-    mensaje: /^[a-zA-Z0-9À-ÿ\s]{3,200}$/,
+    observ: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
+    repara: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (molde.valido === 'true' && message.valido === 'true') {
+    console.log('_________Formulario Reparar_______________');
+
+    console.log(date);
+    console.log(hour);
+    console.log(repara.campo);
+
+    if (obser.valido === 'true' && repara.valido === 'true') {
       setFormValidate(true);
 
-      await axios.post(URI, {
-        tabla: '/ordenMatriceria/',
-        fechaCreado: date,
-        horaCreado: hour,
-        molde: molde.campo,
-        lider: liderSesion,
-        descripcion: message.campo,
-
-        fechaVisualizado: '',
-        horaVisualizado: '',
-        recibe: '',
-
-        fechaReparado: '',
-        horaReparado: '',
-        repara: '',
-        observacionesReparar: '',
-
-        fechaVerificado: '',
-        horaVerificado: '',
-        observacionesVerificar: '',
-
-        estado: 'creado',
+      await axios.put(URI + tabla + '/' + id, {
+        repara: repara.campo,
+        observacionesReparar: obser.campo,
+        fechaReparado: date,
+        horaReparado: hour,
+        estado: 'reparado',
       });
-
-      setMolde({ campo: '', valido: '' });
-      setMessage({ campo: '', valido: null });
+      setObser({ campo: '', valido: null });
+      setRepara({ campo: '', valido: null });
 
       await timeout(2000);
       navigate('/');
@@ -84,6 +70,7 @@ const FormCreateMatriceria = () => {
   return (
     <>
       <Formulario action='' onSubmit={onSubmit}>
+        <h1>Formulario Editar</h1>
         <GroupInputDate>
           <div>
             <Label>Fecha</Label>
@@ -97,33 +84,25 @@ const FormCreateMatriceria = () => {
         </GroupInputDate>
 
         <CompInput
-          InputState={molde}
-          InputSetState={setMolde}
+          InputState={obser}
+          InputSetState={setObser}
           inputType='text'
-          inputLabel='Molde'
-          inputPlaceholder='Nombre de molde'
-          inputName='mayus'
-          inputError='El nombre de molde tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo.'
-          inputExp={expresiones.molde}
+          inputLabel='Observacion'
+          inputPlaceholder='Observacion a tener en cuenta'
+          inputName='recibe'
+          inputError='La observacion a tener en cuenta tiene que ser de 3 a 200 dígitos y solo puede contener numeros, letras y guion bajo.'
+          inputExp={expresiones.observ}
         />
 
         <CompInput
-          InputState={liderSesion}
+          InputState={repara}
+          InputSetState={setRepara}
           inputType='text'
-          inputLabel='Lider a cargo'
-          inputName='name'
-          inputDis='disable'
-        />
-
-        <CompInput
-          InputState={message}
-          InputSetState={setMessage}
-          inputType='text'
-          inputLabel='F0-07-02-32 - Sector Matriceria - Descripcion de rotura/problema:'
-          inputPlaceholder='Descripcion de rotura/problema'
-          inputName='message'
-          inputError='La descripcion tiene que ser de 3 a 200 dígitos y solo puede contener letras y espacios.'
-          inputExp={expresiones.mensaje}
+          inputLabel='Quien repara'
+          inputPlaceholder='Diego Garcia'
+          inputName='repara'
+          inputError='El nombre tiene que ser de 3 a 40 dígitos y solo puede contener letras y espacios.'
+          inputExp={expresiones.repara}
         />
 
         {formValidate === false && (
@@ -134,7 +113,6 @@ const FormCreateMatriceria = () => {
             </span>
           </MensajeError>
         )}
-        
         {formValidate === true && (
           <MensajeExito>
             <span>
@@ -154,5 +132,3 @@ const FormCreateMatriceria = () => {
     </>
   );
 };
-
-export default FormCreateMatriceria;

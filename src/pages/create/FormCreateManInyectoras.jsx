@@ -38,7 +38,7 @@ const FormCreateInyectoras = () => {
     mensaje: /^[a-zA-Z0-9À-ÿ\s]{3,200}$/,
   };
 
-  const { date, hour } = useDate()
+  const { date, hour } = useDate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -95,45 +95,45 @@ const FormCreateInyectoras = () => {
 
   return (
     <>
-      <Formulario action="" onSubmit={onSubmit}>
+      <Formulario action='' onSubmit={onSubmit}>
         <GroupInputDate>
           <div>
             <Label>Fecha</Label>
-            <InputDate type="text" value={date} disabled />
+            <InputDate type='text' value={date} disabled />
           </div>
 
           <div>
             <Label>Hora</Label>
-            <InputDate type="text" value={hour} disabled />
+            <InputDate type='text' value={hour} disabled />
           </div>
         </GroupInputDate>
 
         <CompInput
           InputState={maquinas}
           InputSetState={setMaquinas}
-          inputType="text"
-          inputLabel="Maquinas"
-          inputPlaceholder="Nombre de maquina"
-          inputName="molde"
-          inputError="El nombre de la maquina tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo."
+          inputType='text'
+          inputLabel='Maquinas'
+          inputPlaceholder='Nombre de maquina'
+          inputName='molde'
+          inputError='El nombre de la maquina tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo.'
           inputExp={expresiones.maquinas}
         />
         <CompInput
           InputState={data}
-          inputType="text"
-          inputLabel="Lider a cargo"
-          inputName="name"
-          inputDis="disable"
+          inputType='text'
+          inputLabel='Lider a cargo'
+          inputName='name'
+          inputDis='disable'
         />
 
         <CompInput
           InputState={message}
           InputSetState={setMessage}
-          inputType="text"
-          inputLabel="F0-07-02-32 - Sector Mantenimiento de Inyectoras - Descripcion de rotura/problema:"
-          inputPlaceholder="Descripcion de rotura/problema"
-          inputName="message"
-          inputError="La descripcion tiene que ser de 3 a 200 dígitos y solo puede contener letras y espacios."
+          inputType='text'
+          inputLabel='F0-07-02-32 - Sector Mantenimiento de Inyectoras - Descripcion de rotura/problema:'
+          inputPlaceholder='Descripcion de rotura/problema'
+          inputName='message'
+          inputError='La descripcion tiene que ser de 3 a 200 dígitos y solo puede contener letras y espacios.'
           inputExp={expresiones.mensaje}
         />
 
@@ -155,10 +155,10 @@ const FormCreateInyectoras = () => {
         )}
 
         <ContenedorBotonCentrado>
-          <Link to="/">
-            <BotonInicio type="submit">Cancelar</BotonInicio>
+          <Link to='/'>
+            <BotonInicio type='submit'>Cancelar</BotonInicio>
           </Link>
-          <Boton type="submit">Enviar</Boton>
+          <Boton type='submit'>Enviar</Boton>
         </ContenedorBotonCentrado>
       </Formulario>
     </>
