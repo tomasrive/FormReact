@@ -42,21 +42,7 @@ const FormCreateInyectoras = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    console.log('_________Formulario Crear Inyectoras_______________');
-
-    const dataJson = JSON.stringify({
-      Maquinas: maquinas.campo,
-      Mensaje: message.campo,
-    });
-
-    console.log(dataJson);
-
-    console.log(date);
-    console.log(hour);
-    console.log(maquinas.campo);
-    console.log(message.campo);
-
+    
     if (maquinas.valido === 'true' && message.valido === 'true') {
       setFormValidate(true);
 
