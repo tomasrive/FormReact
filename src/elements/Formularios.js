@@ -129,6 +129,7 @@ const Input = styled.input`
 const LeyendaError = styled.p`
   font-size: 12px;
   margin-bottom: 0;
+  margin-left: 6px;
   color: ${colores.error};
   display: none;
 
@@ -219,7 +220,7 @@ const BotonInicio = styled.button`
   }
 `;
 const BotonInicioTabla = styled.button`
-  width:300px;
+  width: 300px;
   background-color: #fff;
   border: 0;
   border-radius: 320px;
@@ -363,7 +364,7 @@ const DivOpciones = styled.div`
     props.validate === 'reparado' &&
     css`
       a:nth-child(1),
-      a:nth-child(2){
+      a:nth-child(2) {
         color: grey !important;
         pointer-events: none;
       }

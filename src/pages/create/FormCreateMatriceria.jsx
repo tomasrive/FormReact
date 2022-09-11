@@ -105,6 +105,7 @@ const FormCreateMatriceria = () => {
           inputName='mayus'
           inputError='El nombre de molde tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo.'
           inputExp={expresiones.molde}
+
         />
 
         <CompInput
@@ -134,7 +135,7 @@ const FormCreateMatriceria = () => {
             </span>
           </MensajeError>
         )}
-        
+
         {formValidate === true && (
           <MensajeExito>
             <span>

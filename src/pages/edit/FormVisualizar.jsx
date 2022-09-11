@@ -40,13 +40,7 @@ export const FormVisualizar = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('_________Formulario Editar_______________');
-
-    console.log(date);
-    console.log(hour);
-    console.log(recibe.campo);
-
-    if (recibe.campo === 'true') {
+    if (recibe.valido === 'true') {
       setFormValidate(true);
 
       await axios.put(URI + tabla + '/' + id, {
@@ -57,7 +51,7 @@ export const FormVisualizar = () => {
       });
       setRecibe({ campo: '', valido: null });
       await timeout(2000);
-      navigate('/');
+      navigate('/CompTableInyectoras');
     } else {
       setFormValidate(false);
     }
@@ -66,7 +60,7 @@ export const FormVisualizar = () => {
   return (
     <>
       <Formulario action='' onSubmit={onSubmit}>
-        <h1>Formulario Visualizar</h1>
+        <h1>Formulario Visualizacion</h1>
         <GroupInputDate>
           <div>
             <Label>Fecha</Label>

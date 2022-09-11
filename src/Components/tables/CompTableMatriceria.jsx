@@ -50,21 +50,17 @@ export const CompTableMatriceria = () => {
 
   const modal = (dataTable) => {
     setStateModal(!stateModal);
-    setDataModal(dataTable);
-  };
-
-  // setInterval(() => window.location.reload(), 2000);
-
+    setDataModal(dataTable)
+  }
 
   useEffect(() => {
     getBlogs();
   }, []);
 
   const getBlogs = async () => {
-    console.log('drecarga');
     const res = await axios.get(URI);
     setData(res.data);
-    
+    console.log(res.data);
   };
 
   data.sort((a, b) => {
@@ -99,19 +95,16 @@ export const CompTableMatriceria = () => {
         <table className='table-fill'>
           <thead>
             <tr>
-              <th>Fecha creado</th>
-              <th>Hora creado</th>
-              <th>Molde</th>
+              <th>Fecha y hora creado</th>
+              <th>Moldes</th>
               <th>Lider a cargo:</th>
+              <th>Descripcion:</th>
 
-              <th>Fecha visualizado</th>
-              <th>Hora visualizado</th>
+              <th>Fecha y hora visualizado</th>
 
-              <th>Fecha reparado</th>
-              <th>Hora reparado</th>
+              <th>Fecha y hora reparado</th>
 
-              <th>Fecha verificado</th>
-              <th>Hora verificado</th>
+              <th>Fecha y hora de verificacion</th>
 
               <th>Opciones</th>
 
@@ -121,16 +114,13 @@ export const CompTableMatriceria = () => {
           <tbody>
             {data.map((dataTable) => (
               <TR key={dataTable._id} validate={dataTable.estado}>
-                <td>{dataTable.fechaCreado}</td>
-                <td>{dataTable.horaCreado}</td>
+                <td>{dataTable.fechaCreado}<hr />{dataTable.horaCreado}</td>
                 <td>{dataTable.molde}</td>
                 <td>{dataTable.lider}</td>
-                <td>{dataTable.fechaVisualizado}</td>
-                <td>{dataTable.horaVisualizado}</td>
-                <td>{dataTable.fechaReparado}</td>
-                <td>{dataTable.horaReparado}</td>
-                <td>{dataTable.fechaVerificado}</td>
-                <td>{dataTable.horaVerificado}</td>
+                <td>{dataTable.descripcion}</td>
+                <td>{dataTable.fechaVisualizado}<hr />{dataTable.horaVisualizado}</td>
+                <td>{dataTable.fechaReparado}<hr />{dataTable.horaReparado}</td>
+                <td>{dataTable.fechaVerificado}<hr />{dataTable.horaVerificado}</td>
                 <td>
                   <DivOpciones validate={dataTable.estado}>
                     <Link

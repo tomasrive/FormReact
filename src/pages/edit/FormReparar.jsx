@@ -70,7 +70,7 @@ export const FormReparar = () => {
   return (
     <>
       <Formulario action='' onSubmit={onSubmit}>
-        <h1>Formulario Editar</h1>
+        <h1>Formulario Reparacion</h1>
         <GroupInputDate>
           <div>
             <Label>Fecha</Label>
@@ -84,6 +84,17 @@ export const FormReparar = () => {
         </GroupInputDate>
 
         <CompInput
+          InputState={repara}
+          InputSetState={setRepara}
+          inputType='text'
+          inputLabel='Quien repara'
+          inputPlaceholder='Diego Garcia'
+          inputName='repara'
+          inputError='El nombre tiene que ser de 3 a 40 dígitos y solo puede contener letras y espacios.'
+          inputExp={expresiones.repara}
+        />
+
+        <CompInput
           InputState={obser}
           InputSetState={setObser}
           inputType='text'
@@ -94,16 +105,7 @@ export const FormReparar = () => {
           inputExp={expresiones.observ}
         />
 
-        <CompInput
-          InputState={repara}
-          InputSetState={setRepara}
-          inputType='text'
-          inputLabel='Quien repara'
-          inputPlaceholder='Diego Garcia'
-          inputName='repara'
-          inputError='El nombre tiene que ser de 3 a 40 dígitos y solo puede contener letras y espacios.'
-          inputExp={expresiones.repara}
-        />
+
 
         {formValidate === false && (
           <MensajeError>

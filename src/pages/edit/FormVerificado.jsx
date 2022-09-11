@@ -67,7 +67,7 @@ export const FormVerificado = () => {
   return (
     <>
       <Formulario action='' onSubmit={onSubmit}>
-        <h1>Formulario Verificar</h1>
+        <h1>Formulario Verificacion</h1>
         <GroupInputDate>
           <div>
             <Label>Fecha</Label>

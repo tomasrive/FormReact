@@ -34,15 +34,15 @@ const FormCreateInyectoras = () => {
   }
 
   const expresiones = {
-    maquinas: /^[a-zA-Z0-9À-ÿ\s]{3,40}$/,
+    maquinas: /^$/,
     mensaje: /^[a-zA-Z0-9À-ÿ\s]{3,200}$/,
   };
 
-  const { date, hour } = useDate();
+  const { date, hour} = useDate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (maquinas.valido === 'true' && message.valido === 'true') {
       setFormValidate(true);
 
@@ -101,9 +101,11 @@ const FormCreateInyectoras = () => {
           inputLabel='Maquinas'
           inputPlaceholder='Nombre de maquina'
           inputName='molde'
-          inputError='El nombre de la maquina tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo.'
+          inputError='Elige una de las opciones desplegadas'
           inputExp={expresiones.maquinas}
+          inputAutocomplete='autocomplete'
         />
+
         <CompInput
           InputState={data}
           inputType='text'

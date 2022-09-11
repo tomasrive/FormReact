@@ -11,6 +11,8 @@ import {
   faTimesCircle,
 } from '@fortawesome/free-solid-svg-icons';
 
+var machine = require('../elements/TableMachine');
+
 const data = sessionStorage.getItem('lider');
 
 const CompInput = ({
@@ -23,13 +25,20 @@ const CompInput = ({
   inputError,
   inputExp,
   inputDis,
+  inputAutocomplete
 }) => {
   const onChange = (e) => {
     InputSetState({
       ...InputState,
       campo: e.target.value,
     });
+
   };
+
+  const onSearch = (searchTerm) => {
+    InputSetState({ ...InputState, campo: searchTerm, valido: 'true' });
+    console.log('search ' + searchTerm);
+  }
 
   const validate = () => {
     if (inputExp) {
@@ -40,6 +49,8 @@ const CompInput = ({
       }
     }
   };
+
+
 
   return (
     <div>
@@ -71,9 +82,37 @@ const CompInput = ({
           icon={InputState.valido === 'true' ? faCheckCircle : faTimesCircle}
           validate={InputState.valido}
         />
-      </GroupInput>
 
+      </GroupInput>
       <LeyendaError validate={InputState.valido}>{inputError}</LeyendaError>
+
+      {inputAutocomplete === 'autocomplete' &&
+        <div className='flexAuto'>
+
+          {
+            machine
+              .filter((item) => {
+                const searchTerm = InputState.campo.toLowerCase();
+                const fullName = item.Maquina.toLowerCase();
+                return (
+                  searchTerm &&
+                  fullName.includes(searchTerm) &&
+                  InputState.campo === searchTerm
+                );
+              })
+
+              .map((item) => (
+                <div className='formA' key={item.Maquina}>
+                  <ul className='list' onClick={() => onSearch(item.Maquina)} >
+                    <li className='list-items'>
+                      {item.Maquina}
+                    </li>
+                  </ul>
+                </div>
+              ))
+          }
+        </div>
+      }
     </div>
   );
 };

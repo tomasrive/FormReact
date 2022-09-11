@@ -13,8 +13,9 @@ export const useDate = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const date = dayjs().format('DD/MM/YYYY');
+  const date = dayjs().format('DD-MM-YYYY');
   const hour = dayjs().format('HH:mm');
 
-  return { date, hour };
+
+  return { date, hour};
 };
