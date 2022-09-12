@@ -55,6 +55,9 @@ export const CompTableMatriceria = () => {
 
   useEffect(() => {
     getBlogs();
+    // setInterval(() => {
+    //   window.location.reload();
+    // }, 10000);
   }, []);
 
   const getBlogs = async () => {
@@ -85,6 +88,24 @@ export const CompTableMatriceria = () => {
         setState={setStateModal}
         dataTable={dataModal}
       />
+
+      <div className='txtColors'>
+        <b>Colores:</b>
+        <div className='colores'>
+          <div className='coloresTable'>
+            <div className='rojo'></div>
+            <p>Creado</p>
+            <div className='amarillo'></div>
+            <p>Visualizado</p>
+          </div>
+          <div className='coloresTable'>
+            <div className='verde'></div>
+            <p>Reparado</p>
+            <div className='azul'></div>
+            <p>Verificado</p>
+          </div>
+        </div>
+      </div>
 
       <ContenedorBotonCentrado>
         <Link to='/'>
@@ -123,12 +144,12 @@ export const CompTableMatriceria = () => {
                 <td>{dataTable.fechaVerificado}<hr />{dataTable.horaVerificado}</td>
                 <td>
                   <DivOpciones validate={dataTable.estado}>
-                    <Link
-                      to={`/FormVisualizar${dataTable.tabla}${dataTable._id}`}
-                    >
+
+                    <Link to={`/FormVisualizar${dataTable.tabla}${dataTable._id}`} title='Visualizar'>
                       <FontAwesomeIcon className='linkMedia' icon={faEye} />
                     </Link>
-                    <Link to={`/FormReparar${dataTable.tabla}${dataTable._id}`}>
+
+                    <Link to={`/FormReparar${dataTable.tabla}${dataTable._id}`} title='Reparar'>
                       <FontAwesomeIcon
                         className='linkMedia'
                         icon={faScrewdriverWrench}
@@ -136,9 +157,7 @@ export const CompTableMatriceria = () => {
                     </Link>
 
                     {liderSesion !== null ? (
-                      <Link
-                        to={`/FormVerificado${dataTable.tabla}${dataTable._id}`}
-                      >
+                      <Link to={`/FormVerificado${dataTable.tabla}${dataTable._id}`} title='Verificar'>
                         <FontAwesomeIcon
                           className='linkMedia'
                           icon={faCheckCircle}
@@ -154,6 +173,7 @@ export const CompTableMatriceria = () => {
                     <button
                       onClick={() => modal(dataTable)}
                       className='btnTable'
+                      title="Abrir orden completa"
                     >
                       <FontAwesomeIcon className='linkMedia' icon={faPlus} />
                     </button>

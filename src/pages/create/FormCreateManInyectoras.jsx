@@ -20,11 +20,11 @@ import { useDate } from '../../Components/useDate';
 
 const URI = 'http://localhost:3000/api/ordenInyectoras';
 
+
 const FormCreateInyectoras = () => {
   const [maquinas, setMaquinas] = useState({ campo: '', valido: null });
   const [message, setMessage] = useState({ campo: '', valido: null });
   const [formValidate, setFormValidate] = useState(null);
-
   const data = sessionStorage.getItem('lider');
 
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const FormCreateInyectoras = () => {
     mensaje: /^[a-zA-Z0-9À-ÿ\s]{3,200}$/,
   };
 
-  const { date, hour} = useDate();
+  const { date, hour } = useDate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
