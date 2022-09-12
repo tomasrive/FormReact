@@ -7,20 +7,10 @@ const colores = {
   exito: '#1ebb2b',
   proceso: '#ffff00',
   verificado: '#3d40c7',
+  black: '#000',
+  white: '#fff',
 };
 
-const Div = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 10px;
-  justify-items: center;
-  align-items: center;
-  height: 98vh;
-  @media (max-width: 1600px) {
-    grid-template-columns: none;
-    grid-template-rows: 0.5fr 1fr;
-  }
-`;
 const DivTable = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 250px);
@@ -65,7 +55,7 @@ const Label = styled.label`
   padding: 10px;
   min-height: 40px;
   cursor: pointer;
-  color: #000;
+  color: ${colores.black};
   ${(props) =>
     props.validate === 'false' &&
     css`
@@ -75,7 +65,7 @@ const Label = styled.label`
 
 const GroupInput = styled.div`
   position: relative;
-  z-index: 90;
+  z-index: 60;
 `;
 const GroupInputDate = styled.div`
   display: grid;
@@ -84,10 +74,10 @@ const GroupInputDate = styled.div`
   text-align: center;
 `;
 const InputDate = styled.input`
-  background-color: #fff;
+  background: ${colores.white};
   border: 0;
   border-radius: 320px;
-  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px ${colores.white};
   font-size: 20px;
   outline: 0;
   padding: 10px;
@@ -97,16 +87,16 @@ const InputDate = styled.input`
 `;
 
 const Input = styled.input`
-  background-color: #fff;
+  background: ${colores.white};
   border: 0;
   border-radius: 320px;
-  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px ${colores.white};
   font-size: 16px;
   outline: 0;
   padding: 16px;
   transition: all 0.2s ease-in-out;
   width: 100%;
-  border: 2px solid #fff;
+  border: 2px solid ${colores.white};
 
   &:focus {
     border: 2px solid ${colores.borde};
@@ -150,7 +140,7 @@ const IconoValidacion = styled(FontAwesomeIcon)`
   position: absolute;
   right: 15px;
   bottom: 18px;
-  z-index: 100;
+  z-index: 50;
   font-size: 16px;
   opacity: 0;
 
@@ -175,19 +165,6 @@ const IconoTabla = styled(FontAwesomeIcon)`
   margin: auto;
   margin-top: 5px;
 `;
-const TD = styled.td`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  font-size: 40px;
-  margin-left: 20px;
-  color: #000;
-`;
-
-const ContenedorTerminos = styled.div`
-  input {
-    margin-right: 10px;
-  }
-`;
 
 const ContenedorBotonInicio = styled.div`
   display: flex;
@@ -200,11 +177,11 @@ const ContenedorBotonInicio = styled.div`
 
 const BotonInicio = styled.button`
   width: 100%;
-  background-color: #fff;
+  background: ${colores.white};
   border: 0;
   border-radius: 320px;
   box-shadow: -5px -5px 20px #cccbcb, 5px 5px 20px #babecc;
-  color: #000;
+  color: ${colores.black};
   cursor: pointer;
   font-size: 16px;
   outline: 0;
@@ -212,20 +189,20 @@ const BotonInicio = styled.button`
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px #000;
+    box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px ${colores.black};
   }
 
   &:active {
-    box-shadow: inset 1px 1px 2px #000, inset -1px -1px 2px #393f4b;
+    box-shadow: inset 1px 1px 2px ${colores.black}, inset -1px -1px 2px #393f4b;
   }
 `;
 const BotonInicioTabla = styled.button`
   width: 300px;
-  background-color: #fff;
+  background: ${colores.white};
   border: 0;
   border-radius: 320px;
   box-shadow: -5px -5px 20px #cccbcb, 5px 5px 20px #babecc;
-  color: #000;
+  color: ${colores.black};
   cursor: pointer;
   font-size: 16px;
   outline: 0;
@@ -233,11 +210,11 @@ const BotonInicioTabla = styled.button`
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px #000;
+    box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px ${colores.black};
   }
 
   &:active {
-    box-shadow: inset 1px 1px 2px #000, inset -1px -1px 2px #393f4b;
+    box-shadow: inset 1px 1px 2px ${colores.black}, inset -1px -1px 2px #393f4b;
   }
 `;
 
@@ -253,11 +230,11 @@ const ContenedorBotonCentrado = styled.div`
 `;
 
 const Boton = styled.button`
-  background-color: #fff;
+  background: ${colores.white};
   border: 0;
   border-radius: 320px;
   box-shadow: -5px -5px 20px #cccbcb, 5px 5px 20px #babecc;
-  color: #000;
+  color: ${colores.black};
   cursor: pointer;
   font-size: 16px;
   margin: 10px 0;
@@ -267,11 +244,11 @@ const Boton = styled.button`
   width: 30%;
 
   &:hover {
-    box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px #000;
+    box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px ${colores.black};
   }
 
   &:active {
-    box-shadow: inset 1px 1px 2px #000, inset -1px -1px 2px #393f4b;
+    box-shadow: inset 1px 1px 2px ${colores.black}, inset -1px -1px 2px #393f4b;
   }
 
   @media (max-width: 550px) {
@@ -311,26 +288,26 @@ const TR = styled.tr`
     props.validate === 'creado' &&
     css`
       text-align: center;
-      background-color: ${colores.error} !important;
+      background: ${colores.error} !important;
     `}
   ${(props) =>
     props.validate === 'visualizado' &&
     css`
       text-align: center;
-      background-color: ${colores.proceso} !important;
+      background: ${colores.proceso} !important;
     `}
   ${(props) =>
     props.validate === 'reparado' &&
     css`
       text-align: center;
-      background-color: ${colores.exito} !important;
+      background: ${colores.exito} !important;
     `}
 
   ${(props) =>
     props.validate === 'verificado' &&
     css`
       text-align: center;
-      background-color: ${colores.verificado} !important;
+      background: ${colores.verificado} !important;
     `}
 `;
 const DivOpciones = styled.div`
@@ -339,7 +316,7 @@ const DivOpciones = styled.div`
   justify-content: space-between;
   font-size: 40px;
   a {
-    color: #000 !important;
+    color: ${colores.black} !important;
   }
 
   ${(props) =>
@@ -390,16 +367,17 @@ const Overlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 100;
 `;
 
 const ContenedorModal = styled.div`
   width: 80%;
   min-height: 100px;
-  background: #fff;
+  background: ${colores.white};
   position: relative;
   border-radius: 10px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  padding: 20px;
+  padding: 30px;
 `;
 
 const EncabezadoModal = styled.div`
@@ -420,7 +398,7 @@ const EncabezadoModal = styled.div`
 `;
 const BotonCerrar = styled.button`
   position: absolute;
-  background: #000;
+  background: ${colores.black};
   right: 20px;
   top: 20px;
   width: 50px;
@@ -462,7 +440,7 @@ const OrdenReparacion = styled.div`
     css`
       & > h5:last-child {
         text-align: center;
-        background-color: ${colores.error};
+        background: ${colores.error};
       }
     `}
   ${(props) =>
@@ -470,7 +448,7 @@ const OrdenReparacion = styled.div`
     css`
       & > h5:last-child {
         text-align: center;
-        background-color: ${colores.proceso};
+        background: ${colores.proceso};
       }
     `}
   ${(props) =>
@@ -478,7 +456,7 @@ const OrdenReparacion = styled.div`
     css`
       & > h5:last-child {
         text-align: center;
-        background-color: ${colores.exito};
+        background: ${colores.exito};
       }
     `}
 
@@ -487,13 +465,12 @@ const OrdenReparacion = styled.div`
     css`
       & > h5:last-child {
         text-align: center;
-        background-color: ${colores.verificado};
+        background: ${colores.verificado};
       }
     `}
 `;
 
 export {
-  Div,
   DivTable,
   Table,
   Formulario,
@@ -505,8 +482,6 @@ export {
   LeyendaError,
   IconoValidacion,
   IconoTabla,
-  TD,
-  ContenedorTerminos,
   ContenedorBotonInicio,
   ContenedorBotonCentrado,
   Boton,

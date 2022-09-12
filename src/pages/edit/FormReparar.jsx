@@ -37,7 +37,7 @@ export const FormReparar = () => {
     observ: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
     repara: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
   };
-
+  console.log(tabla);
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -61,7 +61,14 @@ export const FormReparar = () => {
       setRepara({ campo: '', valido: null });
 
       await timeout(2000);
-      navigate('/');
+
+      if (tabla === 'ordenMatriceria') {
+        navigate('/CompTableMatriceria');
+      }
+      else {
+        navigate('/CompTableInyectoras');
+      }
+
     } else {
       setFormValidate(false);
     }
@@ -128,7 +135,7 @@ export const FormReparar = () => {
           <Link to='/'>
             <BotonInicio type='submit'>Cancelar</BotonInicio>
           </Link>
-          <Boton type='submit'>Enviar</Boton>
+          <Boton type='submit'>Reparado</Boton>
         </ContenedorBotonCentrado>
       </Formulario>
     </>

@@ -67,15 +67,31 @@ export const CompTableMatriceria = () => {
   };
 
   data.sort((a, b) => {
-    const nombreA = a.fechaCreado + a.horaCreado;
-    const apellidoB = b.fechaCreado + b.horaCreado;
-
-    if (nombreA > apellidoB) {
-      return -1;
-    }
+    const nombreA =
+      a.fechaCreado +
+      a.horaCreado +
+      a.fechaVisualizado +
+      a.horaVisualizado +
+      a.fechaReparado +
+      a.horaRefechaReparado +
+      a.fechaVerificado +
+      a.horaVerificado;
+    const apellidoB =
+      b.fechaCreado +
+      b.horaCreado +
+      b.fechaVisualizado +
+      b.horaVisualizado +
+      b.fechaReparado +
+      b.horaRefechaReparado +
+      b.fechaVerificado +
+      b.horaVerificado;
 
     if (nombreA < apellidoB) {
       return 1;
+    }
+
+    if (nombreA > apellidoB) {
+      return -1;
     }
 
     return 0;

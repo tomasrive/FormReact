@@ -51,7 +51,14 @@ export const FormVisualizar = () => {
       });
       setRecibe({ campo: '', valido: null });
       await timeout(2000);
-      navigate('/CompTableInyectoras');
+
+      if (tabla === 'ordenMatriceria') {
+        navigate('/CompTableMatriceria');
+      }
+      else {
+        navigate('/CompTableInyectoras');
+      }
+
     } else {
       setFormValidate(false);
     }
@@ -105,7 +112,7 @@ export const FormVisualizar = () => {
           <Link to='/'>
             <BotonInicio type='submit'>Denegar</BotonInicio>
           </Link>
-          <Boton type='submit'>Verificar</Boton>
+          <Boton type='submit'>Visualizado</Boton>
         </ContenedorBotonCentrado>
       </Formulario>
     </>

@@ -34,7 +34,7 @@ const FormCreateInyectoras = () => {
   }
 
   const expresiones = {
-    maquinas: /^$/,
+    maquinas: /^[‎]$/,
     mensaje: /^[a-zA-Z0-9À-ÿ\s]{3,200}$/,
   };
 
@@ -69,6 +69,28 @@ const FormCreateInyectoras = () => {
 
         estado: 'creado',
       });
+
+      /*
+      tabla: /ordenInyectoras/,
+      fechaCreado: '' ,
+      horaCreado: '' ,
+      maquinas: '' ,
+      lider: '' ,
+      descripcion: ''  ,
+      fechaVisualizado: '' ,
+      horaVisualizado: '' ,
+      recibe: '' ,
+      fechaReparado: '' ,
+      horaReparado: '' ,
+      repara: '' ,
+      observacionesReparar: '' ,
+      fechaVerificado: '' ,
+      horaVerificado: '' ,
+      observacionesVerificar: '' ,
+      estado: ''
+      */
+
+
       setMaquinas({ campo: '', valido: '' });
       setMessage({ campo: '', valido: null });
 

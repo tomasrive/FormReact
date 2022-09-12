@@ -48,6 +48,7 @@ main {
   grid-template-columns: 100px 200px;
   align-items: center;
   justify-content: center;
+  z-index: 20;
 }
 .colores {
   display: grid;
@@ -66,28 +67,24 @@ main {
 .colores p {
   margin: 0;
 }
-.rojo {
-  margin: 0;
-  width: 15px;
-  height: 15px;
-  background: red;
-}
-.amarillo {
-  margin: 0;
-  width: 15px;
-  height: 15px;
-  background: yellow;
-}
+.rojo,
+.amarillo,
+.azul,
 .verde {
   margin: 0;
   width: 15px;
   height: 15px;
+}
+.rojo {
+  background: red;
+}
+.amarillo {
+  background: yellow;
+}
+.verde {
   background: green;
 }
 .azul {
-  margin: 0;
-  width: 15px;
-  height: 15px;
   background: blue;
 }
 

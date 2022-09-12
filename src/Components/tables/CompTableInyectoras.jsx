@@ -103,6 +103,7 @@ export const CompTableInyectoras = () => {
         setState={setStateModal}
         dataTable={dataModal}
       />
+      
       <div className='txtColors'>
         <b>Colores:</b>
         <div className='colores'>
