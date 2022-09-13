@@ -14,7 +14,7 @@ import {
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
-import { faPlus, faScrewdriverWrench, faEye, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faScrewdriverWrench, faEye, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { ModalForm } from '../ModalForm';
 
 const URI = 'http://localhost:3000/api/ordenInyectoras';
@@ -65,31 +65,16 @@ export const CompTableInyectoras = () => {
   };
 
   data.sort((a, b) => {
-    const nombreA =
-      a.fechaCreado +
-      a.horaCreado +
-      a.fechaVisualizado +
-      a.horaVisualizado +
-      a.fechaReparado +
-      a.horaRefechaReparado +
-      a.fechaVerificado +
-      a.horaVerificado;
-    const apellidoB =
-      b.fechaCreado +
-      b.horaCreado +
-      b.fechaVisualizado +
-      b.horaVisualizado +
-      b.fechaReparado +
-      b.horaRefechaReparado +
-      b.fechaVerificado +
-      b.horaVerificado;
+    const verificadoA = a.fechaVerificado + a.horaVerificado;
 
-    if (nombreA < apellidoB) {
-      return 1;
+    const verificadoB = b.fechaVerificado + b.horaVerificado;
+
+    if (verificadoA < verificadoB) {
+      return -1;
     }
 
-    if (nombreA > apellidoB) {
-      return -1;
+    if (verificadoA > verificadoB) {
+      return 1;
     }
 
     return 0;
@@ -103,7 +88,7 @@ export const CompTableInyectoras = () => {
         setState={setStateModal}
         dataTable={dataModal}
       />
-      
+
       <div className='txtColors'>
         <b>Colores:</b>
         <div className='colores'>
@@ -181,7 +166,7 @@ export const CompTableInyectoras = () => {
                     ) : (
                       <FontAwesomeIcon
                         className='linkMediaDisable'
-                        icon={faTimesCircle}
+                        icon={faXmark}
                       />
                     )}
 
