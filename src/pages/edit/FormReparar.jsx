@@ -18,7 +18,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDate } from '../../Components/useDate';
 
-const URI = 'http://localhost:3000/api/';
+const URI = 'http://192.168.11.139:4001/api/procesos/forms';
 
 export const FormReparar = () => {
   const [obser, setObser] = useState({ campo: '', valido: null });
@@ -64,11 +64,9 @@ export const FormReparar = () => {
 
       if (tabla === 'ordenMatriceria') {
         navigate('/CompTableMatriceria');
-      }
-      else {
+      } else {
         navigate('/CompTableInyectoras');
       }
-
     } else {
       setFormValidate(false);
     }
@@ -111,8 +109,6 @@ export const FormReparar = () => {
           inputError='La observacion a tener en cuenta tiene que ser de 3 a 200 dígitos y solo puede contener numeros, letras y guion bajo.'
           inputExp={expresiones.observ}
         />
-
-
 
         {formValidate === false && (
           <MensajeError>

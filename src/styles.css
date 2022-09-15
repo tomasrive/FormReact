@@ -214,7 +214,7 @@ th:last-child {
   color: red;
 }
 
-@media (min-width: 480px) and (max-width: 1550px) {
+@media (min-width: 480px) and (max-width: 1400px) {
   .table-fill {
     width: 100%;
   }
@@ -222,15 +222,22 @@ th:last-child {
   .table-fill .linkMedia {
     width: 40px;
   }
-  td:nth-child(-n + 10),
-  th:nth-child(-n + 10) {
-    width: 95px;
-    font-size: 15px;
+  td:nth-child(-n + 8),
+  th:nth-child(-n + 8) {
+    width: 60px;
+    font-size: 14px;
   }
+
+  td:nth-child(4),
+  th:nth-child(4) {
+    width: 180px;
+    font-size: 14px;
+  }
+
   td:last-child,
   th:last-child {
-    width: 90px;
-    font-size: 13px;
+    width: 50px;
+    font-size: 15px;
   }
 
   th {
@@ -294,4 +301,16 @@ ul {
 }
 .list-items:hover {
   background-color: #fff;
+}
+
+.divGrid {
+  display: grid;
+  grid-template-columns: 150px 200px;
+  align-items: center;
+}
+.divGrid h5 {
+  border-radius: 5px;
+  min-height: 40px;
+  padding: 10px;
+  background: #f2f2f2;
 }

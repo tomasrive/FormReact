@@ -18,7 +18,7 @@ import CompInput from '../../Components/CompInput';
 import axios from 'axios';
 import { useDate } from '../../Components/useDate';
 
-const URI = 'http://localhost:3000/api/ordenMatriceria';
+const URI = 'http://192.168.11.139:4001/api/procesos/forms/maquinas';
 
 const FormCreateMatriceria = () => {
   const [molde, setMolde] = useState({ campo: '', valido: null });
@@ -28,9 +28,9 @@ const FormCreateMatriceria = () => {
 
   const navigate = useNavigate();
 
-  const { date, hour } = useDate();
+  const { date, hour, dia, mes, year, hora, min } = useDate();
 
-  const liderSesion = sessionStorage.getItem('lider');
+  const LiderUser = sessionStorage.getItem('LiderUser');
 
   function timeout(delay) {
     return new Promise((res) => setTimeout(res, delay));
@@ -48,11 +48,12 @@ const FormCreateMatriceria = () => {
       setFormValidate(true);
 
       await axios.post(URI, {
-        tabla: '/ordenMatriceria/',
+        id: molde.campo + year + mes + dia + hora + min,
+        tabla: '/moldes/',
         fechaCreado: date,
         horaCreado: hour,
         molde: molde.campo,
-        lider: liderSesion,
+        lider: LiderUser,
         descripcion: message.campo,
 
         fechaVisualizado: '',
@@ -105,11 +106,10 @@ const FormCreateMatriceria = () => {
           inputName='mayus'
           inputError='El nombre de molde tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo.'
           inputExp={expresiones.molde}
-
         />
 
         <CompInput
-          InputState={liderSesion}
+          InputState={LiderUser}
           inputType='text'
           inputLabel='Lider a cargo'
           inputName='name'
@@ -146,7 +146,7 @@ const FormCreateMatriceria = () => {
         )}
 
         <ContenedorBotonCentrado>
-          <Link to='/'>
+          <Link to='/CompTableMatriceria'>
             <BotonInicio type='submit'>Cancelar</BotonInicio>
           </Link>
           <Boton type='submit'>Enviar</Boton>

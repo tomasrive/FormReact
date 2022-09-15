@@ -18,7 +18,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDate } from '../../Components/useDate';
 
-const URI = 'http://localhost:3000/api/';
+const URI = 'http://192.168.11.139:4001/api/procesos/forms';
 
 export const FormVerificado = () => {
   const [obser, setObser] = useState({ campo: '', valido: null });
@@ -61,11 +61,9 @@ export const FormVerificado = () => {
 
       if (tabla === 'ordenMatriceria') {
         navigate('/CompTableMatriceria');
-      }
-      else {
+      } else {
         navigate('/CompTableInyectoras');
       }
-      
     } else {
       setFormValidate(false);
     }

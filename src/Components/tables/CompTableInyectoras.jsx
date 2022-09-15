@@ -1,7 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCheckCircle,
-} from '@fortawesome/free-regular-svg-icons';
+import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 import { useEffect, useState } from 'react';
 import {
   BotonInicio,
@@ -14,16 +12,21 @@ import {
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
-import { faPlus, faScrewdriverWrench, faEye, faXmark } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPlus,
+  faScrewdriverWrench,
+  faEye,
+} from '@fortawesome/free-solid-svg-icons';
 import { ModalForm } from '../ModalForm';
 
-const URI = 'http://localhost:3000/api/ordenInyectoras';
+const URI = 'http://192.168.11.139:4001/api/procesos/forms/maquinas';
 
 export const CompTableInyectoras = () => {
   const [data, setData] = useState([]);
-  const [stateModal, setStateModal] = useState(false)
+  const [stateModal, setStateModal] = useState(false);
   const [dataModal, setDataModal] = useState({
-    tabla: '/ordenInyectoras/',
+    id: '',
+    tabla: '/maquinas/',
     fechaCreado: '',
     horaCreado: '',
     maquinas: '',
@@ -40,15 +43,13 @@ export const CompTableInyectoras = () => {
     horaVerificado: '',
     observacionesVerificar: '',
     estado: '',
-
-  })
+  });
   const liderSesion = sessionStorage.getItem('lider');
-
 
   const modal = (dataTable) => {
     setStateModal(!stateModal);
-    setDataModal(dataTable)
-  }
+    setDataModal(dataTable);
+  };
 
   useEffect(() => {
     getBlogs();
@@ -57,11 +58,10 @@ export const CompTableInyectoras = () => {
     // }, 10000);
   }, []);
 
-
   const getBlogs = async () => {
     const res = await axios.get(URI);
     setData(res.data);
-    console.log('a');
+    console.log(res.data);
   };
 
   data.sort((a, b) => {
@@ -79,7 +79,6 @@ export const CompTableInyectoras = () => {
 
     return 0;
   });
-
 
   return (
     <>
@@ -134,52 +133,74 @@ export const CompTableInyectoras = () => {
           </thead>
           <tbody>
             {data.map((dataTable) => (
-              <TR key={dataTable._id} validate={dataTable.estado}>
-                <td>{dataTable.fechaCreado}<hr />{dataTable.horaCreado}</td>
+              <TR key={dataTable.id} validate={dataTable.estado}>
+                <td>
+                  {dataTable.fechaCreado}
+                  <hr />
+                  {dataTable.horaCreado}
+                </td>
                 <td>{dataTable.maquinas}</td>
                 <td>{dataTable.lider}</td>
                 <td>{dataTable.descripcion}</td>
-                <td>{dataTable.fechaVisualizado}<hr />{dataTable.horaVisualizado}</td>
-                <td>{dataTable.fechaReparado}<hr />{dataTable.horaReparado}</td>
-                <td>{dataTable.fechaVerificado}<hr />{dataTable.horaVerificado}</td>
+                <td>
+                  {dataTable.fechaVisualizado}
+                  <hr />
+                  {dataTable.horaVisualizado}
+                </td>
+                <td>
+                  {dataTable.fechaReparado}
+                  <hr />
+                  {dataTable.horaReparado}
+                </td>
+                <td>
+                  {dataTable.fechaVerificado}
+                  <hr />
+                  {dataTable.horaVerificado}
+                </td>
                 <td>
                   <DivOpciones validate={dataTable.estado}>
-
-                    <Link to={`/FormVisualizar${dataTable.tabla}${dataTable._id}`} title='Visualizar'>
-                      <FontAwesomeIcon className='linkMedia' icon={faEye} />
-                    </Link>
-
-                    <Link to={`/FormReparar${dataTable.tabla}${dataTable._id}`} title='Reparar'>
-                      <FontAwesomeIcon
-                        className='linkMedia'
-                        icon={faScrewdriverWrench}
-                      />
-                    </Link>
-
                     {liderSesion !== null ? (
-                      <Link to={`/FormVerificado${dataTable.tabla}${dataTable._id}`} title='Verificar'>
-                        <FontAwesomeIcon
-                          className='linkMedia'
-                          icon={faCheckCircle}
-                        />
-                      </Link>
+                      <>
+                        <Link
+                          to={`/FormVisualizar${dataTable.tabla}${dataTable.id}`}
+                          title='Visualizar'
+                        >
+                          <FontAwesomeIcon className='linkMedia' icon={faEye} />
+                        </Link>
+
+                        <Link
+                          to={`/FormReparar${dataTable.tabla}${dataTable.id}`}
+                          title='Reparar'
+                        >
+                          <FontAwesomeIcon
+                            className='linkMedia'
+                            icon={faScrewdriverWrench}
+                          />
+                        </Link>
+                        <Link
+                          to={`/FormVerificado${dataTable.tabla}${dataTable.id}`}
+                          title='Verificar'
+                        >
+                          <FontAwesomeIcon
+                            className='linkMedia'
+                            icon={faCheckCircle}
+                          />
+                        </Link>
+                      </>
                     ) : (
-                      <FontAwesomeIcon
-                        className='linkMediaDisable'
-                        icon={faXmark}
-                      />
+                      <></>
                     )}
 
                     <button
                       onClick={() => modal(dataTable)}
                       className='btnTable'
-                      title="Abrir orden completa"
+                      title='Abrir orden completa'
                     >
                       <FontAwesomeIcon className='linkMedia' icon={faPlus} />
                     </button>
                   </DivOpciones>
                 </td>
-                <td>{dataTable.estado.toUpperCase()}</td>
+                <td>{dataTable.estado}</td>
               </TR>
             ))}
           </tbody>

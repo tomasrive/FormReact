@@ -18,14 +18,14 @@ import CompInput from '../../Components/CompInput';
 import axios from 'axios';
 import { useDate } from '../../Components/useDate';
 
-const URI = 'http://localhost:3000/api/ordenInyectoras';
-
+const URI = 'http://192.168.11.139:4001/api/procesos/forms/maquinas';
 
 const FormCreateInyectoras = () => {
   const [maquinas, setMaquinas] = useState({ campo: '', valido: null });
   const [message, setMessage] = useState({ campo: '', valido: null });
   const [formValidate, setFormValidate] = useState(null);
-  const data = sessionStorage.getItem('lider');
+
+  const LiderUser = sessionStorage.getItem('LiderUser');
 
   const navigate = useNavigate();
 
@@ -38,7 +38,9 @@ const FormCreateInyectoras = () => {
     mensaje: /^[a-zA-Z0-9À-ÿ\s]{3,200}$/,
   };
 
-  const { date, hour } = useDate();
+  const { date, hour, dia, mes, year, hora, min } = useDate();
+
+  console.log(maquinas.campo + dia + mes + year + hora + min);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -47,11 +49,12 @@ const FormCreateInyectoras = () => {
       setFormValidate(true);
 
       await axios.post(URI, {
-        tabla: '/ordenInyectoras/',
+        id: maquinas.campo + year + mes + dia + hora + min,
+        tabla: '/maquinas/',
         fechaCreado: date,
         horaCreado: hour,
         maquinas: maquinas.campo,
-        lider: data,
+        lider: LiderUser,
         descripcion: message.campo,
 
         fechaVisualizado: '',
@@ -69,27 +72,6 @@ const FormCreateInyectoras = () => {
 
         estado: 'creado',
       });
-
-      /*
-      tabla: /ordenInyectoras/,
-      fechaCreado: '' ,
-      horaCreado: '' ,
-      maquinas: '' ,
-      lider: '' ,
-      descripcion: ''  ,
-      fechaVisualizado: '' ,
-      horaVisualizado: '' ,
-      recibe: '' ,
-      fechaReparado: '' ,
-      horaReparado: '' ,
-      repara: '' ,
-      observacionesReparar: '' ,
-      fechaVerificado: '' ,
-      horaVerificado: '' ,
-      observacionesVerificar: '' ,
-      estado: ''
-      */
-
 
       setMaquinas({ campo: '', valido: '' });
       setMessage({ campo: '', valido: null });
@@ -129,7 +111,7 @@ const FormCreateInyectoras = () => {
         />
 
         <CompInput
-          InputState={data}
+          InputState={LiderUser}
           inputType='text'
           inputLabel='Lider a cargo'
           inputName='name'
@@ -165,7 +147,7 @@ const FormCreateInyectoras = () => {
         )}
 
         <ContenedorBotonCentrado>
-          <Link to='/'>
+          <Link to='/CompTableInyectoras'>
             <BotonInicio type='submit'>Cancelar</BotonInicio>
           </Link>
           <Boton type='submit'>Enviar</Boton>
