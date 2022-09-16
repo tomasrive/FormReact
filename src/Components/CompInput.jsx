@@ -34,7 +34,7 @@ const CompInput = ({
     });
 
   };
-
+  
   const onSearch = (searchTerm) => {
     InputSetState({ ...InputState, campo: searchTerm, valido: 'true' });
     console.log('search ' + searchTerm);

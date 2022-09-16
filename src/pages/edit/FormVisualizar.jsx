@@ -20,9 +20,11 @@ import { useDate } from '../../Components/useDate';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms';
 
+const URL = require('../../elements/dataMatriceria.json')
+
+
 export const FormVisualizar = () => {
   const [formValidate, setFormValidate] = useState(null);
-  const [data, setData] = useState([]);
   const [dataRes, setDataRes] = useState([]);
   const { tabla, id } = useParams();
 
@@ -36,18 +38,24 @@ export const FormVisualizar = () => {
 
   const { date, hour } = useDate();
 
+
   useEffect(() => {
     a();
   }, []);
 
-  const a = async () => {
-    const res = await axios.get(URI + '/' + tabla);
-    setDataRes(res.data);
-  };
+  // const a = async () => {
+  //   const res = await axios.get(URI + '/' + tabla);
+  // const result = dataRes.filter((word) => word.id === id);
+  //   setDataRes(res.data);
+  // };
 
-  const result = dataRes.filter((word) => word.id === id);
+  const IDID = '6456456456'
+  const a = () => {
+    const result = URL.filter((idDB) => idDB.id === IDID);
+    setDataRes(result[0])
+  }
 
-  console.log();
+
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -57,14 +65,22 @@ export const FormVisualizar = () => {
       URI + '/' + tabla,
       {
         id: id,
-        fechaCreado: 'asd',
-        horaCreado: 'asd',
-        maquinas: 'asd',
-        lider: 'asd',
-        descripcion: 'asd',
+        fechaCreado: dataRes.fechaCreado,
+        horaCreado: dataRes.horaCreado,
+        maquinas: dataRes.maquinas,
+        lider: dataRes.lider,
+        descripcion: dataRes.descripcion,
         fechaVisualizado: date,
         horaVisualizado: hour,
         recibe: LiderUser,
+        fechaReparado: '',
+        horaReparado: '',
+        repara: '',
+        observacionesReparar: '',
+        fechaVerificado: '',
+        horaVerificado: '',
+        observacionesVerificar: '',
+        estado: 'visualizado'
       }
 
       // const res = await axios.get(URI + '/' + tabla);

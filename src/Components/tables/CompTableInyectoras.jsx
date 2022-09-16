@@ -20,7 +20,7 @@ import {
 import { ModalForm } from '../ModalForm';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/maquinas';
-
+const URL = require('../../elements/dataMatriceria.json')
 export const CompTableInyectoras = () => {
   const [data, setData] = useState([]);
   const [stateModal, setStateModal] = useState(false);
@@ -59,7 +59,7 @@ export const CompTableInyectoras = () => {
   }, []);
 
   const getBlogs = async () => {
-    const res = await axios.get(URI);
+    const res = await axios.get(URL);
     setData(res.data);
     console.log(res.data);
   };

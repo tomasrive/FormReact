@@ -4,6 +4,7 @@ import {
   ContenedorBotonInicio,
   DivTable,
 } from '../elements/Formularios.js';
+import { FormVisualizar } from './edit/FormVisualizar.jsx';
 
 export const Home = () => {
   // Usuario de Session Storage de ejemplo
@@ -14,6 +15,7 @@ export const Home = () => {
 
   return (
     <>
+      <FormVisualizar />
       <DivTable>
         <Link className='noStyle' to='/FormCreateMatriceria'>
           <ContenedorBotonInicio>
