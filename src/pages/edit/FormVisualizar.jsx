@@ -20,16 +20,12 @@ import { useDate } from '../../Components/useDate';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms';
 
-const URL = require('../../elements/dataMatriceria.json')
-
-
 export const FormVisualizar = () => {
   const [formValidate, setFormValidate] = useState(null);
   const [dataRes, setDataRes] = useState([]);
   const { tabla, id } = useParams();
 
   const navigate = useNavigate();
-
   const LiderUser = sessionStorage.getItem('LiderUser');
 
   function timeout(delay) {
@@ -38,33 +34,45 @@ export const FormVisualizar = () => {
 
   const { date, hour } = useDate();
 
-
   useEffect(() => {
     a();
-  }, []);
+  });
 
-  // const a = async () => {
-  //   const res = await axios.get(URI + '/' + tabla);
-  // const result = dataRes.filter((word) => word.id === id);
-  //   setDataRes(res.data);
-  // };
-
-  const IDID = '6456456456'
-  const a = () => {
-    const result = URL.filter((idDB) => idDB.id === IDID);
-    setDataRes(result[0])
-  }
-
-
+  const a = async () => {
+    const res = await axios.get(URI + '/' + tabla);
+    const result = res.data.filter((idDB) => idDB.id === id);
+    setDataRes(result[0]);
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
     setFormValidate(true);
-    await axios.put(
-      URI + '/' + tabla,
-      {
+
+    if (tabla === 'moldes') {
+      axios.put(URI + '/' + tabla, {
         id: id,
+        tabla: tabla,
+        fechaCreado: dataRes.fechaCreado,
+        horaCreado: dataRes.horaCreado,
+        molde: dataRes.molde,
+        lider: dataRes.lider,
+        descripcion: dataRes.descripcion,
+        fechaVisualizado: date,
+        horaVisualizado: hour,
+        recibe: LiderUser,
+        fechaReparado: '',
+        horaReparado: '',
+        repara: '',
+        observacionesReparar: '',
+        fechaVerificado: '',
+        horaVerificado: '',
+        observacionesVerificar: '',
+        estado: 'visualizado',
+      });
+    } else {
+      await axios.put(URI + '/' + tabla, {
+        id: id,
+        tabla: tabla,
         fechaCreado: dataRes.fechaCreado,
         horaCreado: dataRes.horaCreado,
         maquinas: dataRes.maquinas,
@@ -80,39 +88,13 @@ export const FormVisualizar = () => {
         fechaVerificado: '',
         horaVerificado: '',
         observacionesVerificar: '',
-        estado: 'visualizado'
-      }
-
-      // const res = await axios.get(URI + '/' + tabla);
-      // setData(res.data);
-
-      // data.map(
-      //   async (dataTable) =>
-      //     await axios.put(URI + '/' + tabla, {
-      //       id: id,
-      //       tabla: tabla,
-      //       fechaCreado: dataTable.fechaCreado,
-      //       horaCreado: dataTable.horaCreado,
-      //       maquinas: dataTable.maquinas,
-      //       lider: dataTable.lider,
-      //       descripcion: dataTable.descripcion,
-      //       fechaVisualizado: date,
-      //       horaVisualizado: hour,
-      //       recibe: LiderUser,
-      //       fechaReparado: dataTable.fechaReparado,
-      //       horaReparado: dataTable.horaReparado,
-      //       repara: dataTable.repara,
-      //       observacionesReparar: dataTable.observacionesReparar,
-      //       fechaVerificado: dataTable.fechaVerificado,
-      //       horaVerificado: dataTable.horaVerificado,
-      //       observacionesVerificar: dataTable.observacionesVerificar,
-      //       estado: 'visualizado',
-      //     })
-    );
+        estado: 'visualizado',
+      });
+    }
 
     await timeout(2000);
 
-    if (tabla === 'ordenMatriceria') {
+    if (tabla === 'moldes') {
       navigate('/CompTableMatriceria');
     } else {
       navigate('/CompTableInyectoras');

@@ -18,19 +18,16 @@ import CompInput from '../../Components/CompInput';
 import axios from 'axios';
 import { useDate } from '../../Components/useDate';
 
-const URI = 'http://192.168.11.139:4001/api/procesos/forms/maquinas';
+const URI = 'http://192.168.11.139:4001/api/procesos/forms/moldes';
 
 const FormCreateMatriceria = () => {
   const [molde, setMolde] = useState({ campo: '', valido: null });
   const [message, setMessage] = useState({ campo: '', valido: null });
-
   const [formValidate, setFormValidate] = useState(null);
 
-  const navigate = useNavigate();
-
-  const { date, hour, dia, mes, year, hora, min } = useDate();
-
   const LiderUser = sessionStorage.getItem('LiderUser');
+
+  const navigate = useNavigate();
 
   function timeout(delay) {
     return new Promise((res) => setTimeout(res, delay));
@@ -40,6 +37,8 @@ const FormCreateMatriceria = () => {
     molde: /^[a-zA-Z0-9À-ÿ\s]{3,40}$/,
     mensaje: /^[a-zA-Z0-9À-ÿ\s]{3,200}$/,
   };
+
+  const { date, hour, dia, mes, year, hora, min } = useDate();
 
   const onSubmit = async (e) => {
     e.preventDefault();

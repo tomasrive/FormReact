@@ -8,6 +8,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 export const ModalForm = ({ dataTable, state, setState }) => {
+  console.log(dataTable.molde);
   return (
     <>
       {state && (
@@ -30,7 +31,7 @@ export const ModalForm = ({ dataTable, state, setState }) => {
                 <h4>Hora Creacion</h4>
                 <h5>{dataTable.horaCreado}</h5>
 
-                {dataTable.tabla === '/ordenMatriceria/' ? (
+                {dataTable.tabla === 'moldes' ? (
                   <>
                     <h4>Molde</h4>
                     <h5>{dataTable.molde}</h5>

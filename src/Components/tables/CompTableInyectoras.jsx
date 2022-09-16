@@ -20,7 +20,7 @@ import {
 import { ModalForm } from '../ModalForm';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/maquinas';
-const URL = require('../../elements/dataMatriceria.json')
+
 export const CompTableInyectoras = () => {
   const [data, setData] = useState([]);
   const [stateModal, setStateModal] = useState(false);
@@ -44,7 +44,7 @@ export const CompTableInyectoras = () => {
     observacionesVerificar: '',
     estado: '',
   });
-  const liderSesion = sessionStorage.getItem('lider');
+  const LiderUser = sessionStorage.getItem('LiderUser');
 
   const modal = (dataTable) => {
     setStateModal(!stateModal);
@@ -59,7 +59,7 @@ export const CompTableInyectoras = () => {
   }, []);
 
   const getBlogs = async () => {
-    const res = await axios.get(URL);
+    const res = await axios.get(URI);
     setData(res.data);
     console.log(res.data);
   };
@@ -124,7 +124,7 @@ export const CompTableInyectoras = () => {
 
               <th>Fecha y hora reparado</th>
 
-              <th>Fecha y hora de verificacion</th>
+              <th>Fecha y hora verificacion</th>
 
               <th>Opciones</th>
 
@@ -159,7 +159,7 @@ export const CompTableInyectoras = () => {
                 </td>
                 <td>
                   <DivOpciones validate={dataTable.estado}>
-                    {liderSesion !== null ? (
+                    {LiderUser !== null ? (
                       <>
                         <Link
                           to={`/FormVisualizar${dataTable.tabla}${dataTable.id}`}
@@ -169,7 +169,7 @@ export const CompTableInyectoras = () => {
                         </Link>
 
                         <Link
-                          to={`/FormReparar${dataTable.tabla}${dataTable.id}`}
+                          to={`/FormReparar/${dataTable.tabla}/${dataTable.id}`}
                           title='Reparar'
                         >
                           <FontAwesomeIcon
@@ -178,7 +178,7 @@ export const CompTableInyectoras = () => {
                           />
                         </Link>
                         <Link
-                          to={`/FormVerificado${dataTable.tabla}${dataTable.id}`}
+                          to={`/FormVerificado/${dataTable.tabla}/${dataTable.id}`}
                           title='Verificar'
                         >
                           <FontAwesomeIcon
@@ -207,7 +207,7 @@ export const CompTableInyectoras = () => {
         </table>
       </div>
       <div className='noStyleDiv'>
-        {liderSesion !== null && (
+        {LiderUser !== null && (
           <Link className='noStyle' to='/FormCreateInyectoras'>
             <ContenedorBotonInicio>
               <BotonInicioTabla type='submit'>

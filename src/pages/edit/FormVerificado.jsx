@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Formulario,
   Label,
@@ -23,6 +23,7 @@ const URI = 'http://192.168.11.139:4001/api/procesos/forms';
 export const FormVerificado = () => {
   const [obser, setObser] = useState({ campo: '', valido: null });
   const [formValidate, setFormValidate] = useState(null);
+  const [dataRes, setDataRes] = useState([]);
   const { tabla, id } = useParams();
 
   const navigate = useNavigate();
@@ -30,36 +31,76 @@ export const FormVerificado = () => {
   function timeout(delay) {
     return new Promise((res) => setTimeout(res, delay));
   }
+  const LiderUser = sessionStorage.getItem('LiderUser');
+  useEffect(() => {
+    a();
+  });
+
+  const a = async () => {
+    const res = await axios.get(URI + '/' + tabla);
+    const result = res.data.filter((idDB) => idDB.id === id);
+    setDataRes(result[0]);
+  };
 
   const expresiones = {
     observ: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
   };
 
   const { date, hour } = useDate();
-  const liderSesion = sessionStorage.getItem('lider');
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('_________Formulario Editar_______________');
-
-    console.log(date);
-    console.log(hour);
-    console.log(obser.campo);
-
     if (obser.valido === 'true') {
       setFormValidate(true);
+      if (tabla === 'moldes') {
+        axios.put(URI + '/' + tabla, {
+          id: id,
+          tabla: tabla,
+          fechaCreado: dataRes.fechaCreado,
+          horaCreado: dataRes.horaCreado,
+          molde: dataRes.molde,
+          lider: dataRes.lider,
+          descripcion: dataRes.descripcion,
+          fechaVisualizado: date,
+          horaVisualizado: hour,
+          recibe: LiderUser,
+          fechaReparado: '',
+          horaReparado: '',
+          repara: '',
+          observacionesReparar: '',
+          fechaVerificado: '',
+          horaVerificado: '',
+          observacionesVerificar: '',
+          estado: 'verificado',
+        });
+      } else {
+        await axios.put(URI + '/' + tabla, {
+          id: id,
+          tabla: tabla,
+          fechaCreado: dataRes.fechaCreado,
+          horaCreado: dataRes.horaCreado,
+          maquinas: dataRes.maquinas,
+          lider: dataRes.lider,
+          descripcion: dataRes.descripcion,
+          fechaVisualizado: date,
+          horaVisualizado: hour,
+          recibe: LiderUser,
+          fechaReparado: '',
+          horaReparado: '',
+          repara: '',
+          observacionesReparar: '',
+          fechaVerificado: '',
+          horaVerificado: '',
+          observacionesVerificar: '',
+          estado: 'verificado',
+        });
+      }
 
-      await axios.put(URI + tabla + '/' + id, {
-        fechaVerificado: date,
-        horaVerificado: hour,
-        observacionesVerificar: obser.campo,
-        estado: 'verificado',
-      });
       setObser({ campo: '', valido: null });
       await timeout(2000);
 
-      if (tabla === 'ordenMatriceria') {
+      if (tabla === 'moldes') {
         navigate('/CompTableMatriceria');
       } else {
         navigate('/CompTableInyectoras');
@@ -86,7 +127,7 @@ export const FormVerificado = () => {
         </GroupInputDate>
 
         <CompInput
-          InputState={liderSesion}
+          InputState={LiderUser}
           inputType='text'
           inputLabel='Persona que lo verifica'
           inputName='name'

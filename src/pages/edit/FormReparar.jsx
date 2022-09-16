@@ -17,52 +17,92 @@ import CompInput from '../../Components/CompInput';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDate } from '../../Components/useDate';
+import { useEffect } from 'react';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms';
 
 export const FormReparar = () => {
   const [obser, setObser] = useState({ campo: '', valido: null });
-  const [repara, setRepara] = useState({ campo: '', valido: null });
   const [formValidate, setFormValidate] = useState(null);
+  const [dataRes, setDataRes] = useState([]);
   const { date, hour } = useDate();
   const { tabla, id } = useParams();
 
   const navigate = useNavigate();
+  const LiderUser = sessionStorage.getItem('LiderUser');
 
   function timeout(delay) {
     return new Promise((res) => setTimeout(res, delay));
   }
 
+  useEffect(() => {
+    a();
+  });
+
+  const a = async () => {
+    const res = await axios.get(URI + '/' + tabla);
+    const result = res.data.filter((idDB) => idDB.id === id);
+    setDataRes(result[0]);
+  };
+
   const expresiones = {
     observ: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
-    repara: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
   };
-  console.log(tabla);
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('_________Formulario Reparar_______________');
-
-    console.log(date);
-    console.log(hour);
-    console.log(repara.campo);
-
-    if (obser.valido === 'true' && repara.valido === 'true') {
+    if (obser.valido === 'true') {
       setFormValidate(true);
+      if (tabla === 'moldes') {
+        axios.put(URI + '/' + tabla, {
+          id: id,
+          tabla: tabla,
+          fechaCreado: dataRes.fechaCreado,
+          horaCreado: dataRes.horaCreado,
+          molde: dataRes.molde,
+          lider: dataRes.lider,
+          descripcion: dataRes.descripcion,
+          fechaVisualizado: date,
+          horaVisualizado: hour,
+          recibe: LiderUser,
+          fechaReparado: '',
+          horaReparado: '',
+          repara: '',
+          observacionesReparar: '',
+          fechaVerificado: '',
+          horaVerificado: '',
+          observacionesVerificar: '',
+          estado: 'reparado',
+        });
+      } else {
+        await axios.put(URI + '/' + tabla, {
+          id: id,
+          tabla: tabla,
+          fechaCreado: dataRes.fechaCreado,
+          horaCreado: dataRes.horaCreado,
+          maquinas: dataRes.maquinas,
+          lider: dataRes.lider,
+          descripcion: dataRes.descripcion,
+          fechaVisualizado: date,
+          horaVisualizado: hour,
+          recibe: LiderUser,
+          fechaReparado: '',
+          horaReparado: '',
+          repara: '',
+          observacionesReparar: '',
+          fechaVerificado: '',
+          horaVerificado: '',
+          observacionesVerificar: '',
+          estado: 'reparado',
+        });
+      }
 
-      await axios.put(URI + tabla + '/' + id, {
-        repara: repara.campo,
-        observacionesReparar: obser.campo,
-        fechaReparado: date,
-        horaReparado: hour,
-        estado: 'reparado',
-      });
       setObser({ campo: '', valido: null });
-      setRepara({ campo: '', valido: null });
 
       await timeout(2000);
 
-      if (tabla === 'ordenMatriceria') {
+      if (tabla === 'moldes') {
         navigate('/CompTableMatriceria');
       } else {
         navigate('/CompTableInyectoras');
@@ -89,14 +129,11 @@ export const FormReparar = () => {
         </GroupInputDate>
 
         <CompInput
-          InputState={repara}
-          InputSetState={setRepara}
+          InputState={LiderUser}
           inputType='text'
           inputLabel='Quien repara'
-          inputPlaceholder='Diego Garcia'
-          inputName='repara'
-          inputError='El nombre tiene que ser de 3 a 40 dígitos y solo puede contener letras y espacios.'
-          inputExp={expresiones.repara}
+          inputName='name'
+          inputDis='disable'
         />
 
         <CompInput

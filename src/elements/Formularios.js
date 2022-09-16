@@ -355,6 +355,11 @@ const DivOpciones = styled.div`
         pointer-events: none;
       }
     `}
+
+    @media (min-width: 480px) and (max-width: 1400px) {
+    grid-template-columns: repeat(4, 50px);
+    font-size: 30px;
+  }
 `;
 const Overlay = styled.div`
   width: 100vw;
@@ -378,6 +383,12 @@ const ContenedorModal = styled.div`
   border-radius: 10px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 30px;
+
+  @media (min-width: 480px) and (max-width: 1400px) {
+    width: 90%;
+    height: 95vh;
+    padding: 20px;
+  }
 `;
 
 const EncabezadoModal = styled.div`
@@ -394,6 +405,10 @@ const EncabezadoModal = styled.div`
     font-weight: 500px;
     font-size: 16px;
     color: #1766dc;
+  }
+  @media (min-width: 480px) and (max-width: 1400px) {
+    margin-bottom: 0px;
+    padding-bottom: 5px;
   }
 `;
 const BotonCerrar = styled.button`
@@ -425,7 +440,7 @@ const OrdenReparacion = styled.div`
   font-size: 15px;
   h4,
   h5 {
-    margin: 7px;
+    margin: 6px;
   }
 
   h5 {

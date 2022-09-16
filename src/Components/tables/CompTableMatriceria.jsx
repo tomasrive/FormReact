@@ -45,7 +45,7 @@ export const CompTableMatriceria = () => {
     estado: '',
   });
 
-  const liderSesion = sessionStorage.getItem('lider');
+  const liderSesion = sessionStorage.getItem('LiderUser');
 
   const modal = (dataTable) => {
     setStateModal(!stateModal);
@@ -125,7 +125,7 @@ export const CompTableMatriceria = () => {
 
               <th>Fecha y hora reparado</th>
 
-              <th>Fecha y hora de verificacion</th>
+              <th>Fecha y hora verificacion</th>
 
               <th>Opciones</th>
 
@@ -170,7 +170,7 @@ export const CompTableMatriceria = () => {
                         </Link>
 
                         <Link
-                          to={`/FormReparar${dataTable.tabla}${dataTable.id}`}
+                          to={`/FormReparar/${dataTable.tabla}/${dataTable.id}`}
                           title='Reparar'
                         >
                           <FontAwesomeIcon
@@ -179,7 +179,7 @@ export const CompTableMatriceria = () => {
                           />
                         </Link>
                         <Link
-                          to={`/FormVerificado${dataTable.tabla}${dataTable.id}`}
+                          to={`/FormVerificado/${dataTable.tabla}/${dataTable.id}`}
                           title='Verificar'
                         >
                           <FontAwesomeIcon

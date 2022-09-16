@@ -40,8 +40,6 @@ const FormCreateInyectoras = () => {
 
   const { date, hour, dia, mes, year, hora, min } = useDate();
 
-  console.log(maquinas.campo + dia + mes + year + hora + min);
-
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -82,6 +80,7 @@ const FormCreateInyectoras = () => {
       setFormValidate(false);
     }
   };
+  console.log(LiderUser);
 
   return (
     <>
