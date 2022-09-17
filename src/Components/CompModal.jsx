@@ -7,8 +7,7 @@ import {
 } from '../elements/Formularios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
-export const ModalForm = ({ dataTable, state, setState }) => {
-  console.log(dataTable.molde);
+export const CompModal = ({ dataTable, state, setState }) => {
   return (
     <>
       {state && (

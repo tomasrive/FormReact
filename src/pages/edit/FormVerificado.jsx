@@ -1,22 +1,14 @@
 import { useEffect, useState } from 'react';
 import {
   Formulario,
-  Label,
   ContenedorBotonCentrado,
   Boton,
-  MensajeError,
-  MensajeExito,
-  GroupInputDate,
-  InputDate,
   BotonInicio,
 } from '../../elements/Formularios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import CompInput from '../../Components/CompInput';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useDate } from '../../Components/useDate';
+import { useDate } from '../../elements/useDate';
+import { CompDate, CompInput, CompMessage } from '../../Components'
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms';
 
@@ -25,13 +17,14 @@ export const FormVerificado = () => {
   const [formValidate, setFormValidate] = useState(null);
   const [dataRes, setDataRes] = useState([]);
   const { tabla, id } = useParams();
-
+  const { date, hour } = useDate();
   const navigate = useNavigate();
+  const LiderUser = sessionStorage.getItem('LiderUser');
 
   function timeout(delay) {
     return new Promise((res) => setTimeout(res, delay));
   }
-  const LiderUser = sessionStorage.getItem('LiderUser');
+  
   useEffect(() => {
     a();
   });
@@ -46,7 +39,7 @@ export const FormVerificado = () => {
     observ: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
   };
 
-  const { date, hour } = useDate();
+
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -114,17 +107,7 @@ export const FormVerificado = () => {
     <>
       <Formulario action='' onSubmit={onSubmit}>
         <h1>Formulario Verificacion</h1>
-        <GroupInputDate>
-          <div>
-            <Label>Fecha</Label>
-            <InputDate type='text' value={date} disabled />
-          </div>
-
-          <div>
-            <Label>Hora</Label>
-            <InputDate type='text' value={hour} disabled />
-          </div>
-        </GroupInputDate>
+        <CompDate date={date} hour={hour} />
 
         <CompInput
           InputState={LiderUser}
@@ -145,22 +128,7 @@ export const FormVerificado = () => {
           inputExp={expresiones.observ}
         />
 
-        {formValidate === false && (
-          <MensajeError>
-            <span>
-              <FontAwesomeIcon icon={faExclamationTriangle} />
-              <b>Error:</b> Por favor rellene el formulario correctamente.
-            </span>
-          </MensajeError>
-        )}
-        {formValidate === true && (
-          <MensajeExito>
-            <span>
-              <FontAwesomeIcon icon={faCheck} />
-              <b>Exito:</b> Formulario enviado exitosamente!
-            </span>
-          </MensajeExito>
-        )}
+        <CompMessage verif={formValidate} />
 
         <ContenedorBotonCentrado>
           <Link to='/'>

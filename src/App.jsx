@@ -5,10 +5,10 @@ import FormCreateInyectoras from './pages/create/FormCreateManInyectoras';
 import FormCreateEdilicio from './pages/create/FormCreateManEdilicio';
 import FormCreateArmado from './pages/create/FormCreateManArmado';
 
-import { CompTableMatriceria } from './Components/tables/CompTableMatriceria.jsx';
-import { CompTableInyectoras } from './Components/tables/CompTableInyectoras.jsx';
-import { CompTableEdilicio } from './Components/tables/CompTableEdilicio.jsx';
-import { CompTableArmado } from './Components/tables/CompTableArmado.jsx';
+import { CompTableMatriceria } from './pages/tables/CompTableMatriceria.jsx';
+import { CompTableInyectoras } from './pages/tables/CompTableInyectoras.jsx';
+import { CompTableEdilicio } from './pages/tables/CompTableEdilicio.jsx';
+import { CompTableArmado } from './pages/tables/CompTableArmado.jsx';
 import { FormReparar } from './pages/edit/FormReparar.jsx';
 import { FormVerificado } from './pages/edit/FormVerificado.jsx';
 import { FormVisualizar } from './pages/edit/FormVisualizar.jsx';

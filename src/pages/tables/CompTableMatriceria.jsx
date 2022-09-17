@@ -1,23 +1,15 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 import { useEffect, useState } from 'react';
 import {
   BotonInicio,
   BotonInicioTabla,
   ContenedorBotonCentrado,
   ContenedorBotonInicio,
-  DivOpciones,
-  TR,
 } from '../../elements/Formularios';
 import { Link } from 'react-router-dom';
-
 import axios from 'axios';
-import {
-  faPlus,
-  faScrewdriverWrench,
-  faEye,
-} from '@fortawesome/free-solid-svg-icons';
-import { ModalForm } from '../ModalForm';
+import { CompModal, CompRow } from '../../Components'
+
+
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/moldes';
 
@@ -45,7 +37,7 @@ export const CompTableMatriceria = () => {
     estado: '',
   });
 
-  const liderSesion = sessionStorage.getItem('LiderUser');
+  const LiderUser = sessionStorage.getItem('LiderUser');
 
   const modal = (dataTable) => {
     setStateModal(!stateModal);
@@ -62,7 +54,6 @@ export const CompTableMatriceria = () => {
   const getBlogs = async () => {
     const res = await axios.get(URI);
     setData(res.data);
-    console.log(res.data);
   };
 
   data.sort((a, b) => {
@@ -83,7 +74,7 @@ export const CompTableMatriceria = () => {
 
   return (
     <>
-      <ModalForm
+      <CompModal
         state={stateModal}
         setState={setStateModal}
         dataTable={dataModal}
@@ -120,95 +111,18 @@ export const CompTableMatriceria = () => {
               <th>Moldes</th>
               <th>Lider a cargo:</th>
               <th>Descripcion:</th>
-
               <th>Fecha y hora visualizado</th>
-
               <th>Fecha y hora reparado</th>
-
               <th>Fecha y hora verificacion</th>
-
               <th>Opciones</th>
-
               <th>Estado:</th>
             </tr>
           </thead>
-          <tbody>
-            {data.map((dataTable) => (
-              <TR key={dataTable.id} validate={dataTable.estado}>
-                <td>
-                  {dataTable.fechaCreado}
-                  <hr />
-                  {dataTable.horaCreado}
-                </td>
-                <td>{dataTable.molde}</td>
-                <td>{dataTable.lider}</td>
-                <td>{dataTable.descripcion}</td>
-                <td>
-                  {dataTable.fechaVisualizado}
-                  <hr />
-                  {dataTable.horaVisualizado}
-                </td>
-                <td>
-                  {dataTable.fechaReparado}
-                  <hr />
-                  {dataTable.horaReparado}
-                </td>
-                <td>
-                  {dataTable.fechaVerificado}
-                  <hr />
-                  {dataTable.horaVerificado}
-                </td>
-                <td>
-                  <DivOpciones validate={dataTable.estado}>
-                    {liderSesion !== null ? (
-                      <>
-                        <Link
-                          to={`/FormVisualizar${dataTable.tabla}${dataTable.id}`}
-                          title='Visualizar'
-                        >
-                          <FontAwesomeIcon className='linkMedia' icon={faEye} />
-                        </Link>
-
-                        <Link
-                          to={`/FormReparar/${dataTable.tabla}/${dataTable.id}`}
-                          title='Reparar'
-                        >
-                          <FontAwesomeIcon
-                            className='linkMedia'
-                            icon={faScrewdriverWrench}
-                          />
-                        </Link>
-                        <Link
-                          to={`/FormVerificado/${dataTable.tabla}/${dataTable.id}`}
-                          title='Verificar'
-                        >
-                          <FontAwesomeIcon
-                            className='linkMedia'
-                            icon={faCheckCircle}
-                          />
-                        </Link>
-                      </>
-                    ) : (
-                      <></>
-                    )}
-
-                    <button
-                      onClick={() => modal(dataTable)}
-                      className='btnTable'
-                      title='Abrir orden completa'
-                    >
-                      <FontAwesomeIcon className='linkMedia' icon={faPlus} />
-                    </button>
-                  </DivOpciones>
-                </td>
-                <td>{dataTable.estado.toUpperCase()}</td>
-              </TR>
-            ))}
-          </tbody>
+          <tbody>{data.map((dataTable) => <CompRow dataTable={dataTable} liderSesion={LiderUser} modal={modal} />)}</tbody>
         </table>
       </div>
       <div className='noStyleDiv'>
-        {liderSesion !== null && (
+        {LiderUser !== null && (
           <Link className='noStyle' to='/FormCreateMatriceria'>
             <ContenedorBotonInicio>
               <BotonInicioTabla type='submit'>

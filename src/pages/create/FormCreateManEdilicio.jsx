@@ -2,44 +2,37 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import {
   Formulario,
-  Label,
   ContenedorBotonCentrado,
   Boton,
-  MensajeError,
-  MensajeExito,
-  GroupInputDate,
-  InputDate,
   BotonInicio,
 } from '../../elements/Formularios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-import CompInput from '../../Components/CompInput';
 import axios from 'axios';
-import { useDate } from '../../Components/useDate';
+import { useDate } from '../../elements/useDate';
+import { CompDate, CompMessage, CompInput } from '../../Components'
 
 const URI = 'http://localhost:3000/api/ordenEdilicio';
+
+function timeout(delay) {
+  return new Promise((res) => setTimeout(res, delay));
+}
 
 const FormCreateEdilicio = () => {
   const [infra, setInfra] = useState({ campo: '', valido: null });
   const [name, setName] = useState({ campo: '', valido: null });
   const [message, setMessage] = useState({ campo: '', valido: null });
   const [formValidate, setFormValidate] = useState(null);
-
+  const { date, hour } = useDate();
   const data = sessionStorage.getItem('lider');
 
   const navigate = useNavigate();
 
-  function timeout(delay) {
-    return new Promise((res) => setTimeout(res, delay));
-  }
+
 
   const expresiones = {
     infraestructura: /^[a-zA-Z0-9À-ÿ\s]{3,40}$/,
     problema: /^[a-zA-Z0-9À-ÿ\s]{3,200}$/,
   };
 
-  const { date, hour } = useDate()
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -89,17 +82,8 @@ const FormCreateEdilicio = () => {
   return (
     <>
       <Formulario action="" onSubmit={onSubmit}>
-        <GroupInputDate>
-          <div>
-            <Label>Fecha</Label>
-            <InputDate type="text" value={date} disabled />
-          </div>
 
-          <div>
-            <Label>Hora</Label>
-            <InputDate type="text" value={hour} disabled />
-          </div>
-        </GroupInputDate>
+        <CompDate date={date} hour={hour} />
 
         <CompInput
           InputState={infra}
@@ -130,22 +114,7 @@ const FormCreateEdilicio = () => {
           inputExp={expresiones.problema}
         />
 
-        {formValidate === false && (
-          <MensajeError>
-            <span>
-              <FontAwesomeIcon icon={faExclamationTriangle} />
-              <b>Error:</b> Por favor rellene el formulario correctamente.
-            </span>
-          </MensajeError>
-        )}
-        {formValidate === true && (
-          <MensajeExito>
-            <span>
-              <FontAwesomeIcon icon={faCheck} />
-              <b>Exito:</b> Formulario enviado exitosamente!
-            </span>
-          </MensajeExito>
-        )}
+        <CompMessage verif={formValidate} />
 
         <ContenedorBotonCentrado>
           <Link to="/">

@@ -15,7 +15,7 @@ var machine = require('../elements/TableMachine');
 
 const data = sessionStorage.getItem('LiderUser');
 
-const CompInput = ({
+export const CompInput = ({
   InputState,
   InputSetState,
   inputType,
@@ -65,8 +65,8 @@ const CompInput = ({
             inputDis === 'disable'
               ? data
               : InputState.campo && inputName === 'mayus'
-              ? InputState.campo.toUpperCase()
-              : InputState.campo
+                ? InputState.campo.toUpperCase()
+                : InputState.campo
           }
           onChange={onChange}
           onKeyUp={validate}
@@ -109,4 +109,4 @@ const CompInput = ({
   );
 };
 
-export default CompInput;
+
