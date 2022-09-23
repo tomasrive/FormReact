@@ -66,6 +66,7 @@ export const FormReparar = () => {
           estado: 'reparado',
         });
       } else {
+
         await axios.put(URI + '/' + tabla, {
           id: id,
           tabla: tabla,

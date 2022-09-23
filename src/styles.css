@@ -236,13 +236,13 @@ th:last-child {
   }
   td:nth-child(-n + 8),
   th:nth-child(-n + 8) {
-    width: 20px;
+    width: 15px;
     font-size: 14px;
   }
 
   td:nth-child(4),
   th:nth-child(4) {
-    width: 65px;
+    width: 30px;
     font-size: 14px;
   }
   td:nth-child(8),
@@ -254,7 +254,7 @@ th:last-child {
   td:last-child,
   th:last-child {
     width: 18px;
-    font-size: 15px;
+    font-size: 14px;
   }
 
   th {

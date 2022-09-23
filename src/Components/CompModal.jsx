@@ -30,7 +30,8 @@ export const CompModal = ({ dataTable, state, setState }) => {
                 <h4>Hora Creacion</h4>
                 <h5>{dataTable.horaCreado}</h5>
 
-                {dataTable.tabla === 'moldes' ? (
+                {dataTable.tabla === '/moldes/' ||
+                dataTable.tabla === 'moldes' ? (
                   <>
                     <h4>Molde</h4>
                     <h5>{dataTable.molde}</h5>

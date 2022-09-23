@@ -8,7 +8,7 @@ import {
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDate } from '../../elements/useDate';
-import { CompDate, CompInput, CompMessage } from '../../Components'
+import { CompDate, CompInput, CompMessage } from '../../Components';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms';
 
@@ -37,7 +37,6 @@ export const FormVisualizar = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setFormValidate(true);
-
     if (tabla === 'moldes') {
       axios.put(URI + '/' + tabla, {
         id: id,

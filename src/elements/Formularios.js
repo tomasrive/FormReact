@@ -312,7 +312,7 @@ const TR = styled.tr`
 `;
 const DivOpciones = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 80px);
+  grid-template-columns: repeat(5, 80px);
   justify-content: space-between;
   font-size: 40px;
   a {
@@ -332,7 +332,8 @@ const DivOpciones = styled.div`
     props.validate === 'visualizado' &&
     css`
       a:nth-child(1),
-      a:nth-child(3) {
+      a:nth-child(3),
+      a:nth-child(4) {
         color: grey !important;
         pointer-events: none;
       }
@@ -341,7 +342,8 @@ const DivOpciones = styled.div`
     props.validate === 'reparado' &&
     css`
       a:nth-child(1),
-      a:nth-child(2) {
+      a:nth-child(2),
+      a:nth-child(4) {
         color: grey !important;
         pointer-events: none;
       }
@@ -350,14 +352,14 @@ const DivOpciones = styled.div`
   ${(props) =>
     props.validate === 'verificado' &&
     css`
-      a:nth-child(-n + 3) {
+      a:nth-child(-n + 4) {
         color: grey !important;
         pointer-events: none;
       }
     `}
 
     @media (min-width: 480px) and (max-width: 1400px) {
-    grid-template-columns: repeat(4, 50px);
+    grid-template-columns: repeat(5, 50px);
     font-size: 30px;
   }
 `;

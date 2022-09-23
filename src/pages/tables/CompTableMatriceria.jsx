@@ -7,9 +7,7 @@ import {
 } from '../../elements/Formularios';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { CompModal, CompRow } from '../../Components'
-
-
+import { CompModal, CompRow } from '../../Components';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/moldes';
 
@@ -42,6 +40,12 @@ export const CompTableMatriceria = () => {
   const modal = (dataTable) => {
     setStateModal(!stateModal);
     setDataModal(dataTable);
+  };
+
+  const deleteRow = async (dataTable) => {
+    // console.log(dataTable);
+    console.log(URI + '/' + dataTable.id);
+    await axios.delete(URI + '/' + dataTable.tabla + '/' + dataTable.id);
   };
 
   useEffect(() => {
@@ -118,7 +122,16 @@ export const CompTableMatriceria = () => {
               <th>Estado:</th>
             </tr>
           </thead>
-          <tbody>{data.map((dataTable) => <CompRow dataTable={dataTable} liderSesion={LiderUser} modal={modal} />)}</tbody>
+          <tbody>
+            {data.map((dataTable) => (
+              <CompRow
+                dataTable={dataTable}
+                liderSesion={LiderUser}
+                modal={modal}
+                deleteRow={deleteRow}
+              />
+            ))}
+          </tbody>
         </table>
       </div>
       <div className='noStyleDiv'>
