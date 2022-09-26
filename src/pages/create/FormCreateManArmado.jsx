@@ -16,7 +16,7 @@ function timeout(delay) {
   return new Promise((res) => setTimeout(res, delay));
 }
 
-const FormCreateArmado = () => {
+export const FormCreateArmado = () => {
   const [, setSeconds] = useState(0);
   const [name, setName] = useState({ campo: '', valido: null });
   const [message, setMessage] = useState({ campo: '', valido: null });
@@ -116,5 +116,3 @@ const FormCreateArmado = () => {
     </>
   );
 };
-
-export default FormCreateArmado;

@@ -9,12 +9,12 @@ export const useDate = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setSeconds((seconds) => seconds + 1);
-    }, 1000);
+    }, 10000);
     return () => clearInterval(interval);
   }, []);
 
   const date = dayjs().format('DD-MM-YYYY');
-  const hour = dayjs().format('HH:mm:ss');
+  const hour = dayjs().format('HH:mm');
 
   const dia = dayjs().format('DD');
   const mes = dayjs().format('MM');

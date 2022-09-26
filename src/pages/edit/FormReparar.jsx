@@ -8,7 +8,7 @@ import {
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDate } from '../../elements/useDate';
-import { CompDate, CompInput, CompMessage } from '../../Components'
+import { CompDate, CompInput, CompMessage } from '../../Components';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms';
 
@@ -53,20 +53,19 @@ export const FormReparar = () => {
           molde: dataRes.molde,
           lider: dataRes.lider,
           descripcion: dataRes.descripcion,
-          fechaVisualizado: date,
-          horaVisualizado: hour,
-          recibe: LiderUser,
-          fechaReparado: '',
-          horaReparado: '',
-          repara: '',
-          observacionesReparar: '',
+          fechaVisualizado: dataRes.fechaVisualizado,
+          horaVisualizado: dataRes.horaVisualizado,
+          recibe: dataRes.recibe,
+          fechaReparado: date,
+          horaReparado: hour,
+          repara: LiderUser,
+          observacionesReparar: obser.campo,
           fechaVerificado: '',
           horaVerificado: '',
           observacionesVerificar: '',
           estado: 'reparado',
         });
       } else {
-
         await axios.put(URI + '/' + tabla, {
           id: id,
           tabla: tabla,
@@ -75,13 +74,13 @@ export const FormReparar = () => {
           maquinas: dataRes.maquinas,
           lider: dataRes.lider,
           descripcion: dataRes.descripcion,
-          fechaVisualizado: date,
-          horaVisualizado: hour,
-          recibe: LiderUser,
-          fechaReparado: '',
-          horaReparado: '',
-          repara: '',
-          observacionesReparar: '',
+          fechaVisualizado: dataRes.fechaVisualizado,
+          horaVisualizado: dataRes.horaVisualizado,
+          recibe: dataRes.recibe,
+          fechaReparado: date,
+          horaReparado: hour,
+          repara: LiderUser,
+          observacionesReparar: obser.campo,
           fechaVerificado: '',
           horaVerificado: '',
           observacionesVerificar: '',

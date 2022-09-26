@@ -8,7 +8,7 @@ import {
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDate } from '../../elements/useDate';
-import { CompDate, CompInput, CompMessage } from '../../Components'
+import { CompDate, CompInput, CompMessage } from '../../Components';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms';
 
@@ -24,7 +24,7 @@ export const FormVerificado = () => {
   function timeout(delay) {
     return new Promise((res) => setTimeout(res, delay));
   }
-  
+
   useEffect(() => {
     a();
   });
@@ -38,8 +38,6 @@ export const FormVerificado = () => {
   const expresiones = {
     observ: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
   };
-
-
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -55,16 +53,16 @@ export const FormVerificado = () => {
           molde: dataRes.molde,
           lider: dataRes.lider,
           descripcion: dataRes.descripcion,
-          fechaVisualizado: date,
-          horaVisualizado: hour,
-          recibe: LiderUser,
-          fechaReparado: '',
-          horaReparado: '',
-          repara: '',
-          observacionesReparar: '',
-          fechaVerificado: '',
-          horaVerificado: '',
-          observacionesVerificar: '',
+          fechaVisualizado: dataRes.fechaVisualizado,
+          horaVisualizado: dataRes.horaVisualizado,
+          recibe: dataRes.recibe,
+          fechaReparado: dataRes.fechaReparado,
+          horaReparado: dataRes.horaReparado,
+          repara: dataRes.repara,
+          observacionesReparar: dataRes.observacionesReparar,
+          fechaVerificado: date,
+          horaVerificado: hour,
+          observacionesVerificar: obser.campo,
           estado: 'verificado',
         });
       } else {
@@ -76,16 +74,16 @@ export const FormVerificado = () => {
           maquinas: dataRes.maquinas,
           lider: dataRes.lider,
           descripcion: dataRes.descripcion,
-          fechaVisualizado: date,
-          horaVisualizado: hour,
-          recibe: LiderUser,
-          fechaReparado: '',
-          horaReparado: '',
-          repara: '',
-          observacionesReparar: '',
-          fechaVerificado: '',
-          horaVerificado: '',
-          observacionesVerificar: '',
+          fechaVisualizado: dataRes.fechaVisualizado,
+          horaVisualizado: dataRes.horaVisualizado,
+          recibe: dataRes.recibe,
+          fechaReparado: dataRes.fechaReparado,
+          horaReparado: dataRes.horaReparado,
+          repara: dataRes.repara,
+          observacionesReparar: dataRes.observacionesReparar,
+          fechaVerificado: date,
+          horaVerificado: hour,
+          observacionesVerificar: obser.campo,
           estado: 'verificado',
         });
       }

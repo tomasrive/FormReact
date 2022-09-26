@@ -8,6 +8,13 @@ import {
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { CompModal, CompRow } from '../../Components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCheckCircle,
+  faEye,
+  faScrewdriverWrench,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/moldes';
 
@@ -45,7 +52,8 @@ export const CompTableMatriceria = () => {
   const deleteRow = async (dataTable) => {
     // console.log(dataTable);
     console.log(URI + '/' + dataTable.id);
-    await axios.delete(URI + '/' + dataTable.tabla + '/' + dataTable.id);
+    await axios.delete(URI + '/' + dataTable.id);
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -58,6 +66,9 @@ export const CompTableMatriceria = () => {
   const getBlogs = async () => {
     const res = await axios.get(URI);
     setData(res.data);
+    setInterval(() => {
+      window.location.reload();
+    }, 10000);
   };
 
   data.sort((a, b) => {
@@ -102,6 +113,37 @@ export const CompTableMatriceria = () => {
         </div>
       </div>
 
+      {LiderUser !== null && (
+        <div className='txtOptions'>
+          <b>Opciones:</b>
+          <div className='colores'>
+            <div className='coloresTable'>
+              <div>
+                <FontAwesomeIcon className='linkMedia' icon={faEye} />
+              </div>
+              <p>Creado</p>
+              <div>
+                <FontAwesomeIcon
+                  className='linkMedia'
+                  icon={faScrewdriverWrench}
+                />
+              </div>
+              <p>Reparar</p>
+            </div>
+            <div className='coloresTable'>
+              <div>
+                <FontAwesomeIcon className='linkMedia' icon={faCheckCircle} />
+              </div>
+              <p>Verificar</p>
+              <div>
+                <FontAwesomeIcon className='linkMedia' icon={faTrash} />
+              </div>
+              <p>Borrar</p>
+            </div>
+          </div>
+        </div>
+      )}
+
       <ContenedorBotonCentrado>
         <Link to='/'>
           <BotonInicio type='submit'>Atras</BotonInicio>
@@ -125,6 +167,7 @@ export const CompTableMatriceria = () => {
           <tbody>
             {data.map((dataTable) => (
               <CompRow
+                key={dataTable.id}
                 dataTable={dataTable}
                 liderSesion={LiderUser}
                 modal={modal}

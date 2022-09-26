@@ -8,7 +8,7 @@ import {
 } from '../../elements/Formularios';
 import axios from 'axios';
 import { useDate } from '../../elements/useDate';
-import {CompMessage, CompInput, CompDate } from '../../Components'
+import { CompMessage, CompInput, CompDate } from '../../Components';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/maquinas';
 
@@ -16,14 +16,13 @@ function timeout(delay) {
   return new Promise((res) => setTimeout(res, delay));
 }
 
-const FormCreateInyectoras = () => {
+export const FormCreateInyectoras = () => {
   const [maquinas, setMaquinas] = useState({ campo: '', valido: null });
   const [message, setMessage] = useState({ campo: '', valido: null });
   const [formValidate, setFormValidate] = useState(null);
   const { date, hour, dia, mes, year, hora, min } = useDate();
   const LiderUser = sessionStorage.getItem('LiderUser');
   const navigate = useNavigate();
-
 
   const expresiones = {
     maquinas: /^[‎]$/,
@@ -70,7 +69,6 @@ const FormCreateInyectoras = () => {
       setFormValidate(false);
     }
   };
-  console.log(LiderUser);
 
   return (
     <>
@@ -120,5 +118,3 @@ const FormCreateInyectoras = () => {
     </>
   );
 };
-
-export default FormCreateInyectoras;

@@ -50,13 +50,13 @@ export const CompTableEdilicio = () => {
   return (
     <>
       <ContenedorBotonCentrado>
-        <Link to="/">
-          <BotonInicio type="submit">Atras</BotonInicio>
+        <Link to='/'>
+          <BotonInicio type='submit'>Atras</BotonInicio>
         </Link>
       </ContenedorBotonCentrado>
 
       <div>
-        <table className="table-fill">
+        <table className='table-fill'>
           <thead>
             <tr>
               <th>Fecha de la rotura</th>
@@ -86,7 +86,7 @@ export const CompTableEdilicio = () => {
                 <td>{dataTable.horaFinal}</td>
                 <td>
                   <Link to={`/FormEditEdilicio/${dataTable._id}`}>
-                    <FontAwesomeIcon className="edit" icon={faPenToSquare} />
+                    <FontAwesomeIcon className='edit' icon={faPenToSquare} />
                   </Link>
                 </td>
                 <td>

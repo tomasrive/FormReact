@@ -1,17 +1,22 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Home } from './pages/Home.jsx';
-import FormCreateMatriceria from './pages/create/FormCreateMatriceria';
-import FormCreateInyectoras from './pages/create/FormCreateManInyectoras';
-import FormCreateEdilicio from './pages/create/FormCreateManEdilicio';
-import FormCreateArmado from './pages/create/FormCreateManArmado';
 
-import { CompTableMatriceria } from './pages/tables/CompTableMatriceria.jsx';
-import { CompTableInyectoras } from './pages/tables/CompTableInyectoras.jsx';
-import { CompTableEdilicio } from './pages/tables/CompTableEdilicio.jsx';
-import { CompTableArmado } from './pages/tables/CompTableArmado.jsx';
-import { FormReparar } from './pages/edit/FormReparar.jsx';
-import { FormVerificado } from './pages/edit/FormVerificado.jsx';
-import { FormVisualizar } from './pages/edit/FormVisualizar.jsx';
+import { Home } from './pages/Home.jsx';
+
+import {
+  FormCreateMatriceria,
+  FormCreateArmado,
+  FormCreateInyectoras,
+  FormCreateEdilicio,
+} from './pages';
+
+import {
+  CompTableArmado,
+  CompTableEdilicio,
+  CompTableInyectoras,
+  CompTableMatriceria,
+} from './pages';
+
+import { FormReparar, FormVerificado, FormVisualizar } from './pages';
 
 export default function App() {
   return (

@@ -10,8 +10,11 @@ import {
   faCheckCircle,
   faTimesCircle,
 } from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
+import axios from 'axios';
+import { useEffect } from 'react';
 
-var machine = require('../elements/TableMachine');
+const machine = 'http://192.168.11.139:4001/api/data/machines';
 
 const data = sessionStorage.getItem('LiderUser');
 
@@ -32,6 +35,17 @@ export const CompInput = ({
       ...InputState,
       campo: e.target.value,
     });
+  };
+
+  const [machines, setMachines] = useState([]);
+
+  useEffect(() => {
+    getMachine();
+  }, []);
+
+  const getMachine = async () => {
+    const res = await axios.get(machine);
+    setMachines(res.data);
   };
 
   const onSearch = (searchTerm) => {
@@ -65,8 +79,8 @@ export const CompInput = ({
             inputDis === 'disable'
               ? data
               : InputState.campo && inputName === 'mayus'
-                ? InputState.campo.toUpperCase()
-                : InputState.campo
+              ? InputState.campo.toUpperCase()
+              : InputState.campo
           }
           onChange={onChange}
           onKeyUp={validate}
@@ -85,7 +99,7 @@ export const CompInput = ({
 
       {inputAutocomplete === 'autocomplete' && (
         <div className='flexAuto'>
-          {machine
+          {machines
             .filter((item) => {
               const searchTerm = InputState.campo.toLowerCase();
               const fullName = item.Maquina.toLowerCase();
@@ -108,5 +122,3 @@ export const CompInput = ({
     </div>
   );
 };
-
-

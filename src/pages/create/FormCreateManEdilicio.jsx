@@ -16,7 +16,7 @@ function timeout(delay) {
   return new Promise((res) => setTimeout(res, delay));
 }
 
-const FormCreateEdilicio = () => {
+export const FormCreateEdilicio = () => {
   const [infra, setInfra] = useState({ campo: '', valido: null });
   const [name, setName] = useState({ campo: '', valido: null });
   const [message, setMessage] = useState({ campo: '', valido: null });
@@ -126,5 +126,3 @@ const FormCreateEdilicio = () => {
     </>
   );
 };
-
-export default FormCreateEdilicio;

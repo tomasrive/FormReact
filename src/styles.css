@@ -51,6 +51,17 @@ main {
   z-index: 20;
   margin-left: 5%;
 }
+
+.txtOptions {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 100px 200px;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  margin-left: 140vh;
+}
+
 .colores {
   display: grid;
   grid-template-rows: 20px 20px;

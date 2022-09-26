@@ -8,7 +8,7 @@ import {
 } from '../../elements/Formularios';
 import axios from 'axios';
 import { useDate } from '../../elements/useDate';
-import { CompDate, CompMessage, CompInput } from '../../Components'
+import { CompDate, CompMessage, CompInput } from '../../Components';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/moldes';
 
@@ -16,7 +16,7 @@ function timeout(delay) {
   return new Promise((res) => setTimeout(res, delay));
 }
 
-const FormCreateMatriceria = () => {
+export const FormCreateMatriceria = () => {
   const [molde, setMolde] = useState({ campo: '', valido: null });
   const [message, setMessage] = useState({ campo: '', valido: null });
   const [formValidate, setFormValidate] = useState(null);
@@ -73,14 +73,13 @@ const FormCreateMatriceria = () => {
   return (
     <>
       <Formulario action='' onSubmit={onSubmit}>
-
         <CompDate date={date} hour={hour} />
 
         <CompInput
           InputState={molde}
           InputSetState={setMolde}
           inputType='text'
-          inputLabel='Molde'
+          inputLabel='Molde u otros perifericos'
           inputPlaceholder='Nombre de molde'
           inputName='mayus'
           inputError='El nombre de molde tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo.'
@@ -118,5 +117,3 @@ const FormCreateMatriceria = () => {
     </>
   );
 };
-
-export default FormCreateMatriceria;

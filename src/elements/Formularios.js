@@ -333,7 +333,7 @@ const DivOpciones = styled.div`
     css`
       a:nth-child(1),
       a:nth-child(3),
-      a:nth-child(4) {
+      button:nth-last-child(2) {
         color: grey !important;
         pointer-events: none;
       }
@@ -343,7 +343,7 @@ const DivOpciones = styled.div`
     css`
       a:nth-child(1),
       a:nth-child(2),
-      a:nth-child(4) {
+      button:nth-last-child(2) {
         color: grey !important;
         pointer-events: none;
       }
@@ -352,7 +352,8 @@ const DivOpciones = styled.div`
   ${(props) =>
     props.validate === 'verificado' &&
     css`
-      a:nth-child(-n + 4) {
+      a:nth-child(-n + 4),
+      button:nth-last-child(2) {
         color: grey !important;
         pointer-events: none;
       }
