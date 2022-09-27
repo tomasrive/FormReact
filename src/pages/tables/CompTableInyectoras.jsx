@@ -63,7 +63,7 @@ export const CompTableInyectoras = () => {
     setData(res.data);
     setInterval(() => {
       window.location.reload();
-    }, 10000);
+    }, 15000);
   };
 
   data.sort((a, b) => {

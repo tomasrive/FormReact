@@ -58,9 +58,6 @@ export const CompTableMatriceria = () => {
 
   useEffect(() => {
     getBlogs();
-    // setInterval(() => {
-    //   window.location.reload();
-    // }, 10000);
   }, []);
 
   const getBlogs = async () => {
@@ -68,7 +65,7 @@ export const CompTableMatriceria = () => {
     setData(res.data);
     setInterval(() => {
       window.location.reload();
-    }, 10000);
+    }, 15000);
   };
 
   data.sort((a, b) => {

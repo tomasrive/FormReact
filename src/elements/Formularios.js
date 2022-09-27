@@ -66,6 +66,9 @@ const Label = styled.label`
 const GroupInput = styled.div`
   position: relative;
   z-index: 60;
+  h4 {
+    margin: 0;
+  }
 `;
 const GroupInputDate = styled.div`
   display: grid;

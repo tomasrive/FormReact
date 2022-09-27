@@ -27,7 +27,7 @@ export const FormReparar = () => {
 
   useEffect(() => {
     a();
-  });
+  }, []);
 
   const a = async () => {
     const res = await axios.get(URI + '/' + tabla);
@@ -65,6 +65,7 @@ export const FormReparar = () => {
           observacionesVerificar: '',
           estado: 'reparado',
         });
+        return;
       } else {
         await axios.put(URI + '/' + tabla, {
           id: id,
@@ -93,7 +94,7 @@ export const FormReparar = () => {
       await timeout(2000);
 
       if (tabla === 'moldes') {
-        navigate('/CompTableMatriceria');
+        navigate('/CompTableInyectoras');
       } else {
         navigate('/CompTableInyectoras');
       }
@@ -105,7 +106,7 @@ export const FormReparar = () => {
   return (
     <>
       <Formulario action='' onSubmit={onSubmit}>
-        <h1>Formulario Reparacion</h1>
+        <h1>Pieza "{id}" (REPARACION)</h1>
 
         <CompDate date={date} hour={hour} />
 

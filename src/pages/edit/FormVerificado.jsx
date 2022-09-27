@@ -27,7 +27,7 @@ export const FormVerificado = () => {
 
   useEffect(() => {
     a();
-  });
+  }, []);
 
   const a = async () => {
     const res = await axios.get(URI + '/' + tabla);
@@ -104,7 +104,7 @@ export const FormVerificado = () => {
   return (
     <>
       <Formulario action='' onSubmit={onSubmit}>
-        <h1>Formulario Verificacion</h1>
+        <h1>Pieza "{id}" (VERIFICADA)</h1>
         <CompDate date={date} hour={hour} />
 
         <CompInput

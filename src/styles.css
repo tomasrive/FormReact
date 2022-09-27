@@ -41,6 +41,16 @@ main {
   color: #000;
   margin-top: 5px;
 }
+.grid {
+  display: grid;
+  grid-template-columns: 0.4fr 1fr;
+}
+.GRID {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10%;
+  text-align: center;
+}
 
 .txtColors {
   position: absolute;
@@ -233,9 +243,6 @@ th:last-child {
 .linkMediaDisable {
   margin: auto;
 }
-.linkMediaDisable:hover {
-  color: red;
-}
 
 @media (min-width: 480px) and (max-width: 1400px) {
   .table-fill {
@@ -274,7 +281,7 @@ th:last-child {
   }
 
   tbody {
-    height: 600px;
+    height: 440px;
   }
 
   td {

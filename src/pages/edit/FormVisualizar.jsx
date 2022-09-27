@@ -26,7 +26,7 @@ export const FormVisualizar = () => {
 
   useEffect(() => {
     a();
-  });
+  }, []);
 
   const a = async () => {
     const res = await axios.get(URI + '/' + tabla);
@@ -93,7 +93,7 @@ export const FormVisualizar = () => {
   return (
     <>
       <Formulario action='' onSubmit={onSubmit}>
-        <h1>Formulario Visualizacion</h1>
+        <h1>Pieza "{id}" (VISUALIZADA)</h1>
 
         <CompDate date={date} hour={hour} />
 
