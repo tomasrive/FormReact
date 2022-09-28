@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import {
+  Boton,
   BotonInicio,
   BotonInicioTabla,
   ContenedorBotonCentrado,
   ContenedorBotonInicio,
 } from '../../elements/Formularios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { CompModal, CompRow } from '../../Components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -41,7 +42,7 @@ export const CompTableMatriceria = () => {
     observacionesVerificar: '',
     estado: '',
   });
-
+  const navigate = useNavigate();
   const LiderUser = sessionStorage.getItem('LiderUser');
 
   const modal = (dataTable) => {
@@ -65,7 +66,11 @@ export const CompTableMatriceria = () => {
     setData(res.data);
     setInterval(() => {
       window.location.reload();
-    }, 15000);
+    }, 150000);
+  };
+
+  const deleteSession = () => {
+    sessionStorage.removeItem('LiderUser');
   };
 
   data.sort((a, b) => {
@@ -142,9 +147,26 @@ export const CompTableMatriceria = () => {
       )}
 
       <ContenedorBotonCentrado>
-        <Link to='/'>
-          <BotonInicio type='submit'>Atras</BotonInicio>
-        </Link>
+        {LiderUser !== null && (
+          <div>
+            <BotonInicio type='submit' onClick={deleteSession}>
+              <a
+                className='noStyle'
+                href='http://192.168.11.139:3000/inyeccion'
+              >
+                Cerrar Sesion
+              </a>
+            </BotonInicio>
+          </div>
+        )}
+
+        <a href='http://192.168.11.139:3000/inyeccion'>
+          {LiderUser !== null ? (
+            <BotonInicio type='submit'>Atras</BotonInicio>
+          ) : (
+            <BotonInicio type='submit'>Iniciar sesion</BotonInicio>
+          )}
+        </a>
       </ContenedorBotonCentrado>
       <div>
         <table className='table-fill'>
@@ -176,13 +198,13 @@ export const CompTableMatriceria = () => {
       </div>
       <div className='noStyleDiv'>
         {LiderUser !== null && (
-          <Link className='noStyle' to='/FormCreateMatriceria'>
+          <a className='noStyle' href='/FormCreateMatriceria'>
             <ContenedorBotonInicio>
               <BotonInicioTabla type='submit'>
                 Crear orden de reparacion: Matriceria
               </BotonInicioTabla>
             </ContenedorBotonInicio>
-          </Link>
+          </a>
         )}
       </div>
     </>

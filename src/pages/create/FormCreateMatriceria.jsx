@@ -9,6 +9,8 @@ import {
 import axios from 'axios';
 import { useDate } from '../../elements/useDate';
 import { CompDate, CompMessage, CompInput } from '../../Components';
+import { CompConfirm } from '../../Components/CompConfirm';
+import { useEffect } from 'react';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/moldes';
 
@@ -23,6 +25,16 @@ export const FormCreateMatriceria = () => {
   const { date, hour, dia, mes, year, hora, min } = useDate();
   const LiderUser = sessionStorage.getItem('LiderUser');
   const navigate = useNavigate();
+  const [stateModal, setStateModal] = useState(false);
+  const [dataModal, setDataModal] = useState({
+    fechaCreado: '',
+    horaCreado: '',
+    molde: '',
+    lider: '',
+    descripcion: '',
+    tabla: '',
+  });
+
 
   const expresiones = {
     molde: /^[a-zA-Z0-9À-ÿ\s]{3,40}$/,
@@ -31,47 +43,65 @@ export const FormCreateMatriceria = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
     if (molde.valido === 'true' && message.valido === 'true') {
-      setFormValidate(true);
-
-      await axios.post(URI, {
-        id: molde.campo + year + mes + dia + hora + min,
-        tabla: '/moldes/',
+      setStateModal(!stateModal);
+      setDataModal({
         fechaCreado: date,
         horaCreado: hour,
         molde: molde.campo,
         lider: LiderUser,
         descripcion: message.campo,
-
-        fechaVisualizado: '',
-        horaVisualizado: '',
-        recibe: '',
-
-        fechaReparado: '',
-        horaReparado: '',
-        repara: '',
-        observacionesReparar: '',
-
-        fechaVerificado: '',
-        horaVerificado: '',
-        observacionesVerificar: '',
-
-        estado: 'creado',
+        tabla: '/moldes/',
       });
-
-      setMolde({ campo: '', valido: '' });
-      setMessage({ campo: '', valido: null });
-
-      await timeout(2000);
-      navigate('/');
     } else {
       setFormValidate(false);
     }
   };
 
+  const sendData = async () => {
+    console.log('Se mando correctamente');
+    setStateModal(!stateModal);
+    setFormValidate(true);
+    await axios.post(URI, {
+      id: molde.campo + year + mes + dia + hora + min,
+      tabla: '/moldes/',
+      fechaCreado: date,
+      horaCreado: hour,
+      molde: molde.campo,
+      lider: LiderUser,
+      descripcion: message.campo,
+
+      fechaVisualizado: '',
+      horaVisualizado: '',
+      recibe: '',
+
+      fechaReparado: '',
+      horaReparado: '',
+      repara: '',
+      observacionesReparar: '',
+
+      fechaVerificado: '',
+      horaVerificado: '',
+      observacionesVerificar: '',
+
+      estado: 'creado',
+    });
+
+    setMolde({ campo: '', valido: '' });
+    setMessage({ campo: '', valido: null });
+
+    await timeout(2000);
+    navigate('/');
+  };
   return (
     <>
+      <CompConfirm
+        state={stateModal}
+        setState={setStateModal}
+        dataTable={dataModal}
+        send={sendData}
+      />
+
       <Formulario action='' onSubmit={onSubmit}>
         <CompDate date={date} hour={hour} />
 

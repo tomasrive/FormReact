@@ -63,7 +63,11 @@ export const CompTableInyectoras = () => {
     setData(res.data);
     setInterval(() => {
       window.location.reload();
-    }, 15000);
+    }, 150000);
+  };
+
+  const deleteSession = () => {
+    sessionStorage.removeItem('LiderUser');
   };
 
   data.sort((a, b) => {
@@ -140,9 +144,26 @@ export const CompTableInyectoras = () => {
       )}
 
       <ContenedorBotonCentrado>
-        <Link to='/'>
-          <BotonInicio type='submit'>Atras</BotonInicio>
-        </Link>
+        {LiderUser !== null && (
+          <div>
+            <BotonInicio type='submit' onClick={deleteSession}>
+              <a
+                className='noStyle'
+                href='http://192.168.11.139:3000/inyeccion'
+              >
+                Cerrar Sesion
+              </a>
+            </BotonInicio>
+          </div>
+        )}
+
+        <a href='http://192.168.11.139:3000/inyeccion'>
+          {LiderUser !== null ? (
+            <BotonInicio type='submit'>Atras</BotonInicio>
+          ) : (
+            <BotonInicio type='submit'>Iniciar sesion</BotonInicio>
+          )}
+        </a>
       </ContenedorBotonCentrado>
       <div>
         <table className='table-fill'>
@@ -174,13 +195,13 @@ export const CompTableInyectoras = () => {
       </div>
       <div className='noStyleDiv'>
         {LiderUser !== null && (
-          <Link className='noStyle' to='/FormCreateInyectoras'>
+          <a className='noStyle' href='/FormCreateInyectoras'>
             <ContenedorBotonInicio>
               <BotonInicioTabla type='submit'>
                 Crear orden de reparacion: Mantenimiento Inyectoras
               </BotonInicioTabla>
             </ContenedorBotonInicio>
-          </Link>
+          </a>
         )}
       </div>
     </>

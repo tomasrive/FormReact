@@ -396,6 +396,21 @@ const ContenedorModal = styled.div`
     padding: 20px;
   }
 `;
+const ContenedorModalConfirmar = styled.div`
+  width: 50%;
+  min-height: 415px;
+  background: ${colores.white};
+  position: relative;
+  border-radius: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 30px;
+
+  @media (min-width: 480px) and (max-width: 1400px) {
+    width: 50%;
+    height: 65vh;
+    padding: 20px;
+  }
+`;
 
 const EncabezadoModal = styled.div`
   display: flex;
@@ -446,7 +461,7 @@ const OrdenReparacion = styled.div`
   font-size: 15px;
   h4,
   h5 {
-    margin: 6px;
+    margin: 8px;
   }
 
   h5 {
@@ -490,7 +505,25 @@ const OrdenReparacion = styled.div`
       }
     `}
 `;
-
+const OrdenReparacionConfirmar = styled.div`
+  font-size: 15px;
+  text-align: center;
+  h5 {
+    margin: auto;
+    border-radius: 5px;
+    min-height: 40px;
+    padding: 10px;
+    background: #f2f2f2;
+    width: 70%;
+  }
+  h4 {
+    margin: 10px;
+  }
+  div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+`;
 export {
   DivTable,
   Table,
@@ -517,4 +550,6 @@ export {
   EncabezadoModal,
   BotonCerrar,
   OrdenReparacion,
+  ContenedorModalConfirmar,
+  OrdenReparacionConfirmar,
 };
