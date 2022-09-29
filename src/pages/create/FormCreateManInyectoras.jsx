@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { useState } from 'react';
 import {
   Formulario,
@@ -23,7 +23,6 @@ export const FormCreateInyectoras = () => {
   const [formValidate, setFormValidate] = useState(null);
   const { date, hour, dia, mes, year, hora, min } = useDate();
   const LiderUser = sessionStorage.getItem('LiderUser');
-  const navigate = useNavigate();
   const [stateModal, setStateModal] = useState(false);
   const [dataModal, setDataModal] = useState({
     fechaCreado: '',
@@ -79,6 +78,7 @@ export const FormCreateInyectoras = () => {
 
       fechaVerificado: '',
       horaVerificado: '',
+      verifica: '',
       observacionesVerificar: '',
 
       estado: 'creado',
@@ -88,7 +88,7 @@ export const FormCreateInyectoras = () => {
     setMessage({ campo: '', valido: null });
 
     await timeout(2000);
-    navigate('/');
+    window.location.replace('/');
   };
 
   return (
@@ -109,7 +109,7 @@ export const FormCreateInyectoras = () => {
           inputType='text'
           inputLabel='Maquinas'
           inputPlaceholder='Nombre de maquina'
-          inputName='molde'
+          inputName='mayus'
           inputError='Elige una de las opciones desplegadas'
           inputExp={expresiones.maquinas}
           inputAutocomplete='autocomplete'

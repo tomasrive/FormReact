@@ -106,7 +106,7 @@ export const CompInput = ({
               return (
                 searchTerm &&
                 fullName.includes(searchTerm) &&
-                InputState.campo === searchTerm
+                InputState.valido === 'false'
               );
             })
 

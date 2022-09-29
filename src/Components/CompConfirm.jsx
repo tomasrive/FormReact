@@ -16,6 +16,7 @@ export const CompConfirm = ({ dataTable, state, setState, send }) => {
           <ContenedorModalConfirmar>
             <EncabezadoModal>
               <h1>Confirmar datos:</h1>
+              <span className='spanConfirm'>(ATENCION: Se enviara un correo a los respectivos lideres y supervisores)</span>
             </EncabezadoModal>
             <OrdenReparacionConfirmar>
               <div>

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import {
   Formulario,
@@ -10,7 +10,6 @@ import axios from 'axios';
 import { useDate } from '../../elements/useDate';
 import { CompDate, CompMessage, CompInput } from '../../Components';
 import { CompConfirm } from '../../Components/CompConfirm';
-import { useEffect } from 'react';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/moldes';
 
@@ -24,7 +23,6 @@ export const FormCreateMatriceria = () => {
   const [formValidate, setFormValidate] = useState(null);
   const { date, hour, dia, mes, year, hora, min } = useDate();
   const LiderUser = sessionStorage.getItem('LiderUser');
-  const navigate = useNavigate();
   const [stateModal, setStateModal] = useState(false);
   const [dataModal, setDataModal] = useState({
     fechaCreado: '',
@@ -34,7 +32,6 @@ export const FormCreateMatriceria = () => {
     descripcion: '',
     tabla: '',
   });
-
 
   const expresiones = {
     molde: /^[a-zA-Z0-9À-ÿ\s]{3,40}$/,
@@ -82,6 +79,7 @@ export const FormCreateMatriceria = () => {
 
       fechaVerificado: '',
       horaVerificado: '',
+      verifica: '',
       observacionesVerificar: '',
 
       estado: 'creado',
@@ -91,7 +89,7 @@ export const FormCreateMatriceria = () => {
     setMessage({ campo: '', valido: null });
 
     await timeout(2000);
-    navigate('/');
+    window.location.replace('/');
   };
   return (
     <>

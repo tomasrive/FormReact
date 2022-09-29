@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import {
   BotonInicio,
   ContenedorBotonInicio,
@@ -8,78 +7,79 @@ import {
 export const Home = () => {
   // Usuario de Session Storage de ejemplo
   if (typeof Storage != 'undefined') {
-    let LiderUser = 'Fabian Gomez';
+    // let LiderUser = 'Fabian Gomez';
+    let LiderUser = 'Lucas Martinez';
     sessionStorage.setItem('LiderUser', LiderUser);
   }
 
   return (
     <>
       <DivTable>
-        <Link className='noStyle' to='/FormCreateMatriceria'>
+        <a className='noStyle' href='/FormCreateMatriceria'>
           <ContenedorBotonInicio>
-            <BotonInicio type='submit'>
+            <BotonInicio>
               Orden de reparacion: Matriceria
               {/* moldes */}
             </BotonInicio>
           </ContenedorBotonInicio>
-        </Link>
-        <Link className='noStyle' to='/FormCreateInyectoras'>
+        </a>
+        <a className='noStyle' href='/FormCreateInyectoras'>
           <ContenedorBotonInicio>
-            <BotonInicio type='submit'>
+            <BotonInicio>
               Orden de reparacion: Mantenimiento de Inyectoras
               {/* maquinas  */}
             </BotonInicio>
           </ContenedorBotonInicio>
-        </Link>
-        <Link className='noStyle' to='/FormCreateEdilicio'>
+        </a>
+        <a className='noStyle' href='/FormCreateEdilicio'>
           <ContenedorBotonInicio>
-            <BotonInicio type='submit'>
+            <BotonInicio>
               Orden de reparacion: Mantenimiento Edilicio
               {/* infraestructura */}
             </BotonInicio>
           </ContenedorBotonInicio>
-        </Link>
-        <Link className='noStyle' to='/FormCreateArmado'>
+        </a>
+        <a className='noStyle' href='/FormCreateArmado'>
           <ContenedorBotonInicio>
-            <BotonInicio type='submit'>
+            <BotonInicio>
               Orden de reparacion: Mantenimiento de Armado
               {/* Problema */}
             </BotonInicio>
           </ContenedorBotonInicio>
-        </Link>
+        </a>
 
-        <Link className='noStyle' to='/CompTableMatriceria'>
+        <a className='noStyle' href='/CompTableMatriceria'>
           <ContenedorBotonInicio>
-            <BotonInicio type='submit'>
+            <BotonInicio>
               Tabla de matriceria
               {/* Problema */}
             </BotonInicio>
           </ContenedorBotonInicio>
-        </Link>
-        <Link className='noStyle' to='/CompTableInyectoras'>
+        </a>
+        <a className='noStyle' href='/CompTableInyectoras'>
           <ContenedorBotonInicio>
-            <BotonInicio type='submit'>
+            <BotonInicio>
               Tabla de Mantenimiento Inyectoras
               {/* Problema */}
             </BotonInicio>
           </ContenedorBotonInicio>
-        </Link>
-        <Link className='noStyle' to='/CompTableEdilicio'>
+        </a>
+        <a className='noStyle' href='/CompTableEdilicio'>
           <ContenedorBotonInicio>
-            <BotonInicio type='submit'>
+            <BotonInicio>
               Tabla de Mantenimiento Edilicio
               {/* Problema */}
             </BotonInicio>
           </ContenedorBotonInicio>
-        </Link>
-        <Link className='noStyle' to='/CompTableArmado'>
+        </a>
+        <a className='noStyle' href='/CompTableArmado'>
           <ContenedorBotonInicio>
-            <BotonInicio type='submit'>
+            <BotonInicio>
               Tabla de Mantenimiento Armado
               {/* Problema */}
             </BotonInicio>
           </ContenedorBotonInicio>
-        </Link>
+        </a>
       </DivTable>
     </>
   );

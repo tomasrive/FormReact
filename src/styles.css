@@ -63,6 +63,8 @@ main {
   justify-content: center;
   z-index: 20;
   margin-left: 5%;
+  pointer-events: none;
+  color: #474747;
 }
 
 .txtOptions {
@@ -73,8 +75,13 @@ main {
   justify-content: center;
   z-index: 20;
   margin-left: 140vh;
+  pointer-events: none;
+  color: #474747;
 }
-
+.spanConfirm {
+  font-size: 14px;
+  color: tomato;
+}
 .colores {
   display: grid;
   grid-template-rows: 20px 20px;

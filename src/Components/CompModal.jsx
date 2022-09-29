@@ -74,6 +74,8 @@ export const CompModal = ({ dataTable, state, setState }) => {
                 <h5>{dataTable.fechaVerificado}</h5>
                 <h4>Hora verificado</h4>
                 <h5>{dataTable.horaVerificado}</h5>
+                <h4>Quien lo verifica</h4>
+                <h5>{dataTable.verifica}</h5>
                 <h4>Observaciones en la verificacion</h4>
                 <h5>{dataTable.observacionesVerificar}</h5>
               </div>

@@ -5,7 +5,6 @@ import {
   ContenedorBotonCentrado,
   ContenedorBotonInicio,
 } from '../../elements/Formularios';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { CompModal, CompRow } from '../../Components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -63,7 +62,7 @@ export const CompTableInyectoras = () => {
     setData(res.data);
     setInterval(() => {
       window.location.reload();
-    }, 150000);
+    }, 600000);
   };
 
   const deleteSession = () => {
@@ -95,19 +94,19 @@ export const CompTableInyectoras = () => {
       />
 
       <div className='txtColors'>
-        <b>Colores:</b>
+        <b>COLORES:</b>
         <div className='colores'>
           <div className='coloresTable'>
             <div className='rojo'></div>
-            <p>Creado</p>
+            <p>CREADO</p>
             <div className='amarillo'></div>
-            <p>Visualizado</p>
+            <p>VISUALIZADO</p>
           </div>
           <div className='coloresTable'>
             <div className='verde'></div>
-            <p>Reparado</p>
+            <p>REPARADO</p>
             <div className='azul'></div>
-            <p>Verificado</p>
+            <p>VERIFICADO</p>
           </div>
         </div>
       </div>
@@ -120,24 +119,24 @@ export const CompTableInyectoras = () => {
               <div>
                 <FontAwesomeIcon className='linkMedia' icon={faEye} />
               </div>
-              <p>Creado</p>
+              <p>CREADO</p>
               <div>
                 <FontAwesomeIcon
                   className='linkMedia'
                   icon={faScrewdriverWrench}
                 />
               </div>
-              <p>Reparar</p>
+              <p>REPARAR</p>
             </div>
             <div className='coloresTable'>
               <div>
                 <FontAwesomeIcon className='linkMedia' icon={faCheckCircle} />
               </div>
-              <p>Verificar</p>
+              <p>VERIFICAR</p>
               <div>
                 <FontAwesomeIcon className='linkMedia' icon={faTrash} />
               </div>
-              <p>Borrar</p>
+              <p>BORRAR</p>
             </div>
           </div>
         </div>

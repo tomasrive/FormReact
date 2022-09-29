@@ -9,7 +9,7 @@ export const useDate = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setSeconds((seconds) => seconds + 1);
-    }, 10000);
+    }, 60000);
     return () => clearInterval(interval);
   }, []);
 

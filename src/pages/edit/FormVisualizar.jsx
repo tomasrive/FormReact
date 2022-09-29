@@ -5,7 +5,7 @@ import {
   Boton,
   BotonInicio,
 } from '../../elements/Formularios';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDate } from '../../elements/useDate';
 import { CompDate, CompInput, CompMessage } from '../../Components';
@@ -17,7 +17,6 @@ export const FormVisualizar = () => {
   const [dataRes, setDataRes] = useState([]);
   const { tabla, id } = useParams();
   const { date, hour } = useDate();
-  const navigate = useNavigate();
   const LiderUser = sessionStorage.getItem('LiderUser');
 
   function timeout(delay) {
@@ -26,6 +25,7 @@ export const FormVisualizar = () => {
 
   useEffect(() => {
     a();
+    // eslint-disable-next-line
   }, []);
 
   const a = async () => {
@@ -55,6 +55,7 @@ export const FormVisualizar = () => {
         observacionesReparar: '',
         fechaVerificado: '',
         horaVerificado: '',
+        verifica: '',
         observacionesVerificar: '',
         estado: 'visualizado',
       });
@@ -76,6 +77,7 @@ export const FormVisualizar = () => {
         observacionesReparar: '',
         fechaVerificado: '',
         horaVerificado: '',
+        verifica: '',
         observacionesVerificar: '',
         estado: 'visualizado',
       });
@@ -84,9 +86,9 @@ export const FormVisualizar = () => {
     await timeout(2000);
 
     if (tabla === 'moldes') {
-      navigate('/CompTableMatriceria');
+      window.location.replace('/CompTableMatriceria');
     } else {
-      navigate('/CompTableInyectoras');
+      window.location.replace('/CompTableInyectoras');
     }
   };
 

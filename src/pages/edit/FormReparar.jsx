@@ -5,7 +5,7 @@ import {
   Boton,
   BotonInicio,
 } from '../../elements/Formularios';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDate } from '../../elements/useDate';
 import { CompDate, CompInput, CompMessage } from '../../Components';
@@ -18,7 +18,6 @@ export const FormReparar = () => {
   const [dataRes, setDataRes] = useState([]);
   const { tabla, id } = useParams();
   const { date, hour } = useDate();
-  const navigate = useNavigate();
   const LiderUser = sessionStorage.getItem('LiderUser');
 
   function timeout(delay) {
@@ -27,6 +26,7 @@ export const FormReparar = () => {
 
   useEffect(() => {
     a();
+    // eslint-disable-next-line
   }, []);
 
   const a = async () => {
@@ -62,10 +62,10 @@ export const FormReparar = () => {
           observacionesReparar: obser.campo,
           fechaVerificado: '',
           horaVerificado: '',
+          verifica: '',
           observacionesVerificar: '',
           estado: 'reparado',
         });
-        return;
       } else {
         await axios.put(URI + '/' + tabla, {
           id: id,
@@ -84,6 +84,7 @@ export const FormReparar = () => {
           observacionesReparar: obser.campo,
           fechaVerificado: '',
           horaVerificado: '',
+          verifica: '',
           observacionesVerificar: '',
           estado: 'reparado',
         });
@@ -94,9 +95,9 @@ export const FormReparar = () => {
       await timeout(2000);
 
       if (tabla === 'moldes') {
-        navigate('/CompTableInyectoras');
+        window.location.replace('/CompTableMatriceria');
       } else {
-        navigate('/CompTableInyectoras');
+        window.location.replace('/CompTableInyectoras');
       }
     } else {
       setFormValidate(false);

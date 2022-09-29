@@ -407,7 +407,7 @@ const ContenedorModalConfirmar = styled.div`
 
   @media (min-width: 480px) and (max-width: 1400px) {
     width: 50%;
-    height: 65vh;
+    height: 67vh;
     padding: 20px;
   }
 `;
@@ -416,9 +416,11 @@ const EncabezadoModal = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-direction: column;
   margin-bottom: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid #e8e8e8;
+  margin: auto;
   h1 {
     margin: auto;
   }
@@ -461,7 +463,7 @@ const OrdenReparacion = styled.div`
   font-size: 15px;
   h4,
   h5 {
-    margin: 8px;
+    margin: 5px;
   }
 
   h5 {
