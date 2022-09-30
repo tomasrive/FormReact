@@ -4,6 +4,8 @@ import {
   ContenedorBotonCentrado,
   Boton,
   BotonInicio,
+  Grid,
+  H5,
 } from '../../elements/Formularios';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -106,39 +108,69 @@ export const FormReparar = () => {
 
   return (
     <>
-      <Formulario action='' onSubmit={onSubmit}>
-        <h1>Pieza "{id}" (REPARACION)</h1>
+      <Grid>
+        <section className='sectionh3h5'>
+          <div className='contentGrid'>
+            <div className='GRID'>
+              <div>
+                <h3>FECHA CREADO</h3>
+                <h5>{dataRes.fechaCreado}</h5>
+                <h3>MAQUINAS</h3>
+                <h5>{dataRes.maquinas}</h5>
+                <h3>FECHA VISUALIZADO</h3>
+                <h5>{dataRes.fechaVisualizado}</h5>
+                <h3>RECIBE</h3>
+                <h5>{dataRes.recibe}</h5>
+              </div>
+              <div>
+                <h3>HORA CREADO</h3>
+                <h5>{dataRes.horaCreado}</h5>
+                <h3>LIDER</h3>
+                <h5>{dataRes.lider}</h5>
+                <h3>HORA VISUALIZADO</h3>
+                <h5>{dataRes.horaVisualizado}</h5>
+                <h3>DESCRIPCION</h3>
+                <h5>{dataRes.descripcion}</h5>
+              </div>
+            </div>
+          </div>
+          <h3>ESTADO</h3>
+          <H5 validate={dataRes.estado}>{dataRes.estado}</H5>
+        </section>
+        <Formulario action='' onSubmit={onSubmit}>
+          <h1>Pieza "{id}" (REPARACION)</h1>
 
-        <CompDate date={date} hour={hour} />
+          <CompDate date={date} hour={hour} />
 
-        <CompInput
-          InputState={LiderUser}
-          inputType='text'
-          inputLabel='Quien repara'
-          inputName='name'
-          inputDis='disable'
-        />
+          <CompInput
+            InputState={LiderUser}
+            inputType='text'
+            inputLabel='Quien repara'
+            inputName='name'
+            inputDis='disable'
+          />
 
-        <CompInput
-          InputState={obser}
-          InputSetState={setObser}
-          inputType='text'
-          inputLabel='Observacion'
-          inputPlaceholder='Observacion a tener en cuenta'
-          inputName='recibe'
-          inputError='La observacion a tener en cuenta tiene que ser de 3 a 200 dígitos y solo puede contener numeros, letras y guion bajo.'
-          inputExp={expresiones.observ}
-        />
+          <CompInput
+            InputState={obser}
+            InputSetState={setObser}
+            inputType='text'
+            inputLabel='Observacion(REPARADO)'
+            inputPlaceholder='Observacion a tener en cuenta'
+            inputName='recibe'
+            inputError='La observacion a tener en cuenta tiene que ser de 3 a 200 dígitos y solo puede contener numeros, letras y guion bajo.'
+            inputExp={expresiones.observ}
+          />
 
-        <CompMessage verif={formValidate} />
+          <CompMessage verif={formValidate} />
 
-        <ContenedorBotonCentrado>
-          <Link to='/'>
-            <BotonInicio type='submit'>Cancelar</BotonInicio>
-          </Link>
-          <Boton type='submit'>Reparado</Boton>
-        </ContenedorBotonCentrado>
-      </Formulario>
+          <ContenedorBotonCentrado>
+            <Link to='/'>
+              <BotonInicio type='submit'>Cancelar</BotonInicio>
+            </Link>
+            <Boton type='submit'>Reparado</Boton>
+          </ContenedorBotonCentrado>
+        </Formulario>
+      </Grid>
     </>
   );
 };

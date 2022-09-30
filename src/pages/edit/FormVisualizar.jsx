@@ -4,6 +4,8 @@ import {
   ContenedorBotonCentrado,
   Boton,
   BotonInicio,
+  Grid,
+  H5,
 } from '../../elements/Formularios';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -94,28 +96,56 @@ export const FormVisualizar = () => {
 
   return (
     <>
-      <Formulario action='' onSubmit={onSubmit}>
-        <h1>Pieza "{id}" (VISUALIZADA)</h1>
+      <Grid>
+        <section className='sectionh3h5'>
+          <div className='contentGrid'>
+            <div className='GRID'>
+              <div>
+                <h3>FECHA CREADO</h3>
+                <h5>{dataRes.fechaCreado}</h5>
 
-        <CompDate date={date} hour={hour} />
+                <h3>LIDER</h3>
+                <h5>{dataRes.lider}</h5>
+              </div>
+              <div>
+                <h3>HORA CREADO</h3>
+                <h5>{dataRes.horaCreado}</h5>
+                <h3>MAQUINAS</h3>
+                <h5>{dataRes.maquinas}</h5>
+              </div>
+            </div>
+            <h3>DESCRIPCION</h3>
+            <h5>{dataRes.descripcion}</h5>
+          </div>
+          <div>
+            <h3>ESTADO</h3>
+            <H5 validate={dataRes.estado}>{dataRes.estado}</H5>
+          </div>
+        </section>
 
-        <CompInput
-          InputState={LiderUser}
-          inputType='text'
-          inputLabel='Lider a cargo'
-          inputName='name'
-          inputDis='disable'
-        />
+        <Formulario action='' onSubmit={onSubmit}>
+          <h1>Pieza "{id}" (VISUALIZADA)</h1>
 
-        <CompMessage verif={formValidate} />
+          <CompDate date={date} hour={hour} />
 
-        <ContenedorBotonCentrado>
-          <Link to='/'>
-            <BotonInicio type='submit'>Denegar</BotonInicio>
-          </Link>
-          <Boton type='submit'>Visualizado</Boton>
-        </ContenedorBotonCentrado>
-      </Formulario>
+          <CompInput
+            InputState={LiderUser}
+            inputType='text'
+            inputLabel='Lider a cargo'
+            inputName='name'
+            inputDis='disable'
+          />
+
+          <CompMessage verif={formValidate} />
+
+          <ContenedorBotonCentrado>
+            <Link to='/'>
+              <BotonInicio type='submit'>Denegar</BotonInicio>
+            </Link>
+            <Boton type='submit'>Visualizado</Boton>
+          </ContenedorBotonCentrado>
+        </Formulario>
+      </Grid>
     </>
   );
 };

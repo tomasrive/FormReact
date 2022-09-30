@@ -244,7 +244,7 @@ const Boton = styled.button`
   outline: 0;
   padding: 16px;
   transition: all 0.2s ease-in-out;
-  width: 30%;
+  width: 40%;
 
   &:hover {
     box-shadow: -2px -2px 5px #393f4b, 2px 2px 5px ${colores.black};
@@ -526,6 +526,41 @@ const OrdenReparacionConfirmar = styled.div`
     grid-template-columns: 1fr 1fr;
   }
 `;
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 0.8fr 1fr;
+  align-items: center;
+  height: 90vh;
+  padding: 20px;
+`;
+
+const H5 = styled.h5`
+  text-transform: uppercase;
+  ${(props) =>
+    props.validate === 'creado' &&
+    css`
+      text-align: center;
+      background: ${colores.error};
+    `}
+  ${(props) =>
+    props.validate === 'visualizado' &&
+    css`
+      text-align: center;
+      background: ${colores.proceso};
+    `}
+    ${(props) =>
+    props.validate === 'reparado' &&
+    css`
+      text-align: center;
+      background: ${colores.exito};
+    `}
+    ${(props) =>
+    props.validate === 'verificado' &&
+    css`
+      text-align: center;
+      background: ${colores.verificado};
+    `};
+`;
 export {
   DivTable,
   Table,
@@ -554,4 +589,6 @@ export {
   OrdenReparacion,
   ContenedorModalConfirmar,
   OrdenReparacionConfirmar,
+  H5,
+  Grid,
 };

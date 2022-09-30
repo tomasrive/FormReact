@@ -44,15 +44,38 @@ main {
   color: #000;
   margin-top: 5px;
 }
-.grid {
-  display: grid;
-  grid-template-columns: 0.4fr 1fr;
+.sectionh3h5 {
+  text-align: center;
+  background: rgba(128, 128, 128, 0.3);
+  border-radius: 7px;
+  padding: 50px;
 }
+
+.sectionh3h5 h5 {
+  font-size: 14px;
+  margin: 3px 55px 3px 55px;
+  border-radius: 5px;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.sectionh3h5 h3 {
+  font-size: 14px;
+  margin: 7px 0 8px 0;
+}
+
 .GRID {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10%;
   text-align: center;
+}
+
+.contentGrid {
+  margin-bottom: 50px;
+}
+
+.contentGrid h5 {
+  background: rgba(128, 128, 128, 0.4);
 }
 
 .txtColors {
