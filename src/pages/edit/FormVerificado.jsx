@@ -18,7 +18,6 @@ export const FormVerificado = () => {
   const [obser, setObser] = useState({ campo: '', valido: null });
   const [denegar, setDenegar] = useState({ campo: '', valido: null });
   const [formValidate, setFormValidate] = useState(null);
-  const [messageValidate, setMessageValidate] = useState(null);
   const [dataRes, setDataRes] = useState([]);
   const { tabla, id } = useParams();
   const { date, hour } = useDate();
@@ -115,63 +114,61 @@ export const FormVerificado = () => {
 
   const sendData = async () => {
     if (denegar.valido === 'true') {
-      setMessageValidate(true);
-      console.log(messageValidate);
-      // if (tabla === 'maquinas') {
-      //   await axios.put(URI + '/' + tabla, {
-      //     id: id,
-      //     tabla: '/maquinas/',
-      //     fechaCreado: dataRes.fechaCreado,
-      //     horaCreado: dataRes.horaCreado,
-      //     maquinas: dataRes.maquinas,
-      //     lider: dataRes.lider,
-      //     descripcion: dataRes.descripcion,
-      //     liderDenegacion: LiderUser,
-      //     motivoDenegacion: denegar.campo,
-      //     fechaVisualizado: '',
-      //     horaVisualizado: '',
-      //     recibe: '',
+      if (tabla === 'maquinas') {
+        await axios.put(URI + '/' + tabla, {
+          id: id,
+          tabla: '/maquinas/',
+          fechaCreado: dataRes.fechaCreado,
+          horaCreado: dataRes.horaCreado,
+          maquinas: dataRes.maquinas,
+          lider: dataRes.lider,
+          descripcion: dataRes.descripcion,
+          liderDenegacion: LiderUser,
+          motivoDenegacion: denegar.campo,
+          fechaVisualizado: '',
+          horaVisualizado: '',
+          recibe: '',
 
-      //     fechaReparado: '',
-      //     horaReparado: '',
-      //     repara: '',
-      //     observacionesReparar: '',
+          fechaReparado: '',
+          horaReparado: '',
+          repara: '',
+          observacionesReparar: '',
 
-      //     fechaVerificado: '',
-      //     horaVerificado: '',
-      //     verifica: '',
-      //     observacionesVerificar: '',
+          fechaVerificado: '',
+          horaVerificado: '',
+          verifica: '',
+          observacionesVerificar: '',
 
-      //     estado: 'creado',
-      //   });
-      // } else {
-      //   await axios.put(URI + '/' + tabla, {
-      //     id: id,
-      //     tabla: '/moldes/',
-      //     fechaCreado: dataRes.fechaCreado,
-      //     horaCreado: dataRes.horaCreado,
-      //     moldes: dataRes.moldes,
-      //     lider: dataRes.lider,
-      //     descripcion: dataRes.descripcion,
-      //     liderDenegacion: LiderUser,
-      //     motivoDenegacion: denegar.campo,
-      //     fechaVisualizado: '',
-      //     horaVisualizado: '',
-      //     recibe: '',
+          estado: 'creado',
+        });
+      } else {
+        await axios.put(URI + '/' + tabla, {
+          id: id,
+          tabla: '/moldes/',
+          fechaCreado: dataRes.fechaCreado,
+          horaCreado: dataRes.horaCreado,
+          moldes: dataRes.moldes,
+          lider: dataRes.lider,
+          descripcion: dataRes.descripcion,
+          liderDenegacion: LiderUser,
+          motivoDenegacion: denegar.campo,
+          fechaVisualizado: '',
+          horaVisualizado: '',
+          recibe: '',
 
-      //     fechaReparado: '',
-      //     horaReparado: '',
-      //     repara: '',
-      //     observacionesReparar: '',
+          fechaReparado: '',
+          horaReparado: '',
+          repara: '',
+          observacionesReparar: '',
 
-      //     fechaVerificado: '',
-      //     horaVerificado: '',
-      //     verifica: '',
-      //     observacionesVerificar: '',
+          fechaVerificado: '',
+          horaVerificado: '',
+          verifica: '',
+          observacionesVerificar: '',
 
-      //     estado: 'creado',
-      //   });
-      // }
+          estado: 'creado',
+        });
+      }
     }
 
     setObser({ campo: '', valido: null });
@@ -188,7 +185,6 @@ export const FormVerificado = () => {
         denegar={denegar}
         setDenegar={setDenegar}
         send={sendData}
-        messageValidate={messageValidate}
       />
       <Grid>
         <section className='sectionh3h5'>

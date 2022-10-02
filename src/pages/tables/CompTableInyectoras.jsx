@@ -58,8 +58,13 @@ export const CompTableInyectoras = () => {
   }, []);
 
   const getBlogs = async () => {
-    const res = await axios.get(URI);
-    setData(res.data);
+    try {
+      const res = await axios.get(URI);
+      setData(res.data);
+    } catch (error) {
+      console.log(error);
+      alert('BASE DE DATOS NO RESPONDE O ESTA APAGADA, POR FAVOR COMUNICARSE')
+    }
     setInterval(() => {
       window.location.reload();
     }, 600000);
