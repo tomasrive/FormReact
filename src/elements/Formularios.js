@@ -228,7 +228,7 @@ const ContenedorBotonCentrado = styled.div`
   justify-content: center;
   margin: auto;
   margin-top: 15px;
-  gap: 100px;
+  gap: 60px;
   width: 50%;
 `;
 
@@ -335,8 +335,7 @@ const DivOpciones = styled.div`
     props.validate === 'visualizado' &&
     css`
       a:nth-child(1),
-      a:nth-child(3),
-      button:nth-last-child(2) {
+      a:nth-child(3) {
         color: grey !important;
         pointer-events: none;
       }
@@ -345,8 +344,7 @@ const DivOpciones = styled.div`
     props.validate === 'reparado' &&
     css`
       a:nth-child(1),
-      a:nth-child(2),
-      button:nth-last-child(2) {
+      a:nth-child(2) {
         color: grey !important;
         pointer-events: none;
       }
@@ -355,8 +353,7 @@ const DivOpciones = styled.div`
   ${(props) =>
     props.validate === 'verificado' &&
     css`
-      a:nth-child(-n + 4),
-      button:nth-last-child(2) {
+      a:nth-child(-n + 4) {
         color: grey !important;
         pointer-events: none;
       }
@@ -411,6 +408,21 @@ const ContenedorModalConfirmar = styled.div`
     padding: 20px;
   }
 `;
+const ContenedorModalDenegar = styled.div`
+  width: 50%;
+  min-height: 340px;
+  background: ${colores.white};
+  position: relative;
+  border-radius: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 30px;
+
+  @media (min-width: 480px) and (max-width: 1400px) {
+    width: 50%;
+    height: 40vh;
+    padding: 20px;
+  }
+`;
 
 const EncabezadoModal = styled.div`
   display: flex;
@@ -438,9 +450,9 @@ const BotonCerrar = styled.button`
   position: absolute;
   background: ${colores.black};
   right: 20px;
-  top: 20px;
-  width: 50px;
-  height: 50px;
+  top: 10px;
+  width: 60px;
+  height: 60px;
   background: none;
   border: none;
   cursor: pointer;
@@ -461,6 +473,7 @@ const OrdenReparacion = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 20px;
   font-size: 15px;
+
   h4,
   h5 {
     margin: 5px;
@@ -471,8 +484,12 @@ const OrdenReparacion = styled.div`
     min-height: 40px;
     padding: 10px;
     background: #f2f2f2;
+    inline-size: 240px;
+    overflow-wrap: break-word;
   }
-
+  & > div {
+    overflow-wrap: break-word;
+  }
   ${(props) =>
     props.validate === 'creado' &&
     css`
@@ -531,7 +548,7 @@ const Grid = styled.div`
   grid-template-columns: 0.8fr 1fr;
   align-items: center;
   height: 90vh;
-  padding: 20px;
+  padding: 10px;
 `;
 
 const H5 = styled.h5`
@@ -591,4 +608,5 @@ export {
   OrdenReparacionConfirmar,
   H5,
   Grid,
+  ContenedorModalDenegar,
 };

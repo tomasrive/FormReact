@@ -1,4 +1,4 @@
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import {
   Formulario,
@@ -38,8 +38,9 @@ export const FormCreateInyectoras = () => {
     mensaje: /^[a-zA-Z0-9À-ÿ\s]{3,200}$/,
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
+    console.log(e);
     if (maquinas.valido === 'true' && message.valido === 'true') {
       setStateModal(!stateModal);
       setDataModal({
@@ -52,6 +53,7 @@ export const FormCreateInyectoras = () => {
       });
     } else {
       setFormValidate(false);
+      console.log(formValidate);
     }
   };
   const sendData = async () => {
@@ -140,7 +142,9 @@ export const FormCreateInyectoras = () => {
           <Link to='/CompTableInyectoras'>
             <BotonInicio type='submit'>Cancelar</BotonInicio>
           </Link>
-          <Boton type='submit'>Enviar</Boton>
+          <Boton type='submit'>
+            Enviar
+          </Boton>
         </ContenedorBotonCentrado>
       </Formulario>
     </>

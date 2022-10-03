@@ -5,8 +5,9 @@ import {
   Boton,
   H5,
   Grid,
+  BotonInicio,
 } from '../../elements/Formularios';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDate } from '../../elements/useDate';
 import { CompDate, CompInput, CompMessage } from '../../Components';
@@ -40,8 +41,8 @@ export const FormVerificado = () => {
   };
 
   const expresiones = {
-    observ: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
-    mensaje: /^[a-zA-Z0-9À-ÿ\s]{5,200}$/,
+    observ: /^[a-zA-ZÀ-ÿ\s]{3,150}$/,
+    mensaje: /^[a-zA-Z0-9À-ÿ\s]{5,150}$/,
   };
 
   const onSubmit = async (e) => {
@@ -109,7 +110,11 @@ export const FormVerificado = () => {
 
   const ordenDenegada = (e) => {
     e.preventDefault();
-    setStateModal(!stateModal);
+    if (obser.valido !== 'true') {
+      setStateModal(!stateModal);
+    } else {
+      alert('Debe borrar los datos para denegar la orden');
+    }
   };
 
   const sendData = async () => {
@@ -172,9 +177,8 @@ export const FormVerificado = () => {
     }
 
     setObser({ campo: '', valido: null });
-    setStateModal(!stateModal);
-    // await timeout(2000);
-    // window.location.replace('/');
+    await timeout(2000);
+    window.location.replace('/');
   };
 
   return (
@@ -195,8 +199,19 @@ export const FormVerificado = () => {
                 <h5>{dataRes.fechaCreado}</h5>
                 <h3>HORA CREADO</h3>
                 <h5>{dataRes.horaCreado}</h5>
-                <h3>MAQUINAS</h3>
-                <h5>{dataRes.maquinas}</h5>
+
+                {dataRes.tabla === 'moldes' ? (
+                  <>
+                    <h3>MOLDE</h3>
+                    <h5>{dataRes.molde}</h5>
+                  </>
+                ) : (
+                  <>
+                    <h3>MAQUINA</h3>
+                    <h5>{dataRes.maquinas}</h5>
+                  </>
+                )}
+
                 <h3>LIDER</h3>
                 <h5>{dataRes.lider}</h5>
                 <h3>DESCRIPCION</h3>
@@ -251,9 +266,10 @@ export const FormVerificado = () => {
           <CompMessage verif={formValidate} />
 
           <ContenedorBotonCentrado>
-            <Boton type='submit' onClick={ordenDenegada}>
-              Denegar
-            </Boton>
+            <Link to='/'>
+              <BotonInicio type='submit'>Cancelar</BotonInicio>
+            </Link>
+            <Boton onClick={ordenDenegada}>Denegar</Boton>
             <Boton type='submit'>Verificado</Boton>
           </ContenedorBotonCentrado>
         </Formulario>

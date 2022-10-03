@@ -8,25 +8,23 @@ import { MensajeError, MensajeExito } from '../elements/Formularios';
 export const CompMessage = ({ verif }) => {
   return (
     <>
-      {verif === false ||
-        (verif === 'false' && (
-          <MensajeError>
-            <span>
-              <FontAwesomeIcon icon={faExclamationTriangle} />
-              <b>Error:</b> Por favor rellene el formulario correctamente.
-            </span>
-          </MensajeError>
-        ))}
+      {verif === false && (
+        <MensajeError>
+          <span>
+            <FontAwesomeIcon icon={faExclamationTriangle} />
+            <b>Error:</b> Por favor rellene el formulario correctamente.
+          </span>
+        </MensajeError>
+      )}
 
-      {verif === true ||
-        (verif === 'true' && (
-          <MensajeExito>
-            <span>
-              <FontAwesomeIcon icon={faCheck} />
-              <b>Exito:</b> Formulario enviado exitosamente!
-            </span>
-          </MensajeExito>
-        ))}
+      {verif === true && (
+        <MensajeExito>
+          <span>
+            <FontAwesomeIcon icon={faCheck} />
+            <b>Exito:</b> Formulario enviado exitosamente!
+          </span>
+        </MensajeExito>
+      )}
     </>
   );
 };

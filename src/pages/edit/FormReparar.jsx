@@ -43,7 +43,6 @@ export const FormReparar = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
     if (obser.valido === 'true') {
       setFormValidate(true);
       if (tabla === 'moldes') {
@@ -115,8 +114,19 @@ export const FormReparar = () => {
               <div>
                 <h3>FECHA CREADO</h3>
                 <h5>{dataRes.fechaCreado}</h5>
-                <h3>MAQUINAS</h3>
-                <h5>{dataRes.maquinas}</h5>
+
+                {dataRes.tabla === 'moldes' ? (
+                  <>
+                    <h3>MOLDE</h3>
+                    <h5>{dataRes.molde}</h5>
+                  </>
+                ) : (
+                  <>
+                    <h3>MAQUINA</h3>
+                    <h5>{dataRes.maquinas}</h5>
+                  </>
+                )}
+
                 <h3>FECHA VISUALIZADO</h3>
                 <h5>{dataRes.fechaVisualizado}</h5>
                 <h3>RECIBE</h3>
@@ -134,8 +144,10 @@ export const FormReparar = () => {
               </div>
             </div>
           </div>
-          <h3>ESTADO</h3>
-          <H5 validate={dataRes.estado}>{dataRes.estado}</H5>
+          <div>
+            <h3>ESTADO</h3>
+            <H5 validate={dataRes.estado}>{dataRes.estado}</H5>
+          </div>
         </section>
         <Formulario action='' onSubmit={onSubmit}>
           <h1>Pieza "{id}" (REPARACION)</h1>

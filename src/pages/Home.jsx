@@ -7,8 +7,8 @@ import {
 export const Home = () => {
   // Usuario de Session Storage de ejemplo
   if (typeof Storage != 'undefined') {
-    // let LiderUser = 'Fabian Gomez';
-    let LiderUser = 'Lucas Martinez';
+    let LiderUser = 'Fabian Gomez';
+    // let LiderUser = 'Lucas Martinez';
     sessionStorage.setItem('LiderUser', LiderUser);
   }
 

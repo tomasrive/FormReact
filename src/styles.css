@@ -48,20 +48,20 @@ main {
   text-align: center;
   background: rgba(128, 128, 128, 0.3);
   border-radius: 7px;
-  padding: 50px;
+  padding: 30px;
 }
 
 .sectionh3h5 h5 {
   font-size: 14px;
-  margin: 3px 55px 3px 55px;
+  margin: 0 30px 5px 30px;
   border-radius: 5px;
-  padding: 5px;
+  padding: 8px;
   border-radius: 4px;
 }
 
 .sectionh3h5 h3 {
   font-size: 14px;
-  margin: 7px 0 8px 0;
+  margin: 12px 0 3px 0;
 }
 
 .GRID {
@@ -70,6 +70,7 @@ main {
   text-align: center;
 }
 
+
 .contentGrid {
   margin-bottom: 50px;
 }
@@ -77,7 +78,10 @@ main {
 .contentGrid h5 {
   background: rgba(128, 128, 128, 0.4);
 }
-
+.lastDiv {
+  display: flex;
+  margin: 0;
+}
 .txtColors {
   position: absolute;
   display: grid;
@@ -144,7 +148,6 @@ main {
 }
 
 .table-fill {
-  border-radius: 3px;
   border-collapse: collapse;
   max-height: 250px;
   margin: auto;
@@ -188,17 +191,16 @@ tbody tr {
   table-layout: fixed;
 }
 thead {
-  width: calc(100% - 1em);
+  width: calc(100% - 0.7em);
 }
 
 th {
-  border: none;
-  background: #7f8488;
+  background: #a2a8ad;
   font-size: 16px;
   font-weight: 500;
   padding: 8px;
   text-align: center;
-  border: 2px solid #c1c3d1;
+  border: 2px solid #6b6c74;
 }
 
 tr {
@@ -375,10 +377,16 @@ ul {
   display: grid;
   grid-template-columns: 150px 200px;
   align-items: center;
+  margin: 15px 0 12px 0;
+}
+.divGrid h4,
+.divGrid h5 {
+  margin: 0;
 }
 .divGrid h5 {
   border-radius: 5px;
-  min-height: 40px;
+  min-height: 30px;
   padding: 10px;
   background: #f2f2f2;
+  font-size: 16px;
 }

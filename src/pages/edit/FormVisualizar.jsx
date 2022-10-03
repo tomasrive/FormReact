@@ -32,6 +32,7 @@ export const FormVisualizar = () => {
 
   const a = async () => {
     const res = await axios.get(URI + '/' + tabla);
+    console.log(res.data);
     const result = res.data.filter((idDB) => idDB.id === id);
     setDataRes(result[0]);
   };
@@ -110,17 +111,25 @@ export const FormVisualizar = () => {
               <div>
                 <h3>HORA CREADO</h3>
                 <h5>{dataRes.horaCreado}</h5>
-                <h3>MAQUINAS</h3>
-                <h5>{dataRes.maquinas}</h5>
+
+                {dataRes.tabla === '/moldes/' ? (
+                  <>
+                    <h3>MOLDES</h3>
+                    <h5>{dataRes.moldes}</h5>
+                  </>
+                ) : (
+                  <>
+                    <h3>MAQUINAS</h3>
+                    <h5>{dataRes.maquinas}</h5>
+                  </>
+                )}
               </div>
             </div>
             <h3>DESCRIPCION</h3>
             <h5>{dataRes.descripcion}</h5>
           </div>
-          <div>
-            <h3>ESTADO</h3>
-            <H5 validate={dataRes.estado}>{dataRes.estado}</H5>
-          </div>
+          <h3>ESTADO</h3>
+          <H5 validate={dataRes.estado}>{dataRes.estado}</H5>
         </section>
 
         <Formulario action='' onSubmit={onSubmit}>

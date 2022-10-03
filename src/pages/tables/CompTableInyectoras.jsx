@@ -63,7 +63,7 @@ export const CompTableInyectoras = () => {
       setData(res.data);
     } catch (error) {
       console.log(error);
-      alert('BASE DE DATOS NO RESPONDE O ESTA APAGADA, POR FAVOR COMUNICARSE')
+      alert('BASE DE DATOS NO RESPONDE O SE ENCUENTRA APAGADA, POR FAVOR COMUNICARSE CON EL AREA')
     }
     setInterval(() => {
       window.location.reload();

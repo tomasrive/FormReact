@@ -77,10 +77,12 @@ export const CompModal = ({ dataTable, state, setState }) => {
                 <h4>Quien lo verifica</h4>
                 <h5>{dataTable.verifica}</h5>
                 <h4>Observaciones en la verificacion</h4>
-                <h5>{dataTable.observacionesVerificar}</h5>
+                <div>
+                  <h5>{dataTable.observacionesVerificar}</h5>
+                </div>
               </div>
 
-              <h4>Estado actual de la pieza</h4>
+              <h4>Estado actual de la pieza:</h4>
               <h5>{dataTable.estado.toUpperCase()}</h5>
             </OrdenReparacion>
           </ContenedorModal>

@@ -60,6 +60,9 @@ export const CompInput = ({
       } else {
         InputSetState({ ...InputState, valido: 'false' });
       }
+      if (InputState.campo === '') {
+        InputSetState({ ...InputState, valido: null });
+      }
     }
   };
 

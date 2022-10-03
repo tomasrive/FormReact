@@ -1,7 +1,7 @@
 import {
   Boton,
   ContenedorBotonCentrado,
-  ContenedorModalConfirmar,
+  ContenedorModalDenegar,
   EncabezadoModal,
   Overlay,
 } from '../elements/Formularios';
@@ -22,7 +22,7 @@ export const CompDenegado = ({
     <>
       {state && (
         <Overlay>
-          <ContenedorModalConfirmar>
+          <ContenedorModalDenegar>
             <EncabezadoModal>
               <h1>Orden denegada: Motivo</h1>
               <span className='spanConfirm'>
@@ -54,7 +54,7 @@ export const CompDenegado = ({
                 Enviar
               </Boton>
             </ContenedorBotonCentrado>
-          </ContenedorModalConfirmar>
+          </ContenedorModalDenegar>
         </Overlay>
       )}
     </>
