@@ -22,7 +22,7 @@ export const CompTableInyectoras = () => {
   const [stateModal, setStateModal] = useState(false);
   const [dataModal, setDataModal] = useState({
     id: '',
-    tabla: '/maquinas/',
+    tabla: 'maquinas',
     fechaCreado: '',
     horaCreado: '',
     maquinas: '',
@@ -44,26 +44,28 @@ export const CompTableInyectoras = () => {
 
   const modal = (dataTable) => {
     setStateModal(!stateModal);
+    console.log(dataTable);
     setDataModal(dataTable);
   };
 
   const deleteRow = async (dataTable) => {
-    window.location.reload();
-    console.log(URI + '/' + dataTable.id);
     await axios.delete(URI + '/' + dataTable.id);
+    window.location.reload();
   };
 
   useEffect(() => {
-    getBlogs();
+    getData();
   }, []);
 
-  const getBlogs = async () => {
+  const getData = async () => {
     try {
       const res = await axios.get(URI);
       setData(res.data);
     } catch (error) {
       console.log(error);
-      alert('BASE DE DATOS NO RESPONDE O SE ENCUENTRA APAGADA, POR FAVOR COMUNICARSE CON EL AREA')
+      alert(
+        'BASE DE DATOS NO RESPONDE O SE ENCUENTRA APAGADA, POR FAVOR COMUNICARSE CON EL AREA'
+      );
     }
     setInterval(() => {
       window.location.reload();
@@ -104,12 +106,13 @@ export const CompTableInyectoras = () => {
           <div className='coloresTable'>
             <div className='rojo'></div>
             <p>CREADO</p>
-            <div className='amarillo'></div>
-            <p>VISUALIZADO</p>
-          </div>
-          <div className='coloresTable'>
             <div className='verde'></div>
             <p>REPARADO</p>
+          </div>
+          <div className='coloresTable'>
+            <div className='amarillo'></div>
+            <p>VISUALIZADO</p>
+
             <div className='azul'></div>
             <p>VERIFICADO</p>
           </div>
@@ -124,7 +127,7 @@ export const CompTableInyectoras = () => {
               <div>
                 <FontAwesomeIcon className='linkMedia' icon={faEye} />
               </div>
-              <p>CREADO</p>
+              <p>VISUALIZAR</p>
               <div>
                 <FontAwesomeIcon
                   className='linkMedia'

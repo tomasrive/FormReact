@@ -18,7 +18,7 @@ export const CompRow = ({ dataTable, liderSesion, modal, deleteRow }) => {
         {dataTable.horaCreado}
       </td>
       {dataTable.tabla === '/maquinas/' || dataTable.tabla === 'maquinas' ? (
-        <td>{dataTable.maquinas}</td>
+        <td>{dataTable.maquina}</td>
       ) : (
         <td>{dataTable.molde}</td>
       )}
@@ -45,7 +45,7 @@ export const CompRow = ({ dataTable, liderSesion, modal, deleteRow }) => {
           {liderSesion !== null ? (
             <>
               <Link
-                to={`/FormVisualizar${dataTable.tabla}${dataTable.id}`}
+                to={`/FormVisualizar/${dataTable.tabla}/${dataTable.id}`}
                 title='Visualizar'
               >
                 <FontAwesomeIcon className='linkMedia' icon={faEye} />

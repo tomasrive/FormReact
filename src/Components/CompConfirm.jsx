@@ -39,7 +39,7 @@ export const CompConfirm = ({ dataTable, state, setState, send }) => {
                   ) : (
                     <>
                       <h4>Maquina:</h4>
-                      <h5>{dataTable.maquinas}</h5>
+                      <h5>{dataTable.maquina}</h5>
                     </>
                   )}
                 </section>

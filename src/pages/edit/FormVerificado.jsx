@@ -10,8 +10,12 @@ import {
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDate } from '../../elements/useDate';
-import { CompDate, CompInput, CompMessage } from '../../Components';
-import { CompDenegado } from '../../Components/CompDenegado';
+import {
+  CompDate,
+  CompInput,
+  CompMessage,
+  CompDenegado,
+} from '../../Components';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms';
 
@@ -25,16 +29,16 @@ export const FormVerificado = () => {
   const [stateModal, setStateModal] = useState(false);
   const LiderUser = sessionStorage.getItem('LiderUser');
 
+  useEffect(() => {
+    getData();
+    // eslint-disable-next-line
+  }, []);
+
   function timeout(delay) {
     return new Promise((res) => setTimeout(res, delay));
   }
 
-  useEffect(() => {
-    a();
-    // eslint-disable-next-line
-  }, []);
-
-  const a = async () => {
+  const getData = async () => {
     const res = await axios.get(URI + '/' + tabla);
     const result = res.data.filter((idDB) => idDB.id === id);
     setDataRes(result[0]);
@@ -119,17 +123,22 @@ export const FormVerificado = () => {
 
   const sendData = async () => {
     if (denegar.valido === 'true') {
+      if (dataRes.fechaDenegado) {
+        console.log('aasdasd');
+      }
       if (tabla === 'maquinas') {
         await axios.put(URI + '/' + tabla, {
           id: id,
-          tabla: '/maquinas/',
+          tabla: 'maquinas',
           fechaCreado: dataRes.fechaCreado,
           horaCreado: dataRes.horaCreado,
-          maquinas: dataRes.maquinas,
+          maquina: dataRes.maquinas,
           lider: dataRes.lider,
           descripcion: dataRes.descripcion,
-          liderDenegacion: LiderUser,
-          motivoDenegacion: denegar.campo,
+          fechaDenegado: date,
+          horaDenegado: hour,
+          liderDenegado: LiderUser,
+          motivoDenegado: denegar.campo,
           fechaVisualizado: '',
           horaVisualizado: '',
           recibe: '',
@@ -149,12 +158,14 @@ export const FormVerificado = () => {
       } else {
         await axios.put(URI + '/' + tabla, {
           id: id,
-          tabla: '/moldes/',
+          tabla: 'moldes',
           fechaCreado: dataRes.fechaCreado,
           horaCreado: dataRes.horaCreado,
-          moldes: dataRes.moldes,
+          molde: dataRes.moldes,
           lider: dataRes.lider,
           descripcion: dataRes.descripcion,
+          fechaDenegado: date,
+          horaDenegado: hour,
           liderDenegacion: LiderUser,
           motivoDenegacion: denegar.campo,
           fechaVisualizado: '',
@@ -174,11 +185,10 @@ export const FormVerificado = () => {
           estado: 'creado',
         });
       }
+      setObser({ campo: '', valido: null });
+      await timeout(2000);
+      window.location.replace('/');
     }
-
-    setObser({ campo: '', valido: null });
-    await timeout(2000);
-    window.location.replace('/');
   };
 
   return (
@@ -208,7 +218,7 @@ export const FormVerificado = () => {
                 ) : (
                   <>
                     <h3>MAQUINA</h3>
-                    <h5>{dataRes.maquinas}</h5>
+                    <h5>{dataRes.maquina}</h5>
                   </>
                 )}
 
@@ -266,9 +276,15 @@ export const FormVerificado = () => {
           <CompMessage verif={formValidate} />
 
           <ContenedorBotonCentrado>
-            <Link to='/'>
-              <BotonInicio type='submit'>Cancelar</BotonInicio>
-            </Link>
+            {dataRes.tabla === 'moldes' ? (
+              <Link to='/CompTableMatriceria'>
+                <BotonInicio type='submit'>Atras</BotonInicio>
+              </Link>
+            ) : (
+              <Link to='/CompTableManInyectoras'>
+                <BotonInicio type='submit'>Atras</BotonInicio>
+              </Link>
+            )}
             <Boton onClick={ordenDenegada}>Denegar</Boton>
             <Boton type='submit'>Verificado</Boton>
           </ContenedorBotonCentrado>

@@ -8,8 +8,12 @@ import {
 } from '../../elements/Formularios';
 import axios from 'axios';
 import { useDate } from '../../elements/useDate';
-import { CompMessage, CompInput, CompDate } from '../../Components';
-import { CompConfirm } from '../../Components/CompConfirm';
+import {
+  CompMessage,
+  CompInput,
+  CompDate,
+  CompConfirm,
+} from '../../Components';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/maquinas';
 
@@ -46,10 +50,10 @@ export const FormCreateInyectoras = () => {
       setDataModal({
         fechaCreado: date,
         horaCreado: hour,
-        maquinas: maquinas.campo,
+        maquina: maquinas.campo,
         lider: LiderUser,
         descripcion: message.campo,
-        tabla: '/maquinas/',
+        tabla: 'maquinas',
       });
     } else {
       setFormValidate(false);
@@ -62,10 +66,10 @@ export const FormCreateInyectoras = () => {
     setFormValidate(true);
     await axios.post(URI, {
       id: maquinas.campo + year + mes + dia + hora + min,
-      tabla: '/maquinas/',
+      tabla: 'maquinas',
       fechaCreado: date,
       horaCreado: hour,
-      maquinas: maquinas.campo,
+      maquina: maquinas.campo,
       lider: LiderUser,
       descripcion: message.campo,
 
@@ -142,9 +146,7 @@ export const FormCreateInyectoras = () => {
           <Link to='/CompTableInyectoras'>
             <BotonInicio type='submit'>Cancelar</BotonInicio>
           </Link>
-          <Boton type='submit'>
-            Enviar
-          </Boton>
+          <Boton type='submit'>Enviar</Boton>
         </ContenedorBotonCentrado>
       </Formulario>
     </>

@@ -22,16 +22,16 @@ export const FormReparar = () => {
   const { date, hour } = useDate();
   const LiderUser = sessionStorage.getItem('LiderUser');
 
+  useEffect(() => {
+    getData();
+    // eslint-disable-next-line
+  }, []);
+
   function timeout(delay) {
     return new Promise((res) => setTimeout(res, delay));
   }
 
-  useEffect(() => {
-    a();
-    // eslint-disable-next-line
-  }, []);
-
-  const a = async () => {
+  const getData = async () => {
     const res = await axios.get(URI + '/' + tabla);
     const result = res.data.filter((idDB) => idDB.id === id);
     setDataRes(result[0]);
@@ -73,7 +73,7 @@ export const FormReparar = () => {
           tabla: tabla,
           fechaCreado: dataRes.fechaCreado,
           horaCreado: dataRes.horaCreado,
-          maquinas: dataRes.maquinas,
+          maquina: dataRes.maquinas,
           lider: dataRes.lider,
           descripcion: dataRes.descripcion,
           fechaVisualizado: dataRes.fechaVisualizado,
@@ -123,7 +123,7 @@ export const FormReparar = () => {
                 ) : (
                   <>
                     <h3>MAQUINA</h3>
-                    <h5>{dataRes.maquinas}</h5>
+                    <h5>{dataRes.maquina}</h5>
                   </>
                 )}
 
@@ -176,9 +176,15 @@ export const FormReparar = () => {
           <CompMessage verif={formValidate} />
 
           <ContenedorBotonCentrado>
-            <Link to='/'>
-              <BotonInicio type='submit'>Cancelar</BotonInicio>
-            </Link>
+            {dataRes.tabla === 'moldes' ? (
+              <Link to='/CompTableMatriceria'>
+                <BotonInicio type='submit'>Atras</BotonInicio>
+              </Link>
+            ) : (
+              <Link to='/CompTableManInyectoras'>
+                <BotonInicio type='submit'>Atras</BotonInicio>
+              </Link>
+            )}
             <Boton type='submit'>Reparado</Boton>
           </ContenedorBotonCentrado>
         </Formulario>

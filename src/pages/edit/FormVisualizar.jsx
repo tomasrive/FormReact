@@ -21,16 +21,16 @@ export const FormVisualizar = () => {
   const { date, hour } = useDate();
   const LiderUser = sessionStorage.getItem('LiderUser');
 
+  useEffect(() => {
+    getData();
+    // eslint-disable-next-line
+  }, []);
+
   function timeout(delay) {
     return new Promise((res) => setTimeout(res, delay));
   }
 
-  useEffect(() => {
-    a();
-    // eslint-disable-next-line
-  }, []);
-
-  const a = async () => {
+  const getData = async () => {
     const res = await axios.get(URI + '/' + tabla);
     console.log(res.data);
     const result = res.data.filter((idDB) => idDB.id === id);
@@ -112,15 +112,15 @@ export const FormVisualizar = () => {
                 <h3>HORA CREADO</h3>
                 <h5>{dataRes.horaCreado}</h5>
 
-                {dataRes.tabla === '/moldes/' ? (
+                {dataRes.tabla === 'moldes' ? (
                   <>
                     <h3>MOLDES</h3>
-                    <h5>{dataRes.moldes}</h5>
+                    <h5>{dataRes.molde}</h5>
                   </>
                 ) : (
                   <>
                     <h3>MAQUINAS</h3>
-                    <h5>{dataRes.maquinas}</h5>
+                    <h5>{dataRes.maquina}</h5>
                   </>
                 )}
               </div>
@@ -148,9 +148,15 @@ export const FormVisualizar = () => {
           <CompMessage verif={formValidate} />
 
           <ContenedorBotonCentrado>
-            <Link to='/'>
-              <BotonInicio type='submit'>Denegar</BotonInicio>
-            </Link>
+            {dataRes.tabla === 'moldes' ? (
+              <Link to='/CompTableMatriceria'>
+                <BotonInicio type='submit'>Atras</BotonInicio>
+              </Link>
+            ) : (
+              <Link to='/CompTableManInyectoras'>
+                <BotonInicio type='submit'>Atras</BotonInicio>
+              </Link>
+            )}
             <Boton type='submit'>Visualizado</Boton>
           </ContenedorBotonCentrado>
         </Formulario>

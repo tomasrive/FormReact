@@ -8,8 +8,7 @@ import {
 } from '../../elements/Formularios';
 import axios from 'axios';
 import { useDate } from '../../elements/useDate';
-import { CompDate, CompMessage, CompInput } from '../../Components';
-import { CompConfirm } from '../../Components/CompConfirm';
+import { CompDate, CompMessage, CompInput,CompConfirm } from '../../Components';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/moldes';
 
@@ -48,7 +47,7 @@ export const FormCreateMatriceria = () => {
         molde: molde.campo,
         lider: LiderUser,
         descripcion: message.campo,
-        tabla: '/moldes/',
+        tabla: 'moldes',
       });
     } else {
       setFormValidate(false);
@@ -61,7 +60,7 @@ export const FormCreateMatriceria = () => {
     setFormValidate(true);
     await axios.post(URI, {
       id: molde.campo + year + mes + dia + hora + min,
-      tabla: '/moldes/',
+      tabla: 'moldes',
       fechaCreado: date,
       horaCreado: hour,
       molde: molde.campo,
