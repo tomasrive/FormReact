@@ -45,58 +45,42 @@ export const FormVerificado = () => {
   };
 
   const expresiones = {
-    observ: /^[a-zA-ZÀ-ÿ\s]{3,150}$/,
-    mensaje: /^[a-zA-Z0-9À-ÿ\s]{5,150}$/,
+    observ: /^[a-zA-Z0-9À-ÿ\s^.,]{3,150}$/,
+    mensaje: /^[a-zA-Z0-9À-ÿ\s^.,]{3,150}$/,
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    let data = {
+      id: id,
+      tabla: tabla,
+      fechaCreado: dataRes.fechaCreado,
+      horaCreado: dataRes.horaCreado,
+      lider: dataRes.lider,
+      descripcion: dataRes.descripcion,
+      fechaVisualizado: dataRes.fechaVisualizado,
+      horaVisualizado: dataRes.horaVisualizado,
+      recibe: dataRes.recibe,
+      fechaReparado: dataRes.fechaReparado,
+      horaReparado: dataRes.horaReparado,
+      repara: dataRes.repara,
+      observacionesReparar: dataRes.observacionesReparar,
+      fechaVerificado: date,
+      horaVerificado: hour,
+      verifica: LiderUser,
+      observacionesVerificar: obser.campo,
+      estado: 'verificado',
+    };
+
     if (obser.valido === 'true') {
       setFormValidate(true);
       if (tabla === 'moldes') {
-        await axios.put(URI + '/' + tabla, {
-          id: id,
-          tabla: tabla,
-          fechaCreado: dataRes.fechaCreado,
-          horaCreado: dataRes.horaCreado,
-          molde: dataRes.molde,
-          lider: dataRes.lider,
-          descripcion: dataRes.descripcion,
-          fechaVisualizado: dataRes.fechaVisualizado,
-          horaVisualizado: dataRes.horaVisualizado,
-          recibe: dataRes.recibe,
-          fechaReparado: dataRes.fechaReparado,
-          horaReparado: dataRes.horaReparado,
-          repara: dataRes.repara,
-          observacionesReparar: dataRes.observacionesReparar,
-          fechaVerificado: date,
-          horaVerificado: hour,
-          verifica: LiderUser,
-          observacionesVerificar: obser.campo,
-          estado: 'verificado',
-        });
+        data.molde = dataRes.moldes;
+        await axios.put(URI + '/' + tabla, data);
       } else {
-        await axios.put(URI + '/' + tabla, {
-          id: id,
-          tabla: tabla,
-          fechaCreado: dataRes.fechaCreado,
-          horaCreado: dataRes.horaCreado,
-          maquinas: dataRes.maquinas,
-          lider: dataRes.lider,
-          descripcion: dataRes.descripcion,
-          fechaVisualizado: dataRes.fechaVisualizado,
-          horaVisualizado: dataRes.horaVisualizado,
-          recibe: dataRes.recibe,
-          fechaReparado: dataRes.fechaReparado,
-          horaReparado: dataRes.horaReparado,
-          repara: dataRes.repara,
-          observacionesReparar: dataRes.observacionesReparar,
-          fechaVerificado: date,
-          horaVerificado: hour,
-          verifica: LiderUser,
-          observacionesVerificar: obser.campo,
-          estado: 'verificado',
-        });
+        data.maquina = dataRes.maquinas;
+        await axios.put(URI + '/' + tabla, data);
       }
 
       setObser({ campo: '', valido: null });
@@ -122,72 +106,95 @@ export const FormVerificado = () => {
   };
 
   const sendData = async () => {
+    let data = {
+      id: id,
+      tabla: tabla,
+      fechaCreado: dataRes.fechaCreado,
+      horaCreado: dataRes.horaCreado,
+      lider: dataRes.lider,
+      descripcion: dataRes.descripcion,
+
+      primeraFechaDenegado: date,
+      primeraHoraDenegado: hour,
+      primerLiderDenegado: LiderUser,
+      primerMotivoDenegado: denegar.campo,
+
+      fechaVisualizado: '',
+      horaVisualizado: '',
+      recibe: '',
+
+      fechaReparado: '',
+      horaReparado: '',
+      repara: '',
+      observacionesReparar: '',
+
+      fechaVerificado: '',
+      horaVerificado: '',
+      verifica: '',
+      observacionesVerificar: '',
+
+      estado: 'creado',
+    };
+
     if (denegar.valido === 'true') {
-      if (dataRes.fechaDenegado) {
-        console.log('aasdasd');
-      }
-      if (tabla === 'maquinas') {
-        await axios.put(URI + '/' + tabla, {
-          id: id,
-          tabla: 'maquinas',
-          fechaCreado: dataRes.fechaCreado,
-          horaCreado: dataRes.horaCreado,
-          maquina: dataRes.maquinas,
-          lider: dataRes.lider,
-          descripcion: dataRes.descripcion,
-          fechaDenegado: date,
-          horaDenegado: hour,
-          liderDenegado: LiderUser,
-          motivoDenegado: denegar.campo,
-          fechaVisualizado: '',
-          horaVisualizado: '',
-          recibe: '',
+      if (dataRes.primeraFechaDenegado) {
+        data.primeraFechaDenegado = dataRes.fechaDenegado;
+        data.primeraHoraDenegado = dataRes.horaDenegado;
+        data.primerLiderDenegado = dataRes.liderDenegado;
+        data.primerMotivoDenegado = dataRes.motivoDenegado;
 
-          fechaReparado: '',
-          horaReparado: '',
-          repara: '',
-          observacionesReparar: '',
+        data.segundaFechaDenegado = date;
+        data.segundaHoraDenegado = hour;
+        data.segundoLiderDenegado = LiderUser;
+        data.segundoMotivoDenegado = denegar.campo;
 
-          fechaVerificado: '',
-          horaVerificado: '',
-          verifica: '',
-          observacionesVerificar: '',
+        if (dataRes.segundaFechaDenegado) {
+          data.primeraFechaDenegado = dataRes.fechaDenegado;
+          data.primeraHoraDenegado = dataRes.horaDenegado;
+          data.primerLiderDenegado = dataRes.liderDenegado;
+          data.primerMotivoDenegado = dataRes.motivoDenegado;
 
-          estado: 'creado',
-        });
+          data.segundaFechaDenegado = dataRes.segundaFechaDenegado;
+          data.segundaHoraDenegado = dataRes.segundaHoraDenegado;
+          data.segundoLiderDenegado = dataRes.segundoLiderDenegado;
+          data.segundoMotivoDenegado = dataRes.segundoMotivoDenegado;
+
+          data.terceraFechaDenegado = date;
+          data.terceraHoraDenegado = hour;
+          data.tercerLiderDenegado = LiderUser;
+          data.tercerMotivoDenegado = denegar.campo;
+
+          if (tabla === 'maquinas') {
+            data.maquina = dataRes.maquinas;
+            await axios.put(URI + '/' + tabla, data);
+          } else {
+            data.molde = dataRes.moldes;
+            await axios.put(URI + '/' + tabla, data);
+          }
+        }
+
+        if (tabla === 'maquinas') {
+          data.maquina = dataRes.maquinas;
+          await axios.put(URI + '/' + tabla, data);
+        } else {
+          data.molde = dataRes.moldes;
+          await axios.put(URI + '/' + tabla, data);
+        }
       } else {
-        await axios.put(URI + '/' + tabla, {
-          id: id,
-          tabla: 'moldes',
-          fechaCreado: dataRes.fechaCreado,
-          horaCreado: dataRes.horaCreado,
-          molde: dataRes.moldes,
-          lider: dataRes.lider,
-          descripcion: dataRes.descripcion,
-          fechaDenegado: date,
-          horaDenegado: hour,
-          liderDenegacion: LiderUser,
-          motivoDenegacion: denegar.campo,
-          fechaVisualizado: '',
-          horaVisualizado: '',
-          recibe: '',
-
-          fechaReparado: '',
-          horaReparado: '',
-          repara: '',
-          observacionesReparar: '',
-
-          fechaVerificado: '',
-          horaVerificado: '',
-          verifica: '',
-          observacionesVerificar: '',
-
-          estado: 'creado',
-        });
+        if (tabla === 'maquinas') {
+          data.maquina = dataRes.maquinas;
+          await axios.put(URI + '/' + tabla, data);
+        } else {
+          data.molde = dataRes.moldes;
+          await axios.put(URI + '/' + tabla, data);
+        }
       }
+
       setObser({ campo: '', valido: null });
       await timeout(2000);
       window.location.replace('/');
+    } else {
+      alert('Completar datos');
     }
   };
 
@@ -222,9 +229,9 @@ export const FormVerificado = () => {
                   </>
                 )}
 
-                <h3>LIDER</h3>
+                <h3>LIDER QUE CREO LA ORDEN</h3>
                 <h5>{dataRes.lider}</h5>
-                <h3>DESCRIPCION</h3>
+                <h3>PROBLEMA</h3>
                 <h5>{dataRes.descripcion}</h5>
                 <h3>FECHA VISUALIZADO</h3>
                 <h5>{dataRes.fechaVisualizado}</h5>
@@ -232,15 +239,15 @@ export const FormVerificado = () => {
               <div>
                 <h3>HORA VISUALIZADO</h3>
                 <h5>{dataRes.horaVisualizado}</h5>
-                <h3>RECIBE</h3>
+                <h3>QUIEN RECIBIO LA ORDEN</h3>
                 <h5>{dataRes.recibe}</h5>
                 <h3>FECHA REPARADO</h3>
                 <h5>{dataRes.fechaReparado}</h5>
                 <h3>HORA REPARADO</h3>
                 <h5>{dataRes.horaReparado}</h5>
-                <h3>REPARA</h3>
+                <h3>QUIEN REPARO LA ORDEN</h3>
                 <h5>{dataRes.repara}</h5>
-                <h3>OBSERVACIONES(REPARADO)</h3>
+                <h3>OBSERVACIONES (REPARACION)</h3>
                 <h5>{dataRes.observacionesReparar}</h5>
               </div>
             </div>
@@ -256,7 +263,7 @@ export const FormVerificado = () => {
           <CompInput
             InputState={LiderUser}
             inputType='text'
-            inputLabel='Persona que lo verifica'
+            inputLabel='Lider que verifica'
             inputName='name'
             inputDis='disable'
             mensaje={expresiones.mensaje}
@@ -266,7 +273,7 @@ export const FormVerificado = () => {
             InputState={obser}
             InputSetState={setObser}
             inputType='text'
-            inputLabel='Observacion(VERIFICADO)'
+            inputLabel='Observacion (VERIFICADO)'
             inputPlaceholder='Observacion a tener en cuenta'
             inputName='recibe'
             inputError='La observacion a tener en cuenta tiene que ser de 3 a 200 dígitos y solo puede contener numeros, letras y guion bajo.'
@@ -285,8 +292,12 @@ export const FormVerificado = () => {
                 <BotonInicio type='submit'>Atras</BotonInicio>
               </Link>
             )}
-            <Boton onClick={ordenDenegada}>Denegar</Boton>
-            <Boton type='submit'>Verificado</Boton>
+            <Boton onClick={ordenDenegada} validate={'denied'}>
+              Denegar
+            </Boton>
+            <Boton type='submit' validate='valid'>
+              Verificado
+            </Boton>
           </ContenedorBotonCentrado>
         </Formulario>
       </Grid>

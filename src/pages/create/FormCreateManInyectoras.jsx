@@ -39,7 +39,7 @@ export const FormCreateInyectoras = () => {
 
   const expresiones = {
     maquinas: /^[‎]$/,
-    mensaje: /^[a-zA-Z0-9À-ÿ\s]{3,200}$/,
+    mensaje: /^[a-zA-Z0-9À-ÿ\s^.,]{3,200}$/,
   };
 
   const onSubmit = (e) => {

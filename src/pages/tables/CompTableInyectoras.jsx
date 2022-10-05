@@ -99,7 +99,9 @@ export const CompTableInyectoras = () => {
         setState={setStateModal}
         dataTable={dataModal}
       />
-
+      <h1 className='titleTop'>
+        TABLA DE ORDENES DE REPARACION (MANTENIMIENTO INYECTORAS)
+      </h1>
       <div className='txtColors'>
         <b>COLORES:</b>
         <div className='colores'>
@@ -153,7 +155,11 @@ export const CompTableInyectoras = () => {
       <ContenedorBotonCentrado>
         {LiderUser !== null && (
           <div>
-            <BotonInicio type='submit' onClick={deleteSession}>
+            <BotonInicio
+              type='submit'
+              onClick={deleteSession}
+              validate='denied'
+            >
               <a
                 className='noStyle'
                 href='http://192.168.11.139:3000/inyeccion'
@@ -168,7 +174,9 @@ export const CompTableInyectoras = () => {
           {LiderUser !== null ? (
             <BotonInicio type='submit'>Atras</BotonInicio>
           ) : (
-            <BotonInicio type='submit'>Iniciar sesion</BotonInicio>
+            <BotonInicio type='submit' validate='valid'>
+              Iniciar sesion
+            </BotonInicio>
           )}
         </a>
       </ContenedorBotonCentrado>
@@ -204,7 +212,7 @@ export const CompTableInyectoras = () => {
         {LiderUser !== null && (
           <a className='noStyle' href='/FormCreateInyectoras'>
             <ContenedorBotonInicio>
-              <BotonInicioTabla type='submit'>
+              <BotonInicioTabla type='submit' validate='valid'>
                 Crear orden de reparacion: Mantenimiento Inyectoras
               </BotonInicioTabla>
             </ContenedorBotonInicio>

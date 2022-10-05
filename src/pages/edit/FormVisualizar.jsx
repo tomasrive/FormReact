@@ -40,50 +40,34 @@ export const FormVisualizar = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setFormValidate(true);
+
+    let data = {
+      id: id,
+      tabla: tabla,
+      fechaCreado: dataRes.fechaCreado,
+      horaCreado: dataRes.horaCreado,
+      lider: dataRes.lider,
+      descripcion: dataRes.descripcion,
+      fechaVisualizado: date,
+      horaVisualizado: hour,
+      recibe: LiderUser,
+      fechaReparado: '',
+      horaReparado: '',
+      repara: '',
+      observacionesReparar: '',
+      fechaVerificado: '',
+      horaVerificado: '',
+      verifica: '',
+      observacionesVerificar: '',
+      estado: 'visualizado',
+    };
+
     if (tabla === 'moldes') {
-      axios.put(URI + '/' + tabla, {
-        id: id,
-        tabla: tabla,
-        fechaCreado: dataRes.fechaCreado,
-        horaCreado: dataRes.horaCreado,
-        molde: dataRes.molde,
-        lider: dataRes.lider,
-        descripcion: dataRes.descripcion,
-        fechaVisualizado: date,
-        horaVisualizado: hour,
-        recibe: LiderUser,
-        fechaReparado: '',
-        horaReparado: '',
-        repara: '',
-        observacionesReparar: '',
-        fechaVerificado: '',
-        horaVerificado: '',
-        verifica: '',
-        observacionesVerificar: '',
-        estado: 'visualizado',
-      });
+      data.molde = dataRes.molde;
+      axios.put(URI + '/' + tabla, data);
     } else {
-      await axios.put(URI + '/' + tabla, {
-        id: id,
-        tabla: tabla,
-        fechaCreado: dataRes.fechaCreado,
-        horaCreado: dataRes.horaCreado,
-        maquinas: dataRes.maquinas,
-        lider: dataRes.lider,
-        descripcion: dataRes.descripcion,
-        fechaVisualizado: date,
-        horaVisualizado: hour,
-        recibe: LiderUser,
-        fechaReparado: '',
-        horaReparado: '',
-        repara: '',
-        observacionesReparar: '',
-        fechaVerificado: '',
-        horaVerificado: '',
-        verifica: '',
-        observacionesVerificar: '',
-        estado: 'visualizado',
-      });
+      data.maquina = dataRes.maquinas;
+      await axios.put(URI + '/' + tabla, data);
     }
 
     await timeout(2000);
@@ -105,7 +89,7 @@ export const FormVisualizar = () => {
                 <h3>FECHA CREADO</h3>
                 <h5>{dataRes.fechaCreado}</h5>
 
-                <h3>LIDER</h3>
+                <h3>LIDER QUE CREO LA ORDEN</h3>
                 <h5>{dataRes.lider}</h5>
               </div>
               <div>
@@ -114,18 +98,18 @@ export const FormVisualizar = () => {
 
                 {dataRes.tabla === 'moldes' ? (
                   <>
-                    <h3>MOLDES</h3>
+                    <h3>MOLDE</h3>
                     <h5>{dataRes.molde}</h5>
                   </>
                 ) : (
                   <>
-                    <h3>MAQUINAS</h3>
+                    <h3>MAQUINA</h3>
                     <h5>{dataRes.maquina}</h5>
                   </>
                 )}
               </div>
             </div>
-            <h3>DESCRIPCION</h3>
+            <h3>PROBLEMA</h3>
             <h5>{dataRes.descripcion}</h5>
           </div>
           <h3>ESTADO</h3>
@@ -140,7 +124,7 @@ export const FormVisualizar = () => {
           <CompInput
             InputState={LiderUser}
             inputType='text'
-            inputLabel='Lider a cargo'
+            inputLabel='Lider que visualiza'
             inputName='name'
             inputDis='disable'
           />
@@ -157,7 +141,9 @@ export const FormVisualizar = () => {
                 <BotonInicio type='submit'>Atras</BotonInicio>
               </Link>
             )}
-            <Boton type='submit'>Visualizado</Boton>
+            <Boton type='submit' validate='valid'>
+              Visualizado
+            </Boton>
           </ContenedorBotonCentrado>
         </Formulario>
       </Grid>

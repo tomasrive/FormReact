@@ -17,7 +17,7 @@ export const CompRow = ({ dataTable, liderSesion, modal, deleteRow }) => {
         <hr />
         {dataTable.horaCreado}
       </td>
-      {dataTable.tabla === '/maquinas/' || dataTable.tabla === 'maquinas' ? (
+      {dataTable.tabla === 'maquinas' ? (
         <td>{dataTable.maquina}</td>
       ) : (
         <td>{dataTable.molde}</td>

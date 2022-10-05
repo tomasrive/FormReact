@@ -198,6 +198,27 @@ const BotonInicio = styled.button`
   &:active {
     box-shadow: inset 1px 1px 2px ${colores.black}, inset -1px -1px 2px #393f4b;
   }
+
+  ${(props) =>
+    props.validate === 'denied' &&
+    css`
+      border: 2px solid rgba(233, 51, 51, 0.9);
+      transition: all 0.5s;
+
+      &:hover {
+        background: rgba(233, 51, 51, 0.5);
+      }
+    `}
+  ${(props) =>
+    props.validate === 'valid' &&
+    css`
+      border: 2px solid rgb(30, 187, 43, 0.9);
+      transition: all 0.5s;
+
+      &:hover {
+        background: rgb(30, 187, 43, 0.5);
+      }
+    `}
 `;
 const BotonInicioTabla = styled.button`
   width: 300px;
@@ -219,6 +240,27 @@ const BotonInicioTabla = styled.button`
   &:active {
     box-shadow: inset 1px 1px 2px ${colores.black}, inset -1px -1px 2px #393f4b;
   }
+
+  ${(props) =>
+    props.validate === 'denied' &&
+    css`
+      border: 2px solid rgba(233, 51, 51, 0.9);
+      transition: all 0.5s;
+
+      &:hover {
+        background: rgba(233, 51, 51, 0.5);
+      }
+    `}
+  ${(props) =>
+    props.validate === 'valid' &&
+    css`
+      border: 2px solid rgb(30, 187, 43, 0.9);
+      transition: all 0.5s;
+
+      &:hover {
+        background: rgb(30, 187, 43, 0.5);
+      }
+    `}
 `;
 
 const ContenedorBotonCentrado = styled.div`
@@ -257,6 +299,27 @@ const Boton = styled.button`
   @media (max-width: 550px) {
     width: 100%;
   }
+
+  ${(props) =>
+    props.validate === 'denied' &&
+    css`
+      border: 2px solid rgba(233, 51, 51, 0.9);
+      transition: all 0.5s;
+
+      &:hover {
+        background: rgba(233, 51, 51, 0.5);
+      }
+    `}
+  ${(props) =>
+    props.validate === 'valid' &&
+    css`
+      border: 2px solid rgb(30, 187, 43, 0.9);
+      transition: all 0.5s;
+
+      &:hover {
+        background: rgb(30, 187, 43, 0.5);
+      }
+    `}
 `;
 const MensajeExito = styled.p`
   border-radius: 320px;

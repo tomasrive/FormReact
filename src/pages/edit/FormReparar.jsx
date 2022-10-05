@@ -38,57 +38,41 @@ export const FormReparar = () => {
   };
 
   const expresiones = {
-    observ: /^[a-zA-ZÀ-ÿ\s]{3,200}$/,
+    observ: /^[a-zA-Z0-9À-ÿ\s^.,]{3,200}$/,
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    let data = {
+      id: id,
+      tabla: tabla,
+      fechaCreado: dataRes.fechaCreado,
+      horaCreado: dataRes.horaCreado,
+      lider: dataRes.lider,
+      descripcion: dataRes.descripcion,
+      fechaVisualizado: dataRes.fechaVisualizado,
+      horaVisualizado: dataRes.horaVisualizado,
+      recibe: dataRes.recibe,
+      fechaReparado: date,
+      horaReparado: hour,
+      repara: LiderUser,
+      observacionesReparar: obser.campo,
+      fechaVerificado: '',
+      horaVerificado: '',
+      verifica: '',
+      observacionesVerificar: '',
+      estado: 'reparado',
+    };
+
     if (obser.valido === 'true') {
       setFormValidate(true);
       if (tabla === 'moldes') {
-        axios.put(URI + '/' + tabla, {
-          id: id,
-          tabla: tabla,
-          fechaCreado: dataRes.fechaCreado,
-          horaCreado: dataRes.horaCreado,
-          molde: dataRes.molde,
-          lider: dataRes.lider,
-          descripcion: dataRes.descripcion,
-          fechaVisualizado: dataRes.fechaVisualizado,
-          horaVisualizado: dataRes.horaVisualizado,
-          recibe: dataRes.recibe,
-          fechaReparado: date,
-          horaReparado: hour,
-          repara: LiderUser,
-          observacionesReparar: obser.campo,
-          fechaVerificado: '',
-          horaVerificado: '',
-          verifica: '',
-          observacionesVerificar: '',
-          estado: 'reparado',
-        });
+        data.molde = dataRes.molde;
+        axios.put(URI + '/' + tabla, data);
       } else {
-        await axios.put(URI + '/' + tabla, {
-          id: id,
-          tabla: tabla,
-          fechaCreado: dataRes.fechaCreado,
-          horaCreado: dataRes.horaCreado,
-          maquina: dataRes.maquinas,
-          lider: dataRes.lider,
-          descripcion: dataRes.descripcion,
-          fechaVisualizado: dataRes.fechaVisualizado,
-          horaVisualizado: dataRes.horaVisualizado,
-          recibe: dataRes.recibe,
-          fechaReparado: date,
-          horaReparado: hour,
-          repara: LiderUser,
-          observacionesReparar: obser.campo,
-          fechaVerificado: '',
-          horaVerificado: '',
-          verifica: '',
-          observacionesVerificar: '',
-          estado: 'reparado',
-        });
+        data.maquina = dataRes.maquina;
+        await axios.put(URI + '/' + tabla, data);
       }
 
       setObser({ campo: '', valido: null });
@@ -129,17 +113,17 @@ export const FormReparar = () => {
 
                 <h3>FECHA VISUALIZADO</h3>
                 <h5>{dataRes.fechaVisualizado}</h5>
-                <h3>RECIBE</h3>
+                <h3>QUIEN RECIBIO LA ORDEN</h3>
                 <h5>{dataRes.recibe}</h5>
               </div>
               <div>
                 <h3>HORA CREADO</h3>
                 <h5>{dataRes.horaCreado}</h5>
-                <h3>LIDER</h3>
+                <h3>LIDER QUE CREO LA ORDEN</h3>
                 <h5>{dataRes.lider}</h5>
                 <h3>HORA VISUALIZADO</h3>
                 <h5>{dataRes.horaVisualizado}</h5>
-                <h3>DESCRIPCION</h3>
+                <h3>PROBLEMA</h3>
                 <h5>{dataRes.descripcion}</h5>
               </div>
             </div>
@@ -166,7 +150,7 @@ export const FormReparar = () => {
             InputState={obser}
             InputSetState={setObser}
             inputType='text'
-            inputLabel='Observacion(REPARADO)'
+            inputLabel='Observaciones (REPARADO)'
             inputPlaceholder='Observacion a tener en cuenta'
             inputName='recibe'
             inputError='La observacion a tener en cuenta tiene que ser de 3 a 200 dígitos y solo puede contener numeros, letras y guion bajo.'
@@ -185,7 +169,9 @@ export const FormReparar = () => {
                 <BotonInicio type='submit'>Atras</BotonInicio>
               </Link>
             )}
-            <Boton type='submit'>Reparado</Boton>
+            <Boton type='submit' validate='valid'>
+              Reparado
+            </Boton>
           </ContenedorBotonCentrado>
         </Formulario>
       </Grid>

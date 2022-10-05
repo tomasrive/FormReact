@@ -8,7 +8,12 @@ import {
 } from '../../elements/Formularios';
 import axios from 'axios';
 import { useDate } from '../../elements/useDate';
-import { CompDate, CompMessage, CompInput,CompConfirm } from '../../Components';
+import {
+  CompDate,
+  CompMessage,
+  CompInput,
+  CompConfirm,
+} from '../../Components';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/moldes';
 
@@ -33,8 +38,8 @@ export const FormCreateMatriceria = () => {
   });
 
   const expresiones = {
-    molde: /^[a-zA-Z0-9À-ÿ\s]{3,40}$/,
-    mensaje: /^[a-zA-Z0-9À-ÿ\s]{3,200}$/,
+    molde: /^[a-zA-Z0-9À-ÿ\s]{4,40}$/,
+    mensaje: /^[a-zA-Z0-9À-ÿ\s^.,]{3,200}$/,
   };
 
   const onSubmit = async (e) => {
@@ -138,7 +143,9 @@ export const FormCreateMatriceria = () => {
           <Link to='/CompTableMatriceria'>
             <BotonInicio type='submit'>Cancelar</BotonInicio>
           </Link>
-          <Boton type='submit'>Enviar</Boton>
+          <Boton type='submit' validate='valid'>
+            Enviar
+          </Boton>
         </ContenedorBotonCentrado>
       </Formulario>
     </>

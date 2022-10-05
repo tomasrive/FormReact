@@ -15,7 +15,7 @@ export const CompDenegado = ({
   setDenegar,
 }) => {
   const expresiones = {
-    mensaje: /^[a-zA-Z0-9À-ÿ\s]{5,200}$/,
+    mensaje: /^[a-zA-Z0-9À-ÿ\s^.,]{3,200}$/,
   };
 
   return (
@@ -50,7 +50,7 @@ export const CompDenegado = ({
               >
                 Cerrar
               </Boton>
-              <Boton type='submit' onClick={send}>
+              <Boton type='submit' onClick={send} validate='valid'>
                 Enviar
               </Boton>
             </ContenedorBotonCentrado>

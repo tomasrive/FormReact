@@ -99,7 +99,7 @@ export const CompTableMatriceria = () => {
         setState={setStateModal}
         dataTable={dataModal}
       />
-
+      <h1 className='titleTop'>TABLA DE ORDENES DE REPARACION (MATRICERIA)</h1>
       <div className='txtColors'>
         <b>COLORES:</b>
         <div className='colores'>
@@ -153,7 +153,11 @@ export const CompTableMatriceria = () => {
       <ContenedorBotonCentrado>
         {LiderUser !== null && (
           <div>
-            <BotonInicio type='submit' onClick={deleteSession}>
+            <BotonInicio
+              type='submit'
+              onClick={deleteSession}
+              validate='denied'
+            >
               <a
                 className='noStyle'
                 href='http://192.168.11.139:3000/inyeccion'
@@ -168,7 +172,9 @@ export const CompTableMatriceria = () => {
           {LiderUser !== null ? (
             <BotonInicio type='submit'>Atras</BotonInicio>
           ) : (
-            <BotonInicio type='submit'>Iniciar sesion</BotonInicio>
+            <BotonInicio type='submit' validate='valid'>
+              Iniciar sesion
+            </BotonInicio>
           )}
         </a>
       </ContenedorBotonCentrado>
@@ -204,7 +210,7 @@ export const CompTableMatriceria = () => {
         {LiderUser !== null && (
           <a className='noStyle' href='/FormCreateMatriceria'>
             <ContenedorBotonInicio>
-              <BotonInicioTabla type='submit'>
+              <BotonInicioTabla type='submit' validate='valid'>
                 Crear orden de reparacion: Matriceria
               </BotonInicioTabla>
             </ContenedorBotonInicio>
