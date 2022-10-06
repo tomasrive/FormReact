@@ -186,8 +186,8 @@ export const CompTableInyectoras = () => {
             <tr>
               <th>Fecha y hora creado</th>
               <th>Maquinas</th>
-              <th>Lider a cargo:</th>
-              <th>Descripcion:</th>
+              <th>Lider que creo la orden:</th>
+              <th>Problema:</th>
               <th>Fecha y hora visualizado</th>
               <th>Fecha y hora reparado</th>
               <th>Fecha y hora verificacion</th>

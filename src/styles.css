@@ -394,3 +394,57 @@ ul {
   background: #f2f2f2;
   font-size: 16px;
 }
+
+.checkBoxDiv {
+  margin-top: 2%;
+  display: flex;
+  justify-content: center;
+  gap: 20%;
+  height: 75px;
+}
+
+.custom-rounded-checkbox {
+  position: relative;
+  --col-checkbox-main-bg: #66bb6a;
+  --col-checkbox-tick: #fff;
+  --col-checkbox-unticked-border: #ccc;
+}
+
+.custom-rounded-checkbox > span {
+  background-color: var(--col-checkbox-tick);
+  border: 1px solid var(--col-checkbox-unticked-border);
+  border-radius: 50%;
+  cursor: pointer;
+  height: 28px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 28px;
+}
+
+.custom-rounded-checkbox > span:after {
+  border: 2px solid var(--col-checkbox-tick);
+  border-top: none;
+  border-right: none;
+  content: '';
+  height: 6px;
+  left: 7px;
+  opacity: 0;
+  position: absolute;
+  top: 8px;
+  transform: rotate(-45deg);
+  width: 12px;
+}
+
+.custom-rounded-checkbox input[type='checkbox'] {
+  visibility: hidden;
+}
+
+.custom-rounded-checkbox input[type='checkbox']:checked + span {
+  background-color: var(--col-checkbox-main-bg);
+  border-color: var(--col-checkbox-main-bg);
+}
+
+.custom-rounded-checkbox input[type='checkbox']:checked + span:after {
+  opacity: 1;
+}

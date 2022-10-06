@@ -14,6 +14,7 @@ import {
   CompInput,
   CompConfirm,
 } from '../../Components';
+import { CustomRoundedCheckbox } from '../../Components/CompCheckBox';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/moldes';
 
@@ -28,6 +29,9 @@ export const FormCreateMatriceria = () => {
   const { date, hour, dia, mes, year, hora, min } = useDate();
   const LiderUser = sessionStorage.getItem('LiderUser');
   const [stateModal, setStateModal] = useState(false);
+  const [checkedUrgencia, setCheckedUrgencia] = useState(false);
+  const [checkedMejora, setCheckedMejora] = useState(false);
+  const [checkedProgramada, setCheckedProgramada] = useState(false);
   const [dataModal, setDataModal] = useState({
     fechaCreado: '',
     horaCreado: '',
@@ -58,7 +62,9 @@ export const FormCreateMatriceria = () => {
       setFormValidate(false);
     }
   };
-
+  if (checkedMejora === true) {
+    console.log('a');
+  }
   const sendData = async () => {
     console.log('Se mando correctamente');
     setStateModal(!stateModal);
@@ -93,7 +99,7 @@ export const FormCreateMatriceria = () => {
     setMessage({ campo: '', valido: null });
 
     await timeout(2000);
-    window.location.replace('/');
+    window.location.replace('/CompTableMatriceria');
   };
   return (
     <>
@@ -138,6 +144,26 @@ export const FormCreateMatriceria = () => {
         />
 
         <CompMessage verif={formValidate} />
+
+        <div className='checkBoxDiv'>
+          <CustomRoundedCheckbox
+            isChecked={checkedUrgencia}
+            onClick={() => setCheckedUrgencia(!checkedUrgencia)}
+            title='URGENCIA'
+          />
+
+          <CustomRoundedCheckbox
+            isChecked={checkedMejora}
+            onClick={() => setCheckedMejora(!checkedMejora)}
+            title='MEJORA'
+          />
+
+          <CustomRoundedCheckbox
+            isChecked={checkedProgramada}
+            onClick={() => setCheckedProgramada(!checkedProgramada)}
+            title='PROGRAMADA'
+          />
+        </div>
 
         <ContenedorBotonCentrado>
           <Link to='/CompTableMatriceria'>

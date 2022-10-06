@@ -114,6 +114,14 @@ export const FormVerificado = () => {
       lider: dataRes.lider,
       descripcion: dataRes.descripcion,
 
+      primeraFechaVisualizado: dataRes.fechaVisualizado,
+      primeraHoraVisualizado: dataRes.horaVisualizado,
+      primerRecibe: dataRes.recibe,
+      primeraFechaReparado: dataRes.fechaReparado,
+      primeraHoraReparado: dataRes.horaReparado,
+      primerRepara: dataRes.repara,
+      primerObservacionesReparar: dataRes.observacionesReparar,
+
       primeraFechaDenegado: date,
       primeraHoraDenegado: hour,
       primerLiderDenegado: LiderUser,
@@ -138,15 +146,31 @@ export const FormVerificado = () => {
 
     if (denegar.valido === 'true') {
       if (dataRes.primeraFechaDenegado) {
-        data.primeraFechaDenegado = dataRes.fechaDenegado;
-        data.primeraHoraDenegado = dataRes.horaDenegado;
-        data.primerLiderDenegado = dataRes.liderDenegado;
-        data.primerMotivoDenegado = dataRes.motivoDenegado;
+        data.primeraFechaDenegado = dataRes.primeraFechaDenegado;
+        data.primeraHoraDenegado = dataRes.primeraHoraDenegado;
+        data.primerLiderDenegado = dataRes.primerLiderDenegado;
+        data.primerMotivoDenegado = dataRes.primerMotivoDenegado;
+
+        data.primeraFechaVisualizado = dataRes.primeraFechaVisualizado;
+        data.primeraHoraVisualizado = dataRes.primeraHoraVisualizado;
+        data.primerRecibe = dataRes.primerRecibe;
+        data.primeraFechaReparado = dataRes.primeraFechaReparado;
+        data.primeraHoraReparado = dataRes.primeraHoraReparado;
+        data.primerRepara = dataRes.primerRepara;
+        data.primerObservacionesReparar = dataRes.primerObservacionesReparar;
 
         data.segundaFechaDenegado = date;
         data.segundaHoraDenegado = hour;
         data.segundoLiderDenegado = LiderUser;
         data.segundoMotivoDenegado = denegar.campo;
+
+        data.segundaFechaVisualizado = dataRes.fechaVisualizado;
+        data.segundaHoraVisualizado = dataRes.horaVisualizado;
+        data.segundoRecibe = dataRes.recibe;
+        data.segundaFechaReparado = dataRes.fechaReparado;
+        data.segundaHoraReparado = dataRes.horaReparado;
+        data.segundoRepara = dataRes.repara;
+        data.segundoObservacionesReparar = dataRes.observacionesReparar;
 
         if (dataRes.segundaFechaDenegado) {
           data.primeraFechaDenegado = dataRes.fechaDenegado;

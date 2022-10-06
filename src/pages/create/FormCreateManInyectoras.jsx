@@ -94,7 +94,7 @@ export const FormCreateInyectoras = () => {
     setMessage({ campo: '', valido: null });
 
     await timeout(2000);
-    window.location.replace('/');
+    window.location.replace('/CompTableInyectoras');
   };
 
   return (

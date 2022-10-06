@@ -31,7 +31,7 @@ export const CompConfirm = ({ dataTable, state, setState, send }) => {
                 <section>
                   <h4>Hora Creacion:</h4>
                   <h5>{dataTable.horaCreado}</h5>
-                  {dataTable.tabla === '/moldes/' ? (
+                  {dataTable.tabla === 'moldes' ? (
                     <>
                       <h4>Molde u otro periferico:</h4>
                       <h5>{dataTable.molde}</h5>
