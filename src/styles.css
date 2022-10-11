@@ -1,13 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-:root {
-  --gl-ms: 'screen and (max-width: 23.5em)';
-  --gl-xs: 'screen and (max-width: 35.5em)';
-  --gl-sm: 'screen and (max-width: 48em)';
-  --gl-md: 'screen and (max-width: 64em)';
-  --gl-lg: 'screen and (max-width: 80em)';
-}
-
 * {
   box-sizing: border-box;
 }
@@ -68,7 +60,11 @@ main {
   font-size: 14px;
   margin: 12px 0 3px 0;
 }
-
+.h5 {
+  width: 15% !important;
+  font-size: 15px;
+  background: rgba(128, 128, 128, 0.3) !important;
+}
 .GRID {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -105,10 +101,11 @@ main {
   align-items: center;
   justify-content: center;
   z-index: 20;
-  margin-left: 140vh;
+  margin-left: 75vw;
   pointer-events: none;
   color: #474747;
 }
+
 .spanConfirm {
   font-size: 14px;
   color: tomato;
@@ -395,56 +392,92 @@ ul {
   font-size: 16px;
 }
 
-.checkBoxDiv {
-  margin-top: 2%;
+.divRadio {
   display: flex;
   justify-content: center;
-  gap: 20%;
-  height: 75px;
+  gap: 15%;
+  text-align: center;
+  margin-bottom: 2%;
 }
 
-.custom-rounded-checkbox {
-  position: relative;
-  --col-checkbox-main-bg: #66bb6a;
-  --col-checkbox-tick: #fff;
-  --col-checkbox-unticked-border: #ccc;
+.divRadio div {
+  display: flex;
+  justify-items: center;
+  align-items: center;
 }
-
-.custom-rounded-checkbox > span {
-  background-color: var(--col-checkbox-tick);
-  border: 1px solid var(--col-checkbox-unticked-border);
-  border-radius: 50%;
+.divRadio label {
+  margin-top: 20px;
+  font-size: 25px;
   cursor: pointer;
-  height: 28px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 28px;
 }
 
-.custom-rounded-checkbox > span:after {
-  border: 2px solid var(--col-checkbox-tick);
-  border-top: none;
-  border-right: none;
-  content: '';
-  height: 6px;
-  left: 7px;
-  opacity: 0;
-  position: absolute;
+.option-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  position: relative;
   top: 8px;
-  transform: rotate(-45deg);
-  width: 12px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 35px;
+  width: 35px;
+  transition: all 0.15s ease-out 0s;
+  background: #cbd1d8;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 0.5rem;
+  outline: none;
+  position: relative;
+}
+.option-input:hover {
+  background: #9faab7;
+}
+.option-input:checked {
+  background: #40e0d0;
+}
+.option-input:checked::before {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  font-size: 25px;
+  font-weight: bold;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+}
+.option-input:checked::after {
+  -webkit-animation: click-wave 0.65s;
+  -moz-animation: click-wave 0.65s;
+  animation: click-wave 0.65s;
+  background: #40e0d0;
+  content: '';
+  display: block;
+  position: relative;
 }
 
-.custom-rounded-checkbox input[type='checkbox'] {
-  visibility: hidden;
+.option-input.radio {
+  border-radius: 50%;
 }
-
-.custom-rounded-checkbox input[type='checkbox']:checked + span {
-  background-color: var(--col-checkbox-main-bg);
-  border-color: var(--col-checkbox-main-bg);
+.option-input.radio::after {
+  border-radius: 50%;
 }
-
-.custom-rounded-checkbox input[type='checkbox']:checked + span:after {
-  opacity: 1;
+@keyframes click-wave {
+  0% {
+    height: 40px;
+    width: 40px;
+    opacity: 0.35;
+    position: relative;
+  }
+  100% {
+    height: 200px;
+    width: 200px;
+    margin-left: -80px;
+    margin-top: -80px;
+    opacity: 0;
+  }
 }

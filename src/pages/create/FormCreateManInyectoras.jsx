@@ -28,6 +28,9 @@ export const FormCreateInyectoras = () => {
   const { date, hour, dia, mes, year, hora, min } = useDate();
   const LiderUser = sessionStorage.getItem('LiderUser');
   const [stateModal, setStateModal] = useState(false);
+  const [radio, setRadio] = useState({
+    checked: 'Mejora'
+  })
   const [dataModal, setDataModal] = useState({
     fechaCreado: '',
     horaCreado: '',
@@ -36,6 +39,10 @@ export const FormCreateInyectoras = () => {
     descripcion: '',
     tabla: '',
   });
+
+  const changeButton = e => {
+    setRadio({ checked: e.target.value })
+  }
 
   const expresiones = {
     maquinas: /^[‎]$/,
@@ -53,6 +60,7 @@ export const FormCreateInyectoras = () => {
         maquina: maquinas.campo,
         lider: LiderUser,
         descripcion: message.campo,
+        categoria: radio.checked,
         tabla: 'maquinas',
       });
     } else {
@@ -88,6 +96,7 @@ export const FormCreateInyectoras = () => {
       observacionesVerificar: '',
 
       estado: 'creado',
+      categoria: radio.checked
     });
 
     setMaquinas({ campo: '', valido: '' });
@@ -141,6 +150,47 @@ export const FormCreateInyectoras = () => {
         />
 
         <CompMessage verif={formValidate} />
+
+        <h2>Seleccionar categoria:</h2>
+
+        <div className='divRadio'>
+          <div>
+            <input
+              id='Mejora'
+              className='option-input radio'
+              value='Mejora'
+              type='radio'
+              checked={radio.checked === 'Mejora'}
+              onChange={changeButton}
+            />
+            <label htmlFor='Mejora'><b>Mejora</b></label>
+          </div>
+
+          <div>
+            <input
+              id='Programada'
+              className='option-input radio'
+              value='Programada'
+              type='radio'
+              checked={radio.checked === 'Programada'}
+              onChange={changeButton}
+            />
+            <label htmlFor='Programada'><b>Programada</b></label>
+          </div>
+
+          <div>
+            <input
+              id='Urgencia'
+              className='option-input radio'
+              value='Urgencia'
+              type='radio'
+              checked={radio.checked === 'Urgencia'}
+              onChange={changeButton}
+            />
+            <label htmlFor='Urgencia'><b>Urgencia</b> </label>
+          </div>
+        </div>
+
 
         <ContenedorBotonCentrado>
           <Link to='/CompTableInyectoras'>

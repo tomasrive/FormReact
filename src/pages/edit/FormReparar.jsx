@@ -63,6 +63,7 @@ export const FormReparar = () => {
       verifica: '',
       observacionesVerificar: '',
       estado: 'reparado',
+      categoria: dataRes.categoria
     };
 
     if (obser.valido === 'true') {

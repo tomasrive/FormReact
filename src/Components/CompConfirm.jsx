@@ -21,6 +21,8 @@ export const CompConfirm = ({ dataTable, state, setState, send }) => {
               </span>
             </EncabezadoModal>
             <OrdenReparacionConfirmar>
+              <h4>Categoria:</h4>
+              <h5 className='h5'>{dataTable.categoria}</h5>
               <div>
                 <section>
                   <h4>Fecha Creacion:</h4>
@@ -44,12 +46,14 @@ export const CompConfirm = ({ dataTable, state, setState, send }) => {
                   )}
                 </section>
               </div>
+
               <h4>Descripcion:</h4>
               <h5>{dataTable.descripcion}</h5>
+
             </OrdenReparacionConfirmar>
             <ContenedorBotonCentrado>
               <Boton onClick={() => setState(!state)}>Cerrar</Boton>
-              <Boton type='submit' onClick={send}>
+              <Boton type='submit' onClick={send} validate='valid'>
                 Enviar
               </Boton>
             </ContenedorBotonCentrado>

@@ -204,9 +204,8 @@ const BotonInicio = styled.button`
     css`
       border: 2px solid rgba(233, 51, 51, 0.9);
       transition: all 0.5s;
-
       &:hover {
-        background: rgba(233, 51, 51, 0.5);
+        border: 2px solid white;
       }
     `}
   ${(props) =>
@@ -214,9 +213,8 @@ const BotonInicio = styled.button`
     css`
       border: 2px solid rgb(30, 187, 43, 0.9);
       transition: all 0.5s;
-
       &:hover {
-        background: rgb(30, 187, 43, 0.5);
+        border: 2px solid white;
       }
     `}
 `;
@@ -246,9 +244,8 @@ const BotonInicioTabla = styled.button`
     css`
       border: 2px solid rgba(233, 51, 51, 0.9);
       transition: all 0.5s;
-
       &:hover {
-        background: rgba(233, 51, 51, 0.5);
+        border: 2px solid white;
       }
     `}
   ${(props) =>
@@ -256,9 +253,8 @@ const BotonInicioTabla = styled.button`
     css`
       border: 2px solid rgb(30, 187, 43, 0.9);
       transition: all 0.5s;
-
       &:hover {
-        background: rgb(30, 187, 43, 0.5);
+        border: 2px solid white;
       }
     `}
 `;
@@ -305,9 +301,8 @@ const Boton = styled.button`
     css`
       border: 2px solid rgba(233, 51, 51, 0.9);
       transition: all 0.5s;
-
       &:hover {
-        background: rgba(233, 51, 51, 0.5);
+        border: 2px solid white;
       }
     `}
   ${(props) =>
@@ -317,7 +312,7 @@ const Boton = styled.button`
       transition: all 0.5s;
 
       &:hover {
-        background: rgb(30, 187, 43, 0.5);
+        border: 2px solid white;
       }
     `}
 `;
@@ -605,6 +600,13 @@ const OrdenReparacionConfirmar = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
+
+  ${(props) =>
+    props.validate === 'h5' &&
+    css`
+      width: 15% !important;
+      background: red;
+    `}
 `;
 const Grid = styled.div`
   display: grid;

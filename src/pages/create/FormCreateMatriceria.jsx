@@ -14,7 +14,6 @@ import {
   CompInput,
   CompConfirm,
 } from '../../Components';
-import { CustomRoundedCheckbox } from '../../Components/CompCheckBox';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/moldes';
 
@@ -29,9 +28,9 @@ export const FormCreateMatriceria = () => {
   const { date, hour, dia, mes, year, hora, min } = useDate();
   const LiderUser = sessionStorage.getItem('LiderUser');
   const [stateModal, setStateModal] = useState(false);
-  const [checkedUrgencia, setCheckedUrgencia] = useState(false);
-  const [checkedMejora, setCheckedMejora] = useState(false);
-  const [checkedProgramada, setCheckedProgramada] = useState(false);
+  const [radio, setRadio] = useState({
+    checked: 'Mejora'
+  })
   const [dataModal, setDataModal] = useState({
     fechaCreado: '',
     horaCreado: '',
@@ -41,10 +40,16 @@ export const FormCreateMatriceria = () => {
     tabla: '',
   });
 
+
   const expresiones = {
     molde: /^[a-zA-Z0-9À-ÿ\s]{4,40}$/,
     mensaje: /^[a-zA-Z0-9À-ÿ\s^.,]{3,200}$/,
   };
+
+
+  const changeButton = e => {
+    setRadio({ checked: e.target.value })
+  }
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -56,15 +61,16 @@ export const FormCreateMatriceria = () => {
         molde: molde.campo,
         lider: LiderUser,
         descripcion: message.campo,
+        categoria: radio.checked,
         tabla: 'moldes',
       });
     } else {
       setFormValidate(false);
     }
   };
-  if (checkedMejora === true) {
-    console.log('a');
-  }
+
+
+
   const sendData = async () => {
     console.log('Se mando correctamente');
     setStateModal(!stateModal);
@@ -93,6 +99,7 @@ export const FormCreateMatriceria = () => {
       observacionesVerificar: '',
 
       estado: 'creado',
+      categoria: radio.checked
     });
 
     setMolde({ campo: '', valido: '' });
@@ -101,6 +108,8 @@ export const FormCreateMatriceria = () => {
     await timeout(2000);
     window.location.replace('/CompTableMatriceria');
   };
+
+
   return (
     <>
       <CompConfirm
@@ -145,26 +154,47 @@ export const FormCreateMatriceria = () => {
 
         <CompMessage verif={formValidate} />
 
-        <div className='checkBoxDiv'>
-          <CustomRoundedCheckbox
-            isChecked={checkedUrgencia}
-            onClick={() => setCheckedUrgencia(!checkedUrgencia)}
-            title='URGENCIA'
-          />
+        <h2>Seleccionar categoria:</h2>
 
-          <CustomRoundedCheckbox
-            isChecked={checkedMejora}
-            onClick={() => setCheckedMejora(!checkedMejora)}
-            title='MEJORA'
-          />
+        <div className='divRadio'>
+          <div>
+            <input
+              id='Mejora'
+              className='option-input radio'
+              value='Mejora'
+              type='radio'
+              checked={radio.checked === 'Mejora'}
+              onChange={changeButton}
+            />
+            <label htmlFor='Mejora'><b>Mejora</b></label>
+          </div>
 
-          <CustomRoundedCheckbox
-            isChecked={checkedProgramada}
-            onClick={() => setCheckedProgramada(!checkedProgramada)}
-            title='PROGRAMADA'
-          />
+          <div>
+            <input
+              id='Programada'
+              className='option-input radio'
+              value='Programada'
+              type='radio'
+              checked={radio.checked === 'Programada'}
+              onChange={changeButton}
+            />
+            <label htmlFor='Programada'><b>Programada</b></label>
+          </div>
+
+          <div>
+            <input
+              id='Urgencia'
+              className='option-input radio'
+              value='Urgencia'
+              type='radio'
+              checked={radio.checked === 'Urgencia'}
+              onChange={changeButton}
+            />
+            <label htmlFor='Urgencia'><b>Urgencia</b> </label>
+          </div>
+
+
         </div>
-
         <ContenedorBotonCentrado>
           <Link to='/CompTableMatriceria'>
             <BotonInicio type='submit'>Cancelar</BotonInicio>

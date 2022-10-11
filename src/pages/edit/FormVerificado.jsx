@@ -71,6 +71,7 @@ export const FormVerificado = () => {
       verifica: LiderUser,
       observacionesVerificar: obser.campo,
       estado: 'verificado',
+      categoria: dataRes.categoria
     };
 
     if (obser.valido === 'true') {
@@ -142,6 +143,7 @@ export const FormVerificado = () => {
       observacionesVerificar: '',
 
       estado: 'creado',
+      categoria: dataRes.categoria
     };
 
     if (denegar.valido === 'true') {
