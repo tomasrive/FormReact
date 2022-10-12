@@ -24,8 +24,26 @@ main {
   color: #000;
 }
 
+body::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f5f5f5;
+}
+body::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #555;
+}
+tbody::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f5;
+}
+
+tbody::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #555;
+}
+
 .titleTop {
-  margin: 30px 0px 30px 0;
+  margin: 0px 0px 25px 0;
   text-align: center;
 }
 .pointer {
@@ -61,7 +79,7 @@ main {
   margin: 12px 0 3px 0;
 }
 .h5 {
-  width: 15% !important;
+  width: 20% !important;
   font-size: 15px;
   background: rgba(128, 128, 128, 0.3) !important;
 }
@@ -101,7 +119,7 @@ main {
   align-items: center;
   justify-content: center;
   z-index: 20;
-  margin-left: 75vw;
+  margin-left: 70vw;
   pointer-events: none;
   color: #474747;
 }
@@ -166,23 +184,6 @@ tbody {
   height: 720px;
   overflow: auto;
   width: calc(100% - 0.65em);
-}
-
-tbody::-webkit-scrollbar {
-  -webkit-appearance: none;
-}
-
-tbody::-webkit-scrollbar:vertical {
-  width: 5px;
-}
-
-tbody::-webkit-scrollbar-thumb {
-  background-color: #000000;
-  border-radius: 20px;
-}
-
-tbody::-webkit-scrollbar-track {
-  border-radius: 10px;
 }
 
 thead,
@@ -288,12 +289,16 @@ th:last-child {
   .table-fill .linkMedia {
     width: 40px;
   }
-  td:nth-child(-n + 8),
-  th:nth-child(-n + 8) {
+  td:nth-child(-n + 9),
+  th:nth-child(-n + 9) {
     width: 15px;
     font-size: 14px;
   }
-
+  td:nth-child(3),
+  th:nth-child(3) {
+    width: 16px;
+    font-size: 14px;
+  }
   td:nth-child(4),
   th:nth-child(4) {
     width: 30px;
@@ -301,13 +306,13 @@ th:last-child {
   }
   td:nth-child(8),
   th:nth-child(8) {
-    width: 35px;
+    width: 37px;
     font-size: 14px;
   }
 
   td:last-child,
   th:last-child {
-    width: 18px;
+    width: 17px;
     font-size: 14px;
   }
 
@@ -323,6 +328,9 @@ th:last-child {
   td {
     padding: 3px;
     font-size: 16px;
+  }
+  td:last-child {
+    text-transform: uppercase;
   }
 }
 
@@ -343,6 +351,18 @@ hr {
   text-align: center;
   margin-top: 5px;
   max-height: 405px;
+  overflow: auto;
+}
+.flexAutoMoldes {
+  position: fixed;
+  z-index: 100;
+  background-color: rgba(200, 200, 200, 0.9);
+  width: 550px;
+  border-radius: 20px;
+  text-align: center;
+  margin-top: 5px;
+  max-height: 405px;
+  overflow: auto;
 }
 
 .formA {
@@ -407,7 +427,7 @@ ul {
 }
 .divRadio label {
   margin-top: 20px;
-  font-size: 25px;
+  font-size: 20px;
   cursor: pointer;
 }
 

@@ -60,7 +60,7 @@ export const FormVisualizar = () => {
       verifica: '',
       observacionesVerificar: '',
       estado: 'visualizado',
-      categoria: dataRes.categoria
+      categoria: dataRes.categoria,
     };
 
     if (tabla === 'moldes') {

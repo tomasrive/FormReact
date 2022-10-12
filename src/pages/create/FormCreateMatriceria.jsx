@@ -5,6 +5,7 @@ import {
   ContenedorBotonCentrado,
   Boton,
   BotonInicio,
+  Label,
 } from '../../elements/Formularios';
 import axios from 'axios';
 import { useDate } from '../../elements/useDate';
@@ -29,8 +30,8 @@ export const FormCreateMatriceria = () => {
   const LiderUser = sessionStorage.getItem('LiderUser');
   const [stateModal, setStateModal] = useState(false);
   const [radio, setRadio] = useState({
-    checked: 'Mejora'
-  })
+    checked: 'Mejora',
+  });
   const [dataModal, setDataModal] = useState({
     fechaCreado: '',
     horaCreado: '',
@@ -40,16 +41,14 @@ export const FormCreateMatriceria = () => {
     tabla: '',
   });
 
-
   const expresiones = {
-    molde: /^[a-zA-Z0-9À-ÿ\s]{4,40}$/,
+    molde: /^[‎]$/,
     mensaje: /^[a-zA-Z0-9À-ÿ\s^.,]{3,200}$/,
   };
 
-
-  const changeButton = e => {
-    setRadio({ checked: e.target.value })
-  }
+  const changeButton = (e) => {
+    setRadio({ checked: e.target.value });
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -68,8 +67,6 @@ export const FormCreateMatriceria = () => {
       setFormValidate(false);
     }
   };
-
-
 
   const sendData = async () => {
     console.log('Se mando correctamente');
@@ -99,7 +96,7 @@ export const FormCreateMatriceria = () => {
       observacionesVerificar: '',
 
       estado: 'creado',
-      categoria: radio.checked
+      categoria: radio.checked,
     });
 
     setMolde({ campo: '', valido: '' });
@@ -108,7 +105,6 @@ export const FormCreateMatriceria = () => {
     await timeout(2000);
     window.location.replace('/CompTableMatriceria');
   };
-
 
   return (
     <>
@@ -126,11 +122,12 @@ export const FormCreateMatriceria = () => {
           InputState={molde}
           InputSetState={setMolde}
           inputType='text'
-          inputLabel='Molde u otros perifericos'
+          inputLabel='Moldes'
           inputPlaceholder='Nombre de molde'
           inputName='mayus'
-          inputError='El nombre de molde tiene que ser de 4 a 16 dígitos y solo puede contener numeros, letras y guion bajo.'
+          inputError='Elige una de las opciones desplegadas'
           inputExp={expresiones.molde}
+          inputAutocomplete='autocompleteMoldes'
         />
 
         <CompInput
@@ -154,7 +151,7 @@ export const FormCreateMatriceria = () => {
 
         <CompMessage verif={formValidate} />
 
-        <h2>Seleccionar categoria:</h2>
+        <Label>Seleccionar categoria:</Label>
 
         <div className='divRadio'>
           <div>
@@ -166,7 +163,7 @@ export const FormCreateMatriceria = () => {
               checked={radio.checked === 'Mejora'}
               onChange={changeButton}
             />
-            <label htmlFor='Mejora'><b>Mejora</b></label>
+            <Label htmlFor='Mejora'>Mejora</Label>
           </div>
 
           <div>
@@ -178,7 +175,9 @@ export const FormCreateMatriceria = () => {
               checked={radio.checked === 'Programada'}
               onChange={changeButton}
             />
-            <label htmlFor='Programada'><b>Programada</b></label>
+            <Label htmlFor='Programada'>
+              <b>Programada</b>
+            </Label>
           </div>
 
           <div>
@@ -190,10 +189,10 @@ export const FormCreateMatriceria = () => {
               checked={radio.checked === 'Urgencia'}
               onChange={changeButton}
             />
-            <label htmlFor='Urgencia'><b>Urgencia</b> </label>
+            <Label htmlFor='Urgencia'>
+              <b>Urgencia</b>{' '}
+            </Label>
           </div>
-
-
         </div>
         <ContenedorBotonCentrado>
           <Link to='/CompTableMatriceria'>

@@ -5,6 +5,7 @@ import {
   ContenedorBotonCentrado,
   Boton,
   BotonInicio,
+  Label,
 } from '../../elements/Formularios';
 import axios from 'axios';
 import { useDate } from '../../elements/useDate';
@@ -29,8 +30,8 @@ export const FormCreateInyectoras = () => {
   const LiderUser = sessionStorage.getItem('LiderUser');
   const [stateModal, setStateModal] = useState(false);
   const [radio, setRadio] = useState({
-    checked: 'Mejora'
-  })
+    checked: 'Mejora',
+  });
   const [dataModal, setDataModal] = useState({
     fechaCreado: '',
     horaCreado: '',
@@ -40,18 +41,17 @@ export const FormCreateInyectoras = () => {
     tabla: '',
   });
 
-  const changeButton = e => {
-    setRadio({ checked: e.target.value })
-  }
-
   const expresiones = {
     maquinas: /^[‎]$/,
     mensaje: /^[a-zA-Z0-9À-ÿ\s^.,]{3,200}$/,
   };
 
+  const changeButton = (e) => {
+    setRadio({ checked: e.target.value });
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
     if (maquinas.valido === 'true' && message.valido === 'true') {
       setStateModal(!stateModal);
       setDataModal({
@@ -65,7 +65,6 @@ export const FormCreateInyectoras = () => {
       });
     } else {
       setFormValidate(false);
-      console.log(formValidate);
     }
   };
   const sendData = async () => {
@@ -96,7 +95,7 @@ export const FormCreateInyectoras = () => {
       observacionesVerificar: '',
 
       estado: 'creado',
-      categoria: radio.checked
+      categoria: radio.checked,
     });
 
     setMaquinas({ campo: '', valido: '' });
@@ -122,12 +121,12 @@ export const FormCreateInyectoras = () => {
           InputState={maquinas}
           InputSetState={setMaquinas}
           inputType='text'
-          inputLabel='Maquinas'
+          inputLabel='Maquinas u otros perifericos'
           inputPlaceholder='Nombre de maquina'
           inputName='mayus'
           inputError='Elige una de las opciones desplegadas'
           inputExp={expresiones.maquinas}
-          inputAutocomplete='autocomplete'
+          inputAutocomplete='autocompleteInyectoras'
         />
 
         <CompInput
@@ -151,7 +150,7 @@ export const FormCreateInyectoras = () => {
 
         <CompMessage verif={formValidate} />
 
-        <h2>Seleccionar categoria:</h2>
+        <Label>Seleccionar categoria:</Label>
 
         <div className='divRadio'>
           <div>
@@ -163,7 +162,7 @@ export const FormCreateInyectoras = () => {
               checked={radio.checked === 'Mejora'}
               onChange={changeButton}
             />
-            <label htmlFor='Mejora'><b>Mejora</b></label>
+            <Label htmlFor='Mejora'>Mejora</Label>
           </div>
 
           <div>
@@ -175,7 +174,7 @@ export const FormCreateInyectoras = () => {
               checked={radio.checked === 'Programada'}
               onChange={changeButton}
             />
-            <label htmlFor='Programada'><b>Programada</b></label>
+            <Label htmlFor='Programada'>Programada</Label>
           </div>
 
           <div>
@@ -187,16 +186,17 @@ export const FormCreateInyectoras = () => {
               checked={radio.checked === 'Urgencia'}
               onChange={changeButton}
             />
-            <label htmlFor='Urgencia'><b>Urgencia</b> </label>
+            <Label htmlFor='Urgencia'>Urgencia</Label>
           </div>
         </div>
-
 
         <ContenedorBotonCentrado>
           <Link to='/CompTableInyectoras'>
             <BotonInicio type='submit'>Cancelar</BotonInicio>
           </Link>
-          <Boton type='submit'>Enviar</Boton>
+          <Boton type='submit' validate='valid'>
+            Enviar
+          </Boton>
         </ContenedorBotonCentrado>
       </Formulario>
     </>

@@ -71,7 +71,7 @@ export const FormVerificado = () => {
       verifica: LiderUser,
       observacionesVerificar: obser.campo,
       estado: 'verificado',
-      categoria: dataRes.categoria
+      categoria: dataRes.categoria,
     };
 
     if (obser.valido === 'true') {
@@ -143,7 +143,7 @@ export const FormVerificado = () => {
       observacionesVerificar: '',
 
       estado: 'creado',
-      categoria: dataRes.categoria
+      categoria: dataRes.categoria,
     };
 
     if (denegar.valido === 'true') {
@@ -218,7 +218,13 @@ export const FormVerificado = () => {
 
       setObser({ campo: '', valido: null });
       await timeout(2000);
-      window.location.replace('/');
+      if (tabla === 'maquinas') {
+        data.maquina = dataRes.maquinas;
+        await axios.put(URI + '/' + tabla, data);
+      } else {
+        data.molde = dataRes.moldes;
+        await axios.put(URI + '/' + tabla, data);
+      }
     } else {
       alert('Completar datos');
     }

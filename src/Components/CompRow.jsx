@@ -99,6 +99,7 @@ export const CompRow = ({ dataTable, liderSesion, modal, deleteRow }) => {
         </DivOpciones>
       </td>
       <td>{dataTable.estado.toUpperCase()}</td>
+      <td>{dataTable.categoria}</td>
     </TR>
   );
 };

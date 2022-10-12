@@ -15,6 +15,9 @@ export const CompModal = ({ dataTable, state, setState }) => {
           <ContenedorModal>
             <EncabezadoModal>
               <h1>Orden de Reparacion</h1>
+              {dataTable.categoria && dataTable.estado !== 'verificado' && (
+                <span>Orden denegada</span>
+              )}
             </EncabezadoModal>
             <BotonCerrar onClick={() => setState(!state)}>
               {<FontAwesomeIcon icon={faClose} />}
@@ -80,6 +83,9 @@ export const CompModal = ({ dataTable, state, setState }) => {
                   <h5>{dataTable.observacionesVerificar}</h5>
                 </div>
               </div>
+
+              <h4>Categoria:</h4>
+              <h5>{dataTable.categoria.toUpperCase()}</h5>
 
               <h4>Estado actual de la pieza:</h4>
               <h5>{dataTable.estado.toUpperCase()}</h5>

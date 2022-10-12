@@ -57,7 +57,6 @@ export const CompTableMatriceria = () => {
   }, []);
 
   const getData = async () => {
-    console.log('a');
     try {
       const res = await axios.get(URI);
       setData(res.data);
@@ -77,16 +76,22 @@ export const CompTableMatriceria = () => {
   };
 
   data.sort((a, b) => {
-    const verificadoA = a.fechaVerificado + a.horaVerificado;
+    const categoriaA = a.categoria;
+    const categoriaB = b.categoria;
 
+    const verificadoA = a.horaVerificado + a.horaVerificado;
     const verificadoB = b.fechaVerificado + b.horaVerificado;
 
-    if (verificadoA < verificadoB) {
+    if (categoriaA > categoriaB) {
       return -1;
-    }
+    } else {
+      if (verificadoA < verificadoB) {
+        return -1;
+      }
 
-    if (verificadoA > verificadoB) {
-      return 1;
+      if (verificadoA > verificadoB) {
+        return 1;
+      }
     }
 
     return 0;
@@ -191,6 +196,7 @@ export const CompTableMatriceria = () => {
               <th>Fecha y hora verificacion</th>
               <th>Opciones</th>
               <th>Estado:</th>
+              <th>Categoria:</th>
             </tr>
           </thead>
           <tbody>

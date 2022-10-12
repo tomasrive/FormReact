@@ -15,6 +15,8 @@ import axios from 'axios';
 
 const machine = 'http://192.168.11.139:4001/api/data/machines';
 
+const molde = 'http://192.168.11.139:4001/api/data/matriceria/moldes';
+
 const data = sessionStorage.getItem('LiderUser');
 
 export const CompInput = ({
@@ -37,14 +39,33 @@ export const CompInput = ({
   };
 
   const [machines, setMachines] = useState([]);
+  const [moldes, setMoldes] = useState([]);
 
   useEffect(() => {
     getMachine();
+    getMolde();
   }, []);
 
   const getMachine = async () => {
-    const res = await axios.get(machine);
-    setMachines(res.data);
+    try {
+      const res = await axios.get(machine);
+      setMachines(res.data);
+    } catch (error) {
+      alert(
+        'BASE DE DATOS DE MAQUINAS APAGADA, POR FAVOR COMUNICARSE CON EL AREA'
+      );
+    }
+  };
+
+  const getMolde = async () => {
+    try {
+      const res = await axios.get(molde);
+      setMoldes(res.data);
+    } catch (error) {
+      alert(
+        'BASE DE DATOS DE MOLDES APAGADA, POR FAVOR COMUNICARSE CON EL AREA'
+      );
+    }
   };
 
   const onSearch = (searchTerm) => {
@@ -99,7 +120,7 @@ export const CompInput = ({
       </GroupInput>
       <LeyendaError validate={InputState.valido}>{inputError}</LeyendaError>
 
-      {inputAutocomplete === 'autocomplete' && (
+      {inputAutocomplete === 'autocompleteInyectoras' && (
         <div className='flexAuto'>
           {machines
             .filter((item) => {
@@ -116,6 +137,35 @@ export const CompInput = ({
               <div className='formA' key={item.Maquina}>
                 <ul className='list' onClick={() => onSearch(item.Maquina)}>
                   <li className='list-items'>{item.Maquina}</li>
+                </ul>
+              </div>
+            ))}
+        </div>
+      )}
+
+      {inputAutocomplete === 'autocompleteMoldes' && (
+        <div className='flexAutoMoldes'>
+          {moldes
+            .filter((item) => {
+              const searchTerm = InputState.campo.toLowerCase();
+              const fullItem = item.molde.toLowerCase();
+
+              return (
+                searchTerm &&
+                fullItem.includes(searchTerm) &&
+                InputState.valido === 'false'
+              );
+            })
+
+            .map((item) => (
+              <div className='formA' key={item.molde + '' + item.descripcion}>
+                <ul
+                  className='list'
+                  onClick={() => onSearch(item.molde + ' ' + item.descripcion)}
+                >
+                  <li className='list-items'>
+                    {item.molde} {item.descripcion}
+                  </li>
                 </ul>
               </div>
             ))}

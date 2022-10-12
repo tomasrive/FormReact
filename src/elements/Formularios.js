@@ -43,10 +43,15 @@ const Formulario = styled.form`
   grid-template-columns: 1fr;
   margin: auto;
   width: 80%;
-  margin-top: 50px;
   @media (max-width: 1300px) {
     width: 100%;
   }
+`;
+const GroupInputDate = styled.div`
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 200px 200px;
+  text-align: center;
 `;
 
 const Label = styled.label`
@@ -61,6 +66,11 @@ const Label = styled.label`
     css`
       color: ${colores.error};
     `}
+  ${(props) =>
+    props.validate === 'cursorNone' &&
+    css`
+      cursor: default;
+    `}
 `;
 
 const GroupInput = styled.div`
@@ -70,12 +80,7 @@ const GroupInput = styled.div`
     margin: 0;
   }
 `;
-const GroupInputDate = styled.div`
-  display: grid;
-  justify-content: center;
-  grid-template-columns: 200px 200px;
-  text-align: center;
-`;
+
 const InputDate = styled.input`
   background: ${colores.white};
   border: 0;
@@ -453,7 +458,7 @@ const ContenedorModal = styled.div`
 `;
 const ContenedorModalConfirmar = styled.div`
   width: 50%;
-  min-height: 415px;
+  min-height: 500px;
   background: ${colores.white};
   position: relative;
   border-radius: 10px;
@@ -462,7 +467,7 @@ const ContenedorModalConfirmar = styled.div`
 
   @media (min-width: 480px) and (max-width: 1400px) {
     width: 50%;
-    height: 67vh;
+    height: 82vh;
     padding: 20px;
   }
 `;
@@ -548,37 +553,66 @@ const OrdenReparacion = styled.div`
   & > div {
     overflow-wrap: break-word;
   }
+
   ${(props) =>
     props.validate === 'creado' &&
     css`
+      & > h5:nth-child(6) {
+        text-align: center;
+        border-left: 7px solid black;
+        border-right: 7px solid black;
+      }
       & > h5:last-child {
         text-align: center;
         background: ${colores.error};
+        border-left: 7px solid black;
+        border-right: 7px solid black;
       }
     `}
   ${(props) =>
     props.validate === 'visualizado' &&
     css`
+      & > h5:nth-child(6) {
+        text-align: center;
+        border-left: 7px solid black;
+        border-right: 7px solid black;
+      }
       & > h5:last-child {
         text-align: center;
         background: ${colores.proceso};
+        border-left: 7px solid black;
+        border-right: 7px solid black;
       }
     `}
   ${(props) =>
     props.validate === 'reparado' &&
     css`
+      & > h5:nth-child(6) {
+        text-align: center;
+        border-left: 7px solid black;
+        border-right: 7px solid black;
+      }
       & > h5:last-child {
         text-align: center;
         background: ${colores.exito};
+        border-left: 7px solid black;
+        border-right: 7px solid black;
       }
     `}
 
   ${(props) =>
     props.validate === 'verificado' &&
     css`
+      & > h5:nth-child(6) {
+        text-align: center;
+        border-left: 7px solid black;
+        border-right: 7px solid black;
+      }
       & > h5:last-child {
         text-align: center;
         background: ${colores.verificado};
+        border-left: 7px solid black;
+        border-right: 7px solid black;
       }
     `}
 `;
@@ -613,7 +647,7 @@ const Grid = styled.div`
   grid-template-columns: 0.8fr 1fr;
   align-items: center;
   height: 90vh;
-  padding: 10px;
+  padding: 5px;
 `;
 
 const H5 = styled.h5`

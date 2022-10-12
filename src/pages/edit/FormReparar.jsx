@@ -16,11 +16,11 @@ const URI = 'http://192.168.11.139:4001/api/procesos/forms';
 
 export const FormReparar = () => {
   const [obser, setObser] = useState({ campo: '', valido: null });
+  const [repara, setRepara] = useState({ campo: '', valido: null });
   const [formValidate, setFormValidate] = useState(null);
   const [dataRes, setDataRes] = useState([]);
   const { tabla, id } = useParams();
   const { date, hour } = useDate();
-  const LiderUser = sessionStorage.getItem('LiderUser');
 
   useEffect(() => {
     getData();
@@ -38,6 +38,7 @@ export const FormReparar = () => {
   };
 
   const expresiones = {
+    repara: /^[a-zA-Z0-9À-ÿ\s^.,]{3,200}$/,
     observ: /^[a-zA-Z0-9À-ÿ\s^.,]{3,200}$/,
   };
 
@@ -56,14 +57,14 @@ export const FormReparar = () => {
       recibe: dataRes.recibe,
       fechaReparado: date,
       horaReparado: hour,
-      repara: LiderUser,
+      repara: repara.campo,
       observacionesReparar: obser.campo,
       fechaVerificado: '',
       horaVerificado: '',
       verifica: '',
       observacionesVerificar: '',
       estado: 'reparado',
-      categoria: dataRes.categoria
+      categoria: dataRes.categoria,
     };
 
     if (obser.valido === 'true') {
@@ -76,6 +77,7 @@ export const FormReparar = () => {
         await axios.put(URI + '/' + tabla, data);
       }
 
+      setRepara({ campo: '', valido: null });
       setObser({ campo: '', valido: null });
 
       await timeout(2000);
@@ -140,11 +142,14 @@ export const FormReparar = () => {
           <CompDate date={date} hour={hour} />
 
           <CompInput
-            InputState={LiderUser}
+            InputState={repara}
+            InputSetState={setRepara}
             inputType='text'
             inputLabel='Quien repara'
-            inputName='name'
-            inputDis='disable'
+            inputPlaceholder='Nombre de quien repara'
+            inputName='repara'
+            inputError='El nombre tiene que ser de 3 a 200 dígitos y solo puede contener numeros, letras y guion bajo.'
+            inputExp={expresiones.repara}
           />
 
           <CompInput
