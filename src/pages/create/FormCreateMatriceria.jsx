@@ -17,6 +17,7 @@ import {
 } from '../../Components';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/moldes';
+const URIEmails = 'http://192.168.11.139:4001/api/sendEmails/send/piezas';
 
 function timeout(delay) {
   return new Promise((res) => setTimeout(res, delay));
@@ -72,8 +73,13 @@ export const FormCreateMatriceria = () => {
     console.log('Se mando correctamente');
     setStateModal(!stateModal);
     setFormValidate(true);
+
+    var moldeID = molde.campo.split(' ');
+
+    var resultadoMoldeID = moldeID[0];
+
     await axios.post(URI, {
-      id: molde.campo + year + mes + dia + hora + min,
+      id: resultadoMoldeID + year + mes + dia + hora + min,
       tabla: 'moldes',
       fechaCreado: date,
       horaCreado: hour,
@@ -97,6 +103,17 @@ export const FormCreateMatriceria = () => {
 
       estado: 'creado',
       categoria: radio.checked,
+    });
+
+    await axios.post(URIEmails, {
+      name: 'Diego',
+      lastname: 'Martin',
+      // fechaCreado: '',
+      // horaCreado: '',
+      // molde: '',
+      // lider: '',
+      // descripcion: '',
+      // tabla: '',
     });
 
     setMolde({ campo: '', valido: '' });

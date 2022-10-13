@@ -215,15 +215,20 @@ export const FormVerificado = () => {
           await axios.put(URI + '/' + tabla, data);
         }
       }
-
-      setObser({ campo: '', valido: null });
-      await timeout(2000);
       if (tabla === 'maquinas') {
         data.maquina = dataRes.maquinas;
         await axios.put(URI + '/' + tabla, data);
       } else {
         data.molde = dataRes.moldes;
         await axios.put(URI + '/' + tabla, data);
+      }
+      setObser({ campo: '', valido: null });
+      await timeout(2000);
+
+      if (tabla === 'moldes') {
+        window.location.replace('/CompTableMatriceria');
+      } else {
+        window.location.replace('/CompTableInyectoras');
       }
     } else {
       alert('Completar datos');
@@ -320,7 +325,7 @@ export const FormVerificado = () => {
                 <BotonInicio type='submit'>Atras</BotonInicio>
               </Link>
             ) : (
-              <Link to='/CompTableManInyectoras'>
+              <Link to='/CompTableInyectoras'>
                 <BotonInicio type='submit'>Atras</BotonInicio>
               </Link>
             )}

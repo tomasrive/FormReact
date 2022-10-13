@@ -77,21 +77,28 @@ export const CompTableInyectoras = () => {
   };
 
   data.sort((a, b) => {
+    const creadoA = a.fechaCreado + a.horaCreado;
+    const creadoB = b.fechaCreado + b.horaCreado;
+
     const categoriaA = a.categoria;
     const categoriaB = b.categoria;
 
     const verificadoA = a.horaVerificado + a.horaVerificado;
     const verificadoB = b.fechaVerificado + b.horaVerificado;
 
-    if (categoriaA > categoriaB) {
+    if (creadoA > creadoB) {
       return -1;
     } else {
-      if (verificadoA < verificadoB) {
+      if (categoriaA > categoriaB) {
         return -1;
-      }
+      } else {
+        if (verificadoA < verificadoB) {
+          return -1;
+        }
 
-      if (verificadoA > verificadoB) {
-        return 1;
+        if (verificadoA > verificadoB) {
+          return 1;
+        }
       }
     }
 

@@ -7,6 +7,7 @@ import {
 } from '../elements/Formularios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 export const CompModal = ({ dataTable, state, setState }) => {
   return (
     <>
@@ -15,9 +16,17 @@ export const CompModal = ({ dataTable, state, setState }) => {
           <ContenedorModal>
             <EncabezadoModal>
               <h1>Orden de Reparacion</h1>
-              {dataTable.categoria && dataTable.estado !== 'verificado' && (
-                <span>Orden denegada</span>
-              )}
+              {dataTable.primeraFechaDenegado &&
+                dataTable.estado !== 'verificado' && (
+                  <div>
+                    <span>Orden denegada </span>
+                    <Link
+                      to={`/OrdenDetallada/${dataTable.tabla}/${dataTable.id}`}
+                    >
+                      Ver orden detallada
+                    </Link>
+                  </div>
+                )}
             </EncabezadoModal>
             <BotonCerrar onClick={() => setState(!state)}>
               {<FontAwesomeIcon icon={faClose} />}

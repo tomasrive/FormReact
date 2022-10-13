@@ -17,6 +17,7 @@ import {
 } from './pages';
 
 import { FormReparar, FormVerificado, FormVisualizar } from './pages';
+import { OrdenDetallada } from './pages/OrdenDetallada.jsx';
 
 export default function App() {
   return (
@@ -44,6 +45,8 @@ export default function App() {
         <Route path='/FormReparar/:tabla/:id' element={<FormReparar />} />
 
         <Route path='/FormVerificado/:tabla/:id' element={<FormVerificado />} />
+
+        <Route path='/OrdenDetallada/:tabla/:id' element={<OrdenDetallada />} />
       </Routes>
     </BrowserRouter>
   );

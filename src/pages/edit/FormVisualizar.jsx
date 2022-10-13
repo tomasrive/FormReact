@@ -138,7 +138,7 @@ export const FormVisualizar = () => {
                 <BotonInicio type='submit'>Atras</BotonInicio>
               </Link>
             ) : (
-              <Link to='/CompTableManInyectoras'>
+              <Link to='/CompTableInyectoras'>
                 <BotonInicio type='submit'>Atras</BotonInicio>
               </Link>
             )}

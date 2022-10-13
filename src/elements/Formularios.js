@@ -448,12 +448,12 @@ const ContenedorModal = styled.div`
   position: relative;
   border-radius: 10px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  padding: 30px;
+  padding: 20px;
 
   @media (min-width: 480px) and (max-width: 1400px) {
     width: 90%;
-    height: 95vh;
-    padding: 20px;
+    height: 96vh;
+    padding: 15px;
   }
 `;
 const ContenedorModalConfirmar = styled.div`
@@ -677,6 +677,10 @@ const H5 = styled.h5`
       background: ${colores.verificado};
     `};
 `;
+
+const DivOrdenDetallada = styled.div`
+  padding: 20px;
+`;
 export {
   DivTable,
   Table,
@@ -708,4 +712,5 @@ export {
   H5,
   Grid,
   ContenedorModalDenegar,
+  DivOrdenDetallada,
 };

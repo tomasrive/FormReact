@@ -289,11 +289,23 @@ th:last-child {
   .table-fill .linkMedia {
     width: 40px;
   }
+
   td:nth-child(-n + 9),
   th:nth-child(-n + 9) {
-    width: 15px;
+    width: 14px;
     font-size: 14px;
   }
+  td:nth-child(1),
+  th:nth-child(1) {
+    width: 13px;
+    font-size: 14px;
+  }
+  td:nth-child(2),
+  th:nth-child(2) {
+    width: 20px;
+    font-size: 14px;
+  }
+
   td:nth-child(3),
   th:nth-child(3) {
     width: 16px;
@@ -301,23 +313,27 @@ th:last-child {
   }
   td:nth-child(4),
   th:nth-child(4) {
-    width: 30px;
+    width: 20px;
     font-size: 14px;
   }
   td:nth-child(8),
   th:nth-child(8) {
-    width: 37px;
+    width: 33px;
+    font-size: 14px;
+  }
+  td:nth-child(9),
+  th:nth-child(9) {
+    width: 14px;
     font-size: 14px;
   }
 
   td:last-child,
   th:last-child {
-    width: 17px;
+    width: 15px;
     font-size: 14px;
   }
 
   th {
-    font-size: 15px;
     padding: 4px;
   }
 
@@ -326,8 +342,7 @@ th:last-child {
   }
 
   td {
-    padding: 3px;
-    font-size: 16px;
+    padding: 2px;
   }
   td:last-child {
     text-transform: uppercase;
