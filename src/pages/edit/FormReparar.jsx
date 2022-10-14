@@ -47,14 +47,13 @@ export const FormReparar = () => {
 
     let data = {
       id: id,
-      tabla: tabla,
       fechaCreado: dataRes.fechaCreado,
       horaCreado: dataRes.horaCreado,
       lider: dataRes.lider,
-      descripcion: dataRes.descripcion,
-      fechaVisualizado: dataRes.fechaVisualizado,
-      horaVisualizado: dataRes.horaVisualizado,
-      recibe: dataRes.recibe,
+      problema: dataRes.problema,
+      fechaNotificado: dataRes.fechaNotificado,
+      horaNotificado: dataRes.horaNotificado,
+      notificado: dataRes.notificado,
       fechaReparado: date,
       horaReparado: hour,
       repara: repara.campo,
@@ -69,7 +68,7 @@ export const FormReparar = () => {
 
     if (obser.valido === 'true') {
       setFormValidate(true);
-      if (tabla === 'moldes') {
+      if (dataRes.molde) {
         data.molde = dataRes.molde;
         axios.put(URI + '/' + tabla, data);
       } else {
@@ -80,9 +79,9 @@ export const FormReparar = () => {
       setRepara({ campo: '', valido: null });
       setObser({ campo: '', valido: null });
 
-      await timeout(2000);
+      await timeout(1500);
 
-      if (tabla === 'moldes') {
+      if (dataRes.molde) {
         window.location.replace('/CompTableMatriceria');
       } else {
         window.location.replace('/CompTableInyectoras');
@@ -102,7 +101,7 @@ export const FormReparar = () => {
                 <h3>FECHA CREADO</h3>
                 <h5>{dataRes.fechaCreado}</h5>
 
-                {dataRes.tabla === 'moldes' ? (
+                {dataRes.molde ? (
                   <>
                     <h3>MOLDE</h3>
                     <h5>{dataRes.molde}</h5>
@@ -114,20 +113,20 @@ export const FormReparar = () => {
                   </>
                 )}
 
-                <h3>FECHA VISUALIZADO</h3>
-                <h5>{dataRes.fechaVisualizado}</h5>
-                <h3>QUIEN RECIBIO LA ORDEN</h3>
-                <h5>{dataRes.recibe}</h5>
+                <h3>FECHA NOTIFICADO</h3>
+                <h5>{dataRes.fechaNotificado}</h5>
+                <h3>QUIEN NOTIFICO LA ORDEN</h3>
+                <h5>{dataRes.notificado}</h5>
               </div>
               <div>
                 <h3>HORA CREADO</h3>
                 <h5>{dataRes.horaCreado}</h5>
                 <h3>LIDER QUE CREO LA ORDEN</h3>
                 <h5>{dataRes.lider}</h5>
-                <h3>HORA VISUALIZADO</h3>
-                <h5>{dataRes.horaVisualizado}</h5>
+                <h3>HORA NOTIFICADO</h3>
+                <h5>{dataRes.horaNotificado}</h5>
                 <h3>PROBLEMA</h3>
-                <h5>{dataRes.descripcion}</h5>
+                <h5>{dataRes.problema}</h5>
               </div>
             </div>
           </div>
@@ -166,7 +165,7 @@ export const FormReparar = () => {
           <CompMessage verif={formValidate} />
 
           <ContenedorBotonCentrado>
-            {dataRes.tabla === 'moldes' ? (
+            {dataRes.molde ? (
               <Link to='/CompTableMatriceria'>
                 <BotonInicio type='submit'>Atras</BotonInicio>
               </Link>

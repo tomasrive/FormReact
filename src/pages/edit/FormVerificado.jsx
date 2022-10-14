@@ -54,14 +54,13 @@ export const FormVerificado = () => {
 
     let data = {
       id: id,
-      tabla: tabla,
       fechaCreado: dataRes.fechaCreado,
       horaCreado: dataRes.horaCreado,
       lider: dataRes.lider,
       descripcion: dataRes.descripcion,
-      fechaVisualizado: dataRes.fechaVisualizado,
-      horaVisualizado: dataRes.horaVisualizado,
-      recibe: dataRes.recibe,
+      fechaNotificado: dataRes.fechaNotificado,
+      horaNotificado: dataRes.horaNotificado,
+      notificado: dataRes.notificado,
       fechaReparado: dataRes.fechaReparado,
       horaReparado: dataRes.horaReparado,
       repara: dataRes.repara,
@@ -76,7 +75,7 @@ export const FormVerificado = () => {
 
     if (obser.valido === 'true') {
       setFormValidate(true);
-      if (tabla === 'moldes') {
+      if (dataRes.molde) {
         data.molde = dataRes.moldes;
         await axios.put(URI + '/' + tabla, data);
       } else {
@@ -87,7 +86,7 @@ export const FormVerificado = () => {
       setObser({ campo: '', valido: null });
       await timeout(2000);
 
-      if (tabla === 'moldes') {
+      if (dataRes.molde) {
         window.location.replace('/CompTableMatriceria');
       } else {
         window.location.replace('/CompTableInyectoras');
@@ -109,15 +108,14 @@ export const FormVerificado = () => {
   const sendData = async () => {
     let data = {
       id: id,
-      tabla: tabla,
       fechaCreado: dataRes.fechaCreado,
       horaCreado: dataRes.horaCreado,
       lider: dataRes.lider,
-      descripcion: dataRes.descripcion,
+      problema: dataRes.problema,
 
-      primeraFechaVisualizado: dataRes.fechaVisualizado,
-      primeraHoraVisualizado: dataRes.horaVisualizado,
-      primerRecibe: dataRes.recibe,
+      primeraFechaNotificado: dataRes.fechaNotificado,
+      primeraHoraNotificado: dataRes.horaNotificado,
+      primerNotificado: dataRes.notificado,
       primeraFechaReparado: dataRes.fechaReparado,
       primeraHoraReparado: dataRes.horaReparado,
       primerRepara: dataRes.repara,
@@ -128,9 +126,9 @@ export const FormVerificado = () => {
       primerLiderDenegado: LiderUser,
       primerMotivoDenegado: denegar.campo,
 
-      fechaVisualizado: '',
-      horaVisualizado: '',
-      recibe: '',
+      fechaNotificado: '',
+      horaNotificado: '',
+      notificado: '',
 
       fechaReparado: '',
       horaReparado: '',
@@ -153,9 +151,9 @@ export const FormVerificado = () => {
         data.primerLiderDenegado = dataRes.primerLiderDenegado;
         data.primerMotivoDenegado = dataRes.primerMotivoDenegado;
 
-        data.primeraFechaVisualizado = dataRes.primeraFechaVisualizado;
-        data.primeraHoraVisualizado = dataRes.primeraHoraVisualizado;
-        data.primerRecibe = dataRes.primerRecibe;
+        data.primeraFechaNotificado = dataRes.primeraFechaNotificado;
+        data.primeraHoraNotificado = dataRes.primeraHoraNotificado;
+        data.primerNotificado = dataRes.primerNotificado;
         data.primeraFechaReparado = dataRes.primeraFechaReparado;
         data.primeraHoraReparado = dataRes.primeraHoraReparado;
         data.primerRepara = dataRes.primerRepara;
@@ -166,9 +164,9 @@ export const FormVerificado = () => {
         data.segundoLiderDenegado = LiderUser;
         data.segundoMotivoDenegado = denegar.campo;
 
-        data.segundaFechaVisualizado = dataRes.fechaVisualizado;
-        data.segundaHoraVisualizado = dataRes.horaVisualizado;
-        data.segundoRecibe = dataRes.recibe;
+        data.segundaFechaNotificado = dataRes.fechaNotificado;
+        data.segundaHoraNotificado = dataRes.horaNotificado;
+        data.segundoNotificado = dataRes.notificado;
         data.segundaFechaReparado = dataRes.fechaReparado;
         data.segundaHoraReparado = dataRes.horaReparado;
         data.segundoRepara = dataRes.repara;
@@ -190,7 +188,15 @@ export const FormVerificado = () => {
           data.tercerLiderDenegado = LiderUser;
           data.tercerMotivoDenegado = denegar.campo;
 
-          if (tabla === 'maquinas') {
+          data.terceraFechaNotificado = dataRes.fechaNotificado;
+          data.terceraHoraNotificado = dataRes.horaNotificado;
+          data.tercerNotificado = dataRes.notificado;
+          data.terceraFechaReparado = dataRes.fechaReparado;
+          data.terceraHoraReparado = dataRes.horaReparado;
+          data.tercerRepara = dataRes.repara;
+          data.tercerObservacionesReparar = dataRes.observacionesReparar;
+
+          if (dataRes.maquina) {
             data.maquina = dataRes.maquinas;
             await axios.put(URI + '/' + tabla, data);
           } else {
@@ -199,7 +205,7 @@ export const FormVerificado = () => {
           }
         }
 
-        if (tabla === 'maquinas') {
+        if (dataRes.maquina) {
           data.maquina = dataRes.maquinas;
           await axios.put(URI + '/' + tabla, data);
         } else {
@@ -207,7 +213,7 @@ export const FormVerificado = () => {
           await axios.put(URI + '/' + tabla, data);
         }
       } else {
-        if (tabla === 'maquinas') {
+        if (dataRes.maquina) {
           data.maquina = dataRes.maquinas;
           await axios.put(URI + '/' + tabla, data);
         } else {
@@ -215,7 +221,7 @@ export const FormVerificado = () => {
           await axios.put(URI + '/' + tabla, data);
         }
       }
-      if (tabla === 'maquinas') {
+      if (dataRes.maquina) {
         data.maquina = dataRes.maquinas;
         await axios.put(URI + '/' + tabla, data);
       } else {
@@ -223,9 +229,9 @@ export const FormVerificado = () => {
         await axios.put(URI + '/' + tabla, data);
       }
       setObser({ campo: '', valido: null });
-      await timeout(2000);
+      await timeout(1500);
 
-      if (tabla === 'moldes') {
+      if (dataRes.molde) {
         window.location.replace('/CompTableMatriceria');
       } else {
         window.location.replace('/CompTableInyectoras');
@@ -254,7 +260,7 @@ export const FormVerificado = () => {
                 <h3>HORA CREADO</h3>
                 <h5>{dataRes.horaCreado}</h5>
 
-                {dataRes.tabla === 'moldes' ? (
+                {dataRes.molde ? (
                   <>
                     <h3>MOLDE</h3>
                     <h5>{dataRes.molde}</h5>
@@ -269,15 +275,15 @@ export const FormVerificado = () => {
                 <h3>LIDER QUE CREO LA ORDEN</h3>
                 <h5>{dataRes.lider}</h5>
                 <h3>PROBLEMA</h3>
-                <h5>{dataRes.descripcion}</h5>
-                <h3>FECHA VISUALIZADO</h3>
-                <h5>{dataRes.fechaVisualizado}</h5>
+                <h5>{dataRes.problema}</h5>
+                <h3>FECHA NOTIFICADO</h3>
+                <h5>{dataRes.fechaNotificado}</h5>
               </div>
               <div>
-                <h3>HORA VISUALIZADO</h3>
-                <h5>{dataRes.horaVisualizado}</h5>
-                <h3>QUIEN RECIBIO LA ORDEN</h3>
-                <h5>{dataRes.recibe}</h5>
+                <h3>HORA NOTIFICADO</h3>
+                <h5>{dataRes.horaNotificado}</h5>
+                <h3>QUIEN NOTIFICO LA ORDEN</h3>
+                <h5>{dataRes.notificado}</h5>
                 <h3>FECHA REPARADO</h3>
                 <h5>{dataRes.fechaReparado}</h5>
                 <h3>HORA REPARADO</h3>
@@ -320,7 +326,7 @@ export const FormVerificado = () => {
           <CompMessage verif={formValidate} />
 
           <ContenedorBotonCentrado>
-            {dataRes.tabla === 'moldes' ? (
+            {dataRes.molde ? (
               <Link to='/CompTableMatriceria'>
                 <BotonInicio type='submit'>Atras</BotonInicio>
               </Link>

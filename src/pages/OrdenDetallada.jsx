@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { DivOrdenDetallada, OrdenReparacion } from '../elements/Formularios';
+import {
+  BotonInicioTabla,
+  DivOrdenDetallada,
+  OrdenReparacion,
+} from '../elements/Formularios';
 
 export const OrdenDetallada = () => {
   const [data, setData] = useState([]);
@@ -11,6 +15,7 @@ export const OrdenDetallada = () => {
 
   useEffect(() => {
     getData();
+    // eslint-disable-next-line
   }, []);
 
   const getData = async () => {
@@ -29,7 +34,20 @@ export const OrdenDetallada = () => {
   return (
     <>
       <DivOrdenDetallada>
-        <h1>DETALLES DE MOTIVOS DE DENEGACION:</h1>
+        {data.molde ? (
+          <BotonInicioTabla
+            onClick={() => window.location.replace('/CompTableMatriceria')}
+          >
+            Atras
+          </BotonInicioTabla>
+        ) : (
+          <BotonInicioTabla
+            onClick={() => window.location.replace('/CompTableInyectoras')}
+          >
+            Atras
+          </BotonInicioTabla>
+        )}
+        <h2>DETALLES DE MOTIVOS DE DENEGACION:</h2>
         <div className='divGrid'>
           <h4>ID de la orden:</h4>
           <h5>{id}</h5>
@@ -45,13 +63,13 @@ export const OrdenDetallada = () => {
             <h4>Primer hora denegada</h4>
             <h5>{data.primeraHoraDenegado}</h5>
             <h4>Primer fecha notificado</h4>
-            <h5>{data.primeraFechaVisualizado}</h5>
+            <h5>{data.primeraFechaNotificado}</h5>
             <h4>Primer hora notificado</h4>
-            <h5>{data.primeraHoraVisualizado}</h5>
+            <h5>{data.primeraHoraNotificado}</h5>
           </div>
           <div>
             <h4>Primer persona notificada</h4>
-            <h5>{data.primerRecibe}</h5>
+            <h5>{data.primerNotificado}</h5>
             <h4>Primer fecha reparado</h4>
             <h5>{data.primeraFechaReparado}</h5>
             <h4>Primer hora reparado</h4>
@@ -74,13 +92,13 @@ export const OrdenDetallada = () => {
                 <h4>Segunda hora denegada</h4>
                 <h5>{data.segundaHoraDenegado}</h5>
                 <h4>Segunda fecha notificado</h4>
-                <h5>{data.segundaFechaVisualizado}</h5>
+                <h5>{data.segundaFechaNotificado}</h5>
                 <h4>Segunda hora notificado</h4>
-                <h5>{data.segundaHoraVisualizado}</h5>
+                <h5>{data.segundaHoraNotificado}</h5>
               </div>
               <div>
                 <h4>Segunda persona notificada</h4>
-                <h5>{data.segundaRecibe}</h5>
+                <h5>{data.segundoNotificado}</h5>
                 <h4>Segunda fecha reparado</h4>
                 <h5>{data.segundaFechaReparado}</h5>
                 <h4>Segunda hora reparado</h4>

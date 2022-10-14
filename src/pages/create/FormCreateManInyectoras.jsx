@@ -17,6 +17,7 @@ import {
 } from '../../Components';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/maquinas';
+// const URIEmails = 'http://192.168.11.139:4001/api/sendEmails/send/piezas';
 
 function timeout(delay) {
   return new Promise((res) => setTimeout(res, delay));
@@ -37,8 +38,7 @@ export const FormCreateInyectoras = () => {
     horaCreado: '',
     maquinas: '',
     lider: '',
-    descripcion: '',
-    tabla: '',
+    problema: '',
   });
 
   const expresiones = {
@@ -59,9 +59,8 @@ export const FormCreateInyectoras = () => {
         horaCreado: hour,
         maquina: maquinas.campo,
         lider: LiderUser,
-        descripcion: message.campo,
+        problema: message.campo,
         categoria: radio.checked,
-        tabla: 'maquinas',
       });
     } else {
       setFormValidate(false);
@@ -73,16 +72,15 @@ export const FormCreateInyectoras = () => {
     setFormValidate(true);
     await axios.post(URI, {
       id: maquinas.campo + year + mes + dia + hora + min,
-      tabla: 'maquinas',
       fechaCreado: date,
       horaCreado: hour,
       maquina: maquinas.campo,
       lider: LiderUser,
-      descripcion: message.campo,
+      problema: message.campo,
 
-      fechaVisualizado: '',
-      horaVisualizado: '',
-      recibe: '',
+      fechaNotificado: '',
+      horaNotificado: '',
+      notificado: '',
 
       fechaReparado: '',
       horaReparado: '',
@@ -98,10 +96,20 @@ export const FormCreateInyectoras = () => {
       categoria: radio.checked,
     });
 
+    // await axios.post(URIEmails, {
+    //   name: 'Diego',
+    //   lastname: 'Martin',
+    //   // fechaCreado: '',
+    //   // horaCreado: '',
+    //   // molde: '',
+    //   // lider: '',
+    //   // descripcion: '',
+    // });
+
     setMaquinas({ campo: '', valido: '' });
     setMessage({ campo: '', valido: null });
 
-    await timeout(2000);
+    await timeout(1500);
     window.location.replace('/CompTableInyectoras');
   };
 

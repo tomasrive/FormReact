@@ -126,7 +126,7 @@ export const CompTableInyectoras = () => {
           </div>
           <div className='coloresTable'>
             <div className='amarillo'></div>
-            <p>VISUALIZADO</p>
+            <p>NOTIFICADO</p>
 
             <div className='azul'></div>
             <p>VERIFICADO</p>
@@ -142,7 +142,7 @@ export const CompTableInyectoras = () => {
               <div>
                 <FontAwesomeIcon className='linkMedia' icon={faEye} />
               </div>
-              <p>VISUALIZAR</p>
+              <p>NOTIFICAR</p>
               <div>
                 <FontAwesomeIcon
                   className='linkMedia'
@@ -201,7 +201,7 @@ export const CompTableInyectoras = () => {
               <th>Maquinas</th>
               <th>Lider que creo la orden:</th>
               <th>Problema:</th>
-              <th>Fecha y hora visualizado</th>
+              <th>Fecha y hora notificado</th>
               <th>Fecha y hora reparado</th>
               <th>Fecha y hora verificacion</th>
               <th>Opciones</th>

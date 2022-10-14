@@ -357,7 +357,7 @@ const TR = styled.tr`
       background: ${colores.error} !important;
     `}
   ${(props) =>
-    props.validate === 'visualizado' &&
+    props.validate === 'notificado' &&
     css`
       text-align: center;
       background: ${colores.proceso} !important;
@@ -395,7 +395,7 @@ const DivOpciones = styled.div`
       }
     `}
   ${(props) =>
-    props.validate === 'visualizado' &&
+    props.validate === 'notificado' &&
     css`
       a:nth-child(1),
       a:nth-child(3) {
@@ -570,7 +570,7 @@ const OrdenReparacion = styled.div`
       }
     `}
   ${(props) =>
-    props.validate === 'visualizado' &&
+    props.validate === 'notificado' &&
     css`
       & > h5:nth-child(6) {
         text-align: center;
@@ -659,7 +659,7 @@ const H5 = styled.h5`
       background: ${colores.error};
     `}
   ${(props) =>
-    props.validate === 'visualizado' &&
+    props.validate === 'notificado' &&
     css`
       text-align: center;
       background: ${colores.proceso};
@@ -679,7 +679,10 @@ const H5 = styled.h5`
 `;
 
 const DivOrdenDetallada = styled.div`
-  padding: 20px;
+  padding: 12px 15px 0 15px;
+  & > h2 {
+    margin-top: 20px;
+  }
 `;
 export {
   DivTable,

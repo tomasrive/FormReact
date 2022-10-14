@@ -32,7 +32,6 @@ export const FormVisualizar = () => {
 
   const getData = async () => {
     const res = await axios.get(URI + '/' + tabla);
-    console.log(res.data);
     const result = res.data.filter((idDB) => idDB.id === id);
     setDataRes(result[0]);
   };
@@ -43,14 +42,13 @@ export const FormVisualizar = () => {
 
     let data = {
       id: id,
-      tabla: tabla,
       fechaCreado: dataRes.fechaCreado,
       horaCreado: dataRes.horaCreado,
       lider: dataRes.lider,
-      descripcion: dataRes.descripcion,
-      fechaVisualizado: date,
-      horaVisualizado: hour,
-      recibe: LiderUser,
+      problema: dataRes.problema,
+      fechaNotificado: date,
+      horaNotificado: hour,
+      notificado: LiderUser,
       fechaReparado: '',
       horaReparado: '',
       repara: '',
@@ -59,11 +57,11 @@ export const FormVisualizar = () => {
       horaVerificado: '',
       verifica: '',
       observacionesVerificar: '',
-      estado: 'visualizado',
+      estado: 'notificado',
       categoria: dataRes.categoria,
     };
 
-    if (tabla === 'moldes') {
+    if (dataRes.molde) {
       data.molde = dataRes.molde;
       axios.put(URI + '/' + tabla, data);
     } else {
@@ -71,9 +69,9 @@ export const FormVisualizar = () => {
       await axios.put(URI + '/' + tabla, data);
     }
 
-    await timeout(2000);
+    await timeout(1500);
 
-    if (tabla === 'moldes') {
+    if (dataRes.molde) {
       window.location.replace('/CompTableMatriceria');
     } else {
       window.location.replace('/CompTableInyectoras');
@@ -97,7 +95,7 @@ export const FormVisualizar = () => {
                 <h3>HORA CREADO</h3>
                 <h5>{dataRes.horaCreado}</h5>
 
-                {dataRes.tabla === 'moldes' ? (
+                {dataRes.molde ? (
                   <>
                     <h3>MOLDE</h3>
                     <h5>{dataRes.molde}</h5>
@@ -111,21 +109,21 @@ export const FormVisualizar = () => {
               </div>
             </div>
             <h3>PROBLEMA</h3>
-            <h5>{dataRes.descripcion}</h5>
+            <h5>{dataRes.problema}</h5>
           </div>
           <h3>ESTADO</h3>
           <H5 validate={dataRes.estado}>{dataRes.estado}</H5>
         </section>
 
         <Formulario action='' onSubmit={onSubmit}>
-          <h1>Pieza "{id}" (VISUALIZADA)</h1>
+          <h1>Pieza "{id}" (NOTIFICADA)</h1>
 
           <CompDate date={date} hour={hour} />
 
           <CompInput
             InputState={LiderUser}
             inputType='text'
-            inputLabel='Lider que visualiza'
+            inputLabel='Lider se notifica'
             inputName='name'
             inputDis='disable'
           />
@@ -133,7 +131,7 @@ export const FormVisualizar = () => {
           <CompMessage verif={formValidate} />
 
           <ContenedorBotonCentrado>
-            {dataRes.tabla === 'moldes' ? (
+            {dataRes.molde ? (
               <Link to='/CompTableMatriceria'>
                 <BotonInicio type='submit'>Atras</BotonInicio>
               </Link>
@@ -143,7 +141,7 @@ export const FormVisualizar = () => {
               </Link>
             )}
             <Boton type='submit' validate='valid'>
-              Visualizado
+              Notificado
             </Boton>
           </ContenedorBotonCentrado>
         </Formulario>

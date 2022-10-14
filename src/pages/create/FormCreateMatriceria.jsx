@@ -17,7 +17,7 @@ import {
 } from '../../Components';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/moldes';
-const URIEmails = 'http://192.168.11.139:4001/api/sendEmails/send/piezas';
+// const URIEmails = 'http://192.168.11.139:4001/api/sendEmails/send/piezas';
 
 function timeout(delay) {
   return new Promise((res) => setTimeout(res, delay));
@@ -39,7 +39,6 @@ export const FormCreateMatriceria = () => {
     molde: '',
     lider: '',
     descripcion: '',
-    tabla: '',
   });
 
   const expresiones = {
@@ -60,9 +59,8 @@ export const FormCreateMatriceria = () => {
         horaCreado: hour,
         molde: molde.campo,
         lider: LiderUser,
-        descripcion: message.campo,
+        problema: message.campo,
         categoria: radio.checked,
-        tabla: 'moldes',
       });
     } else {
       setFormValidate(false);
@@ -80,16 +78,15 @@ export const FormCreateMatriceria = () => {
 
     await axios.post(URI, {
       id: resultadoMoldeID + year + mes + dia + hora + min,
-      tabla: 'moldes',
       fechaCreado: date,
       horaCreado: hour,
       molde: molde.campo,
       lider: LiderUser,
-      descripcion: message.campo,
+      problema: message.campo,
 
-      fechaVisualizado: '',
-      horaVisualizado: '',
-      recibe: '',
+      fechaNotificado: '',
+      horaNotificado: '',
+      notificado: '',
 
       fechaReparado: '',
       horaReparado: '',
@@ -105,21 +102,20 @@ export const FormCreateMatriceria = () => {
       categoria: radio.checked,
     });
 
-    await axios.post(URIEmails, {
-      name: 'Diego',
-      lastname: 'Martin',
-      // fechaCreado: '',
-      // horaCreado: '',
-      // molde: '',
-      // lider: '',
-      // descripcion: '',
-      // tabla: '',
-    });
+    // await axios.post(URIEmails, {
+    //   name: 'Diego',
+    //   lastname: 'Martin',
+    //   // fechaCreado: '',
+    //   // horaCreado: '',
+    //   // molde: '',
+    //   // lider: '',
+    //   // descripcion: '',
+    // });
 
     setMolde({ campo: '', valido: '' });
     setMessage({ campo: '', valido: null });
 
-    await timeout(2000);
+    await timeout(1500);
     window.location.replace('/CompTableMatriceria');
   };
 

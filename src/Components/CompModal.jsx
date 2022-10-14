@@ -19,12 +19,21 @@ export const CompModal = ({ dataTable, state, setState }) => {
               {dataTable.primeraFechaDenegado &&
                 dataTable.estado !== 'verificado' && (
                   <div>
-                    <span>Orden denegada </span>
-                    <Link
-                      to={`/OrdenDetallada/${dataTable.tabla}/${dataTable.id}`}
-                    >
-                      Ver orden detallada
-                    </Link>
+                    {dataTable.molde ? (
+                      <>
+                        <span>Orden denegada </span>
+                        <Link to={`/OrdenDetallada/moldes/${dataTable.id}`}>
+                          (Ver orden detallada)
+                        </Link>
+                      </>
+                    ) : (
+                      <>
+                        <span>Orden denegada </span>
+                        <Link to={`/OrdenDetallada/maquinas/${dataTable.id}`}>
+                          (Ver orden detallada)
+                        </Link>
+                      </>
+                    )}
                   </div>
                 )}
             </EncabezadoModal>
@@ -42,7 +51,7 @@ export const CompModal = ({ dataTable, state, setState }) => {
                 <h4>Hora Creacion</h4>
                 <h5>{dataTable.horaCreado}</h5>
 
-                {dataTable.tabla === 'moldes' ? (
+                {dataTable.molde ? (
                   <>
                     <h4>Molde</h4>
                     <h5>{dataTable.molde}</h5>

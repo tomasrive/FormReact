@@ -89,7 +89,7 @@ export const CompTableMatriceria = () => {
       return -1;
     } else {
       if (categoriaA > categoriaB) {
-        return -1;
+        return 1;
       } else {
         if (verificadoA < verificadoB) {
           return -1;
@@ -123,7 +123,7 @@ export const CompTableMatriceria = () => {
           </div>
           <div className='coloresTable'>
             <div className='amarillo'></div>
-            <p>VISUALIZADO</p>
+            <p>NOTIFICADO</p>
 
             <div className='azul'></div>
             <p>VERIFICADO</p>
@@ -139,7 +139,7 @@ export const CompTableMatriceria = () => {
               <div>
                 <FontAwesomeIcon className='linkMedia' icon={faEye} />
               </div>
-              <p>VISUALIZAR</p>
+              <p>NOTIFICAR</p>
               <div>
                 <FontAwesomeIcon
                   className='linkMedia'
@@ -198,7 +198,7 @@ export const CompTableMatriceria = () => {
               <th>Moldes</th>
               <th>Lider que creo la orden:</th>
               <th>Problema:</th>
-              <th>Fecha y hora visualizado</th>
+              <th>Fecha y hora notificado</th>
               <th>Fecha y hora reparado</th>
               <th>Fecha y hora verificacion</th>
               <th>Opciones</th>

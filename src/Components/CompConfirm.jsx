@@ -33,7 +33,7 @@ export const CompConfirm = ({ dataTable, state, setState, send }) => {
                 <section>
                   <h4>Hora Creacion:</h4>
                   <h5>{dataTable.horaCreado}</h5>
-                  {dataTable.tabla === 'moldes' ? (
+                  {dataTable.molde ? (
                     <>
                       <h4>Molde u otro periferico:</h4>
                       <h5>{dataTable.molde}</h5>
@@ -48,8 +48,7 @@ export const CompConfirm = ({ dataTable, state, setState, send }) => {
               </div>
 
               <h4>Descripcion:</h4>
-              <h5>{dataTable.descripcion}</h5>
-
+              <h5>{dataTable.problema}</h5>
             </OrdenReparacionConfirmar>
             <ContenedorBotonCentrado>
               <Boton onClick={() => setState(!state)}>Cerrar</Boton>
