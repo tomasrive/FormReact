@@ -65,17 +65,17 @@ export const CompModal = ({ dataTable, state, setState }) => {
 
                 <h4>Lider a cargo</h4>
                 <h5>{dataTable.lider}</h5>
-                <h4>Descripcion</h4>
-                <h5>{dataTable.descripcion}</h5>
+                <h4>Problema</h4>
+                <h5>{dataTable.problema}</h5>
               </div>
 
               <div>
                 <h4>Fecha Visualizado</h4>
-                <h5>{dataTable.fechaVisualizado}</h5>
+                <h5>{dataTable.fechaNotificado}</h5>
                 <h4>Hora Visualizado</h4>
-                <h5>{dataTable.horaVisualizado}</h5>
+                <h5>{dataTable.horaNotificado}</h5>
                 <h4>Quien recibe</h4>
-                <h5>{dataTable.recibe}</h5>
+                <h5>{dataTable.notificado}</h5>
               </div>
 
               <div>

@@ -48,8 +48,12 @@ export const CompTableMatriceria = () => {
   };
 
   const deleteRow = async (dataTable) => {
-    await axios.delete(URI + '/' + dataTable.id);
-    window.location.reload();
+    try {
+      await axios.delete(URI + '/' + dataTable.id);
+      window.location.reload();
+    } catch (error) {
+      alert('No se pudo eliminar la orden');
+    }
   };
 
   useEffect(() => {
@@ -89,7 +93,7 @@ export const CompTableMatriceria = () => {
       return -1;
     } else {
       if (categoriaA > categoriaB) {
-        return 1;
+        return -1;
       } else {
         if (verificadoA < verificadoB) {
           return -1;
@@ -196,14 +200,14 @@ export const CompTableMatriceria = () => {
             <tr>
               <th>Fecha y hora creado</th>
               <th>Moldes</th>
-              <th>Lider que creo la orden:</th>
-              <th>Problema:</th>
+              <th>Lider que creo la orden</th>
+              <th>Problema</th>
               <th>Fecha y hora notificado</th>
               <th>Fecha y hora reparado</th>
               <th>Fecha y hora verificacion</th>
               <th>Opciones</th>
-              <th>Estado:</th>
-              <th>Categoria:</th>
+              <th>Estado</th>
+              <th>Categoria</th>
             </tr>
           </thead>
           <tbody>

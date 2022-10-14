@@ -506,7 +506,7 @@ const EncabezadoModal = styled.div`
   }
   @media (min-width: 480px) and (max-width: 1400px) {
     margin-bottom: 0px;
-    padding-bottom: 5px;
+    padding-bottom: 15px;
   }
 `;
 const BotonCerrar = styled.button`

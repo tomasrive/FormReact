@@ -76,8 +76,12 @@ export const FormCreateMatriceria = () => {
 
     var resultadoMoldeID = moldeID[0];
 
+    const result = resultadoMoldeID.replace('/', '-');
+    
+    console.log(result);
+
     await axios.post(URI, {
-      id: resultadoMoldeID + year + mes + dia + hora + min,
+      id: result + year + mes + dia + hora + min,
       fechaCreado: date,
       horaCreado: hour,
       molde: molde.campo,
@@ -103,13 +107,11 @@ export const FormCreateMatriceria = () => {
     });
 
     // await axios.post(URIEmails, {
-    //   name: 'Diego',
-    //   lastname: 'Martin',
-    //   // fechaCreado: '',
-    //   // horaCreado: '',
-    //   // molde: '',
-    //   // lider: '',
-    //   // descripcion: '',
+    //   fechaCreado: '',
+    //   horaCreado: '',
+    //   molde: '',
+    //   lider: '',
+    //   problema: '',
     // });
 
     setMolde({ campo: '', valido: '' });

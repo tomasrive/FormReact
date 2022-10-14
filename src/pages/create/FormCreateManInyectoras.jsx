@@ -97,13 +97,11 @@ export const FormCreateInyectoras = () => {
     });
 
     // await axios.post(URIEmails, {
-    //   name: 'Diego',
-    //   lastname: 'Martin',
-    //   // fechaCreado: '',
-    //   // horaCreado: '',
-    //   // molde: '',
-    //   // lider: '',
-    //   // descripcion: '',
+    //   fechaCreado: '',
+    //   horaCreado: '',
+    //   maquina: '',
+    //   lider: '',
+    //   problema: '',
     // });
 
     setMaquinas({ campo: '', valido: '' });

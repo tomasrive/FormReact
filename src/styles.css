@@ -186,6 +186,10 @@ tbody {
   width: calc(100% - 0.65em);
 }
 
+/* tbody tr:last-child {
+  display: none;
+} */
+
 thead,
 tbody tr {
   display: table;
@@ -411,7 +415,7 @@ ul {
 
 .divGrid {
   display: grid;
-  grid-template-columns: 150px 200px;
+  grid-template-columns: 150px 250px;
   align-items: center;
   margin: 15px 0 12px 0;
 }
