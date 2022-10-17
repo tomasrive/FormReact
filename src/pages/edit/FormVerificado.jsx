@@ -16,12 +16,14 @@ import {
   CompMessage,
   CompDenegado,
 } from '../../Components';
+import { useInputs } from '../../elements/useInputs';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms';
 
 export const FormVerificado = () => {
-  const [obser, setObser] = useState({ campo: '', valido: null });
-  const [denegar, setDenegar] = useState({ campo: '', valido: null });
+
+  const { obserVerifica, setObserVerifica, obserDenega, setObserDenega, expresiones } = useInputs()
+
   const [formValidate, setFormValidate] = useState(null);
   const [dataRes, setDataRes] = useState([]);
   const { tabla, id } = useParams();
@@ -44,10 +46,6 @@ export const FormVerificado = () => {
     setDataRes(result[0]);
   };
 
-  const expresiones = {
-    observ: /^[a-zA-Z0-9À-ÿ\s^.,]{3,150}$/,
-    mensaje: /^[a-zA-Z0-9À-ÿ\s^.,]{3,150}$/,
-  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -68,12 +66,12 @@ export const FormVerificado = () => {
       fechaVerificado: date,
       horaVerificado: hour,
       verifica: LiderUser,
-      observacionesVerificar: obser.campo,
+      observacionesVerificar: obserVerifica.campo,
       estado: 'verificado',
       categoria: dataRes.categoria,
     };
 
-    if (obser.valido === 'true') {
+    if (obserVerifica.valido === 'true') {
       setFormValidate(true);
       if (dataRes.molde) {
         data.molde = dataRes.moldes;
@@ -83,7 +81,7 @@ export const FormVerificado = () => {
         await axios.put(URI + '/' + tabla, data);
       }
 
-      setObser({ campo: '', valido: null });
+      setObserVerifica({ campo: '', valido: null });
       await timeout(2000);
 
       if (dataRes.molde) {
@@ -98,7 +96,7 @@ export const FormVerificado = () => {
 
   const ordenDenegada = (e) => {
     e.preventDefault();
-    if (obser.valido !== 'true') {
+    if (obserVerifica.valido !== 'true') {
       setStateModal(!stateModal);
     } else {
       alert('Debe borrar los datos para denegar la orden');
@@ -124,7 +122,7 @@ export const FormVerificado = () => {
       primeraFechaDenegado: date,
       primeraHoraDenegado: hour,
       primerLiderDenegado: LiderUser,
-      primerMotivoDenegado: denegar.campo,
+      primerMotivoDenegado: obserDenega.campo,
 
       fechaNotificado: '',
       horaNotificado: '',
@@ -144,7 +142,7 @@ export const FormVerificado = () => {
       categoria: dataRes.categoria,
     };
 
-    if (denegar.valido === 'true') {
+    if (obserDenega.valido === 'true') {
       if (dataRes.primeraFechaDenegado) {
         data.primeraFechaDenegado = dataRes.primeraFechaDenegado;
         data.primeraHoraDenegado = dataRes.primeraHoraDenegado;
@@ -162,7 +160,7 @@ export const FormVerificado = () => {
         data.segundaFechaDenegado = date;
         data.segundaHoraDenegado = hour;
         data.segundoLiderDenegado = LiderUser;
-        data.segundoMotivoDenegado = denegar.campo;
+        data.segundoMotivoDenegado = obserDenega.campo;
 
         data.segundaFechaNotificado = dataRes.fechaNotificado;
         data.segundaHoraNotificado = dataRes.horaNotificado;
@@ -186,7 +184,7 @@ export const FormVerificado = () => {
           data.terceraFechaDenegado = date;
           data.terceraHoraDenegado = hour;
           data.tercerLiderDenegado = LiderUser;
-          data.tercerMotivoDenegado = denegar.campo;
+          data.tercerMotivoDenegado = obserDenega.campo;
 
           data.terceraFechaNotificado = dataRes.fechaNotificado;
           data.terceraHoraNotificado = dataRes.horaNotificado;
@@ -228,7 +226,7 @@ export const FormVerificado = () => {
         data.molde = dataRes.moldes;
         await axios.put(URI + '/' + tabla, data);
       }
-      setObser({ campo: '', valido: null });
+      setObserVerifica({ campo: '', valido: null });
       await timeout(1500);
 
       if (dataRes.molde) {
@@ -246,8 +244,8 @@ export const FormVerificado = () => {
       <CompDenegado
         state={stateModal}
         setState={setStateModal}
-        denegar={denegar}
-        setDenegar={setDenegar}
+        denegar={obserDenega}
+        setDenegar={setObserDenega}
         send={sendData}
       />
       <Grid>
@@ -309,18 +307,18 @@ export const FormVerificado = () => {
             inputLabel='Lider que verifica'
             inputName='name'
             inputDis='disable'
-            mensaje={expresiones.mensaje}
+            mensaje={expresiones.verifica}
           />
 
           <CompInput
-            InputState={obser}
-            InputSetState={setObser}
+            InputState={obserVerifica}
+            InputSetState={setObserVerifica}
             inputType='text'
             inputLabel='Observacion (VERIFICADO)'
             inputPlaceholder='Observacion a tener en cuenta'
             inputName='recibe'
             inputError='La observacion a tener en cuenta tiene que ser de 3 a 200 dígitos y solo puede contener numeros, letras y guion bajo.'
-            inputExp={expresiones.observ}
+            inputExp={expresiones.obserVerifica}
           />
 
           <CompMessage verif={formValidate} />

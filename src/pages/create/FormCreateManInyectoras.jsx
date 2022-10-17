@@ -15,6 +15,7 @@ import {
   CompDate,
   CompConfirm,
 } from '../../Components';
+import { useInputs } from '../../elements/useInputs';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/maquinas';
 // const URIEmails = 'http://192.168.11.139:4001/api/sendEmails/send/piezas';
@@ -24,8 +25,8 @@ function timeout(delay) {
 }
 
 export const FormCreateInyectoras = () => {
-  const [maquinas, setMaquinas] = useState({ campo: '', valido: null });
-  const [message, setMessage] = useState({ campo: '', valido: null });
+  const { maquinas, setMaquinas, messageMaquinas, setMessageMaquinas, expresiones } = useInputs()
+
   const [formValidate, setFormValidate] = useState(null);
   const { date, hour, dia, mes, year, hora, min } = useDate();
   const LiderUser = sessionStorage.getItem('LiderUser');
@@ -41,25 +42,20 @@ export const FormCreateInyectoras = () => {
     problema: '',
   });
 
-  const expresiones = {
-    maquinas: /^[‎]$/,
-    mensaje: /^[a-zA-Z0-9À-ÿ\s^.,]{3,200}$/,
-  };
-
   const changeButton = (e) => {
     setRadio({ checked: e.target.value });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (maquinas.valido === 'true' && message.valido === 'true') {
+    if (maquinas.valido === 'true' && messageMaquinas.valido === 'true') {
       setStateModal(!stateModal);
       setDataModal({
         fechaCreado: date,
         horaCreado: hour,
         maquina: maquinas.campo,
         lider: LiderUser,
-        problema: message.campo,
+        problema: messageMaquinas.campo,
         categoria: radio.checked,
       });
     } else {
@@ -76,7 +72,7 @@ export const FormCreateInyectoras = () => {
       horaCreado: hour,
       maquina: maquinas.campo,
       lider: LiderUser,
-      problema: message.campo,
+      problema: messageMaquinas.campo,
 
       fechaNotificado: '',
       horaNotificado: '',
@@ -105,7 +101,7 @@ export const FormCreateInyectoras = () => {
     // });
 
     setMaquinas({ campo: '', valido: '' });
-    setMessage({ campo: '', valido: null });
+    setMessageMaquinas({ campo: '', valido: null });
 
     await timeout(1500);
     window.location.replace('/CompTableInyectoras');
@@ -144,14 +140,14 @@ export const FormCreateInyectoras = () => {
         />
 
         <CompInput
-          InputState={message}
-          InputSetState={setMessage}
+          InputState={messageMaquinas}
+          InputSetState={setMessageMaquinas}
           inputType='text'
           inputLabel='F0-07-02-32 - Sector Mantenimiento de Inyectoras - Descripcion de rotura/problema:'
           inputPlaceholder='Descripcion de rotura/problema'
           inputName='message'
           inputError='La descripcion tiene que ser de 3 a 200 dígitos y solo puede contener letras y espacios.'
-          inputExp={expresiones.mensaje}
+          inputExp={expresiones.problemaMaquinas}
         />
 
         <CompMessage verif={formValidate} />

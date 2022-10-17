@@ -15,6 +15,7 @@ import {
   CompInput,
   CompConfirm,
 } from '../../Components';
+import { useInputs } from '../../elements/useInputs';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/moldes';
 // const URIEmails = 'http://192.168.11.139:4001/api/sendEmails/send/piezas';
@@ -24,8 +25,9 @@ function timeout(delay) {
 }
 
 export const FormCreateMatriceria = () => {
-  const [molde, setMolde] = useState({ campo: '', valido: null });
-  const [message, setMessage] = useState({ campo: '', valido: null });
+
+  const { molde, setMolde, messageMolde, setMessageMolde, expresiones } = useInputs()
+
   const [formValidate, setFormValidate] = useState(null);
   const { date, hour, dia, mes, year, hora, min } = useDate();
   const LiderUser = sessionStorage.getItem('LiderUser');
@@ -41,10 +43,7 @@ export const FormCreateMatriceria = () => {
     descripcion: '',
   });
 
-  const expresiones = {
-    molde: /^[‎]$/,
-    mensaje: /^[a-zA-Z0-9À-ÿ\s^.,]{3,200}$/,
-  };
+
 
   const changeButton = (e) => {
     setRadio({ checked: e.target.value });
@@ -52,14 +51,14 @@ export const FormCreateMatriceria = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (molde.valido === 'true' && message.valido === 'true') {
+    if (molde.valido === 'true' && messageMolde.valido === 'true') {
       setStateModal(!stateModal);
       setDataModal({
         fechaCreado: date,
         horaCreado: hour,
         molde: molde.campo,
         lider: LiderUser,
-        problema: message.campo,
+        problema: messageMolde.campo,
         categoria: radio.checked,
       });
     } else {
@@ -77,7 +76,7 @@ export const FormCreateMatriceria = () => {
     var resultadoMoldeID = moldeID[0];
 
     const result = resultadoMoldeID.replace('/', '-');
-    
+
     console.log(result);
 
     await axios.post(URI, {
@@ -86,7 +85,7 @@ export const FormCreateMatriceria = () => {
       horaCreado: hour,
       molde: molde.campo,
       lider: LiderUser,
-      problema: message.campo,
+      problema: messageMolde.campo,
 
       fechaNotificado: '',
       horaNotificado: '',
@@ -115,7 +114,7 @@ export const FormCreateMatriceria = () => {
     // });
 
     setMolde({ campo: '', valido: '' });
-    setMessage({ campo: '', valido: null });
+    setMessageMolde({ campo: '', valido: null });
 
     await timeout(1500);
     window.location.replace('/CompTableMatriceria');
@@ -154,14 +153,14 @@ export const FormCreateMatriceria = () => {
         />
 
         <CompInput
-          InputState={message}
-          InputSetState={setMessage}
+          InputState={messageMolde}
+          InputSetState={setMessageMolde}
           inputType='text'
           inputLabel='F0-07-02-32 - Sector Matriceria - Descripcion de rotura/problema:'
           inputPlaceholder='Descripcion de rotura/problema'
           inputName='message'
           inputError='La descripcion tiene que ser de 3 a 200 dígitos y solo puede contener letras y espacios.'
-          inputExp={expresiones.mensaje}
+          inputExp={expresiones.problemaMoldes}
         />
 
         <CompMessage verif={formValidate} />

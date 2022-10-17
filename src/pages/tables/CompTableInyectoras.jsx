@@ -1,61 +1,21 @@
 import { useEffect, useState } from 'react';
 import {
-  BotonInicio,
   BotonInicioTabla,
-  ContenedorBotonCentrado,
   ContenedorBotonInicio,
 } from '../../elements/Formularios';
 import axios from 'axios';
-import { CompModal, CompRow } from '../../Components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCheckCircle,
-  faEye,
-  faScrewdriverWrench,
-  faTrash,
-} from '@fortawesome/free-solid-svg-icons';
+import { CompModal, Options, Table } from '../../Components';
+import { useOptions } from '../../elements/useOptions';
+import { ButtonSesion } from '../../Components/ButtonSesion';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/maquinas';
 
 export const CompTableInyectoras = () => {
   const [data, setData] = useState([]);
-  const [stateModal, setStateModal] = useState(false);
-  const [dataModal, setDataModal] = useState({
-    id: '',
-    tabla: 'maquinas',
-    fechaCreado: '',
-    horaCreado: '',
-    maquinas: '',
-    lider: '',
-    descripcion: '',
-    fechaVisualizado: '',
-    horaVisualizado: '',
-    recibe: '',
-    fechaReparado: '',
-    horaReparado: '',
-    repara: '',
-    observacionesReparar: '',
-    fechaVerificado: '',
-    horaVerificado: '',
-    observacionesVerificar: '',
-    estado: '',
-  });
+
+  const { dataModal, modal, stateModal, setStateModal, deleteSession } = useOptions()
+
   const LiderUser = sessionStorage.getItem('LiderUser');
-
-  const modal = (dataTable) => {
-    setStateModal(!stateModal);
-    console.log(dataTable);
-    setDataModal(dataTable);
-  };
-
-  const deleteRow = async (dataTable) => {
-    try {
-      await axios.delete(URI + '/' + dataTable.id);
-      window.location.reload();
-    } catch (error) {
-      alert('No se pudo eliminar la orden');
-    }
-  };
 
   useEffect(() => {
     getData();
@@ -67,18 +27,24 @@ export const CompTableInyectoras = () => {
       setData(res.data);
     } catch (error) {
       console.log(error);
-      alert(
-        'BASE DE DATOS NO RESPONDE O SE ENCUENTRA APAGADA, POR FAVOR COMUNICARSE CON EL AREA'
-      );
+      // alert(
+      //   'BASE DE DATOS NO RESPONDE O SE ENCUENTRA APAGADA, POR FAVOR COMUNICARSE CON EL AREA'
+      // );
     }
     setInterval(() => {
       window.location.reload();
     }, 600000);
   };
 
-  const deleteSession = () => {
-    sessionStorage.removeItem('LiderUser');
+  const deleteRow = async (dataTable) => {
+    try {
+      await axios.delete(URI + '/' + dataTable.id);
+      window.location.reload();
+    } catch (error) {
+      alert('No se pudo eliminar la orden');
+    }
   };
+
 
   data.sort((a, b) => {
     const creadoA = a.fechaCreado + a.horaCreado;
@@ -116,116 +82,18 @@ export const CompTableInyectoras = () => {
         setState={setStateModal}
         dataTable={dataModal}
       />
+
       <h1 className='titleTop'>
         TABLA DE ORDENES DE REPARACION (MANTENIMIENTO INYECTORAS)
       </h1>
-      <div className='txtColors'>
-        <b>COLORES:</b>
-        <div className='colores'>
-          <div className='coloresTable'>
-            <div className='rojo'></div>
-            <p>CREADO</p>
-            <div className='verde'></div>
-            <p>REPARADO</p>
-          </div>
-          <div className='coloresTable'>
-            <div className='amarillo'></div>
-            <p>NOTIFICADO</p>
 
-            <div className='azul'></div>
-            <p>VERIFICADO</p>
-          </div>
-        </div>
-      </div>
+      <Options liderUser={LiderUser} />
 
-      {LiderUser !== null && (
-        <div className='txtOptions'>
-          <b>Opciones:</b>
-          <div className='colores'>
-            <div className='coloresTable'>
-              <div>
-                <FontAwesomeIcon className='linkMedia' icon={faEye} />
-              </div>
-              <p>NOTIFICAR</p>
-              <div>
-                <FontAwesomeIcon
-                  className='linkMedia'
-                  icon={faScrewdriverWrench}
-                />
-              </div>
-              <p>REPARAR</p>
-            </div>
-            <div className='coloresTable'>
-              <div>
-                <FontAwesomeIcon className='linkMedia' icon={faCheckCircle} />
-              </div>
-              <p>VERIFICAR</p>
-              <div>
-                <FontAwesomeIcon className='linkMedia' icon={faTrash} />
-              </div>
-              <p>BORRAR</p>
-            </div>
-          </div>
-        </div>
-      )}
+      <ButtonSesion liderUser={LiderUser} deleteSession={deleteSession} />
 
-      <ContenedorBotonCentrado>
-        {LiderUser !== null && (
-          <div>
-            <BotonInicio
-              type='submit'
-              onClick={deleteSession}
-              validate='denied'
-            >
-              <a
-                className='noStyle'
-                href='http://192.168.11.139:3000/inyeccion'
-              >
-                Cerrar Sesion
-              </a>
-            </BotonInicio>
-          </div>
-        )}
+      <Table data={data} liderUser={LiderUser} deleteRow={deleteRow} modal={modal} />
 
-        <a href='http://192.168.11.139:3000/inyeccion'>
-          {LiderUser !== null ? (
-            <BotonInicio type='submit'>Atras</BotonInicio>
-          ) : (
-            <BotonInicio type='submit' validate='valid'>
-              Iniciar sesion
-            </BotonInicio>
-          )}
-        </a>
-      </ContenedorBotonCentrado>
-      <div>
-        <table className='table-fill'>
-          <thead>
-            <tr>
-              <th>Fecha y hora creado</th>
-              <th>Maquinas</th>
-              <th>Lider que creo la orden</th>
-              <th>Problema:</th>
-              <th>Fecha y hora notificado</th>
-              <th>Fecha y hora reparado</th>
-              <th>Fecha y hora verificacion</th>
-              <th>Opciones</th>
-              <th>Estado</th>
-              <th>Categoria</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((dataTable) => (
-              <CompRow
-                key={dataTable.id}
-                dataTable={dataTable}
-                liderSesion={LiderUser}
-                modal={modal}
-                deleteRow={deleteRow}
-              />
-            ))}
-          </tbody>
-        </table>
-      </div>
+
       <div className='noStyleDiv'>
         {LiderUser !== null && (
           <a className='noStyle' href='/FormCreateInyectoras'>

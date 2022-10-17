@@ -11,12 +11,13 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDate } from '../../elements/useDate';
 import { CompDate, CompInput, CompMessage } from '../../Components';
+import { useInputs } from '../../elements/useInputs';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms';
 
 export const FormReparar = () => {
-  const [obser, setObser] = useState({ campo: '', valido: null });
-  const [repara, setRepara] = useState({ campo: '', valido: null });
+  const { repara, setRepara, obserRepara, setObserRepara, expresiones } = useInputs()
+
   const [formValidate, setFormValidate] = useState(null);
   const [dataRes, setDataRes] = useState([]);
   const { tabla, id } = useParams();
@@ -37,10 +38,6 @@ export const FormReparar = () => {
     setDataRes(result[0]);
   };
 
-  const expresiones = {
-    repara: /^[a-zA-Z0-9À-ÿ\s^.,]{3,200}$/,
-    observ: /^[a-zA-Z0-9À-ÿ\s^.,]{3,200}$/,
-  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -57,7 +54,7 @@ export const FormReparar = () => {
       fechaReparado: date,
       horaReparado: hour,
       repara: repara.campo,
-      observacionesReparar: obser.campo,
+      observacionesReparar: obserRepara.campo,
       fechaVerificado: '',
       horaVerificado: '',
       verifica: '',
@@ -66,7 +63,7 @@ export const FormReparar = () => {
       categoria: dataRes.categoria,
     };
 
-    if (obser.valido === 'true') {
+    if (obserRepara.valido === 'true') {
       setFormValidate(true);
       if (dataRes.molde) {
         data.molde = dataRes.molde;
@@ -77,7 +74,7 @@ export const FormReparar = () => {
       }
 
       setRepara({ campo: '', valido: null });
-      setObser({ campo: '', valido: null });
+      setObserRepara({ campo: '', valido: null });
 
       await timeout(1500);
 
@@ -152,8 +149,8 @@ export const FormReparar = () => {
           />
 
           <CompInput
-            InputState={obser}
-            InputSetState={setObser}
+            InputState={obserRepara}
+            InputSetState={setObserRepara}
             inputType='text'
             inputLabel='Observaciones (REPARADO)'
             inputPlaceholder='Observacion a tener en cuenta'
