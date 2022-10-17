@@ -6,6 +6,7 @@ import {
   Overlay,
 } from '../elements/Formularios';
 import { CompInput } from './CompInput';
+import { CompMessage } from './CompMessage';
 
 export const CompDenegado = ({
   state,
@@ -13,6 +14,8 @@ export const CompDenegado = ({
   send,
   denegar,
   setDenegar,
+  formValidate,
+  setFormValidate,
 }) => {
   const expresiones = {
     mensaje: /^[a-zA-Z0-9À-ÿ\s^.,]{3,200}$/,
@@ -41,11 +44,13 @@ export const CompDenegado = ({
                 inputExp={expresiones.mensaje}
               />
             </>
+            <CompMessage verif={formValidate} />
             <ContenedorBotonCentrado>
               <Boton
                 onClick={() => {
                   setDenegar({ campo: '', valido: null });
                   setState(!state);
+                  setFormValidate(null);
                 }}
               >
                 Cerrar

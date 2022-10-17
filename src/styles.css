@@ -505,6 +505,7 @@ ul {
 .option-input.radio::after {
   border-radius: 50%;
 }
+
 @keyframes click-wave {
   0% {
     height: 40px;
@@ -519,4 +520,89 @@ ul {
     margin-top: -80px;
     opacity: 0;
   }
+}
+
+#oopss {
+  background: #222;
+  text-align: center;
+  margin-bottom: 50px;
+  font-weight: 400;
+  font-size: 20px;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  line-height: 1.5em;
+  left: 0px;
+}
+
+#error-text {
+  top: 30%;
+  position: relative;
+  font-size: 40px;
+  color: #eee;
+}
+
+#error-text a {
+  color: #eee;
+}
+
+#error-text button:hover {
+  color: #fff;
+}
+
+#error-text p {
+  color: #eee;
+  margin: 70px 0 0 0;
+}
+
+#error-text p.hmpg {
+  margin: 40px 0 0 0;
+}
+
+#error-text span {
+  position: relative;
+  background: #da4220;
+  color: #fff;
+  font-size: 300%;
+  padding: 0 20px;
+  border-radius: 5px;
+  font-weight: bolder;
+  transition: all 0.5s;
+  margin: 0 0 40px 0;
+}
+
+#error-text span:after {
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: '';
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(136, 183, 213, 0);
+  border-top-color: #da4220;
+  border-width: 7px;
+  margin-left: -7px;
+}
+
+.back {
+  text-decoration: none;
+  background: #5b5a5a;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transform: scale(1);
+  transition: all 0.3s ease-out;
+  border: none;
+}
+
+.back:hover {
+  background: #2d2d2d;
+  color: #fff;
+  cursor: pointer;
 }

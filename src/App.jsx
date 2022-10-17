@@ -18,6 +18,7 @@ import {
 
 import { FormReparar, FormVerificado, FormVisualizar } from './pages';
 import { OrdenDetallada } from './pages/OrdenDetallada.jsx';
+import { UnknownPage } from './Components/UnknownPage.jsx';
 
 export default function App() {
   return (
@@ -47,6 +48,8 @@ export default function App() {
         <Route path='/FormVerificado/:tabla/:id' element={<FormVerificado />} />
 
         <Route path='/OrdenDetallada/:tabla/:id' element={<OrdenDetallada />} />
+
+        <Route path='*' element={<UnknownPage />}></Route>
       </Routes>
     </BrowserRouter>
   );

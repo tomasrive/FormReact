@@ -21,10 +21,16 @@ import { useInputs } from '../../elements/useInputs';
 const URI = 'http://192.168.11.139:4001/api/procesos/forms';
 
 export const FormVerificado = () => {
-
-  const { obserVerifica, setObserVerifica, obserDenega, setObserDenega, expresiones } = useInputs()
+  const {
+    obserVerifica,
+    setObserVerifica,
+    obserDenega,
+    setObserDenega,
+    expresiones,
+  } = useInputs();
 
   const [formValidate, setFormValidate] = useState(null);
+  const [formValidateDenegado, setFormValidateDenegado] = useState(null);
   const [dataRes, setDataRes] = useState([]);
   const { tabla, id } = useParams();
   const { date, hour } = useDate();
@@ -45,7 +51,6 @@ export const FormVerificado = () => {
     const result = res.data.filter((idDB) => idDB.id === id);
     setDataRes(result[0]);
   };
-
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -227,15 +232,15 @@ export const FormVerificado = () => {
         await axios.put(URI + '/' + tabla, data);
       }
       setObserVerifica({ campo: '', valido: null });
+      setFormValidateDenegado(true);
       await timeout(1500);
-
       if (dataRes.molde) {
         window.location.replace('/CompTableMatriceria');
       } else {
         window.location.replace('/CompTableInyectoras');
       }
     } else {
-      alert('Completar datos');
+      setFormValidateDenegado(false);
     }
   };
 
@@ -247,6 +252,8 @@ export const FormVerificado = () => {
         denegar={obserDenega}
         setDenegar={setObserDenega}
         send={sendData}
+        formValidate={formValidateDenegado}
+        setFormValidate={setFormValidateDenegado}
       />
       <Grid>
         <section className='sectionh3h5'>

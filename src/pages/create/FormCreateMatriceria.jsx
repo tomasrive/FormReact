@@ -25,8 +25,8 @@ function timeout(delay) {
 }
 
 export const FormCreateMatriceria = () => {
-
-  const { molde, setMolde, messageMolde, setMessageMolde, expresiones } = useInputs()
+  const { molde, setMolde, messageMolde, setMessageMolde, expresiones } =
+    useInputs();
 
   const [formValidate, setFormValidate] = useState(null);
   const { date, hour, dia, mes, year, hora, min } = useDate();
@@ -42,8 +42,6 @@ export const FormCreateMatriceria = () => {
     lider: '',
     descripcion: '',
   });
-
-
 
   const changeButton = (e) => {
     setRadio({ checked: e.target.value });

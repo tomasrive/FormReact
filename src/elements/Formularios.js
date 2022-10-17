@@ -467,7 +467,7 @@ const ContenedorModalConfirmar = styled.div`
 
   @media (min-width: 480px) and (max-width: 1400px) {
     width: 50%;
-    height: 82vh;
+    height: 85vh;
     padding: 20px;
   }
 `;
@@ -479,10 +479,9 @@ const ContenedorModalDenegar = styled.div`
   border-radius: 10px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 30px;
-
   @media (min-width: 480px) and (max-width: 1400px) {
     width: 50%;
-    height: 40vh;
+    height: 60vh;
     padding: 20px;
   }
 `;

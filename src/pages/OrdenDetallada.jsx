@@ -25,9 +25,6 @@ export const OrdenDetallada = () => {
       setData(res.data.filter((datos) => datos.id === id)[0]);
     } catch (error) {
       console.log(error);
-      alert(
-        'BASE DE DATOS NO RESPONDE O SE ENCUENTRA APAGADA, POR FAVOR COMUNICARSE CON EL AREA'
-      );
     }
   };
 

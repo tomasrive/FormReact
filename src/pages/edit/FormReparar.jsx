@@ -16,7 +16,8 @@ import { useInputs } from '../../elements/useInputs';
 const URI = 'http://192.168.11.139:4001/api/procesos/forms';
 
 export const FormReparar = () => {
-  const { repara, setRepara, obserRepara, setObserRepara, expresiones } = useInputs()
+  const { repara, setRepara, obserRepara, setObserRepara, expresiones } =
+    useInputs();
 
   const [formValidate, setFormValidate] = useState(null);
   const [dataRes, setDataRes] = useState([]);
@@ -37,7 +38,6 @@ export const FormReparar = () => {
     const result = res.data.filter((idDB) => idDB.id === id);
     setDataRes(result[0]);
   };
-
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -156,7 +156,7 @@ export const FormReparar = () => {
             inputPlaceholder='Observacion a tener en cuenta'
             inputName='recibe'
             inputError='La observacion a tener en cuenta tiene que ser de 3 a 200 dígitos y solo puede contener numeros, letras y guion bajo.'
-            inputExp={expresiones.observ}
+            inputExp={expresiones.obserRepara}
           />
 
           <CompMessage verif={formValidate} />

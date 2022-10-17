@@ -12,9 +12,9 @@ const URI = 'http://192.168.11.139:4001/api/procesos/forms/moldes';
 
 export const CompTableMatriceria = () => {
   const [data, setData] = useState([]);
-  const { dataModal, modal, stateModal, setStateModal, deleteSession } = useOptions()
+  const { dataModal, modal, stateModal, setStateModal, deleteSession } =
+    useOptions();
   const LiderUser = sessionStorage.getItem('LiderUser');
-
 
   const deleteRow = async (dataTable) => {
     try {
@@ -35,9 +35,9 @@ export const CompTableMatriceria = () => {
       setData(res.data);
     } catch (error) {
       console.log(error);
-      // alert(
-      //   'BASE DE DATOS NO RESPONDE O SE ENCUENTRA APAGADA, POR FAVOR COMUNICARSE CON EL AREA'
-      // );
+      alert(
+        'BASE DE DATOS NO RESPONDE O SE ENCUENTRA APAGADA, POR FAVOR COMUNICARSE CON EL AREA'
+      );
     }
     setInterval(() => {
       window.location.reload();
@@ -52,21 +52,15 @@ export const CompTableMatriceria = () => {
     const categoriaB = b.categoria;
 
     const verificadoA = a.horaVerificado + a.horaVerificado;
-    const verificadoB = b.fechaVerificado + b.horaVerificado;
 
+    if (verificadoA) {
+      return 1;
+    }
     if (creadoA > creadoB) {
       return -1;
     } else {
       if (categoriaA > categoriaB) {
         return -1;
-      } else {
-        if (verificadoA < verificadoB) {
-          return -1;
-        }
-
-        if (verificadoA > verificadoB) {
-          return 1;
-        }
       }
     }
 
@@ -86,7 +80,12 @@ export const CompTableMatriceria = () => {
 
       <ButtonSesion liderUser={LiderUser} deleteSession={deleteSession} />
 
-      <Table data={data} liderUser={LiderUser} deleteRow={deleteRow} modal={modal} />
+      <Table
+        data={data}
+        liderUser={LiderUser}
+        deleteRow={deleteRow}
+        modal={modal}
+      />
 
       <div className='noStyleDiv'>
         {LiderUser !== null && (

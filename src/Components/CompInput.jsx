@@ -51,9 +51,7 @@ export const CompInput = ({
       const res = await axios.get(machine);
       setMachines(res.data);
     } catch (error) {
-      alert(
-        'BASE DE DATOS DE MAQUINAS APAGADA, POR FAVOR COMUNICARSE CON EL AREA'
-      );
+      console.log(error);
     }
   };
 
@@ -62,9 +60,7 @@ export const CompInput = ({
       const res = await axios.get(molde);
       setMoldes(res.data);
     } catch (error) {
-      alert(
-        'BASE DE DATOS DE MOLDES APAGADA, POR FAVOR COMUNICARSE CON EL AREA'
-      );
+      console.log(error);
     }
   };
 
@@ -158,16 +154,20 @@ export const CompInput = ({
             })
 
             .map((item) => (
-              <div className='formA' key={item.molde + '' + item.descripcion}>
-                <ul
-                  className='list'
-                  onClick={() => onSearch(item.molde + ' ' + item.descripcion)}
-                >
-                  <li className='list-items'>
-                    {item.molde} {item.descripcion}
-                  </li>
-                </ul>
-              </div>
+              <>
+                <div className='formA' key={item.molde + '' + item.descripcion}>
+                  <ul
+                    className='list'
+                    onClick={() =>
+                      onSearch(item.molde + ' ' + item.descripcion)
+                    }
+                  >
+                    <li className='list-items'>
+                      {item.molde} {item.descripcion}
+                    </li>
+                  </ul>
+                </div>
+              </>
             ))}
         </div>
       )}
