@@ -5,7 +5,7 @@ import {
   EncabezadoModal,
   OrdenReparacionConfirmar,
   Overlay,
-} from '../elements/Formularios';
+} from '../elements/styledComponents';
 
 export const CompConfirm = ({ dataTable, state, setState, send }) => {
   return (

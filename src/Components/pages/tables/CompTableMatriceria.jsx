@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react';
 import {
   BotonInicioTabla,
   ContenedorBotonInicio,
-} from '../../elements/Formularios';
+} from '../../../elements/styledComponents';
 import axios from 'axios';
-import { CompModal, Options, Table } from '../../Components';
-import { useOptions } from '../../elements/useOptions';
-import { ButtonSesion } from '../../Components/ButtonSesion';
+import { CompModal, Options, Table, ButtonSesion } from '../../';
+import { useOptions } from '../../../hooks';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/moldes';
 

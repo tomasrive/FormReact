@@ -1,4 +1,4 @@
-import { GroupInputDate, InputDate, Label } from '../elements/Formularios';
+import { GroupInputDate, InputDate, Label } from '../elements/styledComponents';
 
 export const CompDate = ({ date, hour }) => {
   return (

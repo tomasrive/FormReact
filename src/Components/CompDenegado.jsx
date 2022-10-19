@@ -4,7 +4,7 @@ import {
   ContenedorModalDenegar,
   EncabezadoModal,
   Overlay,
-} from '../elements/Formularios';
+} from '../elements/styledComponents';
 import { CompInput } from './CompInput';
 import { CompMessage } from './CompMessage';
 

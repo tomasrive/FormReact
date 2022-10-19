@@ -2,7 +2,7 @@ import {
   BotonInicio,
   ContenedorBotonInicio,
   DivTable,
-} from '../elements/Formularios.js';
+} from '../elements/styledComponents';
 
 export const Home = () => {
   // Usuario de Session Storage de ejemplo

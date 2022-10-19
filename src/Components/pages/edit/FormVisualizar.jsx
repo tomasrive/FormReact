@@ -6,11 +6,11 @@ import {
   BotonInicio,
   Grid,
   H5,
-} from '../../elements/Formularios';
+} from '../../../elements/styledComponents';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useDate } from '../../elements/useDate';
-import { CompDate, CompInput, CompMessage } from '../../Components';
+import { useDate } from '../../../hooks';
+import { CompDate, CompInput, CompMessage } from '../../';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms';
 
@@ -123,7 +123,7 @@ export const FormVisualizar = () => {
           <CompInput
             InputState={LiderUser}
             inputType='text'
-            inputLabel='Lider se notifica'
+            inputLabel='Lider que es notificado'
             inputName='name'
             inputDis='disable'
           />

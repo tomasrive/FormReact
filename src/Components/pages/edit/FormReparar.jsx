@@ -6,14 +6,15 @@ import {
   BotonInicio,
   Grid,
   H5,
-} from '../../elements/Formularios';
+} from '../../../elements/styledComponents';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useDate } from '../../elements/useDate';
-import { CompDate, CompInput, CompMessage } from '../../Components';
-import { useInputs } from '../../elements/useInputs';
+import { useDate, useInputs } from '../../../hooks';
+import { CompDate, CompInput, CompMessage } from '../../';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms';
+
+const URIEmails = 'http://192.168.11.139:4001/api/sendEmails/send/piezas';
 
 export const FormReparar = () => {
   const { repara, setRepara, obserRepara, setObserRepara, expresiones } =
@@ -68,9 +69,40 @@ export const FormReparar = () => {
       if (dataRes.molde) {
         data.molde = dataRes.molde;
         axios.put(URI + '/' + tabla, data);
+
+        await axios.post(URIEmails + '/' + tabla, {
+          message:
+            'El dia' +
+            date +
+            'a las ' +
+            hour +
+            ' la orden ' +
+            id +
+            ' con el molde ' +
+            dataRes.molde +
+            ' fue reparada por ' +
+            repara.campo +
+            ' y se tuvo en cuenta lo siguiente:' +
+            obserRepara.campo,
+        });
       } else {
         data.maquina = dataRes.maquina;
         await axios.put(URI + '/' + tabla, data);
+        await axios.post(URIEmails + '/' + tabla, {
+          message:
+            'El dia' +
+            date +
+            'a las ' +
+            hour +
+            ' la orden ' +
+            id +
+            ' con la maquina u otro periferico ' +
+            dataRes.maquina +
+            ' fue reparada por ' +
+            repara.campo +
+            ' y se tuvo en cuenta lo siguiente:' +
+            obserRepara.campo,
+        });
       }
 
       setRepara({ campo: '', valido: null });
@@ -136,7 +168,7 @@ export const FormReparar = () => {
           <h1>Pieza "{id}" (REPARACION)</h1>
 
           <CompDate date={date} hour={hour} />
-
+          <input type='submit' hidden />
           <CompInput
             InputState={repara}
             InputSetState={setRepara}

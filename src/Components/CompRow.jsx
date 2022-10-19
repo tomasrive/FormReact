@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import { DivOpciones, TR } from '../elements/Formularios';
+import { DivOpciones, TR } from '../elements/styledComponents';
 
 export const CompRow = ({ dataTable, liderSesion, modal, deleteRow }) => {
   return (

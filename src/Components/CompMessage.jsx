@@ -3,7 +3,7 @@ import {
   faExclamationTriangle,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { MensajeError, MensajeExito } from '../elements/Formularios';
+import { MensajeError, MensajeExito } from '../elements/styledComponents';
 
 export const CompMessage = ({ verif }) => {
   return (

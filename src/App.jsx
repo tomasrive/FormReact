@@ -1,24 +1,17 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { Home } from './pages/Home.jsx';
+import { Home } from './Components/Home.jsx';
+
+import { FormCreateMatriceria, FormCreateInyectoras } from './Components/pages';
+
+import { CompTableInyectoras, CompTableMatriceria } from './Components/pages';
 
 import {
-  FormCreateMatriceria,
-  FormCreateArmado,
-  FormCreateInyectoras,
-  FormCreateEdilicio,
-} from './pages';
-
-import {
-  CompTableArmado,
-  CompTableEdilicio,
-  CompTableInyectoras,
-  CompTableMatriceria,
-} from './pages';
-
-import { FormReparar, FormVerificado, FormVisualizar } from './pages';
-import { OrdenDetallada } from './pages/OrdenDetallada.jsx';
-import { UnknownPage } from './Components/UnknownPage.jsx';
+  FormReparar,
+  FormVerificado,
+  FormVisualizar,
+} from './Components/pages/edit';
+import { OrdenDetallada, UnknownPage } from './Components';
 
 export default function App() {
   return (
@@ -33,13 +26,9 @@ export default function App() {
           path='/FormCreateInyectoras'
           element={<FormCreateInyectoras />}
         />
-        <Route path='/FormCreateArmado' element={<FormCreateArmado />} />
-        <Route path='/FormCreateEdilicio' element={<FormCreateEdilicio />} />
 
         <Route path='/CompTableMatriceria' element={<CompTableMatriceria />} />
         <Route path='/CompTableInyectoras' element={<CompTableInyectoras />} />
-        <Route path='/CompTableEdilicio' element={<CompTableEdilicio />} />
-        <Route path='/CompTableArmado' element={<CompTableArmado />} />
 
         <Route path='/FormVisualizar/:tabla/:id' element={<FormVisualizar />} />
 

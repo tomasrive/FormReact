@@ -4,7 +4,7 @@ import {
   EncabezadoModal,
   OrdenReparacion,
   Overlay,
-} from '../elements/Formularios';
+} from '../elements/styledComponents';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';

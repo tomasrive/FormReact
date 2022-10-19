@@ -6,19 +6,15 @@ import {
   H5,
   Grid,
   BotonInicio,
-} from '../../elements/Formularios';
+} from '../../../elements/styledComponents';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useDate } from '../../elements/useDate';
-import {
-  CompDate,
-  CompInput,
-  CompMessage,
-  CompDenegado,
-} from '../../Components';
-import { useInputs } from '../../elements/useInputs';
+import { useDate, useInputs } from '../../../hooks';
+import { CompDate, CompInput, CompMessage, CompDenegado } from '../../';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms';
+
+const URIEmails = 'http://192.168.11.139:4001/api/sendEmails/send/piezas';
 
 export const FormVerificado = () => {
   const {
@@ -202,35 +198,119 @@ export const FormVerificado = () => {
           if (dataRes.maquina) {
             data.maquina = dataRes.maquinas;
             await axios.put(URI + '/' + tabla, data);
+            await axios.post(URIEmails + '/' + tabla, {
+              message:
+                'El dia ' +
+                date +
+                ' a las ' +
+                hour +
+                ' la orden ' +
+                id +
+                ' con la maquina u otro periferico ' +
+                dataRes.maquinas +
+                ' fue denegada en el proceso de verificacion por ' +
+                LiderUser +
+                ' y el motivo es el siguiente:' +
+                obserDenega.campo,
+            });
           } else {
             data.molde = dataRes.moldes;
             await axios.put(URI + '/' + tabla, data);
+            await axios.post(URIEmails + '/' + tabla, {
+              message:
+                'El dia ' +
+                date +
+                ' a las ' +
+                hour +
+                ' la orden ' +
+                id +
+                ' con el molde ' +
+                dataRes.moldes +
+                ' fue denegada en el proceso de verificacion por ' +
+                LiderUser +
+                ' y el motivo es el siguiente:' +
+                obserDenega.campo,
+            });
+          }
+        } else {
+          if (dataRes.maquina) {
+            data.maquina = dataRes.maquinas;
+            await axios.put(URI + '/' + tabla, data);
+            await axios.post(URIEmails + '/' + tabla, {
+              message:
+                'El dia ' +
+                date +
+                ' a las ' +
+                hour +
+                ' la orden ' +
+                id +
+                ' con la maquina u otro periferico ' +
+                dataRes.maquinas +
+                ' fue denegada por segunda vez en el proceso de verificacion por ' +
+                LiderUser +
+                ' y el motivo es el siguiente:' +
+                obserDenega.campo,
+            });
+          } else {
+            data.molde = dataRes.moldes;
+            await axios.put(URI + '/' + tabla, data);
+            await axios.post(URIEmails + '/' + tabla, {
+              message:
+                'El dia ' +
+                date +
+                ' a las ' +
+                hour +
+                ' la orden ' +
+                id +
+                ' con el molde ' +
+                dataRes.moldes +
+                ' fue denegada por segunda vez en el proceso de verificacion por ' +
+                LiderUser +
+                ' y el motivo es el siguiente:' +
+                obserDenega.campo,
+            });
           }
         }
+      } else {
+        if (dataRes.maquina) {
+          data.maquina = dataRes.maquinas;
+          await axios.put(URI + '/' + tabla, data);
+          await axios.post(URIEmails + '/' + tabla, {
+            message:
+              'El dia ' +
+              date +
+              ' a las ' +
+              hour +
+              ' la orden ' +
+              id +
+              ' con la maquina u otro periferico ' +
+              dataRes.maquinas +
+              ' fue denegada en el proceso de verificacion por ' +
+              LiderUser +
+              ' y el motivo es el siguiente:' +
+              obserDenega.campo,
+          });
+        } else {
+          data.molde = dataRes.moldes;
+          await axios.put(URI + '/' + tabla, data);
+          await axios.post(URIEmails + '/' + tabla, {
+            message:
+              'El dia ' +
+              date +
+              ' a las ' +
+              hour +
+              ' la orden ' +
+              id +
+              ' con el molde ' +
+              dataRes.moldes +
+              ' fue denegada en el proceso de verificacion por ' +
+              LiderUser +
+              ' y el motivo es el siguiente:' +
+              obserDenega.campo,
+          });
+        }
+      }
 
-        if (dataRes.maquina) {
-          data.maquina = dataRes.maquinas;
-          await axios.put(URI + '/' + tabla, data);
-        } else {
-          data.molde = dataRes.moldes;
-          await axios.put(URI + '/' + tabla, data);
-        }
-      } else {
-        if (dataRes.maquina) {
-          data.maquina = dataRes.maquinas;
-          await axios.put(URI + '/' + tabla, data);
-        } else {
-          data.molde = dataRes.moldes;
-          await axios.put(URI + '/' + tabla, data);
-        }
-      }
-      if (dataRes.maquina) {
-        data.maquina = dataRes.maquinas;
-        await axios.put(URI + '/' + tabla, data);
-      } else {
-        data.molde = dataRes.moldes;
-        await axios.put(URI + '/' + tabla, data);
-      }
       setObserVerifica({ campo: '', valido: null });
       setFormValidateDenegado(true);
       await timeout(1500);

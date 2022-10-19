@@ -1,4 +1,4 @@
-import { BotonInicio, ContenedorBotonCentrado } from "../elements/Formularios"
+import { BotonInicio, ContenedorBotonCentrado } from "../elements/styledComponents"
 
 export const ButtonSesion = ({ liderUser, deleteSession }) => {
     return (

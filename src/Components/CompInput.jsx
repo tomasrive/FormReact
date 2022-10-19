@@ -4,7 +4,7 @@ import {
   LeyendaError,
   IconoValidacion,
   Label,
-} from '../elements/Formularios';
+} from '../elements/styledComponents';
 
 import {
   faCheckCircle,
@@ -17,7 +17,7 @@ const machine = 'http://192.168.11.139:4001/api/data/machines';
 
 const molde = 'http://192.168.11.139:4001/api/data/matriceria/moldes';
 
-const data = sessionStorage.getItem('LiderUser');
+let data = sessionStorage.getItem('LiderUser');
 
 export const CompInput = ({
   InputState,
@@ -37,7 +37,6 @@ export const CompInput = ({
       campo: e.target.value,
     });
   };
-
   const [machines, setMachines] = useState([]);
   const [moldes, setMoldes] = useState([]);
 
@@ -142,32 +141,24 @@ export const CompInput = ({
       {inputAutocomplete === 'autocompleteMoldes' && (
         <div className='flexAutoMoldes'>
           {moldes
-            .filter((item) => {
+            .filter(function (item) {
               const searchTerm = InputState.campo.toLowerCase();
-              const fullItem = item.molde.toLowerCase();
-
-              return (
-                searchTerm &&
-                fullItem.includes(searchTerm) &&
-                InputState.valido === 'false'
-              );
+              const fullItem =
+                item.molde.toLowerCase() + '' + item.descripcion.toLowerCase();
+              return searchTerm && fullItem.includes(searchTerm);
             })
 
             .map((item) => (
-              <>
-                <div className='formA' key={item.molde + '' + item.descripcion}>
-                  <ul
-                    className='list'
-                    onClick={() =>
-                      onSearch(item.molde + ' ' + item.descripcion)
-                    }
-                  >
-                    <li className='list-items'>
-                      {item.molde} {item.descripcion}
-                    </li>
-                  </ul>
-                </div>
-              </>
+              <div className='formA' key={item.molde}>
+                <ul
+                  className='list'
+                  onClick={() => onSearch(item.molde + ' ' + item.descripcion)}
+                >
+                  <li className='list-items'>
+                    {item.molde} {item.descripcion}
+                  </li>
+                </ul>
+              </div>
             ))}
         </div>
       )}

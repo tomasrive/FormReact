@@ -5,7 +5,7 @@ import {
   BotonInicioTabla,
   DivOrdenDetallada,
   OrdenReparacion,
-} from '../elements/Formularios';
+} from '../elements/styledComponents';
 
 export const OrdenDetallada = () => {
   const [data, setData] = useState([]);
