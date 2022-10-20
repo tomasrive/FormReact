@@ -12,8 +12,7 @@ import { useDate, useInputs } from '../../../hooks/';
 import { CompMessage, CompInput, CompDate, CompConfirm } from '../../';
 
 const URI = 'http://192.168.11.139:4001/api/procesos/forms/maquinas';
-const URIEmails =
-  'http://192.168.11.139:4001/api/sendEmails/send/piezas/maquinas';
+const URIEmails = 'http://192.168.11.139:4001/api/sendEmails/send/maquinas';
 
 function timeout(delay) {
   return new Promise((res) => setTimeout(res, delay));
