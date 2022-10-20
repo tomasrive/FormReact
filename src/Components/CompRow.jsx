@@ -118,7 +118,11 @@ export const CompRow = ({ dataTable, liderSesion, modal, deleteRow }) => {
             </>
           )}
 
-          {liderSesion === dataTable.lider ? (
+          {dataTable.estado !== 'creado' ||
+          dataTable.primerMotivoDenegado ||
+          dataTable.segundoMotivoDenegado ? (
+            <></>
+          ) : liderSesion === dataTable.lider ? (
             <button
               onClick={() => deleteRow(dataTable)}
               className='btnTable'

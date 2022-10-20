@@ -13,13 +13,13 @@ const colores = {
 
 const DivTable = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 250px);
+  grid-template-columns: repeat(2, 250px);
   gap: 50px;
   align-items: center;
   justify-content: center;
   height: 50vh;
   @media (max-width: 1600px) {
-    grid-template-columns: 230px 230px 230px 230px;
+    grid-template-columns: 230px 230px;
   }
   @media (max-width: 1100px) {
     grid-template-columns: 1fr 1fr;
