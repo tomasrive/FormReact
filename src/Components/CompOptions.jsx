@@ -1,7 +1,7 @@
 import { faCheckCircle, faEye, faScrewdriverWrench, faTrash } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-export const Options = (liderUser) => {
+export const Options = ({ liderUser }) => {
     return (
         <>
             <div className='txtColors'>
